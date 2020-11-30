@@ -71,6 +71,7 @@ class User implements UserInterface
         $this->shoppingLists = new ArrayCollection();
         $this->recipes = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int

@@ -41,6 +41,7 @@ class Ingredient
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->recipeIngredients = new ArrayCollection();
     }
 

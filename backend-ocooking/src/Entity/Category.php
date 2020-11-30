@@ -41,6 +41,7 @@ class Category
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->recipes = new ArrayCollection();
     }
 

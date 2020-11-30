@@ -102,6 +102,8 @@ class Recipe
         $this->steps = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->shoppingLists = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->signaled = false;
     }
 
     public function getId(): ?int
