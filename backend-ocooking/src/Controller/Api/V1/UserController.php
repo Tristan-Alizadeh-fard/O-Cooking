@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -18,7 +19,7 @@ class UserController extends AbstractController
     /**
      * @Route("/add", name="add", methods={"POST"})
      */
-    public function add(Request $request, SerializerInterface $serializer): Response
+    public function add(Request $request, SerializerInterface $serializer, UserPasswordEncoderInterface $userPasswordEncoder): Response
     {
         $json = $request->getContent();
 
@@ -30,8 +31,17 @@ class UserController extends AbstractController
         $form->submit($userInformationsArray);
 
         if ($form->isValid()) {
+            $password = $form->get('password')->getData();
+            $user->setPassword($userPasswordEncoder->encodePassword($user, $password));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $userJson = $serializer->serialize($user, 'json');
+            
             return $this->json([
-                    'test' => 'OK'
+                    'new user' => $userJson
                 ]);
         } else {
             return $this->json([
