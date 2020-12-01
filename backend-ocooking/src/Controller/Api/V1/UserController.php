@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Entity\ShoppingList;
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +30,7 @@ class UserController extends AbstractController
 
         $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
         $form->submit($userInformationsArray);
-
+        
         if ($form->isValid()) {
             $password = $form->get('password')->getData();
             $user->setPassword($userPasswordEncoder->encodePassword($user, $password));
@@ -38,11 +39,13 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $userJson = $serializer->serialize($user, 'json');
+            $shoppingList = new ShoppingList();
+            $shoppingList->setUser($user);
             
-            return $this->json([
-                    'new user' => $userJson
-                ]);
+            $em-> persist($shoppingList);
+            $em->flush();
+
+            return $this->json([], 201);
         } else {
             return $this->json([
                 'errors' => (string) $form->getErrors(true, false),
