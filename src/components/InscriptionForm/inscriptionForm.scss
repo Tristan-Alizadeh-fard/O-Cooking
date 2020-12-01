@@ -1,9 +1,17 @@
 .form__inscription {
-    margin-top: 1 em;
-    margin: 0 auto;
-    width: 400px;
+    margin: auto auto;  
+    margin-top: 60px;
+    width: 50%;
     padding: 1em;
     border: 1px solid #CCC;
     border-radius: 1em;
-  }
-  
+    background-color: grey;
+}
+.form__button {
+  color: blue;
+}
+.error__message {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
