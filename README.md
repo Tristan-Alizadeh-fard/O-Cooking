@@ -1,15 +1,14 @@
 # Installation du Backend
 
+## Mise en place des outils
 1. Se placer sur la branche back
 2. ``` $ git pull ```
 3. ``` $ cd backend-ocooking ```
 4. ``` $ composer install ```
 5. Dupliquer le fichier .env
 6. Renommer le fichier .env en .env.local
-
-## Mise en place des outils
-1. Dans le fichier .env.local, coller ``` DATABASE_URL=mysql://<user>:<mdp>@127.0.0.1:3306/ocooking?serverVersion=mariadb-10.4.12 ```
-2. Remplacer le user et le mdp par leurs valeurs respectives
+7. Dans le fichier .env.local, coller ``` DATABASE_URL=mysql://<user>:<mdp>@127.0.0.1:3306/ocooking?serverVersion=mariadb-10.4.12 ```
+8. Remplacer le user et le mdp par leurs valeurs respectives
 
 ## Création de la base de données avec fixtures
 1. ``` $ bin/console d:d:c ```
