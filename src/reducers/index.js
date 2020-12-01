@@ -1,9 +1,11 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 // import the different reducers
-import useReducer from './user';
+import userReducer from './user';
+import recipeReducer from './recipe';
 
 const originReducer = combineReducers({
-  user: useReducer,
+  user: userReducer,
+  recipe: recipeReducer,
   // add more down here
 });
 

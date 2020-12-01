@@ -2,8 +2,9 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import './page.scss';
 import Navbar from 'src/components/Navbar';
-import LoginForm from 'src/components/LoginForm';
+import ConnectedLoginForm from 'src/containers/ConnectedLoginForm';
 import InscriptionForm from 'src/components/InscriptionForm';
+import ConnectedAddRecipeForm from 'src/containers/ConnectedAddRecipeForm';
 
 // Page : this component manage the other components with a props called isLogged
 // means => if the user isLogged the Navbar (or his parent component if we create
@@ -19,7 +20,7 @@ const Page = () => (
     <Route
       path="/connection"
     >
-      <LoginForm />
+      <ConnectedLoginForm />
     </Route>
     <Route
       path="/inscription"
@@ -36,7 +37,7 @@ const Page = () => (
     <Route
       path="/ajout-recette"
     >
-      <></>
+      <ConnectedAddRecipeForm />
     </Route>
 
     <Route
