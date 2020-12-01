@@ -86,9 +86,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection|Recipe[]
-     */
     public function getRecipes(): Collection
     {
         return $this->recipes;
