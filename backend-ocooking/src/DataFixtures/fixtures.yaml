@@ -63,8 +63,8 @@ App\Entity\Measure:
     name: 'c. à soupe'
 
 App\Entity\Ingredient:
-  ingredient_{1..500}:
-    name: '<word()>'
+  ingredient_{1..150}:
+    name (unique): '<word())>'
 
 App\Entity\ShoppingList:
   shoppingList_1:
@@ -84,16 +84,16 @@ App\Entity\Recipe:
     author: '@user_*'
 
 App\Entity\RecipeIngredient:
-  ingredient_{1..400}:
-    quantity: '<numberBetween(1, 50)>@measure_* de @ingredient_*'
+  recipeIngredient_{1..400}:
+    quantity: '<numberBetween(1, 50)>measure de ingredient'
     recipe: '@recipe_*'
-    measure:
-    ingredient:
-
+    measure: '@measure_*'
+    ingredient: '@ingredient_*'
+    
 App\Entity\Step:
   step_{1..250}:
     nbStep: '<numberBetween(1, 5)>'
-    description: '<text(numberBetween(50, 255))>'
+    description: '<paragraph()>'
     recipe: '@recipe_*'
 
 App\Entity\Favorite:
