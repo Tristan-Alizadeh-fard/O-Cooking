@@ -33,10 +33,10 @@ class UserController extends AbstractController
             return $this->json([
                     'test' => 'OK'
                 ]);
+        } else {
+            return $this->json([
+                'errors' => (string) $form->getErrors(true, false),
+            ], 400);
         }
-        
-        return $this->json([
-            
-        ]);
     }
 }
