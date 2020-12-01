@@ -23,7 +23,7 @@ class Step
     private $nbStep;
 
     /**
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="string", length=500)
      */
     private $description;
 
