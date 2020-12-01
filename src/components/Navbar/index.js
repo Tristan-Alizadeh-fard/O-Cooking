@@ -1,33 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Dropdown, Button, Menu, Transition } from 'semantic-ui-react';
+import { Button, Menu, Transition } from 'semantic-ui-react';
 import './navbar.scss';
 
 // <Dropdown text="Menu" options={options} simple item />
 
 const Navbar = () => {
-    var visible = true;
-    const state = { visible: false };
+  const [visible, setVisible] = useState(false);
 
-    const toggleVisibility = () => {
-        visible = !state.visible;
-    };
+  const toggleVisibility = () => setVisible(!visible);
 
-    return (
-        <Menu className="menu" compact>
-            <Button
-                content={visible ? 'Hide' : 'Show'}
-                onClick={toggleVisibility}
-            />
-            <Transition visible={state.visible} animation='scale' duration={2000}>
-                <div>
-                    <a href='#'>Accueil</a>
-                    <a href='#'>Ajouter une recette</a>
-                    <a href='#'>Aide de course</a>
-                    <a href='#'>Déconnection</a>
-                </div>
-            </Transition>
-        </Menu>
-)};
+  return (
+    <Menu className="menu" compact>
+      <Button
+        content={visible ? 'Hide' : 'Show'}
+        onClick={toggleVisibility}
+      />
+      <Transition visible={visible} animation="scale" duration={500}>
+        <div className="menu__toggle">
+          <a href="" className="toggle__item">Accueil</a>
+          <a href="" className="toggle__item">Ajouter</a>
+          <a href="" className="toggle__item">Aide de course</a>
+          <a href="" className="toggle__item">Déconnexion</a>
+        </div>
+      </Transition>
+    </Menu>
+  );
+};
 
 export default Navbar;
