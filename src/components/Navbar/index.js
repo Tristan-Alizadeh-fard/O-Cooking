@@ -18,7 +18,7 @@ const Navbar = () => {
       />
       <Transition visible={visible} animation="scale" duration={500}>
         <div className="menu__toggle">
-          <a href="" className="toggle__item">Accueil</a>
+          <a href="/" className="toggle__item">Accueil</a>
           <a href="" className="toggle__item">Ajouter</a>
           <a href="" className="toggle__item">Aide de course</a>
           <a href="" className="toggle__item">Déconnexion</a>

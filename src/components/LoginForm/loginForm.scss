@@ -1,3 +1,60 @@
-.form__input {
-    with: 200px;
+.form__login {
+  margin: auto auto;  
+  margin-top: 60px;
+  width: 50%;
+  padding: 1em;
+  border: 2px solid black;
+  border-radius: 1em;
+  background-color: grey;
+}
+.link__inscription {
+  margin-top: 40px;
+  text-align: center;
+}
+.link__forgottenpass {
+  margin-top: 40px;
+  text-align: center;
+  
+}
+.forgotten__password {
+  color: red;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: black;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+.inscription {
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: black;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+.error__login {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}  
+.home__title {
+  text-align: center;
+  color: black;
+}
+.home__description {
+  text-align: center;
+  color: black;
+}
+.home__content {
+  text-align: center;
+  color: white;
+  padding-bottom: 15px;
+}
+.home {
+  width: 70%;
+  background-color: cornflowerblue;
+  margin: auto auto;
+  margin-top: 40px;
+  border-radius: 1rem;
+  border: solid 2px black;
 }

@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
 import InscriptionForm from 'src/components/InscriptionForm';
-import { updateUserField } from 'src/actions/user';
+import { updateUserField, userInscription } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
-  emailValue: state.emailValue,
-  passwordValue: state.passwordValue,
-  pseudoValue: state.pseudoValue,
+  errorInscription: state.user.errorInscription,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   updateField: (newValue, name) => {
     dispatch(updateUserField(newValue, name));
+  },
+  submitInscription: () => {
+    dispatch(userInscription());
   },
 });
 
