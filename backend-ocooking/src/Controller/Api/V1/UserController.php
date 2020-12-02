@@ -12,13 +12,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
+
 /**
  * @Route("/api/v1/users", name="api_v1_users_")
  */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/add", name="add", methods={"POST"})
+     * @Route("/{id}/recipeAll", name="recipeAll", methods={"GET"}, requirements={"id":"\d+"})
+     */
+    public function userBrowseRecipeAll(User $user): Response
+    {
+        return $this->json([
+        
+            'user' => $user
+        
+        ]);
+
+     /**
+      * @Route("/add", name="add", methods={"POST"})
      */
     public function add(Request $request, SerializerInterface $serializer, UserPasswordEncoderInterface $userPasswordEncoder): Response
     {
@@ -47,7 +59,6 @@ class UserController extends AbstractController
                 ], 500);
             }
                 
-
             $shoppingList = new ShoppingList();
             $shoppingList->setUser($user);
             

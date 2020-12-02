@@ -6,6 +6,7 @@ use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
@@ -104,6 +105,7 @@ class Recipe
         $this->createdAt = new \DateTime();
         $this->signaled = false;
         $this->favorites = new ArrayCollection();
+        $this->category = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,7 +221,42 @@ class Recipe
         return $this;
     }
 
+    public function getStepsCollection(): array
+    {
+        $stepJson = [];
+        foreach ($this->steps as $step) {
+            $stepJson[] = [
+                'id' => $step->getId(),
+                'nb_step' => $step->getNbStep(),
+                'description' => $step->getDescription(), 
+            ];
+        }
+
+        return $stepJson;
+    }
+
+    public function getTagsCollection(): array
+    {
+        $tagsJson = [];
+        foreach ($this->tags as $tag) {
+            $tagsJson[] = [
+                'id' => $tag->getId(),
+                'name' => $tag->getName(),
+            ];
+        }
+
+        return $tagsJson;
+    }
+
+    public function getCategoryCollection(): array
+    {
+        $categoryJson = ['name' => $this->category->getName()];
+
+        return $categoryJson;
+    }
+
     /**
+     * @@Ignore()
      * @return Collection|RecipeIngredient[]
      */
     public function getRecipeIngredients(): Collection
@@ -249,10 +286,10 @@ class Recipe
         return $this;
     }
 
-    public function getCategory(): ?Category
+/*     public function getCategory(): ?Category
     {
         return $this->category;
-    }
+    } */
 
     public function setCategory(?Category $category): self
     {
@@ -261,7 +298,9 @@ class Recipe
         return $this;
     }
 
+
     /**
+     * @Ignore()
      * @return Collection|Step[]
      */
     public function getSteps(): Collection
@@ -292,6 +331,7 @@ class Recipe
     }
 
     /**
+     * @Ignore()
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -316,6 +356,7 @@ class Recipe
     }
 
     /**
+     * @Ignore()
      * @return Collection|ShoppingList[]
      */
     public function getShoppingLists(): Collection
@@ -340,6 +381,7 @@ class Recipe
     }
 
     /**
+     * @Ignore()
      * @return Collection|User[]
      */
     public function getFavorites(): Collection
