@@ -1,17 +1,35 @@
 import {
   TEST_RECIPE_ALL,
   UPDATE_RECIPE_FIELD,
-  UPDATE_RECIPE_INGREDIENTS,
+  ADD_RECIPE_INGREDIENTS,
   UPDATE_RECIPE_STEPS,
+  UPDATE_RECIPE_INGREDIENTS,
 } from 'src/actions/recipe';
 
 const initialState = {
-  recipeValue: '',
+  recipeName: '',
   preparationTime1: '',
   preparationTime2: '',
+  PTS1: '',
+  PTS2: '',
   cookingTime1: '',
   cookingTime2: '',
+  CTS1: '',
+  CTS2: '',
   ingredientInputValue: '',
+  quantityInputValue: '',
+  optionsMeasure: [
+    { key: 1, text: 'g', value: 'g' },
+    { key: 2, text: 'Kg', value: 'Kg' },
+    { key: 3, text: 'c.a.s', value: 'c.a.s' },
+    { key: 4, text: 'c.a.c', value: 'c.a.c' },
+    { key: 5, text: 'pièce.s', value: 'pièce.s' },
+    { key: 6, text: 'pincée.s', value: 'pincée.s' },
+    { key: 7, text: 'ml', value: 'ml' },
+    { key: 8, text: 'cl', value: 'cl' },
+    { key: 9, text: 'L', value: 'L' },
+  ],
+  selectedMeasure: 'g',
   ingredients: [],
   stepInputValue: '',
   steps: [],
@@ -39,7 +57,7 @@ const recipe = (state = initialState, action = {}) => {
         ...state,
         [action.name]: action.value,
       };
-    case UPDATE_RECIPE_INGREDIENTS:
+    case ADD_RECIPE_INGREDIENTS:
       return {
         ...state,
         ingredients: [...state.ingredients, action.value],
@@ -50,6 +68,11 @@ const recipe = (state = initialState, action = {}) => {
         ...state,
         steps: [...state.steps, action.value],
         stepsInputValue: '',
+      };
+    case UPDATE_RECIPE_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: [...state.ingredients].splice(action.index, 0, action.value),
       };
     default: return { ...state };
   }
