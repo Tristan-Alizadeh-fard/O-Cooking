@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 import './inscriptionForm.scss';
 
@@ -21,6 +22,7 @@ const InscriptionForm = ({ updateField, submitInscription, errorInscription }) =
         <Form.Input label="Votre Pseudo" placeholder="Pseudo" onChange={() => updateField(event.target.value, 'name')} />
         <Button type="submit" className="form__button" onClick={inputVeryfication}>Soumettre</Button>
       </Form>
+      <Link to="/" className="link__back">Retour</Link>
     </div>
   );
 };
