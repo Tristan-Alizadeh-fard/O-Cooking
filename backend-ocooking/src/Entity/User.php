@@ -199,6 +199,9 @@ class User implements UserInterface
                 'picture' => $recipe->getPicture(),
                 'preparation_time' => $recipe->getPreparationTime(),
                 'favorite' => $recipe->getFavorites(),
+                'tag' => $recipe->getTagsCollection(),
+                'category' => $recipe->getCategoryCollection(),
+                
             ];
         }
 
