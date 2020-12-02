@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RecipeIngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeIngredientRepository::class)

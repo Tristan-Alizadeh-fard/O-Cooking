@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -188,7 +189,24 @@ class User implements UserInterface
         return $this;
     }
 
+    
+    public function getshoppingListsCollection(): array
+    {
+        $shoppingListsJson = [];
+        foreach ($this->shoppingLists as $shoppingList) {
+            $shoppingListsJson[] = [
+                'id' => $shoppingList->getId(),
+                'title' => $shoppingList->getTitle(),
+
+            ];
+        }
+
+        return $shoppingListsJson;
+    }
+
+    
     /**
+     * @Ignore()
      * @return Collection|ShoppingList[]
      */
     public function getShoppingLists(): Collection
@@ -218,7 +236,27 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getRecipesCollection(): array
+    {
+        $recipesJson = [];
+        foreach ($this->recipes as $recipe) {
+            $recipesJson[] = [
+                'id' => $recipe->getId(),
+                'picture' => $recipe->getPicture(),
+                'nbPeople' => $recipe->getNbPeople(),
+                'preparationTime' => $recipe->getPreparationTime(),
+                'cookingTime' => $recipe->getCookingTime(),
+                'signaled' => $recipe->getSignaled(),
+                'createdAt' => $recipe->getCreatedAt(),
+                'category' => $recipe->getCategory(),
+            ];
+        }
+
+        return $recipesJson;
+    }
+
     /**
+     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getRecipes(): Collection
@@ -248,7 +286,27 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getFavoritesCollection(): array
+    {
+        $favoritesJson = [];
+        foreach ($this->favorites as $favorite) {
+            $favoritessJson[] = [
+                'id' => $favorite->getId(),
+                'picture' => $favorite->getPicture(),
+                'nbPeople' => $favorite->getNbPeople(),
+                'preparationTime' => $favorite->getPreparationTime(),
+                'cookingTime' => $favorite->getCookingTime(),
+                'signaled' => $favorite->getSignaled(),
+                'createdAt' => $favorite->getCreatedAt(),
+                'category' => $favorite->getCategory(),
+            ];
+        }
+
+        return $favoritesJson;
+    }
+    
     /**
+     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getFavorites(): Collection

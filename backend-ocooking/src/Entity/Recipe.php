@@ -6,6 +6,7 @@ use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
@@ -219,7 +220,23 @@ class Recipe
         return $this;
     }
 
+    public function getRecipeIngredientsCollection(): array
+    {
+        $recipeIngredientsJson = [];
+        foreach ($this->recipeIngredients as $recipeIngredient) {
+            $recipeIngredientsJson[] = [
+                'id' => $recipeIngredient->getId(),
+                'quantityIngredient' => $recipeIngredient->getQuantity(),
+                'ingredient' => $recipeIngredient->getIngredient(),
+                'measure' => $recipeIngredient->getMeasure(),
+            ];
+        }
+
+        return $recipeIngredientsJson;
+    }
+    
     /**
+    //  * @ignore()
      * @return Collection|RecipeIngredient[]
      */
     public function getRecipeIngredients(): Collection
@@ -261,7 +278,23 @@ class Recipe
         return $this;
     }
 
+    public function getStepsCollection(): array
+    {
+        $stepsJson = [];
+        foreach ($this->steps as $step) {
+            $stepsJson[] = [
+                'id' => $step->getId(),
+                'nbStep' => $step->getNbStep(),
+                'description' => $step->getDescription(),
+                'recipe' => $step->getRecipe(),
+            ];
+        }
+
+        return $stepsJson;
+    }
+    
     /**
+     * @Ignore()
      * @return Collection|Step[]
      */
     public function getSteps(): Collection
@@ -291,7 +324,22 @@ class Recipe
         return $this;
     }
 
+    public function getTagsCollection(): array
+    {
+        $tagsJson = [];
+        foreach ($this->tags as $tag) {
+            $tagsJson[] = [
+                'id' => $tag->getId(),
+                'name' => $tag->getName(),
+                'recipe' => $tag->getRecipes(),
+            ];
+        }
+
+        return $tagsJson;
+    }
+    
     /**
+     * @Ignore()
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -315,7 +363,23 @@ class Recipe
         return $this;
     }
 
+    public function getShoppingListsCollection(): array
+    {
+        $shoppingListsJson = [];
+        foreach ($this->shoppingLists as $shoppingList) {
+            $shoppingListsJson[] = [
+                'id' => $shoppingList->getId(),
+                'nbShoppingList' => $shoppingList->getNbShoppingList(),
+                'description' => $shoppingList->getDescription(),
+                'recipe' => $shoppingList->getRecipe(),
+            ];
+        }
+
+        return $shoppingListsJson;
+    }
+
     /**
+     * @Ignore()
      * @return Collection|ShoppingList[]
      */
     public function getShoppingLists(): Collection
@@ -339,7 +403,22 @@ class Recipe
         return $this;
     }
 
+    public function getFavoritesCollection(): array
+    {
+        $favoritesJson = [];
+        foreach ($this->favorites as $favorite) {
+            $favoritesJson[] = [
+                'id' => $favorite->getId(),
+                'email' => $favorite->getEmail(),
+                'pseudo' => $favorite->getPseudo(),
+            ];
+        }
+
+        return $favoritesJson;
+    }
+    
     /**
+     * @Ignore()
      * @return Collection|User[]
      */
     public function getFavorites(): Collection

@@ -6,6 +6,7 @@ use App\Repository\ShoppingListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=ShoppingListRepository::class)
@@ -104,7 +105,27 @@ class ShoppingList
         return $this;
     }
 
+    public function getRecipesCollection(): array
+    {
+        $recipesJson = [];
+        foreach ($this->recipes as $recipe) {
+            $recipesJson[] = [
+                'id' => $recipe->getId(),
+                'picture' => $recipe->getPicture(),
+                'nbPeople' => $recipe->getNbPeople(),
+                'preparationTime' => $recipe->getPreparationTime(),
+                'cookingTime' => $recipe->getCookingTime(),
+                'signaled' => $recipe->getSignaled(),
+                'createdAt' => $recipe->getCreatedAt(),
+                'category' => $recipe->getCategory(),
+            ];
+        }
+
+        return $recipesJson;
+    }
+    
     /**
+     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getRecipes(): Collection
