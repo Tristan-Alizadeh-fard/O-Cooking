@@ -1,0 +1,47 @@
+.recette {
+  text-align: center;
+}
+.recette__image {
+  text-align: center;
+  size: 50%;
+}
+.recette__title {
+  background-color: black;
+  color: white;
+  text-align: center;
+  margin: 10px 50px 10px 50px;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: blanchedalmond solid 1px;
+  opacity: 0.7;
+}
+.author {
+  color: white;
+  font-size: 25px;
+  font: bold;
+}
+.recette__ingredients {
+  background-color: chartreuse;
+  margin: 10px 50px 10px 50px;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: blanchedalmond solid 1px;
+  opacity: 0.7;
+  }
+.recette__etapes {
+  background-color: gainsboro;
+  margin: 10px 50px 10px 50px;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: blanchedalmond solid 1px;
+  opacity: 0.7;
+}
+.icon__addshopping {
+  background-color: indigo;
+  border: solid 2px black;
+  border-radius: 0.5rem;
+  color: white;
+  margin: 5px;
+  padding: 5px;
+}
+

@@ -13,6 +13,7 @@ const user = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
+          console.log(response);
           store.dispatch(saveUserLogin(response.LEBACK, response.LEBACKname));
         })
         .catch((error) => {

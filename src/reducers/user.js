@@ -5,11 +5,13 @@ import {
   USER_INSCRIPTION_SUCCESS,
   ERROR_INSCRIPTION,
   ERROR_LOGIN,
+  DESCRIPTION_ON,
 } from 'src/actions/user';
+import { descriptionOn } from '../actions/user';
 
 const initialState = {
   name: '',
-  isLogged: false,
+  isLogged: true,
   email: '',
   pass: '',
   confirmPass: '',
@@ -17,6 +19,7 @@ const initialState = {
   inscriptionSuccess: false,
   errorInscription: false,
   errorLogin: false,
+  descriptionOn: false,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -53,6 +56,11 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         errorLogin: true,
+      };
+    case DESCRIPTION_ON:
+      return {
+        ...state,
+        descriptionOn: !state.descriptionOn,
       };
     default: return { ...state };
   }
