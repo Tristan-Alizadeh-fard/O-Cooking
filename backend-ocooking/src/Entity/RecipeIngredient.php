@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RecipeIngredientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,6 +54,7 @@ class RecipeIngredient
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+       
     }
     
     public function getId(): ?int
@@ -96,9 +98,12 @@ class RecipeIngredient
         return $this;
     }
 
-    public function getMeasure(): ?Measure
+    public function getMeasure(): array
     {
-        return $this->measure;
+        $measureJson = ['name' => $this->measure->getName()];
+
+        return $measureJson;
+        /* return $this->measure; */
     }
 
     public function setMeasure(?Measure $measure): self
@@ -120,9 +125,11 @@ class RecipeIngredient
         return $this;
     }
 
-    public function getIngredient(): ?Ingredient
+    public function getIngredient(): array
     {
-        return $this->ingredient;
+        $ingredientJson = ['name' => $this->ingredient->getName()];
+
+        return $ingredientJson;
     }
 
     public function setIngredient(?Ingredient $ingredient): self

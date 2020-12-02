@@ -200,7 +200,7 @@ class User implements UserInterface
                 'preparation_time' => $recipe->getPreparationTime(),
                 'favorite' => $recipe->getFavorites(),
                 'tag' => $recipe->getTagsCollection(),
-                'category' => $recipe->getCategoryCollection(),
+                'category' => $recipe->getCategory(),
                 
             ];
         }

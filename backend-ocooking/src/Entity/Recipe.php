@@ -105,7 +105,6 @@ class Recipe
         $this->createdAt = new \DateTime();
         $this->signaled = false;
         $this->favorites = new ArrayCollection();
-        $this->category = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,9 +208,14 @@ class Recipe
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): array
     {
-        return $this->author;
+        $AuthorJson = [
+            'id' => $this->author->getId(),
+            'pseudo' => $this->author->getPseudo(),
+
+        ];
+        return $AuthorJson;
     }
 
     public function setAuthor(?User $author): self
@@ -219,6 +223,22 @@ class Recipe
         $this->author = $author;
 
         return $this;
+    }
+
+    public function getRecipeIngredientsCollection(): array
+    {
+        $recipeIngredientspJson = [];
+        foreach ($this->recipeIngredients as $recipeIngredient) {
+            $recipeIngredientspJson[] = [
+                'id' => $recipeIngredient->getId(),
+                'quantity' => $recipeIngredient->getQuantity(),
+                'measure' => $recipeIngredient->getMeasure(),
+                'ingredient' => $recipeIngredient->getIngredient(),
+
+            ];
+        }
+
+        return $recipeIngredientspJson;
     }
 
     public function getStepsCollection(): array
@@ -248,15 +268,8 @@ class Recipe
         return $tagsJson;
     }
 
-    public function getCategoryCollection(): array
-    {
-        $categoryJson = ['name' => $this->category->getName()];
-
-        return $categoryJson;
-    }
-
     /**
-     * @@Ignore()
+     * @Ignore()
      * @return Collection|RecipeIngredient[]
      */
     public function getRecipeIngredients(): Collection
@@ -286,10 +299,12 @@ class Recipe
         return $this;
     }
 
-/*     public function getCategory(): ?Category
+    public function getCategory(): array
     {
-        return $this->category;
-    } */
+        $categoryJson = ['name' => $this->category->getName()];
+
+        return $categoryJson;
+    }
 
     public function setCategory(?Category $category): self
     {
