@@ -7,6 +7,7 @@ use App\Repository\IngredientRepository;
 use App\Repository\MeasureRepository;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -36,8 +37,12 @@ class RecipeController extends AbstractController
     /**
     * @Route("/add", name="add", methods={"POST"})
     */
-    public function add()
+    public function add(Request $request)
     {
-        
+        $json = $request->getContent();
+
+        $RecipeInformationsArray = json_decode($json, true);
+
+        dd($RecipeInformationsArray);
     }
 }
