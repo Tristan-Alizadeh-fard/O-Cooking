@@ -6,6 +6,7 @@ export const USER_INSCRIPTION = 'USER_INSCRIPTION';
 export const USER_INSCRIPTION_SUCCESS = 'USER_INSCRIPTION_SUCCESS';
 export const ERROR_INSCRIPTION = 'ERROR_INSCRIPTION';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
+export const DESCRIPTION_ON = 'DESCRIPTION_ON';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -41,4 +42,8 @@ export const errorInscription = () => ({
 
 export const errorLogin = () => ({
   type: ERROR_LOGIN,
+});
+
+export const descriptionOn = () => ({
+  type: DESCRIPTION_ON,
 });
