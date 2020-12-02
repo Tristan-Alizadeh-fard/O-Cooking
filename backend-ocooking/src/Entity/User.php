@@ -62,7 +62,7 @@ class User implements UserInterface
     private $recipes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity=Recipe::class, inversedBy="favorites")
      */
     private $favorites;
 
@@ -70,8 +70,8 @@ class User implements UserInterface
     {
         $this->shoppingLists = new ArrayCollection();
         $this->recipes = new ArrayCollection();
-        $this->favorites = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,31 +249,25 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Favorite[]
+     * @return Collection|Recipe[]
      */
     public function getFavorites(): Collection
     {
         return $this->favorites;
     }
 
-    public function addFavorite(Favorite $favorite): self
+    public function addFavorite(Recipe $favorite): self
     {
         if (!$this->favorites->contains($favorite)) {
             $this->favorites[] = $favorite;
-            $favorite->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeFavorite(Favorite $favorite): self
+    public function removeFavorite(Recipe $favorite): self
     {
-        if ($this->favorites->removeElement($favorite)) {
-            // set the owning side to null (unless already changed)
-            if ($favorite->getUser() === $this) {
-                $favorite->setUser(null);
-            }
-        }
+        $this->favorites->removeElement($favorite);
 
         return $this;
     }
