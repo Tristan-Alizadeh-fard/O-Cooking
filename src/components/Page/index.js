@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import './page.scss';
 import Navbar from 'src/components/Navbar';
 import ConnectedLoginForm from 'src/containers/ConnectedLoginForm';
-import InscriptionForm from 'src/components/InscriptionForm';
+import ConnectedInscriptionForm from 'src/containers/ConnectedInscriptionForm';
 import ConnectedAddRecipeForm from 'src/containers/ConnectedAddRecipeForm';
 
 // Page : this component manage the other components with a props called isLogged
@@ -18,20 +18,16 @@ const Page = () => (
       <Navbar />
     </header>
     <Route
-      path="/connection"
-    >
-      <ConnectedLoginForm />
-    </Route>
-    <Route
       path="/inscription"
     >
-      <InscriptionForm />
+      <ConnectedInscriptionForm />
     </Route>
 
     <Route
-      path="/accueil"
+      path="/"
+      exact
     >
-      <></>
+      <ConnectedLoginForm />
     </Route>
 
     <Route

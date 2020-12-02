@@ -3,8 +3,8 @@ import { updateUserField, logInUser } from 'src/actions/user';
 import LoginForm from 'src/components/LoginForm';
 
 const mapStateToProps = (state) => ({
-  emailValue: state.emailValue,
-  passwordValue: state.passwordValue,
+  errorLogin: state.user.errorLogin,
+  isLogged: state.user.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
