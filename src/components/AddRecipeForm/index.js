@@ -8,45 +8,36 @@ import {
   Icon,
   TextArea,
   Image,
-  TransitionGroup,
-  FormField,
+  Option,
+  Dropdown,
 } from 'semantic-ui-react';
-import Ingredient from './Ingredient';
 import PropTypes, { shape } from 'prop-types';
+import Ingredient from './Ingredient';
 
 import './addRecipeForm.scss';
 
-const optionsTime = [
-  { key: 'h', text: 'h', value: 'h' },
-  { key: 'mn', text: 'mn', value: 'mn' },
-];
-
-const optionsQuantity = [
-  { key: 'g', text: 'g', value: 'g'},
-  { key: 'Kg', text: 'Kg', value: 'Kg'},
-  { key: 'c.a.s', text: 'c.a.s', value: 'c.a.s'},
-  { key: 'c.a.c', text: 'c.a.c', value: 'c.a.c'},
-  { key: 'pièce.s', text: 'pièce.s', value: 'pièce.s'},
-  { key: 'pincée.s', text: 'pincée.s', value: 'pincée.s'},
-  { key: 'ml', text: 'ml', value: 'ml'},
-  { key: 'cl', text: 'cl', value: 'cl'},
-  { key: 'L', text: 'L', value: 'L'},
-];
-
 const AddRecipeForm = ({
   updateField,
-  updateRecipeIngredients,
+  addRecipeIngredients,
   updateRecipeSteps,
-  recipeValue,
+  updateRecipeIngredients,
+  recipeName,
   preparationTime1,
   preparationTime2,
+  PTS1,
+  PTS2,
   cookingTime1,
   cookingTime2,
+  CTS1,
+  CTS2,
   ingredientInputValue,
   stepInputValue,
   recipeImage,
   tagList,
   ingredients,
+  quantityInputValue,
+  selectedMeasure,
+  optionsMeasure,
 }) => (
   <div className="form__addrecipe">
     <Form>
@@ -55,41 +46,55 @@ const AddRecipeForm = ({
         <Form.Input
           fluid label="Donnez un nom à votre recette !"
           placeholder="Ecrivez le nom de votre recette"
-          onChange={() => updateField(event.target.value, 'recipeValue')}
-          value={recipeValue}
+          onChange={() => updateField(event.target.value, 'recipeName')}
+          value={recipeName}
         />
       </Form.Field>
 
       <Form.Field>
         <Input
-          placeholder="Ex: 2"
-          onChange={() => updateField(event.target.value, 'preparationTime1')}
-          value={preparationTime1}
+          label={{ basic: true, content: 'h' }}
+          labelPosition="right"
+          placeholder="Ex: 1"
+          onChange={() => {
+            updateField(`${event.target.value}h`, 'preparationTime1');
+            updateField(event.target.value, 'PTS1');
+          }}
+          value={PTS1}
         />
-        <Select compact options={optionsTime} defaultValue="h" />
-
         <Input
-          placeholder="Ex: 30 (si nécessaire)"
-          onChange={() => updateField(event.target.value, 'preparationTime2')}
-          value={preparationTime2}
+          label={{ basic: true, content: 'mn' }}
+          labelPosition="right"
+          placeholder="Ex: 30"
+          onChange={() => {
+            updateField(`${event.target.value}mn`, 'preparationTime2');
+            updateField(event.target.value, 'PTS2');
+          }}
+          value={PTS2}
         />
-        <Select compact options={optionsTime} defaultValue="mn" />
       </Form.Field>
 
       <Form.Field>
         <Input
-          placeholder="Ex: 2"
-          onChange={() => updateField(event.target.value, 'cookingTime1')}
-          value={cookingTime1}
+          label={{ basic: true, content: 'h' }}
+          labelPosition="right"
+          placeholder="Ex: 1"
+          onChange={() => {
+            updateField(`${event.target.value}h`, 'cookingTime');
+            updateField(event.target.value, 'CTS1');
+          }}
+          value={CTS1}
         />
-        <Select compact options={optionsTime} defaultValue="h" />
-
         <Input
-          placeholder="Ex: 30 (si nécessaire)"
-          onChange={() => updateField(event.target.value, 'cookingTime2')}
-          value={cookingTime2}
+          label={{ basic: true, content: 'mn' }}
+          labelPosition="right"
+          placeholder="Ex: 30"
+          onChange={() => {
+            updateField(`${event.target.value}mn`, 'cookingTime2');
+            updateField(event.target.value, 'CTS2');
+          }}
+          value={CTS2}
         />
-        <Select compact options={optionsTime} defaultValue="mn" />
       </Form.Field>
 
       <Divider />
@@ -97,7 +102,7 @@ const AddRecipeForm = ({
       <p>Ingrédients</p>
       <Form.Field>
         <div>
-          {ingredients.map((ingredient) => <Ingredient ingredient={ingredient} />)}
+          {ingredients.map((ingredient, index) => <Ingredient key={index} index={index} ingredient={ingredient} updateIngredients={updateRecipeIngredients} />)}
         </div>
         <Form.Input
           fluid label="Ajoutez un ingrédient"
@@ -105,8 +110,27 @@ const AddRecipeForm = ({
           onChange={() => updateField(event.target.value, 'ingredientInputValue')}
           value={ingredientInputValue}
         />
-        <Select compact options={optionsQuantity} defaultValue="g" />
-        <Button onClick={() => updateRecipeIngredients(ingredientInputValue)}>
+        <Input
+          label={(
+            <Dropdown
+              defaultValue={selectedMeasure}
+              options={optionsMeasure}
+              onChange={() => updateField(event.target.textContent, 'selectedMeasure')}
+            />
+          )}
+          labelPosition="right"
+          placeholder="Ex: 2"
+          onChange={() => updateField(event.target.value, 'quantityInputValue')}
+          value={quantityInputValue}
+          required
+        />
+        <Button
+          onClick={() => addRecipeIngredients({
+            name: ingredientInputValue,
+            measure: selectedMeasure,
+            quantity: quantityInputValue,
+          })}
+        >
           <Icon name="plus" />
         </Button>
       </Form.Field>
@@ -156,7 +180,7 @@ const AddRecipeForm = ({
       </Form.Field>
       <Divider />
       <Form.Field>
-        <Button as="button" onClick={console.log('Ici')}>Ajouter cette recette</Button>
+        <Button name="add_button" type="button" onClick={console.log('Ici')}>Ajouter cette recette</Button>
       </Form.Field>
     </Form>
   </div>
@@ -164,9 +188,10 @@ const AddRecipeForm = ({
 
 AddRecipeForm.propTypes = {
   updateField: PropTypes.func.isRequired,
-  updateRecipeIngredients: PropTypes.func.isRequired,
+  addRecipeIngredients: PropTypes.func.isRequired,
   updateRecipeSteps: PropTypes.func.isRequired,
-  recipeValue: PropTypes.string.isRequired,
+  updateRecipeIngredients: PropTypes.func.isRequired,
+  recipeName: PropTypes.string.isRequired,
   preparationTime1: PropTypes.string.isRequired,
   preparationTime2: PropTypes.string.isRequired,
   cookingTime1: PropTypes.string.isRequired,
@@ -174,6 +199,7 @@ AddRecipeForm.propTypes = {
   ingredientInputValue: PropTypes.string.isRequired,
   stepInputValue: PropTypes.string.isRequired,
   recipeImage: PropTypes.string.isRequired,
+  quantityInputValue: PropTypes.string.isRequired,
 };
 
 export default AddRecipeForm;

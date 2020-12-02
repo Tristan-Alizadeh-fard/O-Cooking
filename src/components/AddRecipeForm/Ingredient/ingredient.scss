@@ -1,0 +1,14 @@
+.ingredient {
+  padding: 0.8em;
+  color: black;
+  border: 1px solid white;
+  margin-bottom: 0.5em;
+  background-color: lightgrey;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+}
