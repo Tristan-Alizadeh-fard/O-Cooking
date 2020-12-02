@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-
 /**
  * @Route("/api/v1/users", name="api_v1_users_")
  */
@@ -28,6 +27,7 @@ class UserController extends AbstractController
             'user' => $user
         
         ]);
+    }
 
      /**
       * @Route("/add", name="add", methods={"POST"})
