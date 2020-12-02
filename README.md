@@ -28,13 +28,11 @@ Le token est renvoyé en json lorque l'on s'authentifie (route : api/login_check
 Il doit être stocké côté front pour que l'utilisateur n'ai pas besoin de s'authentifier à chaque fois.
 
 User 1:
-   username: stephanie@ocooking.fr
-   password: stephanie
+   - username: stephanie@ocooking.fr
+   - password: stephanie
 
 User 2:
-   username: renan@ocooking.fr
-   password: renan
-
-   ```
+   - username: renan@ocooking.fr
+   - password: renan
 
 # Installation du FrontEnd
