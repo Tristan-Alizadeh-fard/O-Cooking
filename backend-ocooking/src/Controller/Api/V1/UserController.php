@@ -37,7 +37,16 @@ class UserController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
-            $em->flush();
+            
+            try {
+                $em->flush();
+            } catch (\Exception $error) {
+                $errors = $error->getMessage();
+                return $this->json([
+                    'error' => 'Cette adresse email existe déjà',
+                ], 500);
+            }
+                
 
             $shoppingList = new ShoppingList();
             $shoppingList->setUser($user);
