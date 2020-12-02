@@ -95,8 +95,3 @@ App\Entity\Step:
     nbStep: '<numberBetween(1, 5)>'
     description: '<paragraph()>'
     recipe: '@recipe_*'
-
-App\Entity\Favorite:
-  favorite_{1..6}:
-    user: '@user_*'
-    recipe: '@recipe_*'
