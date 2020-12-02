@@ -29,7 +29,7 @@ class UserController extends AbstractController
         ]);
     }
 
-     /**
+    /**
       * @Route("/add", name="add", methods={"POST"})
      */
     public function add(Request $request, SerializerInterface $serializer, UserPasswordEncoderInterface $userPasswordEncoder): Response
