@@ -21,6 +21,8 @@
 
 # Utilisation du JWT
 
+Documentation du bundle utilisé en back : https://github.com/lexik/LexikJWTAuthenticationBundle
+
 A chaque appel à l'API, il faudra indiquer dans le header :
 ``` Authorization: Bearer {token} ```
 
