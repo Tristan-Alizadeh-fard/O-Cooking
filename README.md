@@ -14,7 +14,7 @@
 ## Création de la base de données avec fixtures
 1. ``` $ bin/console d:d:c ```
 2. ``` $ bin/console d:m:m ```
-3. ``` $ bin/console d:f:l NelmioAliceFixtures```
+3. ``` $ bin/console d:f:l ```
 
 ## Création du serveur PHP
 1. ``` $ php -S 0.0.0.0:8000 -t public ```
