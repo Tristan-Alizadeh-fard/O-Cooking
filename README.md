@@ -19,50 +19,21 @@
 ## Création du serveur PHP
 1. ``` $ php -S 0.0.0.0:8000 -t public ```
 
-## Installation et configuration du JWT
+# Utilisation du JWT
 
-### Installation
-1. ``` $ composer require lexik/jwt-authentication-bundle ``` (à faire tant que la branche login n'a pas été merge dans back)
-2. ``` $ mkdir -p config/jwt ```
-3. ``` openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096 ```
-4. La PEM pass phrase à saisir dans le terminal se trouve dans le fichier .env : il faut copier/coller ce qui se trouve après le signe égal du JWT-PASSPHRASE
-5. ``` $ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout ```
-6. La PEM pass phrase à saisir dans le terminal se trouve dans le fichier .env : il faut copier/coller ce qui se trouve après le signe égal du JWT-PASSPHRASE
+A chaque appel à l'API, il faudra indiquer dans le header :
+``` Authorization: Bearer {token} ```
 
-### Configuration
-1. Dans config/packages/security.yaml ajouter les lignes suivantes :
-   ```
-   security:
-    # ...
-    
-    firewalls:
+Le token est renvoyé en json lorque l'on s'authentifie (route : api/login_check).
+Il doit être stocké côté front pour que l'utilisateur n'ai pas besoin de s'authentifier à chaque fois.
 
-        login:
-            pattern:  ^/api/login
-            stateless: true
-            anonymous: true
-            json_login:
-                check_path:               /api/login_check
-                success_handler:          lexik_jwt_authentication.handler.authentication_success
-                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+User 1:
+   username: stephanie@ocooking.fr
+   password: stephanie
 
-        api:
-            pattern:   ^/api
-            stateless: true
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
-
-    access_control:
-        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
-
-   ```
-   Mettre les firewalls avant main
-2. Dans config/routes.yaml ajouter
-   ``` 
-   api_login_check:
-        path: /api/
+User 2:
+   username: renan@ocooking.fr
+   password: renan
 
    ```
 
