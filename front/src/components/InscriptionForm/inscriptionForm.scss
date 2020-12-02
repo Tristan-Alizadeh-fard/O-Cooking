@@ -1,0 +1,25 @@
+.form__inscription {
+    margin: auto auto;  
+    margin-top: 60px;
+    width: 50%;
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    background-color: grey;
+}
+.form__button {
+  color: blue;
+}
+.error__message {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
+.link__back {
+  color: white;
+  margin: 200px;
+  border: solid 1px black;
+  border-radius: 1rem;
+  padding: 0.3rem;
+  background-color: blue;
+}

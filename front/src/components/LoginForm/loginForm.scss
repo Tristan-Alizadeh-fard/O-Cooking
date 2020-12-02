@@ -1,0 +1,93 @@
+.form__login {
+  margin: auto auto;  
+  margin-top: 60px;
+  width: 50%;
+  padding: 1em;
+  border: 2px solid black;
+  border-radius: 1em;
+  background-color: grey;
+  margin-bottom: 20px;
+}
+.link__inscription {
+  margin-top: 40px;
+  text-align: center;
+}
+.link__forgottenpass {
+  margin-top: 40px;
+  text-align: center;
+  
+}
+.forgotten__password {
+  color: red;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: black;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+.inscription {
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: black;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+.error__login {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
+.login__ok {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}  
+.home__title {
+  text-align: center;
+  color: black;
+}
+.home__smalltitle {
+  text-align: center;
+  color: black;
+}
+.home__more {
+  text-align: center;
+  color: black;
+}
+.home__less {
+  text-align: center;
+  color: black;
+  margin-bottom: 15px;
+}
+.home__content {
+  text-align: center;
+  color: white;
+  padding-bottom: 15px;
+}
+.home {
+  width: 70%;
+  background-color: cornflowerblue;
+  margin: auto auto;
+  margin-top: 40px;
+  border-radius: 1rem;
+  border: solid 2px black;
+}
+.link__logged {
+  display: inline-block;
+  font-size: large;
+  font: bold;
+  color: white;
+  background-color: none;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  margin: auto auto;
+}
+.link__islogged {
+  color: black;
+  animation: clignote 2s linear infinite;
+}
+@keyframes clignote {  
+  50% { opacity: 0; }
+}
+
