@@ -22,7 +22,7 @@
 ## Installation et configuration du JWT
 
 ### Installation
-1. ``` $ composer require lexik/jwt-authentication-bundle ```
+1. ``` $ composer require lexik/jwt-authentication-bundle ``` (à faire tant que la branche login n'a pas été merge dans back)
 2. ``` $ mkdir -p config/jwt ```
 3. ``` openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096 ```
 4. La PEM pass phrase à saisir dans le terminal se trouve dans le fichier .env : il faut copier/coller ce qui se trouve après le signe égal du JWT-PASSPHRASE
