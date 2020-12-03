@@ -28,6 +28,7 @@ class RecipeController extends AbstractController
         // dd($user);
         // $userId= $user->getId();
 
+      //requête pour récupérer les information de l'utilisateur
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
         $qb->from(User::class, 'u')
@@ -40,6 +41,7 @@ class RecipeController extends AbstractController
         
         $user = $qb->getQuery()->getResult();
 
+      //requête pour récupérer les recettes de l'utilisateur
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
         $qb->from(Recipe::class, 'r')
@@ -56,6 +58,8 @@ class RecipeController extends AbstractController
         
         $recipe = $qb->getQuery()->getResult();
 
+
+      //requête pour récupérer les Catégories
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
         $qb->from(Recipe::class, 'r')
@@ -67,6 +71,7 @@ class RecipeController extends AbstractController
         ;
         $category = $qb->getQuery()->getResult();
 
+      //requête pour récupérer les Tags
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
         $qb->from(Recipe::class, 'r')
@@ -113,6 +118,7 @@ class RecipeController extends AbstractController
      */
     public function read(int $id,Recipe $recipe): Response
     {
+      //requête pour récupérer la recette via l'id de l'utilisateur
       $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
       $qb->from(Recipe::class, 'r')
@@ -131,6 +137,7 @@ class RecipeController extends AbstractController
     
       $recipe = $qb->getQuery()->getResult();
       
+      //requête pour récupérer la quantité et les ingredients
       $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
       $qb->from(RecipeIngredient::class, 're')
@@ -142,6 +149,8 @@ class RecipeController extends AbstractController
       ->setParameter('id', $id)
       ;
       $recipeIngredient = $qb->getQuery()->getResult();
+
+      //requête pour récupérer les type de mesure
       $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
       $qb->from(RecipeIngredient::class, 're')
@@ -153,7 +162,7 @@ class RecipeController extends AbstractController
       ;
       $recipeIngredientMeasure = $qb->getQuery()->getResult();
 
-
+      //requête pour récupérer  les étapes
       $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
       $qb->from(Step::class, 's')
@@ -164,6 +173,7 @@ class RecipeController extends AbstractController
       ;
       $steps = $qb->getQuery()->getResult();
 
+      //requête pour récupérer les categories 
       $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
       $qb->from(Recipe::class, 'r')
@@ -174,7 +184,7 @@ class RecipeController extends AbstractController
       ;
       $category = $qb->getQuery()->getResult();
 
-
+      // requête pour récupérer les Tags
       $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
       $qb->from(Recipe::class, 'r')
