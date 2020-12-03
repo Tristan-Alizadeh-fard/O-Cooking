@@ -401,6 +401,18 @@ class Recipe
 
         return $this;
     }
+
+    public function getUsersCollection(): array
+    {
+        $usersJson = [];
+        foreach ($this->users as $user) {
+            $usersJson[] = [
+                'name' => $user->getPseudo(),
+            ];
+        }
+
+        return $usersJson;
+    }
     
     /**
      * @return Collection|User[]

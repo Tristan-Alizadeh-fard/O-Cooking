@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecipeTestController extends AbstractController
 {
     /**
-     * @Route("/api/v1/recipes/{id}", name="api_v1_recipe_test", methods={"GET"}, requirements={"id":"\d+"})
+     * @Route("/api/v1/test/recipes/{id}", name="api_v1_recipe_test", methods={"GET"}, requirements={"id":"\d+"})
      */
     public function read(Recipe $recipe): Response
     {
