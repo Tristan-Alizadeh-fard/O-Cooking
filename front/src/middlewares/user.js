@@ -16,8 +16,8 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response,'success login');
-          store.dispatch(saveUserLogin(response.LEBACK, response.LEBACKname));
+          console.log(response, 'success login');
+          store.dispatch(saveUserLogin());
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware LOGIN error');
@@ -44,10 +44,10 @@ const user = (store) => (next) => (action) => {
         })
           .then((response) => {
             console.log(response, 'post success');
-            store.dispatch(saveUserInscription(response.LEBACK, response.LEBACKname));
+            store.dispatch(saveUserInscription());
           })
-          .catch((response) => {
-            console.log(response, 'Je suis dans le middleware LOGIN error');
+          .catch((error) => {
+            console.log(error, 'Je suis dans le middleware LOGIN error');
           });
       }
       else {

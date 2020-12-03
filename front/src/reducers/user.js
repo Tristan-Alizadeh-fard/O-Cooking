@@ -36,9 +36,8 @@ const user = (state = initialState, action = {}) => {
     case SAVE_USER_LOGIN:
       return {
         ...state,
-        islogged: true,
-        name: action.name,
-        email: '',
+        isLogged: true,
+        nmae: '',
         pass: '',
       };
     case USER_INSCRIPTION_SUCCESS:
