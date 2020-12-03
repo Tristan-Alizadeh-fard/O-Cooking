@@ -19,24 +19,24 @@ use Symfony\Component\Routing\Annotation\Route;
      */
 class RecipeController extends AbstractController
 {
-      /**
+    /**
      * @Route("/browse/user/{id}", name="browse_user", methods={"GET"}, requirements={"id":"\d+"})
      */
     public function userBrowseRecipeAll(int $id, User $user, Recipe $recipe): Response
     {
-        //$user = $this->getUser();
+        $user = $this->getUser();
         // dd($user);
-        // $userId= $user->getId();
-
-      //requête pour récupérer les information de l'utilisateur
+        $userId= $user->getId();
+        
+        //requête pour récupérer les information de l'utilisateur
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
-
+        
         $qb->from(User::class, 'u')
-            ->select('u.id')
-            ->addSelect('u.email')
-            ->addSelect('u.pseudo')
-            ->where('u.id = :id')
-            ->setParameter('id', $id,/* $userId */)
+        ->select('u.id')
+        ->addSelect('u.email')
+        ->addSelect('u.pseudo')
+        ->where('u.id = :id')
+        ->setParameter('id', $userId)
         ;
         
         $user = $qb->getQuery()->getResult();
@@ -45,16 +45,17 @@ class RecipeController extends AbstractController
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
 
         $qb->from(Recipe::class, 'r')
-            ->select('r.id')
-            ->addSelect('r.name')
-            ->addSelect('r.picture')
-            ->addSelect('r.nbPeople')
-            ->addSelect('r.cookingTime')
-            ->leftJoin('r.author', 'a')
-            ->addSelect('a.pseudo')
-            ->where('r.author = :id')
-            ->setParameter('id', $id,/* $userId */)
+        ->select('r.id')
+        ->addSelect('r.name')
+        ->addSelect('r.picture')
+        ->addSelect('r.nbPeople')
+        ->addSelect('r.cookingTime')
+        ->leftJoin('r.author', 'a')
+        ->addSelect('a.pseudo')
+        ->where('r.author = :id')
+        ->setParameter('id', $userId)
         ;
+        // dd($qb);
         
         $recipe = $qb->getQuery()->getResult();
 
@@ -67,7 +68,7 @@ class RecipeController extends AbstractController
             ->leftJoin('r.category', 'c')
             ->addSelect('c.name')
             ->where('r.author = :id')
-            ->setParameter('id', $id,/* $userId */)
+            ->setParameter('id', $userId)
         ;
         $category = $qb->getQuery()->getResult();
 
@@ -79,7 +80,7 @@ class RecipeController extends AbstractController
             ->leftjoin('r.tags', 't')
             ->addSelect('t.name')
             ->where('r.author = :id')
-            ->setParameter('id', $id,/* $userId */)
+            ->setParameter('id', $userId)
         ;
         $tags = $qb->getQuery()->getResult();
         return $this->json([
@@ -94,24 +95,25 @@ class RecipeController extends AbstractController
     /**
      * @Route("", name="browse", methods={"GET"}, requirements={"id":"\d+"})
      */
-    // public function browse(Recipe $recipe, RecipeRepository $recipeRepository): Response
-    // {
-    //   // $recipe = $recipeRepository->findAll();
-    //   $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
-
-    //   $qb->from(Recipe::class, 'r')
-    //       ->select('r.id')
-    //       ->addSelect('r.name')
-    //       ->addSelect('r.picture')
-    //       ->setMaxResults(5)
-    //       // ->orderBy('r.createdAt', 'DESC')
-
-    //   ;
+    public function browse( RecipeRepository $recipeRepository): Response
+    {
+      //requête pour récupérer toute les recettes de la communauté  et on limite a 10 résulta ordonné par ordre décroissant 
+      $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
+      
+      $qb->from(Recipe::class, 'r')
+      ->select('r.id')
+      ->addSelect('r.name')
+      ->addSelect('r.picture')
+      ->leftJoin('r.author', 'a')
+      ->addSelect('a.pseudo')
+      ->setMaxResults(10)
+      ->orderBy('r.createdAt', 'DESC')
+      ;
     
-    //   $recipe = $qb->getQuery()->getResult();
+      $recipe = $qb->getQuery()->getResult();
 
-    //   return $this->json($recipe);
-    // }
+      return $this->json($recipe);
+    }
 
      /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id":"\d+"})
