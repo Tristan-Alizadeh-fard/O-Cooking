@@ -4,6 +4,7 @@ import {
   ADD_RECIPE_INGREDIENTS,
   UPDATE_RECIPE_STEPS,
   UPDATE_RECIPE_INGREDIENTS,
+  DELETE_RECIPE_INGREDIENTS,
 } from 'src/actions/recipe';
 
 const initialState = {
@@ -62,6 +63,7 @@ const recipe = (state = initialState, action = {}) => {
         ...state,
         ingredients: [...state.ingredients, action.value],
         ingredientInputValue: '',
+        quantityInputValue: '',
       };
     case UPDATE_RECIPE_STEPS:
       return {
@@ -70,9 +72,15 @@ const recipe = (state = initialState, action = {}) => {
         stepsInputValue: '',
       };
     case UPDATE_RECIPE_INGREDIENTS:
+      console.log('update ingredient at index =>', action.index, 'with =>', action.value);
       return {
         ...state,
-        ingredients: [...state.ingredients].splice(action.index, 0, action.value),
+      };
+    case DELETE_RECIPE_INGREDIENTS:
+      console.log('delete ingredient result => ', action.newList);
+      return {
+        ...state,
+        ingredients: action.newList,
       };
     default: return { ...state };
   }

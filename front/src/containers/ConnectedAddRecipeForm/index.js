@@ -4,7 +4,6 @@ import {
   updateRecipeField,
   addRecipeIngredients,
   updateRecipeSteps,
-  updateRecipeIngredients,
 } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
@@ -30,20 +29,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateField: (newValue, name) => {
-    console.log('updateField');
     dispatch(updateRecipeField(newValue, name));
   },
   addRecipeIngredients: (key, value) => {
-    console.log('updateRecipeIngredients');
     dispatch(addRecipeIngredients(key, value));
   },
   updateRecipeSteps: (key, value) => {
-    console.log('updateRecipeSteps');
     dispatch(updateRecipeSteps(key, value));
-  },
-  updateRecipeIngredients: (value) => {
-    console.log('update qqch');
-    dispatch(updateRecipeIngredients(value));
   },
 });
 
