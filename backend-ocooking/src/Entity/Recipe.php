@@ -236,7 +236,6 @@ class Recipe
     }
     
     /**
-    //  * @ignore()
      * @return Collection|RecipeIngredient[]
      */
     public function getRecipeIngredients(): Collection
@@ -402,23 +401,8 @@ class Recipe
 
         return $this;
     }
-
-    public function getFavoritesCollection(): array
-    {
-        $favoritesJson = [];
-        foreach ($this->favorites as $favorite) {
-            $favoritesJson[] = [
-                'id' => $favorite->getId(),
-                'email' => $favorite->getEmail(),
-                'pseudo' => $favorite->getPseudo(),
-            ];
-        }
-
-        return $favoritesJson;
-    }
     
     /**
-     * @Ignore()
      * @return Collection|User[]
      */
     public function getFavorites(): Collection

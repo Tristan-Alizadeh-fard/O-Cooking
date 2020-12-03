@@ -75,6 +75,14 @@ class User implements UserInterface
         $this->favorites = new ArrayCollection();
     }
 
+    // public function __serialize(): array
+    // {
+    //     return [
+    //         'id' => $this->id,
+    //         'pseudo' => $this->pseudo,
+    //     ];
+    // }
+
     public function getId(): ?int
     {
         return $this->id;
