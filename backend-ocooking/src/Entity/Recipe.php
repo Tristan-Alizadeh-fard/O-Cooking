@@ -105,7 +105,6 @@ class Recipe
         $this->createdAt = new \DateTime();
         $this->signaled = false;
         $this->favorites = new ArrayCollection();
-        $this->category = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -221,6 +220,14 @@ class Recipe
         return $this;
     }
 
+    public function getAuthorCollection(): array
+    {
+        $stepJson = [     
+                'id' => $this->author->getId(),
+                'pseudo' => $this->author->getPseudo(),
+            ];
+        return $stepJson;
+    }
     public function getStepsCollection(): array
     {
         $stepJson = [];
@@ -256,7 +263,6 @@ class Recipe
     }
 
     /**
-     * @@Ignore()
      * @return Collection|RecipeIngredient[]
      */
     public function getRecipeIngredients(): Collection
@@ -286,10 +292,10 @@ class Recipe
         return $this;
     }
 
-/*     public function getCategory(): ?Category
+    public function getCategory(): ?Category
     {
         return $this->category;
-    } */
+    }
 
     public function setCategory(?Category $category): self
     {
@@ -300,7 +306,6 @@ class Recipe
 
 
     /**
-     * @Ignore()
      * @return Collection|Step[]
      */
     public function getSteps(): Collection
@@ -331,7 +336,6 @@ class Recipe
     }
 
     /**
-     * @Ignore()
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -356,7 +360,6 @@ class Recipe
     }
 
     /**
-     * @Ignore()
      * @return Collection|ShoppingList[]
      */
     public function getShoppingLists(): Collection
@@ -381,7 +384,6 @@ class Recipe
     }
 
     /**
-     * @Ignore()
      * @return Collection|User[]
      */
     public function getFavorites(): Collection

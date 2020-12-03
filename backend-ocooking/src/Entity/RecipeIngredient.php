@@ -131,4 +131,5 @@ class RecipeIngredient
 
         return $this;
     }
+
 }

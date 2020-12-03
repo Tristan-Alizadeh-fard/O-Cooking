@@ -239,7 +239,7 @@ class User implements UserInterface
     }
 
     /**
-     * @Ignore()
+
      * @return Collection|Recipe[]
      */
     public function getRecipes(): Collection

@@ -86,7 +86,18 @@ class Measure
 
         return $this;
     }
+    public function getRecipeIngredientCollection(): array
+    {
+        $recipeIngredientJson = [];
+        foreach ($this->measure as $measur) {
+            $recipeIngredientJson[] = [
+                'id' => $measur->getId(),
+                'name' => $measur->getName(),
+            ];
+        }
 
+        return $recipeIngredientJson;
+    }
     /**
      * @Ignore()
      * @return Collection|RecipeIngredient[]

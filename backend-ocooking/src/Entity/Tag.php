@@ -88,7 +88,6 @@ class Tag
     }
 
     /**
-     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getRecipes(): Collection
