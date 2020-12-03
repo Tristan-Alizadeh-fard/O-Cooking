@@ -173,6 +173,6 @@ class __TwigTemplate_654033f97bee63545cb4e48a7e0d859e2f106fd4b4cb070e1c38c503c2b
         {% block javascripts %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "/home/etudiant/Documents/projet-o-cooking/backend-ocooking/templates/base.html.twig");
+", "base.html.twig", "/var/www/html/react/o-coocking/projet-o-cooking/backend-ocooking/templates/base.html.twig");
     }
 }

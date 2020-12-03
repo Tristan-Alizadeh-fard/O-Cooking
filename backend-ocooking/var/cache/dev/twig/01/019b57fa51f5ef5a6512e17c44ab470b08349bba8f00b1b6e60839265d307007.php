@@ -81,6 +81,6 @@ class __TwigTemplate_a5bd5bb6bf744fe3edc34ccdf031202d6aa6bd2201449b7a27b583bf5ec
     public function getSourceContext()
     {
         return new Source("{% block panel '' %}
-", "@WebProfiler/Profiler/ajax_layout.html.twig", "/home/etudiant/Documents/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/ajax_layout.html.twig");
+", "@WebProfiler/Profiler/ajax_layout.html.twig", "/var/www/html/react/o-coocking/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/ajax_layout.html.twig");
     }
 }

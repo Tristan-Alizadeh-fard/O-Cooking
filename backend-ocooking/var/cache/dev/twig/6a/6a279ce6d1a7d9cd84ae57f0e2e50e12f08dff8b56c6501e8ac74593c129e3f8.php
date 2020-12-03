@@ -417,6 +417,6 @@ class __TwigTemplate_74f0a47ea1612f07a4df7b908894ee7f4c1cbebab5bb9b31a4fb993b461
     });
 })();
 </script>
-", "@WebProfiler/Profiler/settings.html.twig", "/home/etudiant/Documents/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/settings.html.twig");
+", "@WebProfiler/Profiler/settings.html.twig", "/var/www/html/react/o-coocking/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/settings.html.twig");
     }
 }

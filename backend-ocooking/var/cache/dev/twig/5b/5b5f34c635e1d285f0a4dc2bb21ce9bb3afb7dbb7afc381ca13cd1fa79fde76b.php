@@ -189,6 +189,6 @@ class __TwigTemplate_1fd19de1e7156020b3aacde8ceaaa0ec81fc5e3add8d26bc99ef6a0a208
 .timeline-graph .timeline-period {
     stroke-width: 0;
 }
-", "@WebProfiler/Collector/time.css.twig", "/home/etudiant/Documents/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Collector/time.css.twig");
+", "@WebProfiler/Collector/time.css.twig", "/var/www/html/react/o-coocking/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Collector/time.css.twig");
     }
 }

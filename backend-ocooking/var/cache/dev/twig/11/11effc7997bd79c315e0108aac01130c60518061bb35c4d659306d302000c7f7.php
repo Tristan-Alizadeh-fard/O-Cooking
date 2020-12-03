@@ -155,6 +155,6 @@ class __TwigTemplate_0e3fd9ef0843e258a5428a02e0a3376ec6b4a18bd8cf5c6f9e85ccda9c8
 {% block panel %}
     {{ render(path('_profiler_router', { token: token })) }}
 {% endblock %}
-", "@WebProfiler/Collector/router.html.twig", "/home/etudiant/Documents/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Collector/router.html.twig");
+", "@WebProfiler/Collector/router.html.twig", "/var/www/html/react/o-coocking/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Collector/router.html.twig");
     }
 }

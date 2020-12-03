@@ -227,6 +227,6 @@ class __TwigTemplate_650497d88613a45783504797c2b7f2bf52ae6bfad709412d89dbb1c66e6
         </div>
     </form>
 </div>
-", "@WebProfiler/Profiler/search.html.twig", "/home/etudiant/Documents/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/search.html.twig");
+", "@WebProfiler/Profiler/search.html.twig", "/var/www/html/react/o-coocking/projet-o-cooking/backend-ocooking/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/search.html.twig");
     }
 }

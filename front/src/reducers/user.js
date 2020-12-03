@@ -11,7 +11,7 @@ import { descriptionOn } from '../actions/user';
 
 const initialState = {
   name: '',
-  isLogged: true,
+  isLogged: false,
   email: '',
   pass: '',
   confirmPass: '',

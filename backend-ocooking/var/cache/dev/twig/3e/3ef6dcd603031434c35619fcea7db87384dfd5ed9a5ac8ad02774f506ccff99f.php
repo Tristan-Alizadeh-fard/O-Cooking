@@ -1671,6 +1671,6 @@ class __TwigTemplate_c2df1a12e7c83666c925750da6343ebc118e086319d001fc760f1d353c3
         </tbody>
     </table>
 {% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "/home/etudiant/Documents/projet-o-cooking/backend-ocooking/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
+", "@Doctrine/Collector/db.html.twig", "/var/www/html/react/o-coocking/projet-o-cooking/backend-ocooking/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
     }
 }

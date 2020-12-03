@@ -71,6 +71,6 @@ class __TwigTemplate_a7247f7280ff6487e574dec3fec73f8c2fe1b9da37472543cbc2aae58ee
     public function getSourceContext()
     {
         return new Source("{% extends \"@email/zurb_2/notification/body.html.twig\" %}
-", "@email/default/notification/body.html.twig", "/home/etudiant/Documents/projet-o-cooking/backend-ocooking/vendor/symfony/twig-bridge/Resources/views/Email/default/notification/body.html.twig");
+", "@email/default/notification/body.html.twig", "/var/www/html/react/o-coocking/projet-o-cooking/backend-ocooking/vendor/symfony/twig-bridge/Resources/views/Email/default/notification/body.html.twig");
     }
 }
