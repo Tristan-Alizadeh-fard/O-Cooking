@@ -6,18 +6,21 @@ const user = (store) => (next) => (action) => {
   switch (action.type) {
     case LOG_IN: {
       const { email, pass } = store.getState().user;
-      axios.post('LE BACK', {
-        email,
-        pass,
+      axios.post('http://localhost:8000/api/login_check', {
+        username: email,
+        password: pass,
       }, {
-        withCredentials: true,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
       })
         .then((response) => {
-          console.log(response);
-          store.dispatch(saveUserLogin(response.LEBACK, response.LEBACKname));
+          console.log(response, 'success login');
+          store.dispatch(saveUserLogin());
         })
         .catch((error) => {
-          console.log(error, 'Je suis dans le middleware LOGIN');
+          console.log(error, 'Je suis dans le middleware LOGIN error');
           store.dispatch(errorLogin());
         });
       next(action);
@@ -26,18 +29,25 @@ const user = (store) => (next) => (action) => {
     case USER_INSCRIPTION: {
       const { email, confirmEmail, pass, confirmPass, name } = store.getState().user;
       if (email === confirmEmail && pass === confirmPass && email !== '' && pass !== '' && name !== '') {
-        axios.post('LE BACK', {
+        axios.post('http://localhost:8000/api/v1/users/add', {
           email,
-          pass,
-          name,
-        }, {
-          withCredentials: true,
+          password: pass,
+          pseudo: name,
+        },
+        {
+          headers: {
+            // Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Content-Type': 'application/json',
+          },
         })
           .then((response) => {
-            store.dispatch(saveUserInscription(response.LEBACK, response.LEBACKname));
+            console.log(response, 'post success');
+            store.dispatch(saveUserInscription());
           })
           .catch((error) => {
-            console.log(error, 'Je suis dans le middleware LOGIN');
+            console.log(error, 'Je suis dans le middleware LOGIN error');
           });
       }
       else {

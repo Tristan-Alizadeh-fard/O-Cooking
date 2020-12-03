@@ -22,10 +22,8 @@ export const logInUser = () => ({
   type: LOG_IN,
 });
 
-export const saveUserLogin = (logged, name) => ({
+export const saveUserLogin = () => ({
   type: SAVE_USER_LOGIN,
-  logged,
-  name,
 });
 
 export const userInscription = () => ({
