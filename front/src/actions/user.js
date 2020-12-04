@@ -7,6 +7,7 @@ export const USER_INSCRIPTION_SUCCESS = 'USER_INSCRIPTION_SUCCESS';
 export const ERROR_INSCRIPTION = 'ERROR_INSCRIPTION';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
 export const DESCRIPTION_ON = 'DESCRIPTION_ON';
+export const EMAIL_IN_USE = 'EMAIL_IN_USE';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -22,10 +23,9 @@ export const logInUser = () => ({
   type: LOG_IN,
 });
 
-export const saveUserLogin = (logged, name) => ({
+export const saveUserLogin = (token) => ({
   type: SAVE_USER_LOGIN,
-  logged,
-  name,
+  token,
 });
 
 export const userInscription = () => ({
@@ -46,4 +46,8 @@ export const errorLogin = () => ({
 
 export const descriptionOn = () => ({
   type: DESCRIPTION_ON,
+});
+
+export const emailInUse = () => ({
+  type: EMAIL_IN_USE,
 });
