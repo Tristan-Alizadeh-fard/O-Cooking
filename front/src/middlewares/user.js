@@ -6,6 +6,7 @@ const user = (store) => (next) => (action) => {
   switch (action.type) {
     case LOG_IN: {
       const { email, pass } = store.getState().user;
+      // http://ec2-100-25-30-18.compute-1.amazonaws.com/api/login_check
       axios.post('http://localhost:8000/api/login_check', {
         username: email,
         password: pass,
@@ -29,6 +30,7 @@ const user = (store) => (next) => (action) => {
     case USER_INSCRIPTION: {
       const { email, confirmEmail, pass, confirmPass, name } = store.getState().user;
       if (email === confirmEmail && pass === confirmPass && email !== '' && pass !== '' && name !== '') {
+        // http://ec2-100-25-30-18.compute-1.amazonaws.com/api/v1/users/add
         axios.post('http://localhost:8000/api/v1/users/add', {
           email,
           password: pass,
