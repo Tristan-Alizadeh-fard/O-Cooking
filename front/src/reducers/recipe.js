@@ -72,7 +72,10 @@ const recipe = (state = initialState, action = {}) => {
         stepsInputValue: '',
       };
     case UPDATE_RECIPE_INGREDIENTS:
-      console.log('update ingredient at index =>', action.index, 'with =>', action.value);
+      // eslint-disable-next-line max-len
+      // Ici action.value renvoie un obj {name :{name:'courgettes', measure:'g', quantity:'Kg',}, measure: undefined, quantity; undefined,}; à chercher pourquoi
+      // WIP
+      console.log('update ingredient at index =>', action.index, 'with =>', action.value.name);
       return {
         ...state,
       };

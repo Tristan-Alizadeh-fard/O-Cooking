@@ -2,3 +2,4 @@
 2c2098,127.0.0.1,GET,http://localhost:8000/api/v1/users/add,1606925173,,405
 d0226c,127.0.0.1,GET,http://localhost:8000/api/v1/users/add,1606925591,2baea3,405
 2baea3,127.0.0.1,GET,http://localhost:8000/api/v1/users/add,1606925591,,405
+6ad3bd,127.0.0.1,GET,http://localhost:8000/,1606984606,,404

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { setState, useEffect } from 'react';
 import {
   Form,
   Select,
@@ -12,13 +12,20 @@ import {
   Dropdown,
 } from 'semantic-ui-react';
 import PropTypes, { shape } from 'prop-types';
-import ConnectedIngredient from 'src/containers/ConnectedIngredient';
 
 import './addRecipeForm.scss';
+
+const getNewList = (arr, index) => {
+  arr.splice(index, 1);
+  console.log('getNewList', arr);
+  return arr;
+};
 
 const AddRecipeForm = ({
   updateField,
   addRecipeIngredients,
+  updateRecipeIngredients,
+  deleteRecipeIngredients,
   updateRecipeSteps,
   recipeName,
   preparationTime1,
@@ -38,7 +45,7 @@ const AddRecipeForm = ({
   selectedMeasure,
   optionsMeasure,
 }) => {
-  const TEST = true;
+  const test = true;
   return (
     <div className="form__addrecipe">
       <Form>
@@ -105,12 +112,30 @@ const AddRecipeForm = ({
           <div>
             {
               ingredients.map((ingredient, index) => (
-                <ConnectedIngredient
-                  key={`${ingredient.name}${ingredient.quantity}`}
-                  index={index}
-                  ingredient={ingredient}
-                  list={ingredients}
-                />
+                <div className="ingredient" key={`${ingredient.quantity} ${ingredient.measure}`}>
+                  <p>{ingredient.quantity} {ingredient.measure} de {ingredient.name}</p>
+                  <div className="ingredient__icons">
+                    <Button
+                      type="button"
+                      // eslint-disable-next-line max-len
+                      onClick={() => updateRecipeIngredients(index, ingredient)}
+                    >
+                      <Icon name="pencil" color="blue" />
+                    </Button>
+                    <Button
+                      type="button"
+                      onClick={() => deleteRecipeIngredients(getNewList(ingredients, index))}
+                    >
+                      <Icon name="delete" color="red" />
+                    </Button>
+                    <Button
+                      type="button"
+                      onClick={() => console.log(ingredient)}
+                    >
+                      Log list
+                    </Button>
+                  </div>
+                </div>
               ))
             }
           </div>
@@ -128,6 +153,7 @@ const AddRecipeForm = ({
                 onChange={() => updateField(event.target.textContent, 'selectedMeasure')}
               />
             )}
+            type="number"
             labelPosition="right"
             placeholder="Ex: 2"
             onChange={() => updateField(event.target.value, 'quantityInputValue')}

@@ -3,6 +3,8 @@ import AddRecipeForm from 'src/components/AddRecipeForm';
 import {
   updateRecipeField,
   addRecipeIngredients,
+  updateRecipeIngredients,
+  deleteRecipeIngredients,
   updateRecipeSteps,
 } from 'src/actions/recipe';
 
@@ -36,6 +38,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   updateRecipeSteps: (key, value) => {
     dispatch(updateRecipeSteps(key, value));
+  },
+  updateRecipeIngredients: (index, value) => {
+    dispatch(updateRecipeIngredients(index, value));
+  },
+  deleteRecipeIngredients: (newList) => {
+    dispatch(deleteRecipeIngredients(newList));
   },
 });
 
