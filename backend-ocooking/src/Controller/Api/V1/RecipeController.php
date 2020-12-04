@@ -2,12 +2,10 @@
 
 namespace App\Controller\Api\V1;
 
-// use App\Entity\Category;
-// use App\Entity\Ingredient;
+
 use App\Entity\Recipe;
 use App\Entity\RecipeIngredient;
 use App\Entity\Step;
-use App\Entity\Tag;
 use App\Entity\User;
 use App\Repository\RecipeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -145,24 +143,10 @@ class RecipeController extends AbstractController
       $qb->from(RecipeIngredient::class, 're')
       ->select('re.id')
       ->addSelect('re.quantity')
-      ->join('re.ingredient', 'i')
-      ->addSelect('i.name')
       ->where('re.recipe = :id')
       ->setParameter('id', $id)
       ;
-      $recipeIngredient = $qb->getQuery()->getResult();
-
-      //requête pour récupérer les type de mesure
-      $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
-
-      $qb->from(RecipeIngredient::class, 're')
-      ->select('re.id')
-      ->join('re.measure', 'm')
-      ->addSelect('m.name')
-      ->where('re.recipe = :id')
-      ->setParameter('id', $id)
-      ;
-      $recipeIngredientMeasure = $qb->getQuery()->getResult();
+      $quantity = $qb->getQuery()->getResult();
 
       //requête pour récupérer  les étapes
       $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
@@ -205,8 +189,7 @@ class RecipeController extends AbstractController
 
       return $this->json([
           'recipe' => $recipe,
-          'recipeIngredient' => $recipeIngredient,
-          'recipeIngredientMeasure' => $recipeIngredientMeasure,
+          'quantity' => $quantity,
           'step' => $steps,
           'category' => $category,
           'tags' => $tags,
