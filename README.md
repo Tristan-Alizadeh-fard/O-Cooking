@@ -1,9 +1,9 @@
 # Installation du Backend
 
-1. Se placer sur la branche back
+1. Se placer sur la branche back (si pas encore de branche back)
 2. ``` $ git pull ```
 3. ``` $ cd backend-ocooking ```
-4. ``` $ composer install ```
+4. ``` $ composer install ``` 
 5. Dupliquer le fichier .env
 6. Renommer le fichier .env en .env.local
 
