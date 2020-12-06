@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import Prototypes from 'prop-types';
 import './page.scss';
 import Navbar from 'src/components/Navbar';
 import ConnectedLoginForm from 'src/containers/ConnectedLoginForm';
@@ -7,14 +8,15 @@ import ConnectedInscriptionForm from 'src/containers/ConnectedInscriptionForm';
 import ConnectedAddRecipeForm from 'src/containers/ConnectedAddRecipeForm';
 import ConnectedHome from 'src/containers/ConnectedHome';
 import ConnectedRecipe from 'src/containers/ConnectedRecipe';
+import ConnectedAllRecipes from 'src/containers/ConnectedAllRecipes'
 
 // Page : this component manage the other components with a props called isLogged
 // means => if the user isLogged the Navbar (or his parent component if we create
 // an other one) component is shown, if he is not the Navbar is hidden
 
-const Page = () => (
+const Page = ({ isLogged }) => (
   <div>
-    <Navbar />
+    {isLogged && <Navbar />}
 
     <Route
       path="/inscription"
@@ -37,6 +39,13 @@ const Page = () => (
     </Route>
 
     <Route
+      path="/allrecipes"
+      exact
+    >
+      <ConnectedAllRecipes />
+    </Route>
+
+    <Route
       path="/ajout-recette"
     >
       <ConnectedAddRecipeForm />
@@ -55,5 +64,9 @@ const Page = () => (
     </Route>
   </div>
 );
+
+Page.prototypes = {
+  isLogged: Prototypes.bool.isrequired,
+};
 
 export default Page;

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateUserField, logInUser, descriptionOn } from 'src/actions/user';
+import { updateUserField, logInUser, descriptionOn, allRecipes, logOutUser } from 'src/actions/user';
 import LoginForm from 'src/components/LoginForm';
 
 const mapStateToProps = (state) => ({
@@ -17,6 +17,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   showDescription: () => {
     dispatch(descriptionOn());
+  },
+  getAllrecipes: () => {
+    dispatch(allRecipes());
+  },
+  logOut: () => {
+    dispatch(logOutUser());
   },
 });
 

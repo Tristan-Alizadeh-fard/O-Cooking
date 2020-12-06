@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import './loginForm.scss';
 
-const LoginForm = ({ updateField, logIn, errorLogin, isLogged, showDescription, descriptionOn }) => {
+const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes }) => {
   const submitLogin = (event) => {
     event.preventDefault();
     logIn();
@@ -38,6 +38,8 @@ const LoginForm = ({ updateField, logIn, errorLogin, isLogged, showDescription, 
           {!isLogged && <Button type="submit" onClick={submitLogin}>Login</Button>}
           <div className="link__logged">
             {isLogged && <Link className="link__islogged" to="/home">Votre espace</Link>}
+            {isLogged && <Link className="link__islogged" to="/allrecipes" onClick={() => getAllrecipes()}>Toutes les recettes</Link>}
+            {isLogged && <Link className="link__islogged" to="/" onClick={() => logOut()}>Déconnexion</Link>}
           </div>
         </Form>
       </div>
@@ -58,6 +60,8 @@ LoginForm.prototypes = {
   showDescription: PropTypes.func.isRequired,
   updateField: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
+  getAllrecipes: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

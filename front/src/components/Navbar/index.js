@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Menu, Transition } from 'semantic-ui-react';
 import './navbar.scss';
 
@@ -18,10 +18,11 @@ const Navbar = () => {
       />
       <Transition visible={visible} animation="fade" duration={500}>
         <div className="menu__toggle">
-          <a href="/" className="toggle__item">Accueil</a>
-          <a href="/ajout-recette" className="toggle__item">Ajouter</a>
-          <a href="" className="toggle__item">Aide de course</a>
-          <a href="" className="toggle__item">Déconnexion</a>
+          <Link to="/" className="toggle__item">Accueil</Link>
+          <Link to="/ajout-recette" className="toggle__item">Ajouter</Link>
+          <Link to="" className="toggle__item">Aide de course</Link>
+          <Link to="/allrecipes" className="toggle__item">Toutes les recettes</Link>
+          <Link to="" className="toggle__item">Déconnexion</Link>
         </div>
       </Transition>
     </Menu>
