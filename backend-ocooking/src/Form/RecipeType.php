@@ -33,18 +33,13 @@ class RecipeType extends AbstractType
             ->add('preparationTime', null, [
                 'required' => false,
                 'constraints' => [
-                    
+                    'pattern' => '/\^(\d?\dh)?(\d\dmn)/'
                 ]
             ])
             ->add('cookingTime', null, [
                 'required' => false,
                 'constraints' => [
-                    'pattern' => '/^\d?\d\s(mn|h)/'
-                ]
-            ])
-            ->add('category', IntegerType::class, [
-                'constraints' => [
-                    new Assert\NotBlank(),
+                    'pattern' => '/\^(\d?\dh)?(\d\dmn)/'
                 ]
             ])
         ;
