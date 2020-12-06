@@ -42,7 +42,19 @@ class RecipeController extends AbstractController
         $json = $request->getContent();
 
         $RecipeInformationsArray = json_decode($json, true);
+        // dd($RecipeInformationsArray);
 
-        dd($RecipeInformationsArray);
+        $recipeArray = [];
+        $recipeArray['name'] = $RecipeInformationsArray['name'];
+        $recipeArray['picture'] = $RecipeInformationsArray['picture'];
+        $recipeArray['nbPeople'] = $RecipeInformationsArray['nbPeople'];
+        $recipeArray['preparationTime'] = $RecipeInformationsArray['preparationTime'];
+        $recipeArray['cookingTime'] = $RecipeInformationsArray['cookingTime'];
+        $recipeArray['category'] = $RecipeInformationsArray['category'];
+        
+        // test formulaire et voir si la catégorie existe
+
+      
+
     }
 }
