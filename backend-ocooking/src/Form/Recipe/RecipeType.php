@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Recipe;
 
 use App\Entity\Recipe;
 use Symfony\Component\Form\AbstractType;

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Recipe;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RecipeAddType extends AbstractType
+class IngredientsForRecipeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
