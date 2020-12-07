@@ -28,3 +28,15 @@ export const removeFromRecipe = createAction('recipe/remove', (target, index) =>
     index,
   },
 }));
+
+export const selectCategory = createAction('recipe/selectCategory', (value) => ({
+  payload: {
+    value,
+  },
+}));
+
+export const selectTags = createAction('recipe/selectTags', (value) => ({
+  payload: {
+    value,
+  },
+}));

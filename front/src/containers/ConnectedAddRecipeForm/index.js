@@ -5,6 +5,8 @@ import {
   addToRecipe,
   updateRecipe,
   removeFromRecipe,
+  selectCategory,
+  selectTags,
 } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
@@ -43,6 +45,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   removeFromRecipe: (target, index) => {
     dispatch(removeFromRecipe(target, index));
+  },
+  selectCategory: (value) => {
+    dispatch(selectCategory(value));
+  },
+  selectTags: (value) => {
+    dispatch(selectTags(value));
   },
 });
 

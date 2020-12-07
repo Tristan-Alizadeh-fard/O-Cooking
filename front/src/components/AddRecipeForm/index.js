@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 
 import Ingredient from './Ingredient';
 import Step from './Step';
+import Category from './Category';
+import Tag from './Tag';
 
 import './addRecipeForm.scss';
 
@@ -21,6 +23,8 @@ const AddRecipeForm = ({
   addToRecipe,
   updateRecipe,
   removeFromRecipe,
+  selectTags,
+  selectCategory,
   recipeName,
   preparationTime1,
   preparationTime2,
@@ -31,16 +35,19 @@ const AddRecipeForm = ({
   CTS1,
   CTS2,
   ingredientInputValue,
+  quantityInputValue,
+  optionsMeasure,
+  selectedMeasure,
+  ingredients,
   stepInputValue,
+  steps,
   recipeImage,
   tagList,
-  ingredients,
-  steps,
-  quantityInputValue,
-  selectedMeasure,
-  optionsMeasure,
+  selectedTags,
+  categories,
+  selectedCategory,
 }) => {
-  const [IG, setIG] = useState(ingredients);
+  console.log('AddRecipeForm');
   return (
     <div className="form__addrecipe">
       <Form>
@@ -178,20 +185,21 @@ const AddRecipeForm = ({
         <p>Catégorie</p>
         <Form.Field>
           <Button.Group size="large">
-            <Button type="button" className="category__button">Entrée</Button>
-            <Button.Or text="ou" />
-            <Button type="button" className="category__button">Plat</Button>
-            <Button.Or text="ou" />
-            <Button type="button" className="category__button">Dessert</Button>
+            {categories.map((category) => (
+            // eslint-disable-next-line max-len
+              <Category {...category} key={category.key} selectedCategory={selectedCategory} selectCategory={selectCategory} />
+            ))}
           </Button.Group>
         </Form.Field>
 
         <Divider />
         <p>Tag</p>
         <Form.Field>
-          {tagList.map((tag) => (
-            <Button type="button" className="tag__button" key={tag.key}>{tag.value}</Button>
-          ))}
+          <Button.Group size="medium">
+            {tagList.map((tag) => (
+              <Tag {...tag} key={tag.key} selectedTags={selectedTags} selectTags={selectTags} />
+            ))}
+          </Button.Group>
         </Form.Field>
         <Divider />
         <Form.Field>
