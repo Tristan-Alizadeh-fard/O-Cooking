@@ -1,31 +1,38 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Button, Menu, Transition } from 'semantic-ui-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.scss';
+
+
 
 // <Dropdown text="Menu" options={options} simple item />
 
-const Navbar = () => {
-  const [visible, setVisible] = useState(false);
+const Navbar = () => (
+  <>
+    <nav>
+      <div className="conteneur-nav">
+          <label for="mobile">Afficher / Cacher le menu</label>
+          <input type="checkbox" id="mobile" role="button"></input>
+        <ul>
+          <li className="deroulan"><Link to="/home"> Acceuil &ensp;</Link>
+            <ul className="sous">
 
-  const toggleVisibility = () => setVisible(!visible);
+            </ul>
+          </li>
+          <li className="deroulan"><Link to="/ajout-recette">Ajouter une recette &ensp;</Link>
+            <ul className="sous">
+            </ul>
+          </li>
+          <li><Link to="/aide-course">Liste de course</Link></li>
+          <li><Link to="">Déconnexion</Link></li>
+          <li><Link to="">Admin</Link></li>
+        </ul>
+      </div>
+    </nav>
 
-  return (
-    <Menu className="menu" compact>
-      <Button
-        content={visible ? 'Hide' : 'Show'}
-        onClick={toggleVisibility}
-      />
-      <Transition visible={visible} animation="fade" duration={500}>
-        <div className="menu__toggle">
-          <a href="/" className="toggle__item">Accueil</a>
-          <a href="/ajout-recette" className="toggle__item">Ajouter</a>
-          <a href="" className="toggle__item">Aide de course</a>
-          <a href="" className="toggle__item">Déconnexion</a>
-        </div>
-      </Transition>
-    </Menu>
-  );
-};
+    <div className="conteneur-contenu">
+      <p>Du contenu sous le menu</p>
+    </div>
+  </>
+);
 
 export default Navbar;
