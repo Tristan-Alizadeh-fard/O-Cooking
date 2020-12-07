@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Route("/api/v1/shoppinglist", name="api_v1_shopping_lists_)
+ * @Route("/api/v1/shoppinglist", name="api_v1_shoppinglist_")
  */
 class ShoppinglistController extends AbstractController
 {
