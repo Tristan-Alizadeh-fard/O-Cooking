@@ -3,7 +3,7 @@ import React from 'react';
 
 // == Import
 import './styles.scss';
-import Page from 'src/components/Page';
+import Page from 'src/containers/ConnectedPage';
 import Footer from 'src/components/Footer';
 import 'semantic-ui-css/semantic.min.css';
 

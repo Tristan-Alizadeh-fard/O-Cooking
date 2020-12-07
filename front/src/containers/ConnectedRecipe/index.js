@@ -3,7 +3,7 @@ import {  } from 'src/actions/user';
 import Recipe from 'src/components/Recipe';
 
 const mapStateToProps = (state) => ({
- 
+  recipe: state.user.recipe,
 });
 
 const mapDispatchToProps = (dispatch) => ({

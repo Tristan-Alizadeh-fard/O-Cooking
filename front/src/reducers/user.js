@@ -7,6 +7,9 @@ import {
   ERROR_LOGIN,
   DESCRIPTION_ON,
   EMAIL_IN_USE,
+  SAVE_ALL_RECIPES,
+  LOG_OUT_USER,
+  SAVE_RECIPE,
 } from 'src/actions/user';
 
 const initialState = {
@@ -22,6 +25,8 @@ const initialState = {
   descriptionOn: false,
   token: '',
   emailInUse: false,
+  recipes: [],
+  recipe: {},
 };
 
 const user = (state = initialState, action = {}) => {
@@ -68,6 +73,22 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         descriptionOn: !state.descriptionOn,
+      };
+    case SAVE_ALL_RECIPES:
+      return {
+        ...state,
+        recipes: action.recipes,
+      };
+    case LOG_OUT_USER:
+      return {
+        ...state,
+        isLogged: false,
+        token: '',
+      };
+    case SAVE_RECIPE:
+      return {
+        ...state,
+        recipe: action.recipe,
       };
     default: return { ...state };
   }
