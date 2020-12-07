@@ -1,4 +1,4 @@
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 
 import {
   updateRecipeField,
@@ -53,7 +53,6 @@ const recipe = createReducer(initialState, (builder) => {
       state[action.payload.target] = action.payload.value;
     })
     .addCase(addToRecipe, (state, action) => {
-      console.log(action.payload);
       state[action.payload.target].push(action.payload.value);
       state.ingredientInputValue = '';
       state.quantityInputValue = '';
@@ -62,8 +61,7 @@ const recipe = createReducer(initialState, (builder) => {
       state[action.payload.target][action.payload.index] = action.payload.value;
     })
     .addCase(removeFromRecipe, (state, action) => {
-      console.log(action.payload.target, action.payload.index);
-      state[action.payload.target] = state[action.payload.target].splice(action.payload.index, 0);
+      state[action.payload.target].splice(action.payload.index, 1);
     });
 });
 

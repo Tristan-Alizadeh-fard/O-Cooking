@@ -18,24 +18,18 @@ const Ingredient = ({
   <div className="ingredient" key={`${quantity} ${measure}`}>
     <p>{quantity} {measure} de {name}</p>
     <div className="ingredient__icons">
-      <button
+      <Button
         type="button"
         onClick={() => console.log('ingredients', index)}
       >
         <Icon name="pencil" color="blue" />
-      </button>
-      <button
+      </Button>
+      <Button
         type="button"
         onClick={() => removeFromRecipe('ingredients', index)}
       >
         <Icon name="delete" color="red" />
-      </button>
-      <button
-        type="button"
-        onClick={() => console.log('sais pas')}
-      >
-        <Icon name="delete" color="red" />
-      </button>
+      </Button>
     </div>
   </div>
 );

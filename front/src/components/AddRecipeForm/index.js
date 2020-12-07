@@ -105,7 +105,7 @@ const AddRecipeForm = ({
 
           {ingredients.map((ingredient, index) => (// test avec destructuring
             // eslint-disable-next-line max-len
-            <Ingredient {...ingredient} index={index} updateRecipe={updateRecipe} removeFromRecipe={removeFromRecipe} />
+            <Ingredient {...ingredient} index={index} key={ingredient.name} updateRecipe={updateRecipe} removeFromRecipe={removeFromRecipe} />
           ))}
           <Form.Input
             fluid label="Ajoutez un ingrédient"

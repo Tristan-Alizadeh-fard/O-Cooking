@@ -30,11 +30,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateRecipeField: (target, value) => {
-    console.log(target, value);
     dispatch(updateRecipeField(target, value));
   },
   addToRecipe: (target, value) => {
-    console.log(target, value);
     dispatch(addToRecipe(target, value));
   },
   updateRecipe: (target, index, value) => {
