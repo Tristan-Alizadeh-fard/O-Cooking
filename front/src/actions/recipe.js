@@ -40,3 +40,9 @@ export const selectTags = createAction('recipe/selectTags', (value) => ({
     value,
   },
 }));
+
+export const changeImage = createAction('recipe/changeImage', (value) => ({
+  payload: {
+    value,
+  },
+}));

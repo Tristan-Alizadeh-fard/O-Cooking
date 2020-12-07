@@ -14,3 +14,13 @@
     font-size: 1.6rem;
   }
 }
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+} 
+
+.tags__button {
+  margin: 0.2em;
+}

@@ -7,6 +7,7 @@ import {
   removeFromRecipe,
   selectCategory,
   selectTags,
+  changeImage,
 } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
@@ -19,12 +20,14 @@ const mapStateToProps = (state) => ({
   cookingTime2: state.recipe.cookingTime2,
   CTS1: state.recipe.CTS1,
   CTS2: state.recipe.CTS2,
+  nbPerson: state.recipe.nbPerson,
   ingredients: state.recipe.ingredients,
   ingredientInputValue: state.recipe.ingredientInputValue,
   selectedMeasure: state.recipe.selectedMeasure,
   steps: state.recipe.steps,
   stepInputValue: state.recipe.stepInputValue,
   recipeImage: state.recipe.recipeImage,
+  alertSize: state.recipe.alertSize,
   tagList: state.recipe.tagList,
   selectedTags: state.recipe.selectedTags,
   categories: state.recipe.categories,
@@ -51,6 +54,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   selectTags: (value) => {
     dispatch(selectTags(value));
+  },
+  changeImage: (value) => {
+    dispatch(changeImage(value));
   },
 });
 

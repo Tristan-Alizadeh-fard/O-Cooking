@@ -14,13 +14,14 @@ const Tag = ({
     chosen = 'blue';
   }
   return (
-    <Button
-      type="button"
-      className="category__button"
-      content={value}
-      onClick={() => selectTags(value)}
-      color={chosen}
-    />
+    <div className="tags__button">
+      <Button
+        type="button"
+        content={value}
+        onClick={() => selectTags(value)}
+        color={chosen}
+      />
+    </div>
   );
 };
 

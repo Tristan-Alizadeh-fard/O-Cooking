@@ -14,7 +14,7 @@ const Step = ({
   content,
 }) => (
   <div className="step">
-    <p>{content}</p>
+    <p>Etape {index + 1} : {content}</p>
     <div className="step__icons">
       <Button
         type="button"

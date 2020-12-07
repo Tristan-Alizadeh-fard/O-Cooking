@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Form,
   Input,
@@ -8,6 +8,7 @@ import {
   TextArea,
   Image,
   Dropdown,
+  Message,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
@@ -42,6 +43,8 @@ const AddRecipeForm = ({
   stepInputValue,
   steps,
   recipeImage,
+  alertSize,
+  changeImage,
   tagList,
   selectedTags,
   categories,
@@ -62,6 +65,7 @@ const AddRecipeForm = ({
         </Form.Field>
 
         <Form.Field>
+          <p>Entrez votre temsp de préparation</p>
           <Input
             label={{ basic: true, content: 'h' }}
             labelPosition="right"
@@ -85,6 +89,7 @@ const AddRecipeForm = ({
         </Form.Field>
 
         <Form.Field>
+          <p>Puis votre temps de cuisson si besoin</p>
           <Input
             label={{ basic: true, content: 'h' }}
             labelPosition="right"
@@ -104,6 +109,14 @@ const AddRecipeForm = ({
               updateRecipeField('CTS2', event.target.value);
             }}
             value={CTS2}
+          />
+        </Form.Field>
+
+        <Form.Field>
+          <p>Le nombre de personnes</p>
+          <Input
+            placeholder="Ex: 4"
+            onChange={() => updateRecipeField('nbPerson', event.target.value)}
           />
         </Form.Field>
 
@@ -176,11 +189,9 @@ const AddRecipeForm = ({
         <p>Image</p>
         <Form.Field>
           <Image src={recipeImage} size="small" wrapped />
-          <Button type="button">
-            <Icon name="plus" />
-          </Button>
+          <Input type="file" accept="image/gif, image/jpeg, image/png, image/jpg" onChange={() => changeImage(URL.createObjectURL(event.target.files[0]))} />
         </Form.Field>
-
+        {alertSize && <p className="alert">Votre image est trop lourde. La taille limite est de 5Mo.</p>}
         <Divider />
         <p>Catégorie</p>
         <Form.Field>
@@ -195,11 +206,11 @@ const AddRecipeForm = ({
         <Divider />
         <p>Tag</p>
         <Form.Field>
-          <Button.Group size="medium">
+          <div className="tags">
             {tagList.map((tag) => (
               <Tag {...tag} key={tag.key} selectedTags={selectedTags} selectTags={selectTags} />
             ))}
-          </Button.Group>
+          </div>
         </Form.Field>
         <Divider />
         <Form.Field>
@@ -224,6 +235,7 @@ AddRecipeForm.propTypes = {
   ingredientInputValue: PropTypes.string.isRequired,
   stepInputValue: PropTypes.string.isRequired,
   recipeImage: PropTypes.string.isRequired,
+  alertSize: PropTypes.bool.isRequired,
   quantityInputValue: PropTypes.string.isRequired,
 };
 
