@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import AddRecipeForm from 'src/components/AddRecipeForm';
 import {
   updateRecipeField,
-  addToRecipe,
-  updateRecipe,
-  removeFromRecipe,
+  addRecipeIngredients,
+  updateRecipeIngredients,
+  deleteRecipeIngredients,
+  updateRecipeSteps,
 } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
@@ -29,19 +30,20 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateRecipeField: (target, value) => {
-    console.log(target, value);
-    dispatch(updateRecipeField(target, value));
+  updateField: (newValue, name) => {
+    dispatch(updateRecipeField(newValue, name));
   },
-  addToRecipe: (target, value) => {
-    console.log(target, value);
-    dispatch(addToRecipe(target, value));
+  addRecipeIngredients: (key, value) => {
+    dispatch(addRecipeIngredients(key, value));
   },
-  updateRecipe: (target, index, value) => {
-    dispatch(updateRecipe(target, index, value));
+  updateRecipeSteps: (key, value) => {
+    dispatch(updateRecipeSteps(key, value));
   },
-  removeFromRecipe: (target, index) => {
-    dispatch(removeFromRecipe(target, index));
+  updateRecipeIngredients: (index, value) => {
+    dispatch(updateRecipeIngredients(index, value));
+  },
+  deleteRecipeIngredients: (index) => {
+    dispatch(deleteRecipeIngredients(index));
   },
 });
 

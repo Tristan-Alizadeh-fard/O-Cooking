@@ -1,9 +1,10 @@
+import { createAction, createReducer } from '@reduxjs/toolkit';
+
 import {
-  TEST_RECIPE_ALL,
-  UPDATE_RECIPE_FIELD,
-  ADD_RECIPE_INGREDIENTS,
-  UPDATE_RECIPE_STEPS,
-  UPDATE_RECIPE_INGREDIENTS,
+  updateRecipeField,
+  addToRecipe,
+  removeFromRecipe,
+  updateRecipe,
 } from 'src/actions/recipe';
 
 const initialState = {
@@ -46,36 +47,24 @@ const initialState = {
   selectedTags: [],
 };
 
-const recipe = (state = initialState, action = {}) => {
-  switch (action.type) {
-    case TEST_RECIPE_ALL:
-      return {
-        ...state,
-      };
-    case UPDATE_RECIPE_FIELD:
-      return {
-        ...state,
-        [action.name]: action.value,
-      };
-    case ADD_RECIPE_INGREDIENTS:
-      return {
-        ...state,
-        ingredients: [...state.ingredients, action.value],
-        ingredientInputValue: '',
-      };
-    case UPDATE_RECIPE_STEPS:
-      return {
-        ...state,
-        steps: [...state.steps, action.value],
-        stepsInputValue: '',
-      };
-    case UPDATE_RECIPE_INGREDIENTS:
-      return {
-        ...state,
-        ingredients: [...state.ingredients].splice(action.index, 0, action.value),
-      };
-    default: return { ...state };
-  }
-};
+const recipe = createReducer(initialState, (builder) => {
+  builder
+    .addCase(updateRecipeField, (state, action) => {
+      state[action.payload.target] = action.payload.value;
+    })
+    .addCase(addToRecipe, (state, action) => {
+      console.log(action.payload);
+      state[action.payload.target].push(action.payload.value);
+      state.ingredientInputValue = '';
+      state.quantityInputValue = '';
+    })
+    .addCase(updateRecipe, (state, action) => {
+      state[action.payload.target][action.payload.index] = action.payload.value;
+    })
+    .addCase(removeFromRecipe, (state, action) => {
+      console.log(action.payload.target, action.payload.index);
+      state[action.payload.target] = state[action.payload.target].splice(action.payload.index, 0);
+    });
+});
 
 export default recipe;
