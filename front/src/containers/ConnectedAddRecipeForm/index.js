@@ -24,6 +24,9 @@ const mapStateToProps = (state) => ({
   stepInputValue: state.recipe.stepInputValue,
   recipeImage: state.recipe.recipeImage,
   tagList: state.recipe.tagList,
+  selectedTags: state.recipe.selectedTags,
+  categories: state.recipe.categories,
+  selectedCategory: state.recipe.selectedCategory,
   quantityInputValue: state.recipe.quantityInputValue,
   optionsMeasure: state.recipe.optionsMeasure,
 });

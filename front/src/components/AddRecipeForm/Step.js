@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Button,
   Icon,
@@ -7,26 +7,24 @@ import PropTypes from 'prop-types';
 
 import './addRecipeForm.scss';
 
-const Ingredient = ({
+const Step = ({
   updateRecipe,
   removeFromRecipe,
   index,
-  quantity,
-  measure,
-  name,
+  content,
 }) => (
-  <div className="ingredient">
-    <p>{quantity} {measure} de {name}</p>
-    <div className="ingredient__icons">
+  <div className="step">
+    <p>{content}</p>
+    <div className="step__icons">
       <Button
         type="button"
-        onClick={() => console.log('ingredients', index)}
+        onClick={() => console.log('steps', index)}
       >
         <Icon name="pencil" color="blue" />
       </Button>
       <Button
         type="button"
-        onClick={() => removeFromRecipe('ingredients', index)}
+        onClick={() => removeFromRecipe('steps', index)}
       >
         <Icon name="delete" color="red" />
       </Button>
@@ -34,13 +32,11 @@ const Ingredient = ({
   </div>
 );
 
-Ingredient.propTypes = {
+Step.propTypes = {
   updateRecipe: PropTypes.func.isRequired,
   removeFromRecipe: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  measure: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
 };
 
-export default Ingredient;
+export default Step;

@@ -12,6 +12,7 @@ import {
 import PropTypes from 'prop-types';
 
 import Ingredient from './Ingredient';
+import Step from './Step';
 
 import './addRecipeForm.scss';
 
@@ -34,6 +35,7 @@ const AddRecipeForm = ({
   recipeImage,
   tagList,
   ingredients,
+  steps,
   quantityInputValue,
   selectedMeasure,
   optionsMeasure,
@@ -102,8 +104,7 @@ const AddRecipeForm = ({
 
         <p>Ingrédients</p>
         <Form.Field>
-
-          {ingredients.map((ingredient, index) => (// test avec destructuring
+          {ingredients.map((ingredient, index) => (
             // eslint-disable-next-line max-len
             <Ingredient {...ingredient} index={index} key={ingredient.name} updateRecipe={updateRecipe} removeFromRecipe={removeFromRecipe} />
           ))}
@@ -144,13 +145,22 @@ const AddRecipeForm = ({
 
         <p>Etapes</p>
         <Form.Field>
+          {steps.map((step, index) => (
+            // eslint-disable-next-line max-len
+            <Step {...step} index={index} key={step.content} updateRecipe={updateRecipe} removeFromRecipe={removeFromRecipe} />
+          ))}
           <TextArea
             placeholder="ex: Courgette"
             onChange={() => updateRecipeField('stepInputValue', event.target.value)}
             value={stepInputValue}
             rows="3"
           />
-          <Button type="button" onClick={() => addToRecipe('steps', stepInputValue)}>
+          <Button
+            type="button"
+            onClick={() => addToRecipe('steps', {
+              content: stepInputValue,
+            })}
+          >
             <Icon name="plus" />
           </Button>
         </Form.Field>
