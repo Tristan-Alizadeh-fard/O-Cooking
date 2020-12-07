@@ -11,8 +11,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 
 /**
-     * @Route("/api/v1/recipes", name="api_v1_recipes_")
-     */
+ * @Route("/api/v1/recipes", name="api_v1_recipes_")
+ */
 class RecipeController extends AbstractController
 {
     /**
