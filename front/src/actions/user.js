@@ -7,6 +7,12 @@ export const USER_INSCRIPTION_SUCCESS = 'USER_INSCRIPTION_SUCCESS';
 export const ERROR_INSCRIPTION = 'ERROR_INSCRIPTION';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
 export const DESCRIPTION_ON = 'DESCRIPTION_ON';
+export const EMAIL_IN_USE = 'EMAIL_IN_USE';
+export const ALL_RECIPES = 'ALL_RECIPES';
+export const SAVE_ALL_RECIPES = 'SAVE_ALL_RECIPES';
+export const LOG_OUT_USER = 'LOG_OUT_USER';
+export const SHOW_ONE_RECIPE = 'SHOW_ONE_RECIPE';
+export const SAVE_RECIPE = 'SAVE_RECIPE';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -22,10 +28,9 @@ export const logInUser = () => ({
   type: LOG_IN,
 });
 
-export const saveUserLogin = (logged, name) => ({
+export const saveUserLogin = (token) => ({
   type: SAVE_USER_LOGIN,
-  logged,
-  name,
+  token,
 });
 
 export const userInscription = () => ({
@@ -46,4 +51,31 @@ export const errorLogin = () => ({
 
 export const descriptionOn = () => ({
   type: DESCRIPTION_ON,
+});
+
+export const emailInUse = () => ({
+  type: EMAIL_IN_USE,
+});
+
+export const allRecipes = () => ({
+  type: ALL_RECIPES,
+});
+
+export const saveAllrecipes = (recipes) => ({
+  type: SAVE_ALL_RECIPES,
+  recipes,
+});
+
+export const logOutUser = () => ({
+  type: LOG_OUT_USER,
+});
+
+export const showOneRecipe = (id) => ({
+  type: SHOW_ONE_RECIPE,
+  id,
+});
+
+export const saveRecipe = (recipe) => ({
+  type: SAVE_RECIPE,
+  recipe,
 });

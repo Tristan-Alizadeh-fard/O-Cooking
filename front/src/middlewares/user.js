@@ -1,11 +1,24 @@
 import axios from 'axios';
 
-import { LOG_IN, USER_INSCRIPTION, saveUserLogin, saveUserInscription, errorInscription, errorLogin } from 'src/actions/user';
+import {
+  LOG_IN,
+  USER_INSCRIPTION,
+  ALL_RECIPES,
+  SHOW_ONE_RECIPE,
+  saveUserLogin,
+  saveUserInscription,
+  errorInscription,
+  errorLogin,
+  emailInUse,
+  saveAllrecipes,
+  saveRecipe,
+} from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
   switch (action.type) {
     case LOG_IN: {
       const { email, pass } = store.getState().user;
+      // http://ec2-100-25-30-18.compute-1.amazonaws.com/api/login_check
       axios.post('http://localhost:8000/api/login_check', {
         username: email,
         password: pass,
@@ -16,8 +29,8 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response,'success login');
-          store.dispatch(saveUserLogin(response.LEBACK, response.LEBACKname));
+          console.log(response, 'success login');
+          store.dispatch(saveUserLogin(response.data.token));
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware LOGIN error');
@@ -29,6 +42,7 @@ const user = (store) => (next) => (action) => {
     case USER_INSCRIPTION: {
       const { email, confirmEmail, pass, confirmPass, name } = store.getState().user;
       if (email === confirmEmail && pass === confirmPass && email !== '' && pass !== '' && name !== '') {
+        // http://ec2-100-25-30-18.compute-1.amazonaws.com/api/v1/users/add
         axios.post('http://localhost:8000/api/v1/users/add', {
           email,
           password: pass,
@@ -44,15 +58,52 @@ const user = (store) => (next) => (action) => {
         })
           .then((response) => {
             console.log(response, 'post success');
-            store.dispatch(saveUserInscription(response.LEBACK, response.LEBACKname));
+            store.dispatch(saveUserInscription());
           })
-          .catch((response) => {
-            console.log(response, 'Je suis dans le middleware LOGIN error');
+          .catch((error) => {
+            console.log(error, 'Je suis dans le middleware LOGIN error');
+            store.dispatch(emailInUse());
           });
       }
       else {
         store.dispatch(errorInscription());
       }
+      next(action);
+      break;
+    }
+    case ALL_RECIPES: {
+      axios.get('http://localhost:8000/api/v1/recipes', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        },
+      })
+        .then((response) => {
+          console.log(response, 'get all recipes ok');
+          store.dispatch(saveAllrecipes(response.data));
+        })
+        .catch((error) => {
+          console.log(error, 'Je suis dans le middleware getALLRECIPES');
+        });
+      next(action);
+      break;
+    }
+    case SHOW_ONE_RECIPE: {
+      axios.get(`http://localhost:8000/api/v1/recipes/${action.id}`, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        },
+      })
+        .then((response) => {
+          console.log(response, 'get one recipe ok');
+          store.dispatch(saveRecipe(response.data));
+        })
+        .catch((error) => {
+          console.log(error, 'Je suis dans le middleware get one recipe error');
+        });
       next(action);
       break;
     }

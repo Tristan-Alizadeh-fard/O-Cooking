@@ -7,7 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -18,16 +20,19 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"show_user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"show_user"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"show_user"})
      */
     private $roles = [];
 
@@ -39,11 +44,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show_recipe", "recipe_read", "show_user"})
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"show_user"})
      */
     private $createdAt;
 
@@ -59,6 +66,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Recipe::class, mappedBy="author")
+     * @Groups({"show_user"})
      */
     private $recipes;
 
@@ -189,7 +197,7 @@ class User implements UserInterface
         return $this;
     }
     
-    public function getRecipesCollection(): array
+/*     public function getRecipesCollection(): array
     {
         $recipesJson = [];
         foreach ($this->recipes as $recipe) {
@@ -206,9 +214,9 @@ class User implements UserInterface
         }
 
         return $recipesJson;
-    }
+    } */
+
     /**
-     * @Ignore()
      * @return Collection|ShoppingList[]
      */
     public function getShoppingLists(): Collection
@@ -239,7 +247,6 @@ class User implements UserInterface
     }
 
     /**
-     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getRecipes(): Collection
@@ -270,7 +277,6 @@ class User implements UserInterface
     }
 
     /**
-     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getFavorites(): Collection
