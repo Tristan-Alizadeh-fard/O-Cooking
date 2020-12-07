@@ -11,6 +11,8 @@ export const EMAIL_IN_USE = 'EMAIL_IN_USE';
 export const ALL_RECIPES = 'ALL_RECIPES';
 export const SAVE_ALL_RECIPES = 'SAVE_ALL_RECIPES';
 export const LOG_OUT_USER = 'LOG_OUT_USER';
+export const SHOW_ONE_RECIPE = 'SHOW_ONE_RECIPE';
+export const SAVE_RECIPE = 'SAVE_RECIPE';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -66,4 +68,14 @@ export const saveAllrecipes = (recipes) => ({
 
 export const logOutUser = () => ({
   type: LOG_OUT_USER,
+});
+
+export const showOneRecipe = (id) => ({
+  type: SHOW_ONE_RECIPE,
+  id,
+});
+
+export const saveRecipe = (recipe) => ({
+  type: SAVE_RECIPE,
+  recipe,
 });

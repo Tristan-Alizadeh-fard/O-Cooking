@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {  } from 'src/actions/user';
+import { showOneRecipe } from 'src/actions/user';
 import AllRecipes from 'src/components/AllRecipes';
 
 const mapStateToProps = (state) => ({
@@ -7,7 +7,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
- 
+  showRecipe: (id) => {
+    dispatch(showOneRecipe(id));
+  },
 });
 
 const ConnectedAllRecipes = connect(mapStateToProps, mapDispatchToProps)(AllRecipes);

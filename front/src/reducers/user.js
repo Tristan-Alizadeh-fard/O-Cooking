@@ -9,6 +9,7 @@ import {
   EMAIL_IN_USE,
   SAVE_ALL_RECIPES,
   LOG_OUT_USER,
+  SAVE_RECIPE,
 } from 'src/actions/user';
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   token: '',
   emailInUse: false,
   recipes: [],
+  recipe: {},
 };
 
 const user = (state = initialState, action = {}) => {
@@ -82,6 +84,11 @@ const user = (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
         token: '',
+      };
+    case SAVE_RECIPE:
+      return {
+        ...state,
+        recipe: action.recipe,
       };
     default: return { ...state };
   }

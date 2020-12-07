@@ -57,7 +57,7 @@ const Page = ({ isLogged }) => (
       <></>
     </Route>
     <Route
-      path="/recette/slug"
+      path="/recette/:id"
       exact
     >
       <ConnectedRecipe />

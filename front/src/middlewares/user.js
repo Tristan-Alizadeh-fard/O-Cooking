@@ -1,6 +1,18 @@
 import axios from 'axios';
 
-import { LOG_IN, USER_INSCRIPTION, ALL_RECIPES, saveUserLogin, saveUserInscription, errorInscription, errorLogin, emailInUse, saveAllrecipes } from 'src/actions/user';
+import {
+  LOG_IN,
+  USER_INSCRIPTION,
+  ALL_RECIPES,
+  SHOW_ONE_RECIPE,
+  saveUserLogin,
+  saveUserInscription,
+  errorInscription,
+  errorLogin,
+  emailInUse,
+  saveAllrecipes,
+  saveRecipe,
+} from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
   switch (action.type) {
@@ -64,7 +76,7 @@ const user = (store) => (next) => (action) => {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + store.getState().user.token,
+          Authorization: `Bearer ${store.getState().user.token}`,
         },
       })
         .then((response) => {
@@ -73,6 +85,24 @@ const user = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware getALLRECIPES');
+        });
+      next(action);
+      break;
+    }
+    case SHOW_ONE_RECIPE: {
+      axios.get(`http://localhost:8000/api/v1/recipes/${action.id}`, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        },
+      })
+        .then((response) => {
+          console.log(response, 'get one recipe ok');
+          store.dispatch(saveRecipe(response.data));
+        })
+        .catch((error) => {
+          console.log(error, 'Je suis dans le middleware get one recipe error');
         });
       next(action);
       break;

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import './loginForm.scss';
 
-const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes }) => {
+const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass }) => {
   const submitLogin = (event) => {
     event.preventDefault();
     logIn();
@@ -32,8 +32,8 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
         <Form>
           {!isLogged && <p>Formulaire de login</p>}
           <Form.Field>
-            {!isLogged && <Form.Input fluid label="Votre Email" placeholder="Votre email" onChange={() => updateField(event.target.value, 'email')} />}
-            {!isLogged && <Form.Input fluid label="Votre Mot de passe" type="password" placeholder="Votre password" onChange={() => updateField(event.target.value, 'pass')} />}
+            {!isLogged && <Form.Input fluid label="Votre Email" placeholder="Votre email" value={email} onChange={() => updateField(event.target.value, 'email')} />}
+            {!isLogged && <Form.Input fluid label="Votre Mot de passe" type="password" placeholder="Votre password" value={pass} onChange={() => updateField(event.target.value, 'pass')} />}
           </Form.Field>
           {!isLogged && <Button type="submit" onClick={submitLogin}>Login</Button>}
           <div className="link__logged">
@@ -54,6 +54,8 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
 };
 
 LoginForm.prototypes = {
+  email: PropTypes.string.isRequired,
+  pass: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   errorLogin: PropTypes.bool.isRequired,
   descriptionOn: PropTypes.bool.isRequired,

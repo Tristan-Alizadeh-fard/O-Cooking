@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import yoda from '../../../bbyoda.jpeg';
 import './recipe.scss';
 
-const Recipe = () => {
+const Recipe = ({ recipe }) => {
   console.log('Recipe component');
   return (
     <div className="recette">
@@ -30,7 +30,7 @@ const Recipe = () => {
         <i className="trash alternate icon" />
       </button>
       <div className="recette__title">
-        <h2>Pot au feu BB yoda</h2>
+        <h2>coucou</h2>
         <p className="author">By "User"</p>
         <h3>Plat - Temps de préparation: 2h30 - Temps de cuisson: 1h00</h3>
       </div>
@@ -52,6 +52,10 @@ const Recipe = () => {
       </div>
     </div>
   );
+};
+
+Recipe.prototype = {
+  recipe: PropTypes.array.isRequired,
 };
 
 export default Recipe;
