@@ -88,7 +88,6 @@ class Measure
     }
 
     /**
-     * @Ignore()
      * @return Collection|RecipeIngredient[]
      */
     public function getRecipeIngredients(): Collection

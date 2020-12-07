@@ -106,7 +106,6 @@ class ShoppingList
     }
 
     /**
-     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getRecipes(): Collection
