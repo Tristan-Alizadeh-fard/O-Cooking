@@ -13,7 +13,8 @@ import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(user),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(user),
+  middleware: [user],
 });
 
 export default store;
