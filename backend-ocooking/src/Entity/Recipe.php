@@ -80,6 +80,7 @@ class Recipe
     /**
      * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="recipe", orphanRemoval=true)
      * @Groups({"recipe_read"})
+     * @Groups({"show_shoppinglist"})
      */
     private $recipeIngredients;
 

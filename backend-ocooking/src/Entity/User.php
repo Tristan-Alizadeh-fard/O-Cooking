@@ -61,6 +61,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=ShoppingList::class, mappedBy="user", orphanRemoval=true)
+     * @Groups({"show_shoppinglist"})
      */
     private $shoppingLists;
 
