@@ -2,6 +2,8 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Entity\Recipe;
+use App\Form\RecipeType;
 use App\Repository\CategoryRepository;
 use App\Repository\IngredientRepository;
 use App\Repository\MeasureRepository;
@@ -39,20 +41,41 @@ class RecipeController extends AbstractController
     */
     public function add(Request $request)
     {
+        // TODO à décommenter pour récupérer l'auteur de la recette
+        // $user = $this->getUser();
+        // dd($author);
+        
         $json = $request->getContent();
 
-        $RecipeInformationsArray = json_decode($json, true);
-        // dd($RecipeInformationsArray);
+        $recipeInformationsArray = json_decode($json, true);
+        // dd($recipeInformationsArray);
 
-        $recipeArray = [];
-        $recipeArray['name'] = $RecipeInformationsArray['name'];
-        $recipeArray['picture'] = $RecipeInformationsArray['picture'];
-        $recipeArray['nbPeople'] = $RecipeInformationsArray['nbPeople'];
-        $recipeArray['preparationTime'] = $RecipeInformationsArray['preparationTime'];
-        $recipeArray['cookingTime'] = $RecipeInformationsArray['cookingTime'];
-        $recipeArray['category'] = $RecipeInformationsArray['category'];
+        // TODO à décommenter pour set l'auteur de la recette
+        // $recipe->setAuthor($user);
+
+        // TODO pour ajouter la recette créée en favoris du user
+        // $recipe->addFavorite($user)
+
+        $recipe = new Recipe();
+
+        $form = $this->createForm(RecipeType::class, $recipe, ['csrf_protection' => false]);
+        $form->submit($recipeInformationsArray);
+        // dd($form->submit($recipeInformationsArray));
+
+
+        // dd($form->isValid());
+
+        return $this->json([
+            'errors' => (string) $form->getErrors(true, false),
+        ], 400);
         
-        // test formulaire et voir si la catégorie existe
+        // if ($form->isValid()) {
+            
+        //     $em = $this->getDoctrine()->getManager();
+        //     $em->persist($recipe);
+
+        // }
+        
 
       
 

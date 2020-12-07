@@ -1,24 +1,30 @@
 <?php
 
-namespace App\Form\Recipe;
+namespace App\Form;
 
+use App\Entity\Step;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class IngredientsForRecipeType extends AbstractType
+class StepType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('field_name')
+            ->add('nbStep', IntegerType::class, [
+
+            ])
+            ->add('description', null, [
+                
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Step::class,
         ]);
     }
 }

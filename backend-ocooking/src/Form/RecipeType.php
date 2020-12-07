@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Form\Recipe;
+namespace App\Form;
 
 use App\Entity\Recipe;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,11 +22,8 @@ class RecipeType extends AbstractType
             ])
             ->add('picture', null, [
                 'required' => false,
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
             ])
-            ->add('nbPeople', null, [
+            ->add('nbPeople', IntegerType::class, [
                 'constraints' => [
                     new Assert\NotBlank(),
                 ]
@@ -33,15 +31,34 @@ class RecipeType extends AbstractType
             ->add('preparationTime', null, [
                 'required' => false,
                 'constraints' => [
-                    'pattern' => '/\^(\d?\dh)?(\d\dmn)/'
+                    new Assert\Regex([
+                        'pattern' => '/^(\d?\dh)?(\d\dmn)/',
+                    ]),
                 ]
             ])
             ->add('cookingTime', null, [
                 'required' => false,
                 'constraints' => [
-                    'pattern' => '/\^(\d?\dh)?(\d\dmn)/'
+                    new Assert\Regex([
+                        'pattern' => '/^(\d?\dh)?(\d\dmn)/',
+                    ]),
                 ]
             ])
+            ->add('category', CategoryType::class, [
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Valid(),
+                ]
+            ])
+            ->add('steps', CollectionType::class, [
+                'entry_type' => TagType::class,
+            ])
+            // ->add('recipeIngredients', CollectionType::class, [
+            //     'entry_type' => TagType::class,
+            // ])
+            // ->add('tags', CollectionType::class, [
+            //     'entry_type' => TagType::class,
+            // ])
         ;
     }
 

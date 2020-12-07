@@ -4,7 +4,7 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\ShoppingList;
 use App\Entity\User;
-use App\Form\User\UserType;
+use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
