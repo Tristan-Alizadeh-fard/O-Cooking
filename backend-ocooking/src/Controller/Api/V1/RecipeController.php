@@ -21,17 +21,18 @@ class RecipeController extends AbstractController
     public function userBrowseRecipeAll(int $id, UserRepository $userRepository, SerializerInterface $serializer): Response
     {
       // recherche toutes les recettes d'un utilisateur
-
-        $users = $userRepository->find($id);
-        
-          $jsonUser = $serializer->serialize(
-          $users,
-          'json',
-          ['groups' => 'show_user']
+       
+       $users = $userRepository->find($id);
+       
+       $jsonUser = $serializer->serialize(
+         $users,
+         'json',
+         ['groups' => 'show_user']
         );
+        $user = json_decode($jsonUser, true);
 
         return $this->json([
-            'user' => $jsonUser,
+            'user' => $user,
         ]);
     }
 
@@ -50,8 +51,10 @@ class RecipeController extends AbstractController
           ['groups' => 'show_recipe']
         );
      
+      $recipes = json_decode($json, true);
+
       return $this->json([
-        'groups' => $json,
+        'recipes' => $recipes,
       ]);
 
     }
@@ -65,18 +68,20 @@ class RecipeController extends AbstractController
 
       $recipe = $recipeRepository->find($id);
         
-      $json = $serializer->serialize(
+      $jsonRecipe = $serializer->serialize(
           $recipe,
           'json',
           ['groups' => 'recipe_read']
         );
+        $recipe = json_decode($jsonRecipe, true);
 
       // Si le recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
       if ($recipe === null) {
           throw $this->createNotFoundException('La recette demandé n\'existe pas');
       }
+
       return $this->json([
-        'recipe' => $json,
+        'recipes' => $recipe,
       ]);
   }
 }
