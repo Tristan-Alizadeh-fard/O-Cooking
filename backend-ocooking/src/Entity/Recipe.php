@@ -237,40 +237,6 @@ class Recipe
         return $this;
     }
 
-/*     public function getStepsCollection(): array
-    {
-        $stepJson = [];
-        foreach ($this->steps as $step) {
-            $stepJson[] = [
-                'id' => $step->getId(),
-                'nb_step' => $step->getNbStep(),
-                'description' => $step->getDescription(), 
-            ];
-        }
-
-        return $stepJson;
-    }
-
-    public function getTagsCollection(): array
-    {
-        $tagsJson = [];
-        foreach ($this->tags as $tag) {
-            $tagsJson[] = [
-                'id' => $tag->getId(),
-                'name' => $tag->getName(),
-            ];
-        }
-
-        return $tagsJson;
-    }
-
-    public function getCategoryCollection(): array
-    {
-        $categoryJson = ['name' => $this->category->getName()];
-
-        return $categoryJson;
-    } */
-
     /**
      * @return Collection|RecipeIngredient[]
      */
