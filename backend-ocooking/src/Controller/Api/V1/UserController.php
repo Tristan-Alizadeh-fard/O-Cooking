@@ -102,4 +102,26 @@ class UserController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route("/favorites/remove/{id}", name="favorites_remove", methods={"PUT", "PATCH"}, requirements={"id"="\d+"})
+     */
+    public function favoritesRemove(Recipe $recipe, SerializerInterface $serializer)
+    {
+        $user = $this->getUser();
+        $user->removeFavorite($recipe);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        $response = new JsonResponse();
+        $jsonContent = $serializer->serialize($user, 'json', [
+            'groups' => 'user_favorites',
+        ]);
+ 
+        $response = JsonResponse::fromJsonString(($jsonContent));
+
+        return $response;
+    }
 }
