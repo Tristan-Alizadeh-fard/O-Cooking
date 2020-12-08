@@ -42,6 +42,8 @@ class RecipeController extends AbstractController
     */
     public function add(Request $request, CategoryRepository $categoryRepository, TagRepository $tagRepository)
     {
+        dd($user = $this->getUser()->getShoppingLists()[0]);
+        
         $json = $request->getContent();
 
         $recipeInformationsArray = json_decode($json, true);
@@ -79,7 +81,10 @@ class RecipeController extends AbstractController
 
             // $recipe add recipeIngredients
             $recipeIngredients = $form->getData()->getRecipeIngredients();
-            dd($recipeIngredients);
+            foreach ($recipeIngredients as $recipeIngredient) {
+                dd($recipeIngredient);
+                $recipe->addrecipeIngredient($recipeIngredient);
+            }
 
             // $recipe add steps
             $steps = $form->getData()->getsteps();

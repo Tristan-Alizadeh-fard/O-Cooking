@@ -189,26 +189,7 @@ class User implements UserInterface
         return $this;
     }
     
-    public function getRecipesCollection(): array
-    {
-        $recipesJson = [];
-        foreach ($this->recipes as $recipe) {
-            $recipesJson[] = [
-                'id' => $recipe->getId(),
-                'name' => $recipe->getName(),
-                'picture' => $recipe->getPicture(),
-                'preparation_time' => $recipe->getPreparationTime(),
-                'favorite' => $recipe->getFavorites(),
-                'tag' => $recipe->getTagsCollection(),
-                'category' => $recipe->getCategoryCollection(),
-                
-            ];
-        }
-
-        return $recipesJson;
-    }
     /**
-     * @Ignore()
      * @return Collection|ShoppingList[]
      */
     public function getShoppingLists(): Collection
