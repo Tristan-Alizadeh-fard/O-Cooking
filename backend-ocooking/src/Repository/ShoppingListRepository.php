@@ -23,17 +23,19 @@ class ShoppingListRepository extends ServiceEntityRepository
     //  * @return ShoppingList[] Returns an array of ShoppingList objects
     //  */
     
-   
-
-    /*
-    public function findOneBySomeField($value): ?ShoppingList
+    public function findOneBySomeField($id): ?ShoppingList
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        ->select('s')
+        // ->join('s.shoppingLists', 's')
+        // ->addSelect('s.title')
+        // ->join('s.user', 'sl')
+        // ->addSelect('sl.pseudo')
+        // ->where('r.id = :id')
+        // ->setParameter('id', $id)
+        ->getQuery()
+        ->getResult()
         ;
     }
-    */
+   
 }

@@ -2,15 +2,12 @@
 
 namespace App\Controller\Api\V1;
 
-use App\Entity\Recipe;
-use App\Entity\ShoppingList;
 use App\Repository\RecipeRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
-
 
 /**
  * @Route("/api/v1/recipes", name="api_v1_recipes_")
@@ -85,5 +82,5 @@ class RecipeController extends AbstractController
       return $this->json([
         'recipes' => $recipe,
       ]);
-  }
+    }
 }

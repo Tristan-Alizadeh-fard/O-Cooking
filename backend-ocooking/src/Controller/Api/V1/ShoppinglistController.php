@@ -3,13 +3,9 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\Recipe;
-use App\Entity\ShoppingList;
-use App\Entity\User;
 use App\Repository\RecipeRepository;
-use App\Repository\ShoppingListRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -38,16 +34,38 @@ class ShoppinglistController extends AbstractController
         return $this->json($user);
     }
 
-       /**
-     * @Route("/{id}/delete", name="delete",methods={"DELETE"})
+    /**
+     * @Route("/{id}/edit", name="edit",methods={"PATCH"})
      */
-    public function DeleteRecipeShoppinglist(RecipeRepository $recipeRepository, $id): Response
+    public function addRecipeShoppinglist(Recipe $recipe): Response
     {
-      $recipe = $recipeRepository->find($id);
+      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+
+      $shoppinglist->addRecipe($recipe);
 
        $em = $this->getDoctrine()->getManager();
        
-       $em->remove($recipe);
+       //le persist sert a modifier (sens supprimer une recette) la relation
+       $em->persist($recipe);
+
+       $em->flush();
+       
+       return $this->json([], 200);
+    }
+
+    /**
+     * @Route("/{id}/delete", name="delete",methods={"DELETE"})
+     */
+    public function DeleteRecipeShoppinglist(Recipe $recipe): Response
+    {
+      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+
+      $shoppinglist->removeRecipe($recipe);
+
+       $em = $this->getDoctrine()->getManager();
+       
+       //le persist sert a modifier (sens supprimer une recette) la relation
+       $em->persist($recipe);
 
        $em->flush();
        
