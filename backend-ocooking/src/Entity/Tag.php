@@ -35,6 +35,7 @@ class Tag
      */
     private $updatedAt;
 
+    // Mettre en inversedBy?
     /**
      * @ORM\ManyToMany(targetEntity=Recipe::class, mappedBy="tags")
      */

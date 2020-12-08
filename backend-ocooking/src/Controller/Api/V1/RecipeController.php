@@ -3,6 +3,7 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\Recipe;
+use App\Entity\Step;
 use App\Form\RecipeType;
 use App\Repository\CategoryRepository;
 use App\Repository\IngredientRepository;
@@ -39,42 +40,69 @@ class RecipeController extends AbstractController
     /**
     * @Route("/add", name="add", methods={"POST"})
     */
-    public function add(Request $request)
+    public function add(Request $request, CategoryRepository $categoryRepository, TagRepository $tagRepository)
     {
-        // TODO à décommenter pour récupérer l'auteur de la recette
-        // $user = $this->getUser();
-        // dd($author);
-        
         $json = $request->getContent();
 
         $recipeInformationsArray = json_decode($json, true);
         // dd($recipeInformationsArray);
 
-        // TODO à décommenter pour set l'auteur de la recette
-        // $recipe->setAuthor($user);
-
-        // TODO pour ajouter la recette créée en favoris du user
-        // $recipe->addFavorite($user)
-
         $recipe = new Recipe();
 
         $form = $this->createForm(RecipeType::class, $recipe, ['csrf_protection' => false]);
         $form->submit($recipeInformationsArray);
+
         // dd($form->submit($recipeInformationsArray));
-
-
         // dd($form->isValid());
-
-        return $this->json([
-            'errors' => (string) $form->getErrors(true, false),
-        ], 400);
         
-        // if ($form->isValid()) {
-            
-        //     $em = $this->getDoctrine()->getManager();
-        //     $em->persist($recipe);
+        if ($form->isValid()) {
+            // set $recipe for author and favorites
+            $user = $this->getUser();
+            $recipe->setAuthor($user);
+            $recipe->addFavorite($user);
 
-        // }
+            // set $recipe for category
+            $categoryName = $form->getData()->getCategory()->getName();
+            $category = $categoryRepository->findOneBy(['name' => $categoryName]);
+            $recipe->setCategory($category);
+
+            // $recipe add tags
+            $tags = $form->getData()->getTags();
+            $tagCollection = [];
+            foreach ($tags as $tag) {
+                $tagName = $tag->getName();
+                $tagToAdd = $tagRepository->findOneBy(['name' => $tagName]);
+                $tagToAdd->addRecipe($recipe);
+                $tagCollection[] = $tagToAdd;
+                $recipe->addTag($tagToAdd);
+            }
+
+            // $recipe add recipeIngredients
+            $recipeIngredients = $form->getData()->getRecipeIngredients();
+            dd($recipeIngredients);
+
+            // $recipe add steps
+            $steps = $form->getData()->getsteps();
+            foreach ($steps as $step) {
+                $recipe->addStep($step);
+            }
+    
+            // persist and flush in database
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($recipe);
+            
+            foreach ($steps as $step) {
+                $em->persist($step);
+            }
+            $em->flush();
+
+            return $this->json([], 201);
+
+        } else {
+            return $this->json([
+                'errors' => (string) $form->getErrors(true, false),
+            ], 400);
+        }
         
 
       

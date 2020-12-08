@@ -15,6 +15,7 @@ class MeasureType extends AbstractType
     {
         $builder
             // TODO Quid type de champs et vérifier que l'unité de mesure existe bien
+            ->add('id')
             ->add('name', null, [
                 // 'constraints' => [
                     // new Assert\NotBlank(),

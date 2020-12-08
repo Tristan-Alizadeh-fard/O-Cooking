@@ -14,6 +14,7 @@ class CategoryType extends AbstractType
     {
         $builder
             // TODO Quid type de champs et vérifier que la catégorie existe bien
+            ->add('id')
             ->add('name', null, [
                 'constraints' => [
                     new Assert\NotBlank(),

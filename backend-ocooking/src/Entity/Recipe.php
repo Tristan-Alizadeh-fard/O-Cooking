@@ -81,6 +81,7 @@ class Recipe
      */
     private $steps;
 
+    // Mettre en mappedBY ?
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="recipes")
      */
@@ -367,4 +368,6 @@ class Recipe
 
         return $this;
     }
+
+    /* NECESSAIRE POUR L'AJOUT D'UNE RECETTE */
 }
