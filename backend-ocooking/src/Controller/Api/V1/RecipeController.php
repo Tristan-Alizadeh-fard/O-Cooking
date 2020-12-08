@@ -2,6 +2,8 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Entity\Recipe;
+use App\Entity\ShoppingList;
 use App\Repository\RecipeRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

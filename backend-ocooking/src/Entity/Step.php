@@ -15,6 +15,7 @@ class Step
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"recipe_read"})
      */
     private $id;
 

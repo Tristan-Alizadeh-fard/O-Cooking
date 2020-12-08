@@ -19,13 +19,13 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"show_recipe", "recipe_read"})
+     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "show_user", "recipe_read"})
+     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist"})
      */
     private $name;
 
@@ -79,8 +79,7 @@ class Recipe
 
     /**
      * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="recipe", orphanRemoval=true)
-     * @Groups({"recipe_read"})
-     * @Groups({"show_shoppinglist"})
+     * @Groups({"recipe_read", "show_shoppinglist"})
      */
     private $recipeIngredients;
 
