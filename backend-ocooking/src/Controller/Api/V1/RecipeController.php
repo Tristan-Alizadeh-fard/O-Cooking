@@ -94,33 +94,40 @@ class RecipeController extends AbstractController
                     $newIngredient = new Ingredient();
                     $newIngredient->setName($ingredientName);
                     $ingredientCollection[] = $newIngredient;
+                    $recipeIngredient->setIngredient($ingredient);
                 } else {
                     $recipeIngredient->setIngredient($ingredient);
                 }
 
-                // Add recipeIngredient to recipe
-                $recipe->addrecipeIngredient($recipeIngredient);
+                // set recipe to recipeIngredient
+                $recipeIngredient->setRecipe($recipe);
+                // dump($recipeIngredient);
             }
+            // dd('FIN');
 
-            // $recipe set steps
+            // set recipe to steps
             $steps = $form->getData()->getsteps();
             foreach ($steps as $step) {
-                $recipe->addStep($step);
+                $step->setRecipe($recipe);
             }
     
             // persist and flush in database
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($ingredientCollection as $ingredient) {
+                $em->persist($ingredient);
+                dd($ingredient);
+            }
             
-            $em->persist($recipe);
             foreach ($recipeIngredients as $recipeIngredient) {
                 $em->persist($recipeIngredient);
             }
-            foreach ($ingredientCollection as $ingredient) {
-                $em->persist($ingredient);
-            }
+
             foreach ($steps as $step) {
                 $em->persist($step);
             }
+
+            $em->persist($recipe);
 
             $em->flush();
 
