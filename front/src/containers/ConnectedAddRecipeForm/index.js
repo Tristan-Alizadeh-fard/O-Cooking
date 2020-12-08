@@ -8,6 +8,7 @@ import {
   selectCategory,
   selectTags,
   changeImage,
+  submitRecipe,
 } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
@@ -57,6 +58,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   changeImage: (value) => {
     dispatch(changeImage(value));
+  },
+  submitRecipe: () => {
+    dispatch(submitRecipe());
   },
 });
 

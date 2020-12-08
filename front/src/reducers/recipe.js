@@ -9,6 +9,7 @@ import {
   selectTags,
   changeImage,
 } from 'src/actions/recipe';
+import { submitRecipe } from '../actions/recipe';
 
 const initialState = {
   recipeName: '',
@@ -79,13 +80,7 @@ const recipe = createReducer(initialState, (builder) => {
       state[action.payload.target].splice(action.payload.index, 1);
     })
     .addCase(changeImage, (state, action) => {
-      if (action.payload.value.size > 5000) {
-        state.alertSize = true;
-      }
-      if (action.payload.value.size < 5000) {
-        state.recipeImage = action.payload.value;
-        state.alertSize = false;
-      }
+      state.recipeImage = action.payload.value;
     })
     .addCase(selectCategory, (state, action) => {
       state.selectedCategory = action.payload.value;
@@ -98,6 +93,8 @@ const recipe = createReducer(initialState, (builder) => {
       else {
         state.selectedTags.push(action.payload.value);
       }
+    })
+    .addCase(submitRecipe, (state, action) => {
     });
 });
 

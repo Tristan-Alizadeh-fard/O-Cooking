@@ -46,3 +46,5 @@ export const changeImage = createAction('recipe/changeImage', (value) => ({
     value,
   },
 }));
+
+export const submitRecipe = createAction('recipe/submit');

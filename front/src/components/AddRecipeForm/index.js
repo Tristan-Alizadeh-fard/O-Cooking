@@ -49,6 +49,7 @@ const AddRecipeForm = ({
   selectedTags,
   categories,
   selectedCategory,
+  submitRecipe,
 }) => {
   console.log('AddRecipeForm');
   return (
@@ -116,6 +117,7 @@ const AddRecipeForm = ({
           <p>Le nombre de personnes</p>
           <Input
             placeholder="Ex: 4"
+            type="number"
             onChange={() => updateRecipeField('nbPerson', event.target.value)}
           />
         </Form.Field>
@@ -214,7 +216,12 @@ const AddRecipeForm = ({
         </Form.Field>
         <Divider />
         <Form.Field>
-          <Button type="button" name="add_button" type="button">Ajouter cette recette</Button>
+          <Button
+            type="button"
+            name="add_button"
+            onClick={() => submitRecipe()}
+          >Ajouter cette recette
+          </Button>
         </Form.Field>
       </Form>
     </div>
@@ -237,6 +244,7 @@ AddRecipeForm.propTypes = {
   recipeImage: PropTypes.string.isRequired,
   alertSize: PropTypes.bool.isRequired,
   quantityInputValue: PropTypes.string.isRequired,
+  submitRecipe: PropTypes.func.isRequired,
 };
 
 export default AddRecipeForm;

@@ -1,6 +1,7 @@
 // import { createStore, applyMiddleware } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import user from 'src/middlewares/user';
+import recipe from 'src/middlewares/recipe';
 import reducer from 'src/reducers';
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -14,7 +15,7 @@ import { configureStore } from '@reduxjs/toolkit';
 const store = configureStore({
   reducer,
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(user),
-  middleware: [user],
+  middleware: [user, recipe],
 });
 
 export default store;
