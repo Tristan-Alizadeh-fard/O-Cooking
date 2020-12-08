@@ -57,6 +57,21 @@ class RecipeController extends AbstractController
         // dd($form->isValid());
         
         if ($form->isValid()) {
+            // Create unknown ingredient in Ingredient Entity
+            $em = $this->getDoctrine()->getManager();
+
+            $recipeIngredients = $form->getData()->getRecipeIngredients();
+            foreach ($recipeIngredients as $recipeIngredient) {
+                $ingredientName = $recipeIngredient->getIngredient()->getName();
+                $ingredient = $ingredientRepository->findOneBy(['name' => $ingredientName]);
+                if (is_null($ingredient)) {
+                    $newIngredient = new Ingredient();
+                    $newIngredient->setName($ingredientName);
+                    $em->persist($newIngredient);
+                    $em->flush();
+                }
+            }
+            
             // set $recipe for author and favorites
             $user = $this->getUser();
             $recipe->setAuthor($user);
@@ -80,7 +95,7 @@ class RecipeController extends AbstractController
 
             // $recipe set recipeIngredients
             $recipeIngredients = $form->getData()->getRecipeIngredients();
-            $ingredientCollection = [];
+            // $ingredientCollection = [];
             foreach ($recipeIngredients as $recipeIngredient) {
                 // Measure
                 $measureName = $recipeIngredient->getMeasure()->getName();
@@ -90,14 +105,15 @@ class RecipeController extends AbstractController
                 // Ingredient
                 $ingredientName = $recipeIngredient->getIngredient()->getName();
                 $ingredient = $ingredientRepository->findOneBy(['name' => $ingredientName]);
-                if (is_null($ingredient)) {
-                    $newIngredient = new Ingredient();
-                    $newIngredient->setName($ingredientName);
-                    $ingredientCollection[] = $newIngredient;
-                    $recipeIngredient->setIngredient($ingredient);
-                } else {
-                    $recipeIngredient->setIngredient($ingredient);
-                }
+                $recipeIngredient->setIngredient($ingredient);
+                // if (is_null($ingredient)) {
+                //     $newIngredient = new Ingredient();
+                //     $newIngredient->setName($ingredientName);
+                //     $ingredientCollection[] = $newIngredient;
+                //     $recipeIngredient->setIngredient($ingredient);
+                // } else {
+                //     $recipeIngredient->setIngredient($ingredient);
+                // }
 
                 // set recipe to recipeIngredient
                 $recipeIngredient->setRecipe($recipe);
@@ -112,12 +128,11 @@ class RecipeController extends AbstractController
             }
     
             // persist and flush in database
-            $em = $this->getDoctrine()->getManager();
+            // $em = $this->getDoctrine()->getManager();
 
-            foreach ($ingredientCollection as $ingredient) {
-                $em->persist($ingredient);
-                dd($ingredient);
-            }
+            // foreach ($ingredientCollection as $ingredient) {
+            //     $em->persist($ingredient);
+            // }
             
             foreach ($recipeIngredients as $recipeIngredient) {
                 $em->persist($recipeIngredient);
