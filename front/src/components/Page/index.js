@@ -13,6 +13,7 @@ import ConnectedAddRecipeForm from 'src/containers/ConnectedAddRecipeForm';
 import ConnectedHome from 'src/containers/ConnectedHome';
 import ConnectedRecipe from 'src/containers/ConnectedRecipe';
 import ConnectedAllRecipes from 'src/containers/ConnectedAllRecipes';
+import SearchBar from 'src/components/SearchBar';
 
 
 // Page : this component manage the other components with a props called isLogged
@@ -21,7 +22,7 @@ import ConnectedAllRecipes from 'src/containers/ConnectedAllRecipes';
 
 const Page = ({ isLogged }) => (
   <div>
-    {isLogged && <Navbar />}
+    {isLogged && <><Navbar /><SearchBar /></>}
 
     <Route
       path="/inscription"
