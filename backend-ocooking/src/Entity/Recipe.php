@@ -6,7 +6,7 @@ use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
@@ -17,72 +17,86 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $nbPeople;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $preparationTime;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"recipe_read"})
      */
     private $cookingTime;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $signaled;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"show_recipe"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="recipes")
+     * @Groups({"show_recipe", "recipe_read"})
      */
     private $author;
 
     /**
      * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="recipe", orphanRemoval=true)
+     * @Groups({"recipe_read", "show_shoppinglist"})
      */
     private $recipeIngredients;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="recipes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $category;
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="recipe", orphanRemoval=true)
+     * @Groups({"recipe_read"})
      */
     private $steps;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="recipes")
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $tags;
 
@@ -105,7 +119,7 @@ class Recipe
         $this->createdAt = new \DateTime();
         $this->signaled = false;
         $this->favorites = new ArrayCollection();
-        $this->category = new ArrayCollection();
+        // $this->category = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -221,42 +235,7 @@ class Recipe
         return $this;
     }
 
-    public function getStepsCollection(): array
-    {
-        $stepJson = [];
-        foreach ($this->steps as $step) {
-            $stepJson[] = [
-                'id' => $step->getId(),
-                'nb_step' => $step->getNbStep(),
-                'description' => $step->getDescription(), 
-            ];
-        }
-
-        return $stepJson;
-    }
-
-    public function getTagsCollection(): array
-    {
-        $tagsJson = [];
-        foreach ($this->tags as $tag) {
-            $tagsJson[] = [
-                'id' => $tag->getId(),
-                'name' => $tag->getName(),
-            ];
-        }
-
-        return $tagsJson;
-    }
-
-    public function getCategoryCollection(): array
-    {
-        $categoryJson = ['name' => $this->category->getName()];
-
-        return $categoryJson;
-    }
-
     /**
-     * @@Ignore()
      * @return Collection|RecipeIngredient[]
      */
     public function getRecipeIngredients(): Collection
@@ -286,10 +265,10 @@ class Recipe
         return $this;
     }
 
-/*     public function getCategory(): ?Category
+    public function getCategory(): ?Category
     {
         return $this->category;
-    } */
+    }
 
     public function setCategory(?Category $category): self
     {
@@ -300,7 +279,7 @@ class Recipe
 
 
     /**
-     * @Ignore()
+
      * @return Collection|Step[]
      */
     public function getSteps(): Collection
@@ -331,7 +310,6 @@ class Recipe
     }
 
     /**
-     * @Ignore()
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -356,7 +334,6 @@ class Recipe
     }
 
     /**
-     * @Ignore()
      * @return Collection|ShoppingList[]
      */
     public function getShoppingLists(): Collection
@@ -381,7 +358,6 @@ class Recipe
     }
 
     /**
-     * @Ignore()
      * @return Collection|User[]
      */
     public function getFavorites(): Collection
