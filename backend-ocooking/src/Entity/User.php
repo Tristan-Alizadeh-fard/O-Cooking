@@ -18,19 +18,19 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"show_user", "user_read"})
+     * @Groups({"show_user", "user_read", "user_favorites"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"show_user","user_read"})
+     * @Groups({"show_user","user_read", "user_favorites"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"show_user","user_read"}) 
+     * @Groups({"show_user","user_read"})
      */
     private $roles = [];
 
@@ -42,7 +42,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "recipe_read", "show_user", "user_read"})
+     * @Groups({"show_recipe", "recipe_read", "show_user", "user_read", "user_favorites"})
      */
     private $pseudo;
 
@@ -71,6 +71,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Recipe::class, inversedBy="favorites")
+     * @groups({"user_favorites"})
      */
     private $favorites;
 

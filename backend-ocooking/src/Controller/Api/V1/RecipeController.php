@@ -250,5 +250,4 @@ class RecipeController extends AbstractController
 
         return $response;
     }
-
 }

@@ -23,7 +23,7 @@ class Recipe
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist"})
+     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist", "user_favorites"})
      */
     private $name;
 

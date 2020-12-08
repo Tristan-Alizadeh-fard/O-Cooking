@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Entity\Recipe;
 use App\Entity\ShoppingList;
 use App\Entity\User;
 use App\Form\UserType;
@@ -73,6 +74,28 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $jsonContent = $serializer->serialize($user, 'json', [
             'groups' => 'user_read',
+        ]);
+ 
+        $response = JsonResponse::fromJsonString(($jsonContent));
+
+        return $response;
+    }
+
+    /**
+     * @Route("/favorites/add/{id}", name="favorites_add", methods={"PUT", "PATCH"}, requirements={"id"="\d+"})
+     */
+    public function favoritesAdd(Recipe $recipe, SerializerInterface $serializer)
+    {
+        $user = $this->getUser();
+        $user->addFavorite($recipe);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        $response = new JsonResponse();
+        $jsonContent = $serializer->serialize($user, 'json', [
+            'groups' => 'user_favorites',
         ]);
  
         $response = JsonResponse::fromJsonString(($jsonContent));
