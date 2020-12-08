@@ -12,7 +12,7 @@ class StepType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbStep', IntegerType::class, [
+            ->add('nbStep', null, [
 
             ])
             ->add('description', null, [

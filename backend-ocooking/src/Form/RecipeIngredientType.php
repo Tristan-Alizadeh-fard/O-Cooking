@@ -18,13 +18,13 @@ class RecipeIngredientType extends AbstractType
                 //     new Assert\NotBlank(),
                 // ]
             ])
-            ->add('measure', null, [
+            ->add('measure', MeasureType::class, [
                 // 'constraints' => [
                     // new Assert\NotBlank(),
                     // new Assert\Valid(),
                 // ]
             ])
-            ->add('ingredient', null, [
+            ->add('ingredient', IngredientType::class, [
                 // 'constraints' => [
                     // new Assert\NotBlank(),
                     // new Assert\Valid(),
