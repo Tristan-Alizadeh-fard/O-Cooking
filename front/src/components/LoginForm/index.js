@@ -28,7 +28,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
       </div>
       <div className="form__login">
         {errorLogin && <div className="error__login">Vérifiez votre Email ou Password</div>}
-        {isLogged && <div className="login__ok">Login Success Veuillez cliquer sur "Votre espace"</div>}
+        {isLogged && <div className="login__ok">Login Success !</div>}
         <Form>
           {!isLogged && <p>Formulaire de login</p>}
           <Form.Field>
@@ -36,11 +36,6 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
             {!isLogged && <Form.Input fluid label="Votre Mot de passe" type="password" placeholder="Votre password" value={pass} onChange={() => updateField(event.target.value, 'pass')} />}
           </Form.Field>
           {!isLogged && <Button type="submit" onClick={submitLogin}>Login</Button>}
-          <div className="link__logged">
-            {isLogged && <Link className="link__islogged" to="/home">Votre espace</Link>}
-            {isLogged && <Link className="link__islogged" to="/allrecipes" onClick={() => getAllrecipes()}>Toutes les recettes</Link>}
-            {isLogged && <Link className="link__islogged" to="/" onClick={() => logOut()}>Déconnexion</Link>}
-          </div>
         </Form>
       </div>
       <div className="link__inscription">

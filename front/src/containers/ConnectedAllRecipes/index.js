@@ -4,6 +4,7 @@ import AllRecipes from 'src/components/AllRecipes';
 
 const mapStateToProps = (state) => ({
   recipes: state.user.recipes,
+  isLoading: state.user.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -10,6 +10,7 @@ import {
   SAVE_ALL_RECIPES,
   LOG_OUT_USER,
   SAVE_RECIPE,
+  SET_ALL_LOADERS,
 } from 'src/actions/user';
 
 const initialState = {
@@ -27,6 +28,9 @@ const initialState = {
   emailInUse: false,
   recipes: [],
   recipe: {},
+  admin: false,
+  isLoading: true,
+  isLoadingOneRecipe: true,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -78,17 +82,26 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         recipes: action.recipes,
+        isLoading: false,
       };
     case LOG_OUT_USER:
       return {
         ...state,
         isLogged: false,
         token: '',
+        pass: '',
       };
     case SAVE_RECIPE:
       return {
         ...state,
         recipe: action.recipe,
+        isLoadingOneRecipe: false,
+      };
+    case SET_ALL_LOADERS:
+      return {
+        ...state,
+        isLoading: !state.isLoading,
+        isLoadingOneRecipe: !state.isLoadingOneRecipe,
       };
     default: return { ...state };
   }
