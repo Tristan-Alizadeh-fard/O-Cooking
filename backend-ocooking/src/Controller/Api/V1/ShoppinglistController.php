@@ -15,16 +15,17 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ShoppinglistController extends AbstractController
 {
     /**
-     * @Route("/{id}", name="read", methods={"GET"}, requirements={"id":"\d+"})
+     * @Route("/", name="read", methods={"GET"})
      */
-    public function userShoppingList(int $id, UserRepository $userRepository, SerializerInterface $serializer): Response
+    public function userShoppingList(UserRepository $userRepository, SerializerInterface $serializer): Response
     {
-      // affiche la liste de cours d'un utilisateur
+      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+
        
-       $users = $userRepository->find($id);
+      //  $users = $userRepository->find($id);
        
        $jsonUser = $serializer->serialize(
-         $users,
+         $shoppinglist,
          'json',
          ['groups' => 'show_shoppinglist']
         );
@@ -34,7 +35,7 @@ class ShoppinglistController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit",methods={"PATCH", "PUT"}, requirements={"id":"\d+"})
+     * @Route("/edit/{id}", name="edit",methods={"PATCH", "PUT"}, requirements={"id":"\d+"})
      */
     public function addRecipeShoppinglist(Recipe $recipe): Response
     {
@@ -53,7 +54,7 @@ class ShoppinglistController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="delete",methods={"DELETE"}, requirements={"id":"\d+"})
+     * @Route("/delete/{id}", name="delete",methods={"DELETE"}, requirements={"id":"\d+"})
      */
     public function DeleteRecipeShoppinglist(Recipe $recipe): Response
     {
