@@ -94,6 +94,7 @@ class Recipe
      */
     private $steps;
 
+    // Mettre en mappedBY ?
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="recipes")
      * @Groups({"show_recipe", "show_user", "recipe_read"})
@@ -119,7 +120,6 @@ class Recipe
         $this->createdAt = new \DateTime();
         $this->signaled = false;
         $this->favorites = new ArrayCollection();
-        // $this->category = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -279,7 +279,6 @@ class Recipe
 
 
     /**
-
      * @return Collection|Step[]
      */
     public function getSteps(): Collection
@@ -383,4 +382,6 @@ class Recipe
 
         return $this;
     }
+
+    /* NECESSAIRE POUR L'AJOUT D'UNE RECETTE */
 }
