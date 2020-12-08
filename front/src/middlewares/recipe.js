@@ -21,9 +21,9 @@ const user = (store) => (next) => (action) => {
         recipeIngredients: formatIG(recipe.ingredients),
         steps: formatStep(recipe.steps),
       });
-      axios.post('http://localhost:8000/api/recipe_add', {
+      axios.post('http://localhost:8000/api/v1/recipes/add', {
         name: recipe.recipeName,
-        picture: recipe.recipeImage,
+        picture: '',
         nbPeople: recipe.nbPerson * 1,
         preparationTime: formatTime(recipe.preparationTime1, recipe.preparationTime2),
         cookingTime: formatTime(recipe.cookingTime1, recipe.cookingTime2),
@@ -36,6 +36,7 @@ const user = (store) => (next) => (action) => {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
         },
       })
         .then((response) => {
