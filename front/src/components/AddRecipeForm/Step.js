@@ -11,14 +11,14 @@ const Step = ({
   updateRecipe,
   removeFromRecipe,
   index,
-  content,
+  description,
 }) => (
   <div className="step">
-    <p>Etape {index + 1} : {content}</p>
+    <p>Etape {index + 1} : {description}</p>
     <div className="step__icons">
       <Button
         type="button"
-        onClick={() => console.log('steps', index)}
+        onClick={() => console.log('Modification à venir')}
       >
         <Icon name="pencil" color="blue" />
       </Button>
@@ -36,7 +36,7 @@ Step.propTypes = {
   updateRecipe: PropTypes.func.isRequired,
   removeFromRecipe: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  content: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
 };
 
 export default Step;

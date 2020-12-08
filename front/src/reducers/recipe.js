@@ -13,12 +13,12 @@ import { submitRecipe } from '../actions/recipe';
 
 const initialState = {
   recipeName: '',
-  preparationTime1: '',
-  preparationTime2: '',
+  preparationTime1: '00h',
+  preparationTime2: '00mn',
   PTS1: '',
   PTS2: '',
-  cookingTime1: '',
-  cookingTime2: '',
+  cookingTime1: '00h',
+  cookingTime2: '00mn',
   CTS1: '',
   CTS2: '',
   nbPerson: '',
@@ -65,9 +65,6 @@ const recipe = createReducer(initialState, (builder) => {
       state[action.payload.target] = action.payload.value;
     })
     .addCase(addToRecipe, (state, action) => {
-      if (action.payload.target === 'steps') {
-        console.log('dans steps');
-      }
       state[action.payload.target].push(action.payload.value);
       state.ingredientInputValue = '';
       state.quantityInputValue = '';

@@ -10,6 +10,7 @@ const Tag = ({
   value,
 }) => {
   let chosen = 'grey';
+  // si value est dans selected tag alors chosen est blue
   if (selectedTags.includes(value)) {
     chosen = 'blue';
   }

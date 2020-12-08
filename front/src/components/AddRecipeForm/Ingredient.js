@@ -20,7 +20,7 @@ const Ingredient = ({
     <div className="ingredient__icons">
       <Button
         type="button"
-        onClick={() => console.log('ingredients', index)}
+        onClick={() => console.log('Modification à venir')}
       >
         <Icon name="pencil" color="blue" />
       </Button>

@@ -51,7 +51,7 @@ const AddRecipeForm = ({
   selectedCategory,
   submitRecipe,
 }) => {
-  console.log('AddRecipeForm');
+  const prevent = true;
   return (
     <div className="form__addrecipe">
       <Form>
@@ -69,6 +69,7 @@ const AddRecipeForm = ({
           <p>Entrez votre temsp de préparation</p>
           <Input
             label={{ basic: true, content: 'h' }}
+            type="number"
             labelPosition="right"
             placeholder="Ex: 1"
             onChange={() => {
@@ -79,6 +80,7 @@ const AddRecipeForm = ({
           />
           <Input
             label={{ basic: true, content: 'mn' }}
+            type="number"
             labelPosition="right"
             placeholder="Ex: 30"
             onChange={() => {
@@ -93,6 +95,7 @@ const AddRecipeForm = ({
           <p>Puis votre temps de cuisson si besoin</p>
           <Input
             label={{ basic: true, content: 'h' }}
+            type="number"
             labelPosition="right"
             placeholder="Ex: 1"
             onChange={() => {
@@ -103,6 +106,7 @@ const AddRecipeForm = ({
           />
           <Input
             label={{ basic: true, content: 'mn' }}
+            type="number"
             labelPosition="right"
             placeholder="Ex: 30"
             onChange={() => {
@@ -169,7 +173,7 @@ const AddRecipeForm = ({
         <Form.Field>
           {steps.map((step, index) => (
             // eslint-disable-next-line max-len
-            <Step {...step} index={index} key={step.content} updateRecipe={updateRecipe} removeFromRecipe={removeFromRecipe} />
+            <Step {...step} index={index} key={step.description} updateRecipe={updateRecipe} removeFromRecipe={removeFromRecipe} />
           ))}
           <TextArea
             placeholder="ex: Courgette"
@@ -180,7 +184,7 @@ const AddRecipeForm = ({
           <Button
             type="button"
             onClick={() => addToRecipe('steps', {
-              content: stepInputValue,
+              description: stepInputValue,
             })}
           >
             <Icon name="plus" />
@@ -210,7 +214,8 @@ const AddRecipeForm = ({
         <Form.Field>
           <div className="tags">
             {tagList.map((tag) => (
-              <Tag {...tag} key={tag.key} selectedTags={selectedTags} selectTags={selectTags} />
+              // eslint-disable-next-line max-len
+              <Tag {...tag} key={tag.key} selectedTags={selectedTags} selectTags={selectTags} tagList={tagList} />
             ))}
           </div>
         </Form.Field>
