@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -19,19 +18,19 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user_read"})
+     * @Groups({"show_user", "user_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user_read"})
+     * @Groups({"show_user","user_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"user_read"})
+     * @Groups({"show_user","user_read"}) 
      */
     private $roles = [];
 
@@ -43,12 +42,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user_read"})
+     * @Groups({"show_recipe", "recipe_read", "show_user", "user_read"})
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"show_user"})
      */
     private $createdAt;
 
@@ -59,11 +59,13 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=ShoppingList::class, mappedBy="user", orphanRemoval=true)
+     * @Groups({"show_shoppinglist"})
      */
     private $shoppingLists;
 
     /**
      * @ORM\OneToMany(targetEntity=Recipe::class, mappedBy="author")
+     * @Groups({"show_user"})
      */
     private $recipes;
 
@@ -194,26 +196,7 @@ class User implements UserInterface
         return $this;
     }
     
-    public function getRecipesCollection(): array
-    {
-        $recipesJson = [];
-        foreach ($this->recipes as $recipe) {
-            $recipesJson[] = [
-                'id' => $recipe->getId(),
-                'name' => $recipe->getName(),
-                'picture' => $recipe->getPicture(),
-                'preparation_time' => $recipe->getPreparationTime(),
-                'favorite' => $recipe->getFavorites(),
-                'tag' => $recipe->getTagsCollection(),
-                'category' => $recipe->getCategoryCollection(),
-                
-            ];
-        }
-
-        return $recipesJson;
-    }
     /**
-     * @Ignore()
      * @return Collection|ShoppingList[]
      */
     public function getShoppingLists(): Collection
@@ -244,7 +227,6 @@ class User implements UserInterface
     }
 
     /**
-     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getRecipes(): Collection
@@ -275,7 +257,6 @@ class User implements UserInterface
     }
 
     /**
-     * @Ignore()
      * @return Collection|Recipe[]
      */
     public function getFavorites(): Collection

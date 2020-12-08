@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import './loginForm.scss';
 
-const LoginForm = ({ updateField, logIn, errorLogin, isLogged, showDescription, descriptionOn }) => {
+const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass }) => {
   const submitLogin = (event) => {
     event.preventDefault();
     logIn();
@@ -28,17 +28,14 @@ const LoginForm = ({ updateField, logIn, errorLogin, isLogged, showDescription, 
       </div>
       <div className="form__login">
         {errorLogin && <div className="error__login">Vérifiez votre Email ou Password</div>}
-        {isLogged && <div className="login__ok">Login Success Veuillez cliquer sur "Votre espace"</div>}
+        {isLogged && <div className="login__ok">Login Success !</div>}
         <Form>
           {!isLogged && <p>Formulaire de login</p>}
           <Form.Field>
-            {!isLogged && <Form.Input fluid label="Votre Email" placeholder="Votre email" onChange={() => updateField(event.target.value, 'email')} />}
-            {!isLogged && <Form.Input fluid label="Votre Mot de passe" type="password" placeholder="Votre password" onChange={() => updateField(event.target.value, 'pass')} />}
+            {!isLogged && <Form.Input fluid label="Votre Email" placeholder="Votre email" value={email} onChange={() => updateField(event.target.value, 'email')} />}
+            {!isLogged && <Form.Input fluid label="Votre Mot de passe" type="password" placeholder="Votre password" value={pass} onChange={() => updateField(event.target.value, 'pass')} />}
           </Form.Field>
           {!isLogged && <Button type="submit" onClick={submitLogin}>Login</Button>}
-          <div className="link__logged">
-            {isLogged && <Link className="link__islogged" to="/home">Votre espace</Link>}
-          </div>
         </Form>
       </div>
       <div className="link__inscription">
@@ -52,12 +49,16 @@ const LoginForm = ({ updateField, logIn, errorLogin, isLogged, showDescription, 
 };
 
 LoginForm.prototypes = {
+  email: PropTypes.string.isRequired,
+  pass: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   errorLogin: PropTypes.bool.isRequired,
   descriptionOn: PropTypes.bool.isRequired,
   showDescription: PropTypes.func.isRequired,
   updateField: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
+  getAllrecipes: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

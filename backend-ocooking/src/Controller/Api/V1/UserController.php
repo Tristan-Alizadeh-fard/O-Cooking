@@ -19,18 +19,6 @@ use Symfony\Component\Serializer\SerializerInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/{id}/recipeAll", name="recipeAll", methods={"GET"}, requirements={"id":"\d+"})
-     */
-    public function userBrowseRecipeAll(User $user): Response
-    {
-        return $this->json([
-        
-            'user' => $user
-        
-        ]);
-    }
-
-    /**
       * @Route("/add", name="add", methods={"POST"})
      */
     public function add(Request $request, SerializerInterface $serializer, UserPasswordEncoderInterface $userPasswordEncoder): Response

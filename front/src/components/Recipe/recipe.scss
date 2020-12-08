@@ -1,9 +1,10 @@
 .recette {
   text-align: center;
 }
-.recette__image {
+.image__container {
   text-align: center;
-  size: 50%;
+  font-size: 200px;
+  margin-top: 10%;
 }
 .recette__title {
   background-color: black;
@@ -44,4 +45,15 @@
   margin: 5px;
   padding: 5px;
 }
-
+.link__back {
+  width: 100px;
+}
+.signaled {
+  color: red;
+}
+.tag {
+  color: black;
+}
+.tags__container {
+  margin-bottom: 10px;
+}
