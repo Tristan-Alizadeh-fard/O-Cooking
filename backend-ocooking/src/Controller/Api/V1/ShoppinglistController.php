@@ -3,7 +3,6 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\Recipe;
-use App\Repository\RecipeRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,7 +34,7 @@ class ShoppinglistController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit",methods={"PATCH"})
+     * @Route("/{id}/edit", name="edit",methods={"PATCH", "PUT"}, requirements={"id":"\d+"})
      */
     public function addRecipeShoppinglist(Recipe $recipe): Response
     {
@@ -54,7 +53,7 @@ class ShoppinglistController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="delete",methods={"DELETE"})
+     * @Route("/{id}/delete", name="delete",methods={"DELETE"}, requirements={"id":"\d+"})
      */
     public function DeleteRecipeShoppinglist(Recipe $recipe): Response
     {
