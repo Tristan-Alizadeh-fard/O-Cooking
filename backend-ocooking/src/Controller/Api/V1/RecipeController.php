@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
@@ -27,23 +28,21 @@ class RecipeController extends AbstractController
         $categories = $category->findAll();
         $ingredients = $ingredient->findAll();
         $measures = $measure->findAll();
-        $tags = $tag->findAll();
+        // $tags = $tag->findAll();
 
         return $this->json([
             'categories' => $categories,
             'ingredients' => $ingredients,
             'measures' => $measures,
-            'tags' => $tags,
+            // 'tags' => $tags,
         ]);
     }
 
     /**
     * @Route("/add", name="add", methods={"POST"})
     */
-    public function add(Request $request, CategoryRepository $categoryRepository, TagRepository $tagRepository)
+    public function add(Request $request, CategoryRepository $categoryRepository, MeasureRepository $measureRepository, IngredientRepository $ingredientRepository, TagRepository $tagRepository)
     {
-        dd($user = $this->getUser()->getShoppingLists()[0]);
-        
         $json = $request->getContent();
 
         $recipeInformationsArray = json_decode($json, true);
@@ -68,25 +67,42 @@ class RecipeController extends AbstractController
             $category = $categoryRepository->findOneBy(['name' => $categoryName]);
             $recipe->setCategory($category);
 
-            // $recipe add tags
-            $tags = $form->getData()->getTags();
-            $tagCollection = [];
-            foreach ($tags as $tag) {
-                $tagName = $tag->getName();
-                $tagToAdd = $tagRepository->findOneBy(['name' => $tagName]);
-                $tagToAdd->addRecipe($recipe);
-                $tagCollection[] = $tagToAdd;
-                $recipe->addTag($tagToAdd);
-            }
+            // // $recipe set tags
+            // $tags = $form->getData()->getTags();
+            // $tagCollection = [];
+            // foreach ($tags as $tag) {
+            //     $tagName = $tag->getName();
+            //     $tagToAdd = $tagRepository->findOneBy(['name' => $tagName]);
+            //     $tagToAdd->addRecipe($recipe);
+            //     $tagCollection[] = $tagToAdd;
+            //     $recipe->addTag($tagToAdd);
+            // }
 
-            // $recipe add recipeIngredients
+            // $recipe set recipeIngredients
             $recipeIngredients = $form->getData()->getRecipeIngredients();
+            $ingredientCollection = [];
             foreach ($recipeIngredients as $recipeIngredient) {
-                dd($recipeIngredient);
+                // Measure
+                $measureName = $recipeIngredient->getMeasure()->getName();
+                $measure = $measureRepository->findOneBy(['name' => $measureName]);
+                $recipeIngredient->setMeasure($measure);
+
+                // Ingredient
+                $ingredientName = $recipeIngredient->getIngredient()->getName();
+                $ingredient = $ingredientRepository->findOneBy(['name' => $ingredientName]);
+                if (is_null($ingredient)) {
+                    $newIngredient = new Ingredient();
+                    $newIngredient->setName($ingredientName);
+                    $ingredientCollection[] = $newIngredient;
+                } else {
+                    $recipeIngredient->setIngredient($ingredient);
+                }
+
+                // Add recipeIngredient to recipe
                 $recipe->addrecipeIngredient($recipeIngredient);
             }
 
-            // $recipe add steps
+            // $recipe set steps
             $steps = $form->getData()->getsteps();
             foreach ($steps as $step) {
                 $recipe->addStep($step);
@@ -94,11 +110,18 @@ class RecipeController extends AbstractController
     
             // persist and flush in database
             $em = $this->getDoctrine()->getManager();
-            $em->persist($recipe);
             
+            $em->persist($recipe);
+            foreach ($recipeIngredients as $recipeIngredient) {
+                $em->persist($recipeIngredient);
+            }
+            foreach ($ingredientCollection as $ingredient) {
+                $em->persist($ingredient);
+            }
             foreach ($steps as $step) {
                 $em->persist($step);
             }
+
             $em->flush();
 
             return $this->json([], 201);

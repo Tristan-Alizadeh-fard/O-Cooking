@@ -51,11 +51,11 @@ class RecipeType extends AbstractType
                     new Assert\Valid(),
                 ]
             ])
-            ->add('tags', CollectionType::class, [
-                'entry_type' => TagType::class,
-                'entry_options' => ['label' => false],
-                'allow_add' => true,
-            ])
+            // ->add('tags', CollectionType::class, [
+            //     'entry_type' => TagType::class,
+            //     'entry_options' => ['label' => false],
+            //     'allow_add' => true,
+            // ])
             ->add('recipeIngredients', CollectionType::class, [
                 'entry_type' => RecipeIngredientType::class,
                 'entry_options' => ['label' => false],
