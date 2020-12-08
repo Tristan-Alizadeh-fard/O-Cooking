@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StepRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
@@ -14,6 +15,7 @@ class Step
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"recipe_read"})
      */
     private $id;
 
@@ -24,6 +26,7 @@ class Step
 
     /**
      * @ORM\Column(type="string", length=500)
+     * @Groups({"recipe_read"})
      */
     private $description;
 

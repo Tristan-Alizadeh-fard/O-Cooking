@@ -4,6 +4,8 @@ import { updateUserField, userInscription } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   errorInscription: state.user.errorInscription,
+  inscriptionSuccess: state.user.inscriptionSuccess,
+  emailInUse: state.user.emailInUse,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -6,7 +6,7 @@ use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
@@ -17,73 +17,87 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $nbPeople;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $preparationTime;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"recipe_read"})
      */
     private $cookingTime;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $signaled;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"show_recipe"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="recipes")
+     * @Groups({"show_recipe", "recipe_read"})
      */
     private $author;
 
     /**
      * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="recipe", orphanRemoval=true)
+     * @Groups({"recipe_read", "show_shoppinglist"})
      */
     private $recipeIngredients;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="recipes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $category;
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="recipe", orphanRemoval=true)
+     * @Groups({"recipe_read"})
      */
     private $steps;
 
     // Mettre en mappedBY ?
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="recipes")
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $tags;
 

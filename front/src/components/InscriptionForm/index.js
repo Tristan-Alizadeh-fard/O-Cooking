@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import './inscriptionForm.scss';
 
-const InscriptionForm = ({ updateField, submitInscription, errorInscription }) => {
+const InscriptionForm = ({ updateField, submitInscription, errorInscription, inscriptionSuccess, emailInUse }) => {
   const inputVeryfication = (event) => {
     event.preventDefault();
     submitInscription();
@@ -14,20 +14,25 @@ const InscriptionForm = ({ updateField, submitInscription, errorInscription }) =
   return (
     <div className="form__inscription">
       {errorInscription && <div className="error__message">Vous devez remplir tout les champs correctement !</div>}
-      <Form>
-        <Form.Input label="Votre Email" placeholder="exemple@gmail.com" onChange={() => updateField(event.target.value, 'email')} />
-        <Form.Input label="Confirmer votre email" placeholder="exemple@gmail.com" onChange={() => updateField(event.target.value, 'confirmEmail')} />
+      {inscriptionSuccess && <h2>Inscription OK ! Veuillez vous connecter pour commencer</h2>}
+      {!inscriptionSuccess && <Form>
+        <Form.Input type="email" label="Votre Email" placeholder="exemple@gmail.com" onChange={() => updateField(event.target.value, 'email')} />
+        {emailInUse && <p className="emailinuse">Email déjà utilisé ou Email invalide, veuillez utiliser une autre adresse</p>}
+        <Form.Input type="email" label="Confirmer votre email" placeholder="exemple@gmail.com" onChange={() => updateField(event.target.value, 'confirmEmail')} />
         <Form.Input label="Votre password" placeholder="Password" type="password" onChange={() => updateField(event.target.value, 'pass')} />
-        <Form.Input label="Confirmer votre password" placeholder="confirmation de password" type="password" onChange={() => updateField(event.target.value, 'confirmPass')} />
-        <Form.Input label="Votre Pseudo" placeholder="Pseudo" onChange={() => updateField(event.target.value, 'name')} />
+        <Form.Input label="Confirmer votre password" placeholder="Confirmation de password" type="password" onChange={() => updateField(event.target.value, 'confirmPass')} />
+        <Form.Input label="Votre Pseudo" placeholder="Pseudo Minimum 4 caractères" onChange={() => updateField(event.target.value, 'name')} />
         <Button type="submit" className="form__button" onClick={inputVeryfication}>Soumettre</Button>
-      </Form>
-      <Link to="/" className="link__back">Retour</Link>
+      </Form>}
+      {inscriptionSuccess && <Link to="/" className="link__back">- Connection -</Link>}
+      
     </div>
   );
 };
 
 InscriptionForm.protoTypes = {
+  emailInUse: PropTypes.bool.isRequired,
+  inscriptionSuccess: PropTypes.bool.isRequired,
   errorInscription: PropTypes.bool.isRequired,
   updateField: PropTypes.func.isRequired,
   submitInscription: PropTypes.func.isRequired,
