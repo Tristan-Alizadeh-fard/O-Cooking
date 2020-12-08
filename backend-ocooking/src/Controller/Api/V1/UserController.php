@@ -6,6 +6,7 @@ use App\Entity\ShoppingList;
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,5 +60,22 @@ class UserController extends AbstractController
                 'errors' => (string) $form->getErrors(true, false),
             ], 400);
         }
+    }
+
+     /**
+      * @Route("/read", name="read", methods={"GET"})
+     */
+    public function read(SerializerInterface $serializer): Response
+    {
+        $response = new JsonResponse();
+
+        $user = $this->getUser();
+        $jsonContent = $serializer->serialize($user, 'json', [
+            'groups' => 'user_read',
+        ]);
+ 
+        $response = JsonResponse::fromJsonString(($jsonContent));
+
+        return $response;
     }
 }
