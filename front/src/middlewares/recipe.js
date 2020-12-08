@@ -14,7 +14,7 @@ const user = (store) => (next) => (action) => {
         picture: recipe.recipeImage,
         nbPeople: recipe.nbPerson * 1,
         preparationTime: formatTime(recipe.preparationTime1, recipe.preparationTime2),
-        cookingTime: `${recipe.cookingTime1}${recipe.cookingTime2}`,
+        cookingTime: formatTime(recipe.cookingTime1, recipe.cookingTime2),
         category: {
           name: recipe.selectedCategory,
         },
@@ -22,11 +22,11 @@ const user = (store) => (next) => (action) => {
         steps: formatStep(recipe.steps),
       });
       axios.post('http://localhost:8000/api/recipe_add', {
-        name: recipe.name,
+        name: recipe.recipeName,
         picture: recipe.recipeImage,
-        nbPeople: recipe.nbPeople,
+        nbPeople: recipe.nbPerson * 1,
         preparationTime: formatTime(recipe.preparationTime1, recipe.preparationTime2),
-        cookingTime: `${recipe.cookingTime1}${recipe.cookingTime2}`,
+        cookingTime: formatTime(recipe.cookingTime1, recipe.cookingTime2),
         category: {
           name: recipe.selectedCategory,
         },
