@@ -13,6 +13,9 @@ export const SAVE_ALL_RECIPES = 'SAVE_ALL_RECIPES';
 export const LOG_OUT_USER = 'LOG_OUT_USER';
 export const SHOW_ONE_RECIPE = 'SHOW_ONE_RECIPE';
 export const SAVE_RECIPE = 'SAVE_RECIPE';
+export const SET_ALL_LOADERS = 'SET_ALL_LOADERS';
+export const SAVE_USER_NAME = 'SAVE_USER_NAME';
+export const GET_USER_RECIPES_ACTION = 'GET_USER_RECIPES_ACTION';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -78,4 +81,16 @@ export const showOneRecipe = (id) => ({
 export const saveRecipe = (recipe) => ({
   type: SAVE_RECIPE,
   recipe,
+});
+
+export const setAllLoaders = () => ({
+  type: SET_ALL_LOADERS,
+});
+
+export const saveUserName = () => ({
+  type: SAVE_USER_NAME,
+});
+
+export const getUserRecipesAction = () => ({
+  type: GET_USER_RECIPES_ACTION,
 });

@@ -14,7 +14,7 @@ const InscriptionForm = ({ updateField, submitInscription, errorInscription, ins
   return (
     <div className="form__inscription">
       {errorInscription && <div className="error__message">Vous devez remplir tout les champs correctement !</div>}
-      {inscriptionSuccess && <h2>Inscription OK ! Vous pouver maintenant accéder à votre espace</h2>}
+      {inscriptionSuccess && <h2>Inscription OK ! Veuillez vous connecter pour commencer</h2>}
       {!inscriptionSuccess && <Form>
         <Form.Input type="email" label="Votre Email" placeholder="exemple@gmail.com" onChange={() => updateField(event.target.value, 'email')} />
         {emailInUse && <p className="emailinuse">Email déjà utilisé ou Email invalide, veuillez utiliser une autre adresse</p>}
@@ -24,8 +24,8 @@ const InscriptionForm = ({ updateField, submitInscription, errorInscription, ins
         <Form.Input label="Votre Pseudo" placeholder="Pseudo Minimum 4 caractères" onChange={() => updateField(event.target.value, 'name')} />
         <Button type="submit" className="form__button" onClick={inputVeryfication}>Soumettre</Button>
       </Form>}
-      {inscriptionSuccess && <Link to="/home" className="link__inscriptionok">Accéder à votre espace</Link>}
-      <Link to="/" className="link__back">Retour</Link>
+      {inscriptionSuccess && <Link to="/" className="link__back">- Connection -</Link>}
+      
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Prototypes from 'prop-types';
 import './page.scss';
-import Navbar from 'src/components/Navbar';
+import Navbar from 'src/containers/ConnectedNavbar';
 import ConnectedLoginForm from 'src/containers/ConnectedLoginForm';
 import ConnectedInscriptionForm from 'src/containers/ConnectedInscriptionForm';
 import ConnectedAddRecipeForm from 'src/containers/ConnectedAddRecipeForm';
