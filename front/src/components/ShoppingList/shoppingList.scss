@@ -1,6 +1,22 @@
-.shoppingList {
+.home__miniature {
   text-align: center;
-  padding: 20px;
-  font-size: 30px;
-  font: bold;
+  margin: 50px 50px 50px 50px;
+  display: flex;
+  justify-content: center;
 }
+.date {
+  display: block;
+}
+.link__icon {
+  display: block;
+}
+.home {
+  width: 70%;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+
