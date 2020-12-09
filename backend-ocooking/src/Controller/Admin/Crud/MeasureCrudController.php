@@ -2,16 +2,16 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Entity\Category;
+use App\Entity\Measure;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class CategoryCrudController extends AbstractCrudController
+class MeasureCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Category::class;
+        return Measure::class;
     }
 
     /*
