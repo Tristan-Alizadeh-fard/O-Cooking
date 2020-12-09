@@ -1,16 +1,14 @@
 import { connect } from 'react-redux';
 import Recipe from 'src/components/Recipe';
-import { setAllLoaders } from 'src/actions/user';
+import {  } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   recipe: state.user.recipe,
-  isLoadingOneRecipe: state.user.isLoadingOneRecipe,
+  isLoading: state.user.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setLoaders: () => {
-    dispatch(setAllLoaders());
-  },
+
 });
 
 const ConnectedRecipe = connect(mapStateToProps, mapDispatchToProps)(Recipe);
