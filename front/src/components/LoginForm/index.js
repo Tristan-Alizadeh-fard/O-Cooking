@@ -5,10 +5,14 @@ import { Link } from 'react-router-dom';
 
 import './loginForm.scss';
 
-const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass }) => {
+const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes }) => {
   const submitLogin = (event) => {
     event.preventDefault();
     logIn();
+  };
+  const setLoaderLogin = () => {
+    setLoader();
+    getUserRecipes();
   };
 
   return (
@@ -28,7 +32,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
       </div>
       <div className="form__login">
         {errorLogin && <div className="error__login">Vérifiez votre Email ou Password</div>}
-        {isLogged && <div className="login__ok">Login Success !</div>}
+        {isLogged && <Link to="/home" className="login__ok" onClick={() => setLoaderLogin()}>Login Success !</Link>}
         <Form>
           {!isLogged && <p>Formulaire de login</p>}
           <Form.Field>
@@ -59,6 +63,8 @@ LoginForm.prototypes = {
   logIn: PropTypes.func.isRequired,
   getAllrecipes: PropTypes.func.isRequired,
   logOut: PropTypes.func.isRequired,
+  setLoader: PropTypes.func.isRequired,
+  getUserRecipes: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

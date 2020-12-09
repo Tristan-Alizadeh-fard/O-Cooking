@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import './recipe.scss';
 import { setAllLoaders } from '../../actions/user';
 
-const Recipe = ({ recipe, isLoadingOneRecipe, setLoaders }) => {
+const Recipe = ({ recipe, isLoading }) => {
   console.log('Recipe component', recipe);
   return (
     <>
-      {isLoadingOneRecipe && <div className="ui segment">
+      {isLoading && <div className="ui segment">
         <div className="ui active dimmer">
           <div className="ui text loader">Loading</div>
         </div>
         </div>}
-      {!isLoadingOneRecipe && <div className="recette">
+      {!isLoading && <div className="recette">
         <div className="image__container">
           <i className="image icon" />
         </div>
@@ -35,7 +35,6 @@ const Recipe = ({ recipe, isLoadingOneRecipe, setLoaders }) => {
         <button type="button" className="icon__addshopping">Signaler la recette
           <i className="flag icon" />
         </button>
-        <Link className="link__back" to="/allrecipes" onClick={() => setLoaders()}>Retour</Link>
         <div className="recette__title">
           <h2>{recipe.name}</h2>
           {recipe.tags.map((tag) => (
@@ -61,14 +60,13 @@ const Recipe = ({ recipe, isLoadingOneRecipe, setLoaders }) => {
             <p key={step.description}>{step.description}</p>
           ))}
         </div>
-        <Link className="link__back" to="/allrecipes" onClick={() => setLoaders()}>Retour</Link>
       </div>}
     </>
   );
 };
 
 Recipe.prototype = {
-  setLoaders: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   recipe: PropTypes.array.isRequired,
 };
 

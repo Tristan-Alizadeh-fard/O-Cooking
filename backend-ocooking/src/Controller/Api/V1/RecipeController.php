@@ -2,10 +2,12 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Entity\Category;
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
+use App\Form\SearchRecipesType;
 use App\Repository\CategoryRepository;
 use App\Repository\IngredientRepository;
 use App\Repository\MeasureRepository;
@@ -249,5 +251,40 @@ class RecipeController extends AbstractController
         $response = JsonResponse::fromJsonString(($jsonContent));
 
         return $response;
+    }
+
+     /**
+     * @Route("/search", name="search", methods={"POST"})
+     */
+    public function searchRecipes(Request $request, SerializerInterface $serializer, RecipeRepository $recipeRepository,CategoryRepository $categoryRepository): Response
+    {
+      $json = $request->getContent();
+
+      $userInformationsArray = json_decode($json, true);
+      // dd($userInformationsArray);
+      $recipes = new Recipe();
+
+      $form = $this->createForm(SearchRecipesType::class, $recipes, ['csrf_protection' => false]);
+      $form->submit($userInformationsArray);
+      // dd($form);
+
+      $name = $form->get('name')->getData();
+      $category = $form->get('category')->getData();
+      // dd($name, $category);
+
+       $recipes = $recipeRepository->searchRecipes($name, $category);
+       dd($recipes);
+      //  $recipes = $categoryRepository->findByExampleField();
+       
+       $jsonRecipes = $serializer->serialize(
+         $recipes,
+         'json',
+         ['groups' => 'show_user']
+        );
+        $recipesSearch = json_decode($jsonRecipes, true);
+
+        return $this->json([
+            'recipes-search' => $recipesSearch,
+        ]);
     }
 }
