@@ -16,6 +16,7 @@ export const SAVE_RECIPE = 'SAVE_RECIPE';
 export const SET_ALL_LOADERS = 'SET_ALL_LOADERS';
 export const SAVE_USER_NAME = 'SAVE_USER_NAME';
 export const GET_USER_RECIPES_ACTION = 'GET_USER_RECIPES_ACTION';
+export const SEARCH = 'SEARCH';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -95,4 +96,6 @@ export const getUserRecipesAction = () => ({
   type: GET_USER_RECIPES_ACTION,
 });
 
-
+export const searchBar = () => ({
+  type: SEARCH,
+});

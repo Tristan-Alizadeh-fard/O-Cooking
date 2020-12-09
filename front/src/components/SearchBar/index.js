@@ -9,6 +9,7 @@ const SearchBar = ({
     updateField,
     selectedLocation,
     searchLocation,
+    search,
   }) => (
   <Input type="text" placeholder="Search..." action>
     <Input type="text" onChange={() => updateField(event.target.value, 'searchInput')} content={searchInput} />
@@ -21,9 +22,9 @@ const SearchBar = ({
     {searchLocation.map((location) => (
       <ModifiedButton updateField={updateField} location={location} selectedLocation={selectedLocation} key={location} />
     ))}
-    <Button type="button" onClick={() => console.log('submit')}>Search</Button>
+    <Button type="button" onClick={() => search()}>Search</Button>
   </Input>
-)
+  )
 
 
 export default SearchBar;

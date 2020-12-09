@@ -11,6 +11,7 @@ import {
   LOG_OUT_USER,
   SAVE_RECIPE,
   SET_ALL_LOADERS,
+  SEARCH,
 } from 'src/actions/user';
 
 const initialState = {
@@ -113,6 +114,11 @@ const user = (state = initialState, action = {}) => {
         isLoading: !state.isLoading,
         isLoadingOneRecipe: !state.isLoadingOneRecipe,
       };
+    case SEARCH: 
+      console.log('search');
+      return {
+        ...state,
+      }
     default: return { ...state };
   }
 };
