@@ -10,8 +10,10 @@ import {
   SAVE_ALL_RECIPES,
   LOG_OUT_USER,
   SAVE_RECIPE,
-  SET_ALL_LOADERS,
   SEARCH,
+  SET_IS_LOADING,
+  SAVE_INFOS_USER,
+  SAVE_USER_RECIPE,
 } from 'src/actions/user';
 
 const initialState = {
@@ -31,17 +33,21 @@ const initialState = {
   recipe: {},
   admin: false,
   isLoading: true,
-  isLoadingOneRecipe: true,
+  
   searchOption: [
     { key: 'all', text: 'Tout voir', value: 'all', id: null },
     { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
     { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
     { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
   ],
+  
   searchLocation: ['Mes recettes', 'Toutes les recettes'],
   selectedCagetory: '',
   selectedLocation: 'Toutes les recettes',
   searchInput: null,
+  idUser: null,
+  roleUser: [],
+  recipesUser: [],
 };
 
 const user = (state = initialState, action = {}) => {
@@ -59,6 +65,7 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: true,
+        errorLogin: false,
         token: action.token,
       };
     case USER_INSCRIPTION_SUCCESS:
@@ -106,13 +113,25 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         recipe: action.recipe,
-        isLoadingOneRecipe: false,
+        isLoading: false,
       };
-    case SET_ALL_LOADERS:
+    case SET_IS_LOADING:
       return {
         ...state,
-        isLoading: !state.isLoading,
-        isLoadingOneRecipe: !state.isLoadingOneRecipe,
+        isLoading: true,
+      };
+    case SAVE_INFOS_USER:
+      return {
+        ...state,
+        idUser: action.idUser,
+        roleUser: action.roleUser,
+        name: action.name,
+      };
+    case SAVE_USER_RECIPE:
+      return {
+        ...state,
+        recipesUser: action.recipesUser,
+        isLoading: false,
       };
     default: return { ...state };
   }

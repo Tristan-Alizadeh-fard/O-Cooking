@@ -15,8 +15,9 @@ import {
   emailInUse,
   saveAllrecipes,
   saveRecipe,
-  setAllLoaders,
   saveUserName,
+  saveInfosUser,
+  saveUserRecipes,
 } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
@@ -93,7 +94,6 @@ const user = (store) => (next) => (action) => {
           console.log(error, 'Je suis dans le middleware getALLRECIPES');
         });
       next(action);
-      store.dispatch(setAllLoaders());
       break;
     }
     case SHOW_ONE_RECIPE: {
@@ -112,29 +112,28 @@ const user = (store) => (next) => (action) => {
           console.log(error, 'Je suis dans le middleware get one recipe error');
         });
       next(action);
-      store.dispatch(setAllLoaders());
       break;
     }
-    // case SAVE_USER_NAME: {
-    //   axios.get('http://localhost:8000/api/v1/???', {
-    //     headers: {
-    //       'Access-Control-Allow-Origin': '*',
-    //       'Content-Type': 'application/json',
-    //       Authorization: `Bearer ${store.getState().user.token}`,
-    //     },
-    //   })
-    //     .then((response) => {
-    //       console.log(response, 'save user name ok');
-    //       store.dispatch(saveName(response));
-    //     })
-    //     .catch((error) => {
-    //       console.log(error, 'Je suis dans le middleware saveUserName');
-    //     });
-    //   next(action);
-    //   break;
-    // }
+    case SAVE_USER_NAME: {
+      axios.get('http://localhost:8000/api/v1/users/read', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        },
+      })
+        .then((response) => {
+          console.log(response, 'save user name ok');
+          store.dispatch(saveInfosUser(response.data));
+        })
+        .catch((error) => {
+          console.log(error, 'Je suis dans le middleware saveUserName');
+        });
+      next(action);
+      break;
+    }
     case GET_USER_RECIPES_ACTION: {
-      axios.get(`http://localhost:8000/api/v1/recipes/browse/user/${action.id}`, {
+      axios.get(`http://localhost:8000/api/v1/recipes/browse/user/${store.getState().user.idUser}`, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -143,13 +142,12 @@ const user = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response, 'getrecipesUser ok');
-          store.dispatch();
+          store.dispatch(saveUserRecipes(response.data.user));
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware getrecipeUser error');
         });
       next(action);
-      //store.dispatch(setAllLoaders());
       break;
     }
     case SEARCH : {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Navbar from 'src/components/Navbar';
-import { logOutUser, allRecipes, getUserRecipesAction } from 'src/actions/user';
+import { logOutUser, allRecipes, getUserRecipesAction, setisLoading } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   admin: state.user.admin,
@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getUserRecipes: () => {
     dispatch(getUserRecipesAction());
+  },
+  setLoader: () => {
+    dispatch(setisLoading());
   },
 });
 

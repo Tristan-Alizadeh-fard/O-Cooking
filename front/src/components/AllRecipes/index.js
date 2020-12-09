@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './allrecipes.scss';
 
-const AllRecipes = ({ recipes, showRecipe, isLoading }) => {
+const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader }) => {
   console.log('AllRecipes', recipes);
+  const setLoaderAllrecipes = (id) => {
+    setLoader();
+    showRecipe(id);
+  };
   return (
     <>
       {isLoading && <div className="ui segment">
@@ -25,7 +29,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading }) => {
                   <i className="image icon" />
                 </div>
                 <div className="content">
-                  <Link to={`/recette/${recipe.id}`} className="header" onClick={() => showRecipe(recipe.id)}>{recipe.name}</Link>
+                  <Link to={`/recette/${recipe.id}`} className="header" onClick={() => setLoaderAllrecipes(recipe.id)}>{recipe.name}</Link>
                   <div className="meta">
                     <span className="date">{`Posté le ${recipe.createdAt}`}</span>
                   </div>
@@ -58,6 +62,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading }) => {
 };
 
 AllRecipes.propTypes = {
+  setLoader: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   showRecipe: PropTypes.func.isRequired,
   recipes: PropTypes.array.isRequired,

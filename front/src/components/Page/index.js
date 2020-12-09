@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import Prototypes from 'prop-types';
 import './page.scss';
-
 import ConnectedShoppingList from 'src/containers/ConnectedShoppingList';
-
-import Navbar from 'src/containers/ConnectedNavbar';
-
+import ConnectedNavbar from 'src/containers/ConnectedNavbar';
 import ConnectedLoginForm from 'src/containers/ConnectedLoginForm';
 import ConnectedInscriptionForm from 'src/containers/ConnectedInscriptionForm';
 import ConnectedAddRecipeForm from 'src/containers/ConnectedAddRecipeForm';
@@ -21,8 +18,8 @@ import ConnectedSearchBar from 'src/containers/ConnectedSearchBar';
 
 const Page = ({ isLogged }) => (
   <div>
-    {isLogged && <><Navbar /><ConnectedSearchBar /></>}
-
+  
+    {isLogged && <><ConnectedNavbar /><ConnectedSearchBar /></>}
     <Route
       path="/inscription"
     >
