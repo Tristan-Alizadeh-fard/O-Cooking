@@ -2,10 +2,8 @@
 
 namespace App\Controller\Api\V1;
 
-use App\Entity\Category;
 use App\Entity\Recipe;
 use App\Form\SearchRecipesType;
-use App\Repository\CategoryRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,7 +77,7 @@ class RecipeController extends AbstractController
         );
         $recipe = json_decode($jsonRecipe, true);
 
-      // Si le recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
+      // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
       if ($recipe === null) {
           throw $this->createNotFoundException('La recette demandé n\'existe pas');
       }
@@ -92,25 +90,34 @@ class RecipeController extends AbstractController
     /**
      * @Route("/search", name="search", methods={"POST"})
      */
-    public function searchRecipes(Request $request, SerializerInterface $serializer, RecipeRepository $recipeRepository,CategoryRepository $categoryRepository): Response
+    public function searchRecipes(Request $request, SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
     {
       $json = $request->getContent();
 
       $userInformationsArray = json_decode($json, true);
-      // dd($userInformationsArray);
+
       $recipes = new Recipe();
 
-      $form = $this->createForm(SearchRecipesType::class, $recipes, ['csrf_protection' => false]);
+      $form = $this->createForm(SearchRecipesType::class, $recipes, ['csrf_protection' => true]);
       $form->submit($userInformationsArray);
-      // dd($form);
 
       $name = $form->get('name')->getData();
       $category = $form->get('category')->getData();
-      // dd($name, $category);
 
-       $recipes = $recipeRepository->searchRecipes($name, $category);
-       dd($recipes);
-      //  $recipes = $categoryRepository->findByExampleField();
+
+      if($name !== null && $category == null){
+        $recipes = $recipeRepository->searchRecipesByName($name);
+        
+      }elseif($category !== null && $name == null){
+        $recipes = $recipeRepository->searchRecipesByCategory($category);
+       
+      }elseif($name !== null && $category !== null ){
+        $recipes = $recipeRepository->searchRecipesByNameAndCategory($name, $category);
+        
+      }else {
+        $recipes = $recipeRepository->searchRecipesAll();
+        
+      }
        
        $jsonRecipes = $serializer->serialize(
          $recipes,
