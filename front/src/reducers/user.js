@@ -10,6 +10,7 @@ import {
   SAVE_ALL_RECIPES,
   LOG_OUT_USER,
   SAVE_RECIPE,
+  SEARCH,
   SET_IS_LOADING,
   SAVE_INFOS_USER,
   SAVE_USER_RECIPE,
@@ -32,6 +33,18 @@ const initialState = {
   recipe: {},
   admin: false,
   isLoading: true,
+  
+  searchOption: [
+    { key: 'all', text: 'Tout voir', value: 'all', id: null },
+    { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
+    { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
+    { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
+  ],
+  
+  searchLocation: ['Mes recettes', 'Toutes les recettes'],
+  selectedCagetory: '',
+  selectedLocation: 'Toutes les recettes',
+  searchInput: null,
   idUser: null,
   roleUser: [],
   recipesUser: [],

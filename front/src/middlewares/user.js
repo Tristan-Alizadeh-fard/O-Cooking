@@ -7,6 +7,7 @@ import {
   SHOW_ONE_RECIPE,
   SAVE_USER_NAME,
   GET_USER_RECIPES_ACTION,
+  SEARCH,
   saveUserLogin,
   saveUserInscription,
   errorInscription,
@@ -148,6 +149,33 @@ const user = (store) => (next) => (action) => {
         });
       next(action);
       break;
+    }
+    case SEARCH : {
+      const { searchInput, selectedCategory, searchOption, selectedLocation } = store.getState().user;
+      let formatedCategory;
+      searchOption.map((option) => {
+        if (option.text === selectedCategory) {
+          formatedCategory = option.id;
+        }
+      });
+      // console.log(formatedCategory);
+      axios.post(`http://localhost:8000/api/v1/recipes/search`, {
+        name: searchInput,
+        category: formatedCategory,
+      },
+        headers, {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        }, 
+      ).then((response) => {
+        console.log(response, 'search success');
+        // store.dispatch(saveUserInscription());
+      })
+      .catch((error) => {
+        console.log(error, 'Je suis dans le middleware, SEARCH EROOR');
+        // store.dispatch(emailInUse());
+      });
     }
     default:
       next(action);
