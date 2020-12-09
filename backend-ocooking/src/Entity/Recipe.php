@@ -17,7 +17,7 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist"})
+     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist", "show_user"})
      */
     private $id;
 
