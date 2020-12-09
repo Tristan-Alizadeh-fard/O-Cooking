@@ -3,6 +3,10 @@ import { Button, Select, Input } from 'semantic-ui-react';
 import ModifiedButton from './ModifiedButton';
 import './searchBar.scss';
 
+// {searchLocation.map((location) => (
+//   <ModifiedButton updateField={updateField} location={location} selectedLocation={selectedLocation} key={location} />
+// ))};
+
 const SearchBar = ({
     searchOption,
     searchInput,
@@ -19,9 +23,6 @@ const SearchBar = ({
       defaultValue="all"
       onChange={() => updateField(event.target.textContent, 'selectedCategory')}
     />
-    {searchLocation.map((location) => (
-      <ModifiedButton updateField={updateField} location={location} selectedLocation={selectedLocation} key={location} />
-    ))}
     <Button type="button" onClick={() => search()}>Search</Button>
   </Input>
   )

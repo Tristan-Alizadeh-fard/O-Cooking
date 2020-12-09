@@ -40,7 +40,7 @@ const initialState = {
   ],
   searchLocation: ['Mes recettes', 'Toutes les recettes'],
   selectedCagetory: '',
-  selectedLocation: '',
+  selectedLocation: 'Toutes les recettes',
   searchInput: null,
 };
 
@@ -114,11 +114,6 @@ const user = (state = initialState, action = {}) => {
         isLoading: !state.isLoading,
         isLoadingOneRecipe: !state.isLoadingOneRecipe,
       };
-    case SEARCH: 
-      console.log('search');
-      return {
-        ...state,
-      }
     default: return { ...state };
   }
 };
