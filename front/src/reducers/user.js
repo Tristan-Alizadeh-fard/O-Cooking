@@ -31,6 +31,16 @@ const initialState = {
   admin: false,
   isLoading: true,
   isLoadingOneRecipe: true,
+  searchOption: [
+    { key: 'all', text: 'Tout voir', value: 'all', id: null },
+    { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
+    { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
+    { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
+  ],
+  searchLocation: ['Mes recettes', 'Toutes les recettes'],
+  selectedCagetory: '',
+  selectedLocation: '',
+  searchInput: null,
 };
 
 const user = (state = initialState, action = {}) => {
