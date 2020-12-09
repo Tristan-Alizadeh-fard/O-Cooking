@@ -15,6 +15,7 @@ use App\Repository\RecipeRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -232,6 +233,27 @@ class RecipeController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/edit/signaled", name="signaled", methods={"PATCH", "PUT"}, requirements={"id"="\d+"})
+     */
+    public function signaled(Recipe $recipe, SerializerInterface $serializer): Response
+    {
+        $recipe->setSignaled(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($recipe);
+        $em->flush();
+
+        $response = new JsonResponse();
+        $jsonContent = $serializer->serialize($recipe, 'json', [
+            'groups' => 'recipe_read',
+        ]);
+ 
+        $response = JsonResponse::fromJsonString(($jsonContent));
+
+        return $response;
+    }
+
+     /**
      * @Route("/search", name="search", methods={"POST"})
      */
     public function searchRecipes(Request $request, SerializerInterface $serializer, RecipeRepository $recipeRepository,CategoryRepository $categoryRepository): Response
