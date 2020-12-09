@@ -2,13 +2,10 @@ import { connect } from 'react-redux';
 import AddRecipeForm from 'src/components/AddRecipeForm';
 import {
   updateRecipeField,
-  addToRecipe,
-  updateRecipe,
-  removeFromRecipe,
-  selectCategory,
-  selectTags,
-  changeImage,
-  submitRecipe,
+  addRecipeIngredients,
+  updateRecipeIngredients,
+  deleteRecipeIngredients,
+  updateRecipeSteps,
 } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
@@ -21,46 +18,32 @@ const mapStateToProps = (state) => ({
   cookingTime2: state.recipe.cookingTime2,
   CTS1: state.recipe.CTS1,
   CTS2: state.recipe.CTS2,
-  nbPerson: state.recipe.nbPerson,
   ingredients: state.recipe.ingredients,
   ingredientInputValue: state.recipe.ingredientInputValue,
   selectedMeasure: state.recipe.selectedMeasure,
   steps: state.recipe.steps,
   stepInputValue: state.recipe.stepInputValue,
   recipeImage: state.recipe.recipeImage,
-  alertSize: state.recipe.alertSize,
   tagList: state.recipe.tagList,
-  selectedTags: state.recipe.selectedTags,
-  categories: state.recipe.categories,
-  selectedCategory: state.recipe.selectedCategory,
   quantityInputValue: state.recipe.quantityInputValue,
   optionsMeasure: state.recipe.optionsMeasure,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateRecipeField: (target, value) => {
-    dispatch(updateRecipeField(target, value));
+  updateField: (newValue, name) => {
+    dispatch(updateRecipeField(newValue, name));
   },
-  addToRecipe: (target, value) => {
-    dispatch(addToRecipe(target, value));
+  addRecipeIngredients: (key, value) => {
+    dispatch(addRecipeIngredients(key, value));
   },
-  updateRecipe: (target, index, value) => {
-    dispatch(updateRecipe(target, index, value));
+  updateRecipeSteps: (key, value) => {
+    dispatch(updateRecipeSteps(key, value));
   },
-  removeFromRecipe: (target, index) => {
-    dispatch(removeFromRecipe(target, index));
+  updateRecipeIngredients: (index, value) => {
+    dispatch(updateRecipeIngredients(index, value));
   },
-  selectCategory: (value) => {
-    dispatch(selectCategory(value));
-  },
-  selectTags: (value) => {
-    dispatch(selectTags(value));
-  },
-  changeImage: (value) => {
-    dispatch(changeImage(value));
-  },
-  submitRecipe: () => {
-    dispatch(submitRecipe());
+  deleteRecipeIngredients: (index) => {
+    dispatch(deleteRecipeIngredients(index));
   },
 });
 
