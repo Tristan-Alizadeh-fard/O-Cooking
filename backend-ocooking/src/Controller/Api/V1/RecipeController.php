@@ -145,7 +145,7 @@ class RecipeController extends AbstractController
        $jsonRecipes = $serializer->serialize(
          $recipes,
          'json',
-         ['groups' => 'show_user']
+         ['groups' => 'show_recipe']
         );
         $recipesSearch = json_decode($jsonRecipes, true);
 
