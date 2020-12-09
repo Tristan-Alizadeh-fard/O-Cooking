@@ -150,7 +150,7 @@ class RecipeController extends AbstractController
         $recipesSearch = json_decode($jsonRecipes, true);
 
         return $this->json([
-            'recipes-search' => $recipesSearch,
+            'recipesSearch' => $recipesSearch,
         ]);
     }
 }
