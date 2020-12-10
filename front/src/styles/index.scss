@@ -1,9 +1,28 @@
 @use 'reset';
 @use 'vars';
 
-body {
-  font-family: sans-serif;
+// version mobile 
+.body {
+  //max-width: 1500px;
+  margin: 0 auto;
+  background-image :url("../pictures/fondmobile.jpg");
+  background-color:#bcd0c6;
+  background-size: 150%;
+  background-repeat: no-repeat;
+
 }
+
+// vertion ordinateur
+@media screen and (min-width: 980px) {
+ .body{
+  margin: 0 auto;
+  background-image :url("../pictures/FondBody.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+ }
+
+}
+
 
 /* 
   // or you can import your own font

@@ -1,4 +1,5 @@
 import React from 'react';
+import './addRecipeForm.scss';
 import {
   Form,
   Input,
@@ -17,7 +18,6 @@ import Step from './Step';
 import Category from './Category';
 import Tag from './Tag';
 
-import './addRecipeForm.scss';
 
 const AddRecipeForm = ({
   updateRecipeField,
