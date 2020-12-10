@@ -71,7 +71,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Recipe::class, inversedBy="favorites")
-     * @groups({"user_favorites"})
+     * @groups({"user_favorites", "user_read"})
      */
     private $favorites;
 

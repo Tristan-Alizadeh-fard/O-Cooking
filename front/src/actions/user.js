@@ -16,6 +16,7 @@ export const SAVE_RECIPE = 'SAVE_RECIPE';
 export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const SAVE_USER_NAME = 'SAVE_USER_NAME';
 export const GET_USER_RECIPES_ACTION = 'GET_USER_RECIPES_ACTION';
+export const SEARCH = 'SEARCH';
 export const SAVE_INFOS_USER = 'SAVE_INFOS_USER';
 export const SAVE_USER_RECIPE = 'SAVE_USER_RECIPE';
 export const SET_SIGNALED_ACTION = 'SET_SIGNALED_ACTION';
@@ -26,6 +27,7 @@ export const SET_RECIPE = 'SET_RECIPE';
 export const SET_USER_FAVORITE = 'SET_USER_FAVORITE';
 export const UNSET_USER_FAVORITE = 'UNSET_USER_FAVORITE';
 export const GET_SHOPLIST_ACTION = 'GET_SHOPLIST_ACTION';
+
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -103,6 +105,10 @@ export const saveUserName = () => ({
 
 export const getUserRecipesAction = () => ({
   type: GET_USER_RECIPES_ACTION,
+});
+
+export const searchBar = () => ({
+  type: SEARCH,
 });
 
 export const saveInfosUser = (data) => ({

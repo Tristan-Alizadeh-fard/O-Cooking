@@ -12,8 +12,12 @@ class SearchRecipesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('category')
+            ->add('name', null, [
+                'required' => false,
+            ])
+            ->add('category', null, [
+                'required' => false,
+            ])
 
         ;
     }

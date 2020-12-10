@@ -12,6 +12,7 @@ import {
   UNSET_FAVORITE_ACTION,
   ADD_SHOPLIST_ACTION,
   GET_SHOPLIST_ACTION,
+  SEARCH,
   saveUserLogin,
   saveUserInscription,
   errorInscription,
@@ -238,6 +239,35 @@ const user = (store) => (next) => (action) => {
     }
     case GET_SHOPLIST_ACTION: {
       axios.get('http://localhost:8000/api/v1/shoppinglist/', {
+           headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        },
+      })
+        .then((response) => {
+               console.log(response, 'get shoplist ok');
+          store.dispatch();
+        })
+        .catch((error) => {
+          console.log(error, 'get shoplist errore');
+           });
+      next(action);
+      break;
+      }
+    case SEARCH: {
+      const { searchInput, selectedCategory, searchOption, selectedLocation } = store.getState().user;
+      let formatedCategory;
+      searchOption.map((option) => {
+        if (option.text === selectedCategory) {
+          formatedCategory = option.id;
+        }
+      });
+      // console.log(formatedCategory);
+      axios.post(`http://localhost:8000/api/v1/recipes/search`, {
+        name: searchInput,
+        category: formatedCategory,
+      }, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -245,11 +275,13 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response, 'get shoplist ok');
-          store.dispatch();
+          console.log(response, 'search success');
+          store.dispatch(saveAllrecipes(response.data.recipesSearch));
+          console.log(response.data.recipesSearch);
         })
         .catch((error) => {
-          console.log(error, 'get shoplist errore');
+          console.log(error, 'Je suis dans le middleware, SEARCH ERROR');
+          // store.dispatch(emailInUse());
         });
       next(action);
       break;
