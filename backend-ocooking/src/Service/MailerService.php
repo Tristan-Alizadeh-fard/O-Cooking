@@ -5,9 +5,7 @@ namespace App\Service;
 use App\Entity\Recipe;
 use App\Entity\User;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Twig\Environment;
 
 class MailerService
 {
@@ -16,15 +14,9 @@ class MailerService
      */
     private $mailer;
 
-    /**
-     * @var Environment
-     */
-    private $twig;
-
-    public function __construct(MailerInterface $mailer, Environment $twig)
+    public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     /**
@@ -51,7 +43,7 @@ class MailerService
 
         if ($headers === 'true') {
             $email->getHeaders()
-                ->addTextHeader('X-Auto-Response-Suppress', 'AutoReply')
+                ->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply')
             ;
         };
 
@@ -79,6 +71,12 @@ class MailerService
         $this->send($subject, $from, 'ocooking.contact@gmail.com', $template, $parameters, $headers);
     }
 
+    /**
+     * Send an email to the visitor on registering
+     *
+     * @param User $user
+     * @return void
+     */
     public function sendConfirmationInscriptiontoUser(User $user)
     {
         $subject = 'Bienvenue sur O\'Cooking';
