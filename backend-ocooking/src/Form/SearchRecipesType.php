@@ -18,7 +18,6 @@ class SearchRecipesType extends AbstractType
             ->add('category', null, [
                 'required' => false,
             ])
-
         ;
     }
 

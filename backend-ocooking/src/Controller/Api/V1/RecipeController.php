@@ -127,7 +127,6 @@ class RecipeController extends AbstractController
       $name = $form->get('name')->getData();
       $category = $form->get('category')->getData();
 
-
       if($name !== null && $category == null){
         $recipes = $recipeRepository->searchRecipesByName($name);
 
@@ -141,7 +140,7 @@ class RecipeController extends AbstractController
         $recipes = $recipeRepository->searchRecipesAll();
 
       }
-       
+      
        $jsonRecipes = $serializer->serialize(
          $recipes,
          'json',
