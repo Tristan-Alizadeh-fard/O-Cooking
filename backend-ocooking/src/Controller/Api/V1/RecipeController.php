@@ -130,16 +130,16 @@ class RecipeController extends AbstractController
 
       if($name !== null && $category == null){
         $recipes = $recipeRepository->searchRecipesByName($name);
-        
+
       }elseif($category !== null && $name == null){
         $recipes = $recipeRepository->searchRecipesByCategory($category);
-       
+
       }elseif($name !== null && $category !== null ){
         $recipes = $recipeRepository->searchRecipesByNameAndCategory($name, $category);
         
       }else {
         $recipes = $recipeRepository->searchRecipesAll();
-        
+
       }
        
        $jsonRecipes = $serializer->serialize(
