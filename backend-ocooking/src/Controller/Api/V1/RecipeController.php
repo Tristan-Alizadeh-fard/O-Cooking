@@ -4,6 +4,7 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
+use App\Form\RecipeType;
 use App\Form\SearchRecipesType;
 use App\Repository\CategoryRepository;
 use App\Repository\IngredientRepository;
