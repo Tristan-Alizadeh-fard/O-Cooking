@@ -3,39 +3,31 @@
 namespace App\Controller\Api\V1;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-// use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 
 class MailerController extends AbstractController
 {
     /**
-     * @Route("/api/v1/email", name="mailer", methods={"POST"})
+     * @Route("/api/v1/email", name="mailer")
      */
-    public function sendEmail(MailerInterface $mailer): void
+    public function sendEmail(MailerInterface $mailer): Response
     {
-        $transport = new EsmtpTransport('localhost');
-        $mailer = new Mailer($transport);
 
         $email = (new Email())
-            ->from('renan76@sfr.fr')
+            ->from('ocooking.contact@gmail.com')
             ->to('bisigrenan@gmail.com')
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
             ->subject('Test')
-            ->text('Sending emails is fun again!')
-            // ->html('<p>See Twig integration for better HTML integration!</p>')
+            ->text('ca fonctionne bien !!!!  on recois les mail , bon ok j arret de jouer et j eme remet au travail mdr')
             ;
 
         //  dd($email);
         try {
             $mailer->send($email);
+            return $this->json([], 200);
         } catch (TransportExceptionInterface $e) {
             // some error prevented the email sending; display an
             // error message or try to resend the message
