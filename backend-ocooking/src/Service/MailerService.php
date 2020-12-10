@@ -43,7 +43,8 @@ class MailerService
             ->to($to)
             ->subject($subject)
             ->html(
-                $this->twig->render($template, $parameters),
+                
+                // $this->twig->render($template, $parameters),
                 // charset: 'text/html'
             )
         ;
