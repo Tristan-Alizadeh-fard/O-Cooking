@@ -56,3 +56,9 @@ export const setFormSettings = createAction('recipe/setFormSettings', (value) =>
     value,
   },
 }));
+
+export const setMeasures = createAction('recipe/setMeasures', (value) => ({
+  payload: {
+    value,
+  },
+}));

@@ -30,3 +30,15 @@ export const formatStep = (arr) => {
   ));
   return response;
 };
+
+export const formatSetMeasure = (values) => {
+  const result = [];
+  values.map((value) => (
+    result.push({
+      key: value.id,
+      text: value.name,
+      value: value.name,
+    })
+  ));
+  return result;
+};

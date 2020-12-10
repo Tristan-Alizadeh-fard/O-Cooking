@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // eslint-disable-next-line import/no-unresolved
-import { formatIG, formatTime, formatStep } from 'src/utils';
-import { setFormSettings } from 'src/actions/recipe';
+import { formatIG, formatTime, formatStep, formatSetMeasure } from 'src/utils';
+import { setFormSettings, setMeasures } from 'src/actions/recipe';
 
 const user = (store) => (next) => (action) => {
   switch (action.type) {
@@ -57,7 +57,9 @@ const user = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response, 'success get settings');
-          store.dispatch(setFormSettings(response.data));
+          store.dispatch(setFormSettings(response.data.categories));
+
+          store.dispatch(setMeasures(formatSetMeasure(response.data.measure)));
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware recipe; get settings error');
