@@ -171,11 +171,14 @@ const user = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response, 'search success');
-          store.dispatch(saveAllrecipes(response.data.recipesSearch));
+          // store.dispatch(saveAllrecipes(response.data.recipesSearch));
           console.log(response.data.recipesSearch);
+          response.data.recipesSearch.map((recipe) => (
+            console.log(recipe)
+          ));
         })
         .catch((error) => {
-          console.log(error, 'Je suis dans le middleware, SEARCH ERROR');
+          console.log(error, 'La recherche n\'a pas abouti.');
           // store.dispatch(emailInUse());
         });
       next(action);

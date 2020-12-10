@@ -48,3 +48,11 @@ export const changeImage = createAction('recipe/changeImage', (value) => ({
 }));
 
 export const submitRecipe = createAction('recipe/submit');
+
+export const getFormSettings = createAction('recipe/getFormSettings');
+
+export const setFormSettings = createAction('recipe/setFormSettings', (value) => ({
+  payload: {
+    value,
+  },
+}));
