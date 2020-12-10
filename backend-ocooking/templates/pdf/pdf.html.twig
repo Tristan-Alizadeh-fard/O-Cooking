@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+
+{{ dump(users) }}
+{% for user in users %}
+    {% for recipe in user.recipes %}
+        {# {{ recipe.name }} #}
+        {# {{ dump(recipe.recipeIngredients) }} #}
+        {# {% for recipeIngredient in recipe.recipeIngredients %} #}
+            {# <li>
+                {{ recipeIngredient.quantity }}
+            </li> #}
+        {# {% endfor %} #}
+         
+        {#  <li>
+           {{ recipe.name }}
+        </li>  #}
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}

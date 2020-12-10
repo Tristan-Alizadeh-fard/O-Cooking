@@ -12,6 +12,8 @@
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
+        "dompdf/dompdf": "^0.8.6",
+        "knplabs/knp-snappy-bundle": "^1.8",
         "lexik/jwt-authentication-bundle": "^2.10",
         "nelmio/alice": "^3.7",
         "nelmio/cors-bundle": "^2.1",
