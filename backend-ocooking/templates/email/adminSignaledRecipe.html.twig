@@ -14,6 +14,10 @@
             font-weight: bold;
             font-style: italic;
         }
+
+        .italic {
+           font-style: italic; 
+        }
     </style>
 {% endblock %}
 
@@ -21,7 +25,7 @@
     <div id="container">
         <p>Bonjour Admin,</p>
 
-        <p>La recette {{recipe.name}} (id {{recipe.id}}) a été signalée comme étant une recette potentiellement douteuse:
+        <p>La recette {{recipe.name}} (id {{recipe.id}}) a été signalée par <span class="italic">{{signaledBy}}</span> comme étant une recette potentiellement douteuse:
             <article>
                 <section>
                     <h2>{{recipe.name}}</h2>
