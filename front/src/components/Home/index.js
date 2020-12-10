@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './home.scss';
 
-const Home = ({ name, recipesUser, isLoading }) => {
+const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader }) => {
   console.log('Home', recipesUser);
+  const setLoaderHomerecipes = (id) => {
+    setLoader();
+    showRecipe(id);
+  };
   return (
     <>
     {isLoading && <div className="ui segment">
@@ -15,15 +19,16 @@ const Home = ({ name, recipesUser, isLoading }) => {
       <div className="allrecipes">
         <h2 className="allrecipes__title">{`Bienvenue dans votre espace " ${name} " !`}</h2>
       </div>
+      {!isLoading && 
       <div className="all">
-        {recipesUser.map((recipeUser) => (
+       {recipesUser.map((recipeUser) => (
               <div key={recipeUser.name} className="allrecipes__miniature">
                 <div className="ui card">
                   <div className="image">
                     <i className="image icon" />
                   </div>
                   <div className="content">
-                    {/* <Link to={`/recette/${recipeUser.id}`} className="header" onClick={() => showRecipe(recipeUser.id)}>{recipeUser.name}</Link> //TODO idrecette => le link */}
+                    <Link to={`/recette/${recipeUser.id}`} className="header" onClick={() => setLoaderHomerecipes(recipeUser.id)}>{recipeUser.name}</Link>
                     <div className="meta">
                       <span className="date">{`Posté le ${recipeUser.createdAt}`}</span>
                     </div>
@@ -48,12 +53,14 @@ const Home = ({ name, recipesUser, isLoading }) => {
                 </div>
               </div>
         ))}
-      </div>
+      </div>}
     </>
   );
 };
 
 Home.protoTypes = {
+  setLoader: PropTypes.func.isRequired,
+  showRecipe: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   recipesUser: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,

@@ -13,6 +13,9 @@ import {
   SET_IS_LOADING,
   SAVE_INFOS_USER,
   SAVE_USER_RECIPE,
+  SET_RECIPE,
+  SET_USER_FAVORITE,
+  UNSET_USER_FAVORITE,
 } from 'src/actions/user';
 
 const initialState = {
@@ -35,6 +38,7 @@ const initialState = {
   idUser: null,
   roleUser: [],
   recipesUser: [],
+  userFavorite: {},
 };
 
 const user = (state = initialState, action = {}) => {
@@ -54,6 +58,7 @@ const user = (state = initialState, action = {}) => {
         isLogged: true,
         errorLogin: false,
         token: action.token,
+        isLoading: false,
       };
     case USER_INSCRIPTION_SUCCESS:
       return {
@@ -119,6 +124,22 @@ const user = (state = initialState, action = {}) => {
         ...state,
         recipesUser: action.recipesUser,
         isLoading: false,
+      };
+    case SET_RECIPE:
+      return {
+        ...state,
+        recipe: action.recipe,
+        isLoading: false,
+      };
+    case SET_USER_FAVORITE:
+      return {
+        ...state,
+        userFavorite: action.userFavorite,
+      };
+    case UNSET_USER_FAVORITE:
+      return {
+        ...state,
+        userFavorite: action.userFavorite,
       };
     default: return { ...state };
   }
