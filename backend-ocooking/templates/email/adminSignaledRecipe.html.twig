@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recette {{recipe.id}} ({{recipe.name}}) signalée{% endblock %}
+
+{% block body %}
+    <div>
+        <p>Bonjour Admin,</p>
+        <p>La recette {{recipe.name}} (id {{recipe.id}}) a été signalée comme étant une recette potentiellement douteuse.</p>
+        <p>Merci de vous rendre dans l'interface administration pour déterminer si ce signalement est erroné ou si cette recette doit être supprimée</p>
+        <p>Bonne journée</p>
+    </div>
+{% endblock %}

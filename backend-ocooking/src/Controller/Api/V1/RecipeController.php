@@ -14,6 +14,7 @@ use App\Repository\MeasureRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
+use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -235,7 +236,7 @@ class RecipeController extends AbstractController
     /**
      * @Route("/{id}/edit/signaled", name="signaled", methods={"PATCH", "PUT"}, requirements={"id"="\d+"})
      */
-    public function signaled(Recipe $recipe, SerializerInterface $serializer): Response
+    public function signaled(Recipe $recipe, SerializerInterface $serializer, MailerService $mailerService): Response
     {
         $recipe->setSignaled(true);
 
@@ -247,8 +248,10 @@ class RecipeController extends AbstractController
         $jsonContent = $serializer->serialize($recipe, 'json', [
             'groups' => 'recipe_read',
         ]);
- 
         $response = JsonResponse::fromJsonString(($jsonContent));
+
+        $from = $this->getUser()->getEmail();
+        $mailerService->sendAlertAboutSignalRecipe($recipe, $from);
 
         return $response;
     }
