@@ -36,14 +36,12 @@ const initialState = {
   recipe: {},
   admin: false,
   isLoading: true,
-  
   searchOption: [
     { key: 'all', text: 'Tout voir', value: 'all', id: null },
     { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
     { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
     { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
   ],
-  
   searchLocation: ['Mes recettes', 'Toutes les recettes'],
   selectedCagetory: '',
   selectedLocation: 'Toutes les recettes',
@@ -52,6 +50,7 @@ const initialState = {
   roleUser: [],
   recipesUser: [],
   userFavorite: {},
+  shoppingList: [],
 };
 
 const user = (state = initialState, action = {}) => {
@@ -153,6 +152,11 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         userFavorite: action.userFavorite,
+      };
+    case SET_SHOP_LIST:
+      return {
+        ...state,
+        shoppingList: action.shoppingList,
       };
     default: return { ...state };
   }

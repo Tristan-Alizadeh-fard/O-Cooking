@@ -26,6 +26,7 @@ import {
   setRecipe,
   setUserFavorite,
   unsetUserFavorite,
+  setShopListAction,
 } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
@@ -239,24 +240,29 @@ const user = (store) => (next) => (action) => {
     }
     case GET_SHOPLIST_ACTION: {
       axios.get('http://localhost:8000/api/v1/shoppinglist/', {
-           headers: {
+        headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
           Authorization: `Bearer ${store.getState().user.token}`,
         },
       })
         .then((response) => {
-               console.log(response, 'get shoplist ok');
-          store.dispatch();
+          console.log(response, 'get shoplist ok');
+          store.dispatch(setShopListAction(response.data));
         })
         .catch((error) => {
           console.log(error, 'get shoplist errore');
-           });
+        });
       next(action);
       break;
-      }
+    }
     case SEARCH: {
-      const { searchInput, selectedCategory, searchOption, selectedLocation } = store.getState().user;
+      const {
+        searchInput,
+        selectedCategory,
+        searchOption,
+        selectedLocation,
+      } = store.getState().user;
       let formatedCategory;
       searchOption.map((option) => {
         if (option.text === selectedCategory) {

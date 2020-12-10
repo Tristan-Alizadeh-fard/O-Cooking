@@ -27,7 +27,7 @@ export const SET_RECIPE = 'SET_RECIPE';
 export const SET_USER_FAVORITE = 'SET_USER_FAVORITE';
 export const UNSET_USER_FAVORITE = 'UNSET_USER_FAVORITE';
 export const GET_SHOPLIST_ACTION = 'GET_SHOPLIST_ACTION';
-
+export const SET_SHOPLIST_ACTION = 'SET_SHOPLIST_ACTION';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -160,4 +160,9 @@ export const unsetUserFavorite = (data) => ({
 
 export const getShopListAction = () => ({
   type: GET_SHOPLIST_ACTION,
+});
+
+export const setShopListAction = (value) => ({
+  type: SET_SHOPLIST_ACTION,
+  value,
 });
