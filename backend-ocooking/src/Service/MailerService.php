@@ -35,7 +35,7 @@ class MailerService
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function send(string $subject, string $from, string $to, string $template, array $parameters): void
+    public function send(string $subject, string $from, string $to, string $template): void
     {
         // Add attachFromPath('') pour ajouter des pdf
         $email = (new Email())
@@ -43,7 +43,7 @@ class MailerService
             ->to($to)
             ->subject($subject)
             ->html(
-                
+                $template
                 // $this->twig->render($template, $parameters),
                 // charset: 'text/html'
             )
