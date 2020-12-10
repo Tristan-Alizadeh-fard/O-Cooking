@@ -2,7 +2,7 @@
 
 namespace App\Controller\Api\V1;
 
-
+use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Form\SearchRecipesType;
 use App\Repository\CategoryRepository;
@@ -161,19 +161,36 @@ class RecipeController extends AbstractController
     /**
     * @Route("/add", name="needed_information_add", methods={"GET"})
     */
-    public function neededInformationAdd(CategoryRepository $category, IngredientRepository $ingredient, MeasureRepository $measure, TagRepository $tag): Response
+    public function neededInformationAdd(SerializerInterface $serializer, CategoryRepository $category, IngredientRepository $ingredient, MeasureRepository $measure, TagRepository $tag): Response
     {
         $categories = $category->findAll();
         $ingredients = $ingredient->findAll();
         $measures = $measure->findAll();
         // $tags = $tag->findAll();
 
+        
+        $jsonContentCategories = $serializer->serialize($categories, 'json', [
+          'groups' => 'category_needed_information_add',
+        ]);
+        $categoryData = json_decode($jsonContentCategories, true);
+        dump($categoryData);
+
+        $jsonContentIngredients = $serializer->serialize($ingredients, 'json', [
+            'groups' => 'ingredient_needed_information_add',
+        ]);
+        $ingredientData = json_decode($jsonContentIngredients, true);
+
+        $jsonContentMeasures = $serializer->serialize($measures, 'json', [
+            'groups' => 'measure_needed_information_add',
+        ]);
+        $measureData = json_decode($jsonContentMeasures, true);
+  
         return $this->json([
-            'categories' => $categories,
-            'ingredients' => $ingredients,
-            'measures' => $measures,
-            // 'tags' => $tags,
-         ]);
+          'categories' => $categoryData,
+          'ingredients' => $ingredientData,
+          'measure' => $measureData
+        ]);
+ 
     }
 
     /**
