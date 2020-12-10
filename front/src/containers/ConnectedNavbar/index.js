@@ -3,7 +3,7 @@ import Navbar from 'src/components/Navbar';
 import { logOutUser, allRecipes, getUserRecipesAction, setisLoading, getShopListAction } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
-  admin: state.user.admin,
+  admin: state.user.roleUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

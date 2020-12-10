@@ -36,14 +36,12 @@ const initialState = {
   recipe: {},
   admin: false,
   isLoading: true,
-  
   searchOption: [
     { key: 'all', text: 'Tout voir', value: 'all', id: null },
     { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
     { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
     { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
   ],
-  
   searchLocation: ['Mes recettes', 'Toutes les recettes'],
   selectedCagetory: '',
   selectedLocation: 'Toutes les recettes',
@@ -131,6 +129,7 @@ const user = (state = initialState, action = {}) => {
         idUser: action.idUser,
         roleUser: action.roleUser,
         name: action.name,
+        userFavorite: action.userFavorite,
       };
     case SAVE_USER_RECIPE:
       return {
@@ -143,16 +142,6 @@ const user = (state = initialState, action = {}) => {
         ...state,
         recipe: action.recipe,
         isLoading: false,
-      };
-    case SET_USER_FAVORITE:
-      return {
-        ...state,
-        userFavorite: action.userFavorite,
-      };
-    case UNSET_USER_FAVORITE:
-      return {
-        ...state,
-        userFavorite: action.userFavorite,
       };
     default: return { ...state };
   }

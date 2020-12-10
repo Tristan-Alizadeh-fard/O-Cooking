@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import { showOneRecipe, setisLoading } from 'src/actions/user';
+import { showOneRecipe, setisLoading, setFavoriteAction, unsetFavoriteAction } from 'src/actions/user';
 import AllRecipes from 'src/components/AllRecipes';
 
 const mapStateToProps = (state) => ({
   recipes: state.user.recipes,
   isLoading: state.user.isLoading,
+  favorite: state.user.userFavorite,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -13,6 +14,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setLoader: () => {
     dispatch(setisLoading());
+  },
+  setFavorite: (id) => {
+    dispatch(setFavoriteAction(id));
+  },
+  unsetFavorite: (id) => {
+    dispatch(unsetFavoriteAction(id));
   },
 });
 

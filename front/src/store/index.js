@@ -5,6 +5,7 @@ import recipe from 'src/middlewares/recipe';
 import reducer from 'src/reducers';
 import { configureStore } from '@reduxjs/toolkit';
 import throttle from 'lodash/throttle'
+import { createStore, applyMiddleware } from 'redux';
 
 // const enhancers = composeWithDevTools(
 //  applyMiddleware(
@@ -13,7 +14,7 @@ import throttle from 'lodash/throttle'
 //  ),
 // );
 
-function saveStateLocal(state) {
+export const saveStateLocal = (state) => {
   try {
     const serialState = JSON.stringify(state);
     localStorage.setItem('state', serialState);
@@ -21,9 +22,9 @@ function saveStateLocal(state) {
   catch (e) {
     console.log(e);
   }
-}
+};
 
-function loadStateLocal() {
+export const loadStateLocal = () => {
   try {
     const serialState = localStorage.getItem('state');
     if (serialState === null) {
@@ -35,7 +36,7 @@ function loadStateLocal() {
     console.log(e);
     return undefined;
   }
-}
+};
 
 const persistState = loadStateLocal();
 const store = configureStore({
@@ -45,8 +46,6 @@ const store = configureStore({
   middleware: [user, recipe],
 });
 
-store.subscribe(() => {
-  saveStateLocal(store.getState());
-});
+store.subscribe(() => saveStateLocal(store.getState()));
 
 export default store;
