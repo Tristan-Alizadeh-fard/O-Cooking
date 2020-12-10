@@ -2,10 +2,56 @@
 
 {% block title %}Recette {{recipe.id}} ({{recipe.name}}) signalée{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        article {
+            margin: 20px 0 20px 50px;
+            padding-left: 10px;
+            border-left: solid 1px black;
+        }
+
+        .bold {
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <div>
+    <div id="container">
         <p>Bonjour Admin,</p>
-        <p>La recette {{recipe.name}} (id {{recipe.id}}) a été signalée comme étant une recette potentiellement douteuse.</p>
+
+        <p>La recette {{recipe.name}} (id {{recipe.id}}) a été signalée comme étant une recette potentiellement douteuse:
+            <article>
+                <section>
+                    <h2>{{recipe.name}}</h2>
+                    <p><span class="bold">Auteur :</span> {{recipe.author}}</p>
+                    {% if (recipe.picture is not null) %}
+                         <p>photo : </p>
+                    {% endif %}
+                    <p><span class="bold">Nombre de personnes :</span> {{recipe.nbPeople}}</p>
+                    <p><span class="bold">Temps de préparation :</span> {{recipe.preparationTime}}</p>
+                    <p><span class="bold">Temps de cuisson :</span> {{recipe.cookingTime}}</p>
+                </section>
+                <section>
+                    <h2>Ingrédients</h2>
+                    <ul>
+                        {% for ingredient in recipe.recipeIngredients %}
+                            <li>{{ ingredient.quantity }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                <section>
+                    <h2>Etapes</h2>
+                    <ol>
+                        {% for step in recipe.steps|sort((a, b) => a.nbStep|lower <=> b.nbStep|lower) %}
+                            <li>{{ step.description }}</li>
+                        {% endfor %}
+                    </ol>
+                </section>
+            </article>
+        </p>
+
         <p>Merci de vous rendre dans l'interface administration pour déterminer si ce signalement est erroné ou si cette recette doit être supprimée</p>
         <p>Bonne journée</p>
     </div>
