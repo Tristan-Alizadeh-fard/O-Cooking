@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './navbar.scss';
 import Prototypes from 'prop-types';
 
-const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList }) => {
+const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList, getFormSettings }) => {
   const setLoaderHome = () => {
     setLoader();
     getUserRecipes();
@@ -28,7 +28,7 @@ const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getSh
           <li className="deroulan"><Link to="/allrecipes" onClick={() => setLoaderAllrecipes()}> Toutes les recettes &ensp;</Link>
             <ul className="sous" />
           </li>
-          <li className="deroulan"><Link to="/ajout-recette">Ajouter une recette &ensp;</Link>
+          <li className="deroulan"><Link to="/ajout-recette" onClick={() => getFormSettings()}>Ajouter une recette &ensp;</Link>
             <ul className="sous" />
           </li>
           <li><Link to="/aide-course" onClick={() => setLoaderShopList()}>Liste de course</Link></li>

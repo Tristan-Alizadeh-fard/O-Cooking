@@ -9,7 +9,7 @@ import {
   selectTags,
   changeImage,
 } from 'src/actions/recipe';
-import { submitRecipe } from '../actions/recipe';
+import { submitRecipe, setFormSettings } from '../actions/recipe';
 
 const initialState = {
   recipeName: '',
@@ -57,6 +57,7 @@ const initialState = {
     { key: 7, value: 'Viande' },
   ],
   selectedTags: [],
+  settings: [],
 };
 
 const recipe = createReducer(initialState, (builder) => {
@@ -90,6 +91,9 @@ const recipe = createReducer(initialState, (builder) => {
       else {
         state.selectedTags.push(action.payload.value);
       }
+    })
+    .addCase(setFormSettings, (state, action) => {
+      state.settings = action.payload.value;
     })
     .addCase(submitRecipe, (state, action) => {
     });

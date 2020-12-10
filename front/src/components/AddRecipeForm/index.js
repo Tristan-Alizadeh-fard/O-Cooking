@@ -66,7 +66,7 @@ const AddRecipeForm = ({
         </Form.Field>
 
         <Form.Field>
-          <p>Entrez votre temsp de préparation</p>
+          <p>Entrez votre temps de préparation</p>
           <Input
             label={{ basic: true, content: 'h' }}
             type="number"
