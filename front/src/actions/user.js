@@ -19,6 +19,14 @@ export const GET_USER_RECIPES_ACTION = 'GET_USER_RECIPES_ACTION';
 export const SEARCH = 'SEARCH';
 export const SAVE_INFOS_USER = 'SAVE_INFOS_USER';
 export const SAVE_USER_RECIPE = 'SAVE_USER_RECIPE';
+export const SET_SIGNALED_ACTION = 'SET_SIGNALED_ACTION';
+export const SET_FAVORITE_ACTION = 'SET_FAVORITE_ACTION';
+export const UNSET_FAVORITE_ACTION = 'UNSET_FAVORITE_ACTION';
+export const ADD_SHOPLIST_ACTION = 'ADD_SHOPLIST_ACTION';
+export const SET_RECIPE = 'SET_RECIPE';
+export const SET_USER_FAVORITE = 'SET_USER_FAVORITE';
+export const UNSET_USER_FAVORITE = 'UNSET_USER_FAVORITE';
+export const GET_SHOPLIST_ACTION = 'GET_SHOPLIST_ACTION';
 
 
 export const getUserState = () => ({
@@ -113,4 +121,43 @@ export const saveInfosUser = (data) => ({
 export const saveUserRecipes = (data) => ({
   type: SAVE_USER_RECIPE,
   recipesUser: data.recipes,
+});
+
+export const setSignaledAction = (id) => ({
+  type: SET_SIGNALED_ACTION,
+  id,
+});
+
+export const setFavoriteAction = (id) => ({
+  type: SET_FAVORITE_ACTION,
+  id,
+});
+
+export const unsetFavoriteAction = (id) => ({
+  type: UNSET_FAVORITE_ACTION,
+  id,
+});
+
+export const addShopListAction = (id) => ({
+  type: ADD_SHOPLIST_ACTION,
+  id,
+});
+
+export const setRecipe = (data) => ({
+  type: SET_RECIPE,
+  recipe: data,
+});
+
+export const setUserFavorite = (data) => ({
+  type: SET_USER_FAVORITE,
+  userFavorite: data,
+});
+
+export const unsetUserFavorite = (data) => ({
+  type: UNSET_USER_FAVORITE,
+  userFavorite: data,
+});
+
+export const getShopListAction = () => ({
+  type: GET_SHOPLIST_ACTION,
 });

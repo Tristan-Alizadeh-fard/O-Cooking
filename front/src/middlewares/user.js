@@ -7,6 +7,11 @@ import {
   SHOW_ONE_RECIPE,
   SAVE_USER_NAME,
   GET_USER_RECIPES_ACTION,
+  SET_SIGNALED_ACTION,
+  SET_FAVORITE_ACTION,
+  UNSET_FAVORITE_ACTION,
+  ADD_SHOPLIST_ACTION,
+  GET_SHOPLIST_ACTION,
   SEARCH,
   saveUserLogin,
   saveUserInscription,
@@ -18,6 +23,9 @@ import {
   saveUserName,
   saveInfosUser,
   saveUserRecipes,
+  setRecipe,
+  setUserFavorite,
+  unsetUserFavorite,
 } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
@@ -150,6 +158,103 @@ const user = (store) => (next) => (action) => {
       next(action);
       break;
     }
+    case SET_SIGNALED_ACTION: {
+      axios.put(`http://localhost:8000/api/v1/recipes/${action.id}/edit/signaled`,
+        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response, 'mid set signaled ok');
+          store.dispatch(setRecipe(response.data));
+        })
+        .catch((error) => {
+          console.log(error, 'mid set signaled');
+        });
+      next(action);
+      break;
+    }
+    case SET_FAVORITE_ACTION: {
+      axios.put(`http://localhost:8000/api/v1/users/favorites/add/${action.id}`,
+        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data, 'set favorite ok');
+          store.dispatch(setUserFavorite(response)); //TODO
+        })
+        .catch((error) => {
+          console.log(error, 'set favorite error');
+        });
+      next(action);
+      break;
+    }
+    case UNSET_FAVORITE_ACTION: {
+      axios.put(`http://localhost:8000/api/v1/users/favorites/remove/${action.id}`,
+        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data, 'unset favorite ok');
+          store.dispatch(unsetUserFavorite(response));
+        })
+        .catch((error) => {
+          console.log(error, 'unset favorite error');
+        });
+      next(action);
+      break;
+    }
+    case ADD_SHOPLIST_ACTION: {
+      axios.put(`http://localhost:8000/api/v1/shoppinglist/edit/${action.id}`,
+        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response, 'add shoplist ok');
+        })
+        .catch((error) => {
+          console.log(error, 'add shoplist error');
+        });
+      next(action);
+      break;
+    }
+    case GET_SHOPLIST_ACTION: {
+      axios.get('http://localhost:8000/api/v1/shoppinglist/', {
+           headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        },
+      })
+        .then((response) => {
+               console.log(response, 'get shoplist ok');
+          store.dispatch();
+        })
+        .catch((error) => {
+          console.log(error, 'get shoplist errore');
+           });
+      next(action);
+      break;
+      }
     case SEARCH: {
       const { searchInput, selectedCategory, searchOption, selectedLocation } = store.getState().user;
       let formatedCategory;
