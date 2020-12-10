@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {  } from 'src/actions/user';
+import { showOneRecipe, setisLoading } from 'src/actions/user';
 import Home from 'src/components/Home';
 
 const mapStateToProps = (state) => ({
@@ -9,7 +9,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
- 
+  showRecipe: (id) => {
+    dispatch(showOneRecipe(id));
+  },
+  setLoader: () => {
+    dispatch(setisLoading());
+  },
 });
 
 const ConnectedHome = connect(mapStateToProps, mapDispatchToProps)(Home);

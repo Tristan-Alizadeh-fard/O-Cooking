@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Navbar from 'src/components/Navbar';
-import { logOutUser, allRecipes, getUserRecipesAction, setisLoading } from 'src/actions/user';
+import { logOutUser, allRecipes, getUserRecipesAction, setisLoading, getShopListAction } from 'src/actions/user';
 import { getFormSettings } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getFormSettings: () => {
     dispatch(getFormSettings());
+  },
+  getShopList: () => {
+    dispatch(getShopListAction());
   },
 });
 

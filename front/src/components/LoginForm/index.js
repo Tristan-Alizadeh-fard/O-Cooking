@@ -8,6 +8,7 @@ import './loginForm.scss';
 const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes }) => {
   const submitLogin = (event) => {
     event.preventDefault();
+    setLoader();
     logIn();
   };
   const setLoaderLogin = () => {
