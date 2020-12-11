@@ -10,7 +10,6 @@ import {
   SAVE_ALL_RECIPES,
   LOG_OUT_USER,
   SAVE_RECIPE,
-  SEARCH,
   SET_IS_LOADING,
   SAVE_INFOS_USER,
   SAVE_USER_RECIPE,
@@ -18,6 +17,7 @@ import {
   SET_USER_FAVORITE,
   UNSET_USER_FAVORITE,
   SET_SHOPLIST_ACTION,
+  REMOVE_FROM_LIST,
 } from 'src/actions/user';
 
 const initialState = {
@@ -52,6 +52,7 @@ const initialState = {
   recipesUser: [],
   userFavorite: {},
   shoppingList: [],
+  shoppingListCheck: [],
 };
 
 const user = (state = initialState, action = {}) => {
@@ -160,6 +161,14 @@ const user = (state = initialState, action = {}) => {
         ...state,
         shoppingList: action.value,
       };
+    case REMOVE_FROM_LIST: {
+      console.log('remove_from_list');
+      console.log(action);
+      return {
+        ...state,
+        shoppingListCheck: [...state.shoppingListCheck, action.index],
+      };
+    }
     default: return { ...state };
   }
 };

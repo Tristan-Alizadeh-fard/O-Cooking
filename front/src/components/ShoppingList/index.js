@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ListAsRecipe from './ListAsRecipe';
 import './shoppingList.scss';
 
-const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe }) => {
+const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shoppingListCheck }) => {
   console.log('ShoppingList');
   return (
     <>
@@ -13,12 +13,12 @@ const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe }) =>
       <div className="home__miniature">
         <div className="ui card">
           {shoppingList !== undefined && <div className="liste_recettes">
-            {shoppingList.map((recipe, index) => (
+            {shoppingList.map((recipe) => (
               // eslint-disable-next-line max-len
-              <ListAsRecipe {...recipe} index={index} key={recipe.name} removeShoppingRecipe={removeShoppingRecipe} removeFromList={removeFromList} />
+              <ListAsRecipe {...recipe} key={recipe.name} removeShoppingRecipe={removeShoppingRecipe} removeFromList={removeFromList} shoppingListCheck={shoppingListCheck} />
             ))}
           </div>}
-          {shoppingList === undefined && <p>Votre aide de course est vide.</p>}
+          {shoppingList.length === 0 && <p>Votre aide de course est vide.</p>}
         </div>
       </div>
     </>
@@ -27,6 +27,7 @@ const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe }) =>
 
 ShoppingList.propTypes = {
   shoppingList: PropTypes.array.isRequired,
+  shoppingListCheck: PropTypes.array.isRequired,
   removeShoppingRecipe: PropTypes.func.isRequired,
   removeFromList: PropTypes.func.isRequired,
 };

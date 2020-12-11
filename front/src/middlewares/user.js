@@ -29,6 +29,7 @@ import {
   setUserFavorite,
   unsetUserFavorite,
   setShopListAction,
+  getShopListAction,
 } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
@@ -300,10 +301,23 @@ const user = (store) => (next) => (action) => {
     }
     case REMOVE_SHOP_RECIPE: {
       console.log('remove_shop_recipe');
-      break;
-    }
-    case REMOVE_FROM_LIST: {
-      console.log('remove_from_list');
+      console.log(action.index);
+      axios.delete(`http://localhost:8000/api/v1/shoppinglist/delete/${action.index}`,
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response, 'shoplist delete ok');
+          store.dispatch(getShopListAction());
+        })
+        .catch((error) => {
+          console.log(error, 'shoplist delete error');
+        });
+      next(action);
       break;
     }
     default:

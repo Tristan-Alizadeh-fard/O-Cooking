@@ -4,6 +4,7 @@ import ShoppingList from 'src/components/ShoppingList';
 
 const mapStateToProps = (state) => ({
   shoppingList: state.user.shoppingList,
+  shoppingListCheck: state.user.shoppingListCheck,
 });
 
 const mapDispatchToProps = (dispatch) => ({
