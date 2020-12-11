@@ -204,21 +204,11 @@ const AddRecipeForm = ({
           <Button.Group size="large">
             {categories.map((category) => (
             // eslint-disable-next-line max-len
-              <Category {...category} key={category.key} selectedCategory={selectedCategory} selectCategory={selectCategory} />
+              <Category {...category} key={category.name} selectedCategory={selectedCategory} selectCategory={selectCategory} />
             ))}
           </Button.Group>
         </Form.Field>
 
-        <Divider />
-        <p>Tag</p>
-        <Form.Field>
-          <div className="tags">
-            {tagList.map((tag) => (
-              // eslint-disable-next-line max-len
-              <Tag {...tag} key={tag.key} selectedTags={selectedTags} selectTags={selectTags} tagList={tagList} />
-            ))}
-          </div>
-        </Form.Field>
         <Divider />
         <Form.Field>
           <Button
