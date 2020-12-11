@@ -19,17 +19,27 @@ class RecipeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('name'),
-            TextEditorField::new('description'),
+            Field\IdField::new('id'),
+            Field\ImageField::new('picture', 'Photo'),
+            Field\TextField::new('name', 'Nom'),
+            Field\AssociationField::new('category', 'Catégorie'),
+            Field\IntegerField::new('nbPeople', 'Personnes')
+                ->setTextAlign('center'),
+            Field\TextField::new('preparationTime', 'Préparation')
+                ->setTextAlign('center'),
+            Field\TextField::new('cookingTime', 'Cuisson')
+                ->setTextAlign('center'),
+            Field\CollectionField::new('recipeIngredients', 'Ingrédients'),
+            Field\CollectionField::new('steps', 'Etapes'),
+            Field\AssociationField::new('author', 'Auteur'),
+            Field\DateTimeField::new('createdAt', 'Création')
+                ->setTextAlign('center'),
+            Field\BooleanField::new('signaled', 'Signalée'),
         ];
     }
 
     public function configureActions(Actions $actions): Actions
     {
-        // $viewInvoice = Action::new('invoice', 'View invoice', 'fa fa-file-invoice')
-        //     ->linkToCrudAction('renderInvoice');
-
         return $actions
             ->remove(Crud::PAGE_INDEX, Action::NEW)
             ->remove(Crud::PAGE_INDEX, Action::EDIT)

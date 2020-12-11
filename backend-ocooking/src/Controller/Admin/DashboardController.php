@@ -54,7 +54,8 @@ class DashboardController extends AbstractDashboardController
     public function configureCrud(): Crud
     {
         return Crud::new()
-            ->setPaginatorPageSize(16)
+            ->setSearchFields(null)
+            ->setPaginatorPageSize(17)
         ;
     }
 }
