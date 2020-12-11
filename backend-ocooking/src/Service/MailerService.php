@@ -85,4 +85,18 @@ class MailerService
 
         $this->send($subject, 'ocooking.contact@gmail.com', $to, $template, $parameters, $headers);
     }
+
+    public function sendRecipe(Recipe $recipe, string $from)
+    {
+        
+        $subject = 'Bonjour voici votre recette';
+        $template = 'pdf/recipeSend.html.twig';
+        $parameters = [
+            'recipe' => $recipe,
+            'sendBy' => $from,
+        ];
+        $headers = 'false';
+
+        $this->send($subject,'ocooking.contact@gmail.com', $from, $template, $parameters, $headers);
+    }
 }
