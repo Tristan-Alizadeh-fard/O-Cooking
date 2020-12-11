@@ -11,6 +11,7 @@ import ConnectedHome from 'src/containers/ConnectedHome';
 import ConnectedRecipe from 'src/containers/ConnectedRecipe';
 import ConnectedAllRecipes from 'src/containers/ConnectedAllRecipes';
 import ConnectedSearchBar from 'src/containers/ConnectedSearchBar';
+import About from 'src/components/About';
 
 // Page : this component manage the other components with a props called isLogged
 // means => if the user isLogged the Navbar (or his parent component if we create
@@ -63,6 +64,12 @@ const Page = ({ isLogged }) => (
       exact
     >
       <ConnectedRecipe />
+    </Route>
+    <Route
+      path="/about"
+      exact
+    >
+      <About />
     </Route>
   </div>
 );
