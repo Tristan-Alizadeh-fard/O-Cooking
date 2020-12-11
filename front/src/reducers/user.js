@@ -10,9 +10,13 @@ import {
   SAVE_ALL_RECIPES,
   LOG_OUT_USER,
   SAVE_RECIPE,
+  SEARCH,
   SET_IS_LOADING,
   SAVE_INFOS_USER,
   SAVE_USER_RECIPE,
+  SET_RECIPE,
+  SET_USER_FAVORITE,
+  UNSET_USER_FAVORITE,
 } from 'src/actions/user';
 
 const initialState = {
@@ -32,9 +36,20 @@ const initialState = {
   recipe: {},
   admin: false,
   isLoading: true,
+  searchOption: [
+    { key: 'all', text: 'Tout voir', value: 'all', id: null },
+    { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
+    { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
+    { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
+  ],
+  searchLocation: ['Mes recettes', 'Toutes les recettes'],
+  selectedCagetory: '',
+  selectedLocation: 'Toutes les recettes',
+  searchInput: null,
   idUser: null,
   roleUser: [],
   recipesUser: [],
+  userFavorite: {},
 };
 
 const user = (state = initialState, action = {}) => {
@@ -54,6 +69,7 @@ const user = (state = initialState, action = {}) => {
         isLogged: true,
         errorLogin: false,
         token: action.token,
+        isLoading: false,
       };
     case USER_INSCRIPTION_SUCCESS:
       return {
@@ -113,11 +129,18 @@ const user = (state = initialState, action = {}) => {
         idUser: action.idUser,
         roleUser: action.roleUser,
         name: action.name,
+        userFavorite: action.userFavorite,
       };
     case SAVE_USER_RECIPE:
       return {
         ...state,
         recipesUser: action.recipesUser,
+        isLoading: false,
+      };
+    case SET_RECIPE:
+      return {
+        ...state,
+        recipe: action.recipe,
         isLoading: false,
       };
     default: return { ...state };

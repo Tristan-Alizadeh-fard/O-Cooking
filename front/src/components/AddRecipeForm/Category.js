@@ -7,18 +7,18 @@ import PropTypes from 'prop-types';
 const Category = ({
   selectCategory,
   selectedCategory,
-  value,
+  name,
 }) => {
   let chosen = 'grey';
-  if (value === selectedCategory) {
+  if (name === selectedCategory) {
     chosen = 'blue';
   }
   return (
     <Button
       type="button"
       className="category__button"
-      content={value}
-      onClick={() => selectCategory(value)}
+      content={name}
+      onClick={() => selectCategory(name)}
       color={chosen}
     />
   );
@@ -27,7 +27,7 @@ const Category = ({
 Category.propTypes = {
   selectCategory: PropTypes.func.isRequired,
   selectedCategory: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default Category;

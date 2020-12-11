@@ -17,13 +17,13 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist", "show_user"})
+     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist", "show_user", "user_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist", "user_favorites"})
+     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist", "user_favorites", "user_read"})
      */
     private $name;
 

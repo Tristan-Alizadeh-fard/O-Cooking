@@ -2,10 +2,8 @@
 
 namespace App\Controller\Api\V1;
 
-use App\Entity\Category;
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
-use App\Entity\Step;
 use App\Form\RecipeType;
 use App\Form\SearchRecipesType;
 use App\Repository\CategoryRepository;
@@ -27,24 +25,6 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class RecipeController extends AbstractController
 {
-   /**
-    * @Route("/add", name="needed_information_add", methods={"GET"})
-    */
-    public function neededInformationAdd(CategoryRepository $category, IngredientRepository $ingredient, MeasureRepository $measure, TagRepository $tag): Response
-    {
-        $categories = $category->findAll();
-        $ingredients = $ingredient->findAll();
-        $measures = $measure->findAll();
-        // $tags = $tag->findAll();
-
-        return $this->json([
-            'categories' => $categories,
-            'ingredients' => $ingredients,
-            'measures' => $measures,
-            // 'tags' => $tags,
-         ]);
-    }
-
     /**
      * @Route("/browse/user/{id}", name="browse_user", methods={"GET"}, requirements={"id":"\d+"})
      */
@@ -64,6 +44,155 @@ class RecipeController extends AbstractController
         return $this->json([
             'user' => $user,
         ]);
+    }
+
+    /**
+     * @Route("", name="browse", methods={"GET"}, requirements={"id":"\d+"})
+     */
+    public function browse(SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
+    {
+      // recherche toutes les recettes
+
+      $recipes = $recipeRepository->findall();
+        
+      $json = $serializer->serialize(
+          $recipes,
+          'json',
+          ['groups' => 'show_recipe']
+        );
+     
+      $recipes = json_decode($json, true);
+
+      return $this->json([
+        'recipes' => $recipes,
+      ]);
+
+    }
+
+     /**
+     * @Route("/{id}", name="read", methods={"GET"}, requirements={"id":"\d+"})
+     */
+    public function read(int $id,SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
+    {
+      // affiche une recette
+
+      $recipe = $recipeRepository->find($id);
+        
+      $jsonRecipe = $serializer->serialize(
+          $recipe,
+          'json',
+          ['groups' => 'recipe_read']
+        );
+        $recipe = json_decode($jsonRecipe, true);
+
+      // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
+      if ($recipe === null) {
+          throw $this->createNotFoundException('La recette demandé n\'existe pas');
+      }
+
+      return $this->json([
+        'recipes' => $recipe,
+      ]);
+    }
+
+    /**
+     * @Route("/{id}/edit/signaled", name="signaled", methods={"PATCH", "PUT"}, requirements={"id"="\d+"})
+     */
+    public function signaled(Recipe $recipe, SerializerInterface $serializer): Response
+    {
+        $recipe->setSignaled(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($recipe);
+        $em->flush();
+
+        $response = new JsonResponse();
+        $jsonContent = $serializer->serialize($recipe, 'json', [
+            'groups' => 'recipe_read',
+        ]);
+ 
+        $response = JsonResponse::fromJsonString(($jsonContent));
+
+        return $response;
+    }
+
+     /**
+     * @Route("/search", name="search", methods={"POST"})
+     */
+    public function searchRecipes(Request $request, SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
+    {
+      $json = $request->getContent();
+
+      $userInformationsArray = json_decode($json, true);
+
+      $recipes = new Recipe();
+
+      $form = $this->createForm(SearchRecipesType::class, $recipes, ['csrf_protection' => true]);
+      $form->submit($userInformationsArray);
+
+      $name = $form->get('name')->getData();
+      $category = $form->get('category')->getData();
+
+
+      if($name !== null && $category == null){
+        $recipes = $recipeRepository->searchRecipesByName($name);
+
+      }elseif($category !== null && $name == null){
+        $recipes = $recipeRepository->searchRecipesByCategory($category);
+
+      }elseif($name !== null && $category !== null ){
+        $recipes = $recipeRepository->searchRecipesByNameAndCategory($name, $category);
+        
+      }else {
+        $recipes = $recipeRepository->searchRecipesAll();
+
+      }
+       
+       $jsonRecipes = $serializer->serialize(
+         $recipes,
+         'json',
+         ['groups' => 'show_recipe']
+        );
+        $recipesSearch = json_decode($jsonRecipes, true);
+
+        return $this->json([
+            'recipesSearch' => $recipesSearch,
+        ]);
+    }
+
+    /**
+    * @Route("/add", name="needed_information_add", methods={"GET"})
+    */
+    public function neededInformationAdd(SerializerInterface $serializer, CategoryRepository $category, IngredientRepository $ingredient, MeasureRepository $measure, TagRepository $tag): Response
+    {
+        $categories = $category->findAll();
+        $ingredients = $ingredient->findAll();
+        $measures = $measure->findAll();
+        // $tags = $tag->findAll();
+
+        
+        $jsonContentCategories = $serializer->serialize($categories, 'json', [
+          'groups' => 'category_needed_information_add',
+        ]);
+        $categoryData = json_decode($jsonContentCategories, true);
+        dump($categoryData);
+
+        $jsonContentIngredients = $serializer->serialize($ingredients, 'json', [
+            'groups' => 'ingredient_needed_information_add',
+        ]);
+        $ingredientData = json_decode($jsonContentIngredients, true);
+
+        $jsonContentMeasures = $serializer->serialize($measures, 'json', [
+            'groups' => 'measure_needed_information_add',
+        ]);
+        $measureData = json_decode($jsonContentMeasures, true);
+  
+        return $this->json([
+          'categories' => $categoryData,
+          'ingredients' => $ingredientData,
+          'measure' => $measureData
+        ]);
+ 
     }
 
     /**
@@ -182,7 +311,6 @@ class RecipeController extends AbstractController
             ], 400);
         }
     }
-
     
     /**
      * @Route("", name="browse", methods={"GET"}, requirements={"id":"\d+"})

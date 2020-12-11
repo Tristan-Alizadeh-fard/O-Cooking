@@ -7,6 +7,12 @@ import {
   SHOW_ONE_RECIPE,
   SAVE_USER_NAME,
   GET_USER_RECIPES_ACTION,
+  SET_SIGNALED_ACTION,
+  SET_FAVORITE_ACTION,
+  UNSET_FAVORITE_ACTION,
+  ADD_SHOPLIST_ACTION,
+  GET_SHOPLIST_ACTION,
+  SEARCH,
   saveUserLogin,
   saveUserInscription,
   errorInscription,
@@ -17,6 +23,8 @@ import {
   saveUserName,
   saveInfosUser,
   saveUserRecipes,
+  setRecipe,
+ 
 } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
@@ -145,6 +153,138 @@ const user = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware getrecipeUser error');
+        });
+      next(action);
+      break;
+    }
+    case SET_SIGNALED_ACTION: {
+      axios.put(`http://localhost:8000/api/v1/recipes/${action.id}/edit/signaled`,
+        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response, 'mid set signaled ok');
+          store.dispatch(setRecipe(response.data));
+        })
+        .catch((error) => {
+          console.log(error, 'mid set signaled');
+        });
+      next(action);
+      break;
+    }
+    case SET_FAVORITE_ACTION: {
+      axios.put(`http://localhost:8000/api/v1/users/favorites/add/${action.id}`,
+        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data, 'set favorite ok');
+          // store.dispatch(saveInfosUser(response.data)); //TODO
+          store.dispatch(saveUserName());
+        })
+        .catch((error) => {
+          console.log(error, 'set favorite error');
+        });
+      next(action);
+      break;
+    }
+    case UNSET_FAVORITE_ACTION: {
+      axios.put(`http://localhost:8000/api/v1/users/favorites/remove/${action.id}`,
+        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data, 'unset favorite ok');
+          store.dispatch(saveUserName());
+        })
+        .catch((error) => {
+          console.log(error, 'unset favorite error');
+        });
+      next(action);
+      break;
+    }
+    case ADD_SHOPLIST_ACTION: {
+      axios.put(`http://localhost:8000/api/v1/shoppinglist/edit/${action.id}`,
+        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response, 'add shoplist ok');
+        })
+        .catch((error) => {
+          console.log(error, 'add shoplist error');
+        });
+      next(action);
+      break;
+    }
+    case GET_SHOPLIST_ACTION: {
+      axios.get('http://localhost:8000/api/v1/shoppinglist/', {
+           headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        },
+      })
+        .then((response) => {
+               console.log(response, 'get shoplist ok');
+          store.dispatch();
+        })
+        .catch((error) => {
+          console.log(error, 'get shoplist errore');
+           });
+      next(action);
+      break;
+      }
+    case SEARCH: {
+      const { searchInput, selectedCategory, searchOption, selectedLocation } = store.getState().user;
+      let formatedCategory;
+      searchOption.map((option) => {
+        if (option.text === selectedCategory) {
+          formatedCategory = option.id;
+        }
+      });
+      // console.log(formatedCategory);
+      axios.post(`http://localhost:8000/api/v1/recipes/search`, {
+        name: searchInput,
+        category: formatedCategory,
+      }, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${store.getState().user.token}`,
+        },
+      })
+        .then((response) => {
+          console.log(response, 'search success');
+          // store.dispatch(saveAllrecipes(response.data.recipesSearch));
+          console.log(response.data.recipesSearch);
+          response.data.recipesSearch.map((recipe) => (
+            console.log(recipe)
+          ));
+        })
+        .catch((error) => {
+          console.log(error, 'La recherche n\'a pas abouti.');
+          // store.dispatch(emailInUse());
         });
       next(action);
       break;

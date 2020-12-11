@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import Prototypes from 'prop-types';
 import './page.scss';
@@ -10,7 +10,7 @@ import ConnectedAddRecipeForm from 'src/containers/ConnectedAddRecipeForm';
 import ConnectedHome from 'src/containers/ConnectedHome';
 import ConnectedRecipe from 'src/containers/ConnectedRecipe';
 import ConnectedAllRecipes from 'src/containers/ConnectedAllRecipes';
-
+import ConnectedSearchBar from 'src/containers/ConnectedSearchBar';
 
 // Page : this component manage the other components with a props called isLogged
 // means => if the user isLogged the Navbar (or his parent component if we create
@@ -18,8 +18,7 @@ import ConnectedAllRecipes from 'src/containers/ConnectedAllRecipes';
 
 const Page = ({ isLogged }) => (
   <div>
-    {isLogged && <ConnectedNavbar />}
-
+    {isLogged && <><ConnectedNavbar /><ConnectedSearchBar /></>}
     <Route
       path="/inscription"
     >

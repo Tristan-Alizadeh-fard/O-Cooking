@@ -8,6 +8,7 @@ import './loginForm.scss';
 const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes }) => {
   const submitLogin = (event) => {
     event.preventDefault();
+    setLoader();
     logIn();
   };
   const setLoaderLogin = () => {
@@ -32,7 +33,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
       </div>
       <div className="form__login">
         {errorLogin && <div className="error__login">Vérifiez votre Email ou Password</div>}
-        {isLogged && <Link to="/home" className="login__ok" onClick={() => setLoaderLogin()}>Login Success !</Link>}
+        {isLogged && <p className="login__ok">Login Success !</p>}
         <Form>
           {!isLogged && <p>Formulaire de login</p>}
           <Form.Field>
