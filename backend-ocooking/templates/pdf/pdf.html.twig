@@ -4,20 +4,20 @@
 
 {% block body %}
 
-{{ dump(users) }}
+{# {{ dump(users) }} #}
 {% for user in users %}
     {% for recipe in user.recipes %}
-        {# {{ recipe.name }} #}
+        {{ recipe.name }}
         {# {{ dump(recipe.recipeIngredients) }} #}
-        {# {% for recipeIngredient in recipe.recipeIngredients %} #}
-            {# <li>
+        {% for recipeIngredient in recipe.recipeIngredients %}
+            <li>
                 {{ recipeIngredient.quantity }}
-            </li> #}
-        {# {% endfor %} #}
+            </li>
+        {% endfor %}
          
-        {#  <li>
+         <li>
            {{ recipe.name }}
-        </li>  #}
+        </li> 
     {% endfor %}
 {% endfor %}
 

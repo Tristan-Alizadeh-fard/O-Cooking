@@ -32,7 +32,7 @@ class PdfController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
         
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('base.html.twig', [
+        $html = $this->renderView('pdf/pdf.html.twig', [
             'title' => "Welcome to our PDF Test"
         ]);
         
@@ -53,7 +53,7 @@ class PdfController extends AbstractController
 
         /**
      * 
-     * @Route("/v1/pdf/{id}", name="api_v1_pdf")
+     * @Route("/v1/pdf/{id}", name="api_v1_pdf_read")
      */
     public function index2(int $id, SerializerInterface $serializer, ShoppingListRepository $shoppingListRepository)
     {
@@ -68,6 +68,31 @@ class PdfController extends AbstractController
           );
           $users = json_decode($jsonUser, true);
   
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('pdf/pdf.html.twig', [
+            'title' => "Welcome to our PDF Test"
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
           return $this->render('pdf/pdf.html.twig', [
               'users'=>$users
             ]);
