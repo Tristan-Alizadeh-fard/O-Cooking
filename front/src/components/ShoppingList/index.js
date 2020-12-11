@@ -12,12 +12,13 @@ const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe }) =>
       </div>
       <div className="home__miniature">
         <div className="ui card">
-          <div className="liste_recettes">
+          {shoppingList !== undefined && <div className="liste_recettes">
             {shoppingList.map((recipe, index) => (
               // eslint-disable-next-line max-len
-              <ListAsRecipe {...recipe} index={index} removeShoppingRecipe={removeShoppingRecipe} removeFromList={removeFromList} />
+              <ListAsRecipe {...recipe} index={index} key={recipe.name} removeShoppingRecipe={removeShoppingRecipe} removeFromList={removeFromList} />
             ))}
-          </div>
+          </div>}
+          {shoppingList === undefined && <p>Votre aide de course est vide.</p>}
         </div>
       </div>
     </>

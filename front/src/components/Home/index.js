@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './home.scss';
 
-const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader }) => {
+const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader,  }) => {
   console.log('Home', recipesUser);
   const setLoaderHomerecipes = (id) => {
     setLoader();

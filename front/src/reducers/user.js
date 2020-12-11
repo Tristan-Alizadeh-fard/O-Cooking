@@ -17,6 +17,7 @@ import {
   SET_RECIPE,
   SET_USER_FAVORITE,
   UNSET_USER_FAVORITE,
+  SET_SHOPLIST_ACTION,
 } from 'src/actions/user';
 
 const initialState = {
@@ -153,10 +154,11 @@ const user = (state = initialState, action = {}) => {
         ...state,
         userFavorite: action.userFavorite,
       };
-    case SET_SHOP_LIST:
+    case SET_SHOPLIST_ACTION:
+      console.log(action.value);
       return {
         ...state,
-        shoppingList: action.shoppingList,
+        shoppingList: action.value,
       };
     default: return { ...state };
   }

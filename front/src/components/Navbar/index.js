@@ -15,7 +15,7 @@ const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getSh
   const setLoaderShopList = () => {
     setLoader();
     getShopList();
-  }
+  };
   return (
     <nav>
       <div className="conteneur-nav">

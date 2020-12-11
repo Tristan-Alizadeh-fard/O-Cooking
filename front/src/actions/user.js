@@ -28,6 +28,8 @@ export const SET_USER_FAVORITE = 'SET_USER_FAVORITE';
 export const UNSET_USER_FAVORITE = 'UNSET_USER_FAVORITE';
 export const GET_SHOPLIST_ACTION = 'GET_SHOPLIST_ACTION';
 export const SET_SHOPLIST_ACTION = 'SET_SHOPLIST_ACTION';
+export const REMOVE_FROM_LIST = 'REMOVE_FROM_LIST';
+export const REMOVE_SHOP_RECIPE = 'REMOVE_SHOP_RECIPE';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -138,11 +140,6 @@ export const unsetFavoriteAction = (id) => ({
   id,
 });
 
-export const addShopListAction = (id) => ({
-  type: ADD_SHOPLIST_ACTION,
-  id,
-});
-
 export const setRecipe = (data) => ({
   type: SET_RECIPE,
   recipe: data,
@@ -158,6 +155,11 @@ export const unsetUserFavorite = (data) => ({
   userFavorite: data,
 });
 
+export const addShopListAction = (id) => ({
+  type: ADD_SHOPLIST_ACTION,
+  id,
+});
+
 export const getShopListAction = () => ({
   type: GET_SHOPLIST_ACTION,
 });
@@ -165,4 +167,14 @@ export const getShopListAction = () => ({
 export const setShopListAction = (value) => ({
   type: SET_SHOPLIST_ACTION,
   value,
+});
+
+export const removeFromList = (index) => ({
+  type: REMOVE_FROM_LIST,
+  index,
+});
+
+export const removeShoppingRecipe = (index) => ({
+  type: REMOVE_SHOP_RECIPE,
+  index,
 });

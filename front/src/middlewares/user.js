@@ -13,6 +13,8 @@ import {
   ADD_SHOPLIST_ACTION,
   GET_SHOPLIST_ACTION,
   SEARCH,
+  REMOVE_SHOP_RECIPE,
+  REMOVE_FROM_LIST,
   saveUserLogin,
   saveUserInscription,
   errorInscription,
@@ -191,7 +193,7 @@ const user = (store) => (next) => (action) => {
         })
         .then((response) => {
           console.log(response.data, 'set favorite ok');
-          store.dispatch(setUserFavorite(response)); //TODO
+          store.dispatch(setUserFavorite(response)); // TODO
         })
         .catch((error) => {
           console.log(error, 'set favorite error');
@@ -248,7 +250,8 @@ const user = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response, 'get shoplist ok');
-          store.dispatch(setShopListAction(response.data));
+          console.log(response.data.recipes);
+          store.dispatch(setShopListAction(response.data.recipes));
         })
         .catch((error) => {
           console.log(error, 'get shoplist errore');
@@ -293,6 +296,14 @@ const user = (store) => (next) => (action) => {
           // store.dispatch(emailInUse());
         });
       next(action);
+      break;
+    }
+    case REMOVE_SHOP_RECIPE: {
+      console.log('remove_shop_recipe');
+      break;
+    }
+    case REMOVE_FROM_LIST: {
+      console.log('remove_from_list');
       break;
     }
     default:

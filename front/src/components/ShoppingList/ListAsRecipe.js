@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Checkbox } from 'semantic-ui-css';
+import { Button, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const ListAsRecipe = ({
   name,
   index,
-  ingredients,
+  recipeIngredients,
   removeShoppingRecipe,
   removeFromList,
 }) => {
@@ -20,10 +20,11 @@ const ListAsRecipe = ({
         <i className="trash alternate icon" />
       </Button>
       <div className="content">
-        {ingredients.map((ingredient, idx) => (
+        {recipeIngredients.map((ingredient, idx) => (
           <Checkbox
-            label={ingredient.name}
+            label={ingredient.quantity}
             onClick={() => removeFromList(idx)}
+            key={ingredient.quantity}
           />
         ))}
       </div>
@@ -33,7 +34,7 @@ const ListAsRecipe = ({
 
 ListAsRecipe.propTypes = {
   name: PropTypes.string.isRequired,
-  ingredients: PropTypes.array.isRequired,
+  recipeIngredients: PropTypes.array.isRequired,
   index: PropTypes.number.isRequired,
   removeShoppingRecipe: PropTypes.func.isRequired,
   removeFromList: PropTypes.func.isRequired,
