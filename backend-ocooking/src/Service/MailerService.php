@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Recipe;
+use App\Entity\ShoppingList;
 use App\Entity\User;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
@@ -93,6 +94,20 @@ class MailerService
         $template = 'pdf/recipeSend.html.twig';
         $parameters = [
             'recipe' => $recipe,
+            'sendBy' => $from,
+        ];
+        $headers = 'false';
+
+        $this->send($subject,'ocooking.contact@gmail.com', $from, $template, $parameters, $headers);
+    }
+
+    public function sendShoppinList(ShoppingList $shoppingList, string $from)
+    {
+        
+        $subject = 'Bonjour voici votre recette';
+        $template = 'pdf/shoppingListSend.html.twig';
+        $parameters = [
+            'user' => $shoppingList,
             'sendBy' => $from,
         ];
         $headers = 'false';

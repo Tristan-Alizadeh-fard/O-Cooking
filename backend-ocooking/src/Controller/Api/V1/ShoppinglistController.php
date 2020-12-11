@@ -4,7 +4,9 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\Recipe;
 use App\Repository\UserRepository;
+use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -70,5 +72,27 @@ class ShoppinglistController extends AbstractController
        $em->flush();
        
        return $this->json([], 200);
+    }
+
+    /**
+     * @Route("/send", name="send_shoppingList", methods={"GET"})
+     */
+    public function sendShoppingList(MailerService $mailerService,SerializerInterface $serializer): Response
+    {
+
+      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+      
+      $response = new JsonResponse();
+      $jsonShoppinglist = $serializer->serialize(
+        $shoppinglist,
+        'json',
+        ['groups' => 'show_shoppinglist']
+       );
+      $response = JsonResponse::fromJsonString(($jsonShoppinglist));
+
+      $from = $this->getUser()->getEmail();
+      $mailerService->sendShoppinList($shoppinglist, $from);
+      return $response;
+
     }
 }

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}envois de recette par mail{% endblock %}
+
+{% block stylesheets %}
+    <style>
+
+    body{
+       background-color: #F0F0F0;
+    }
+    .head .body .author{
+        margin: 1em;
+    }
+        img {
+           float: right; 
+           margin: 0 1em 2em 1em;
+        }
+        ul {
+            list-style: none;
+        }
+        h3 {
+            text-align: left;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div id="container">
+        <div class="title">
+            <h2>{{user.title}}</h2>
+        </div>
+        <div class='head'>
+
+            <ul>
+                {# <li><span class="bold">créé le :</span> {{user.createdAt}}</li> #}
+            </ul>
+
+            <h3>liste des recettes :</h3>
+            <ul>
+                {% for recipe in user.recipes %}
+                    <li><h4>{{ recipe.name }}</h4></li>
+                    {% for recipeIngredient in recipe.recipeIngredients %}
+                        <ul class='ingredients'>
+                            <li>{{recipeIngredient.quantity}}</li>
+                        </ul>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

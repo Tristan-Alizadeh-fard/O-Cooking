@@ -4,7 +4,6 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
-use App\Entity\User;
 use App\Form\RecipeType;
 use App\Repository\CategoryRepository;
 use App\Repository\IngredientRepository;
@@ -308,12 +307,6 @@ class RecipeController extends AbstractController
           'groups' => 'recipe_read',
       ]);
       $response = JsonResponse::fromJsonString(($jsonContent));
-      // $jsonRecipe = $serializer->serialize(
-      //     $recipe,
-      //     'json',
-      //     ['groups' => 'recipe_read']
-      //   );
-      //   $recipe = json_decode($jsonRecipe, true);
 
       // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
       if ($recipe === null) {
@@ -323,11 +316,6 @@ class RecipeController extends AbstractController
       $from = $this->getUser()->getEmail();
       $mailerService->sendRecipe($recipe, $from);
       return $response;
-      // return $this->render('pdf/recipeSend.html.twig', [
-      //   'recipe' => $recipe
-      // ]);
-      return $this->json([
-        'recipe' => $recipe
-      ]);
     }
+
 }
