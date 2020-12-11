@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field as Field;
 
 class RecipeCrudController extends AbstractCrudController
 {
@@ -15,14 +16,14 @@ class RecipeCrudController extends AbstractCrudController
         return Recipe::class;
     }
 
-    // public function configureFields(string $pageName): iterable
-    // {
-    //     return [
-    //         IdField::new('id'),
-    //         TextField::new('title'),
-    //         TextEditorField::new('description'),
-    //     ];
-    // }
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            IdField::new('id'),
+            TextField::new('name'),
+            TextEditorField::new('description'),
+        ];
+    }
 
     public function configureActions(Actions $actions): Actions
     {
@@ -30,15 +31,16 @@ class RecipeCrudController extends AbstractCrudController
         //     ->linkToCrudAction('renderInvoice');
 
         return $actions
-            ->setPermission(Action::NEW, 'ROLE_SUPERADMIN')
-            ->setPermission(Action::EDIT, 'ROLE_SUPERADMIN')
-            // ->setPermission(Action::DELETE, 'ROLE_ADMIN')
+            ->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->remove(Crud::PAGE_INDEX, Action::EDIT)
         ;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->setEntityLabelInPlural('Recettes')
+            ->setEntityLabelInSingular('Recette')
             ->setDefaultSort(['signaled' => 'DESC'])
             
         ;

@@ -29,13 +29,8 @@ class CategoryCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        // $viewInvoice = Action::new('invoice', 'View invoice', 'fa fa-file-invoice')
-        //     ->linkToCrudAction('renderInvoice');
-
         return $actions
-            // ->setPermission(Action::NEW, 'ROLE_ADMIN')
-            // ->setPermission(Action::EDIT, 'ROLE_ADMIN')
-            ->setPermission(Action::DELETE, 'ROLE_SUPERADMIN')
+            ->remove(Crud::PAGE_INDEX, Action::DELETE)
         ;
     }
 

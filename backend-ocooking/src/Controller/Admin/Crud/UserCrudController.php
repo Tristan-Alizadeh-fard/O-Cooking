@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Crud;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field as Field;
 
@@ -15,23 +16,29 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    // public function configureFields(string $pageName): iterable
-    // {
-    //     return [
-    //         Field\IdField::new('id'),
-    //         Field\TextField::new('name'),
-    //     ];
-    // }
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            Field\IdField::new('id')->onlyOnIndex(),
+            Field\TextField::new('email', 'Email'),
+            Field\TextField::new('pseudo', 'Pseudo'),
+            Field\DateTimeField::new('createdAt', 'Date de création')->onlyOnIndex(),
+        ];
+    }
 
     public function configureActions(Actions $actions): Actions
     {
-        // $viewInvoice = Action::new('invoice', 'View invoice', 'fa fa-file-invoice')
-        //     ->linkToCrudAction('renderInvoice');
-
         return $actions
-            ->setPermission(Action::NEW, 'ROLE_SUPERADMIN')
-            // ->setPermission(Action::EDIT, 'ROLE_ADMIN')
-            // ->setPermission(Action::DELETE, 'ROLE_ADMIN')
+            ->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->remove(Crud::PAGE_INDEX, Action::EDIT)
+        ;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInPlural('Utilisateurs')
+            ->setEntityLabelInSingular('Utilisateur')
         ;
     }
 }

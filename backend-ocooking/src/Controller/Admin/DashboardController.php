@@ -22,6 +22,10 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         return parent::index();
+        
+        // $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
+
+        // return $this->redirect($routeBuilder->setController(Recipe::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
@@ -41,7 +45,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Recettes');
         yield MenuItem::linkToCrud('Recettes', 'fa fa-book-open', Recipe::class);
 
-        yield MenuItem::section('Données BDD');
+        yield MenuItem::section('Données pour les recettes');
         yield MenuItem::linkToCrud('Catégories', 'fa fa-cocktail', Category::class);
         yield MenuItem::linkToCrud('Ingrédients', 'fa fa-apple-alt', Ingredient::class);
         yield MenuItem::linkToCrud('Unités de mesure', 'fa fa-weight', Measure::class);
