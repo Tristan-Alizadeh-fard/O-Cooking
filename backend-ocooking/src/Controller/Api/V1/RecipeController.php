@@ -12,6 +12,7 @@ use App\Repository\MeasureRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
+use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -309,5 +310,112 @@ class RecipeController extends AbstractController
                 'errors' => (string) $form->getErrors(true, false),
             ], 400);
         }
+    }
+    
+    /**
+     * @Route("", name="browse", methods={"GET"}, requirements={"id":"\d+"})
+     */
+    public function browse(SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
+    {
+      // recherche toutes les recettes
+
+      $recipes = $recipeRepository->findall();
+        
+      $json = $serializer->serialize(
+          $recipes,
+          'json',
+          ['groups' => 'show_recipe']
+        );
+     
+      $recipes = json_decode($json, true);
+
+      return $this->json([
+        'recipes' => $recipes,
+      ]);
+
+    }
+
+     /**
+     * @Route("/{id}", name="read", methods={"GET"}, requirements={"id":"\d+"})
+     */
+    public function read(int $id,SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
+    {
+      // affiche une recette
+
+      $recipe = $recipeRepository->find($id);
+        
+      $jsonRecipe = $serializer->serialize(
+          $recipe,
+          'json',
+          ['groups' => 'recipe_read']
+        );
+        $recipe = json_decode($jsonRecipe, true);
+
+      // Si le recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
+      if ($recipe === null) {
+          throw $this->createNotFoundException('La recette demandé n\'existe pas');
+      }
+
+      return $this->json([
+        'recipes' => $recipe,
+      ]);
+    }
+
+    /**
+     * @Route("/{id}/edit/signaled", name="signaled", methods={"PATCH", "PUT"}, requirements={"id"="\d+"})
+     */
+    public function signaled(Recipe $recipe, SerializerInterface $serializer, MailerService $mailerService): Response
+    {
+        $recipe->setSignaled(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($recipe);
+        $em->flush();
+
+        $response = new JsonResponse();
+        $jsonContent = $serializer->serialize($recipe, 'json', [
+            'groups' => 'recipe_read',
+        ]);
+        $response = JsonResponse::fromJsonString(($jsonContent));
+
+        $from = $this->getUser()->getEmail();
+        $mailerService->sendAlertAboutSignalRecipe($recipe, $from);
+
+        return $response;
+    }
+
+     /**
+     * @Route("/search", name="search", methods={"POST"})
+     */
+    public function searchRecipes(Request $request, SerializerInterface $serializer, RecipeRepository $recipeRepository,CategoryRepository $categoryRepository): Response
+    {
+      $json = $request->getContent();
+
+      $userInformationsArray = json_decode($json, true);
+      // dd($userInformationsArray);
+      $recipes = new Recipe();
+
+      $form = $this->createForm(SearchRecipesType::class, $recipes, ['csrf_protection' => false]);
+      $form->submit($userInformationsArray);
+      // dd($form);
+
+      $name = $form->get('name')->getData();
+      $category = $form->get('category')->getData();
+      // dd($name, $category);
+
+       $recipes = $recipeRepository->searchRecipes($name, $category);
+       dd($recipes);
+      //  $recipes = $categoryRepository->findByExampleField();
+       
+       $jsonRecipes = $serializer->serialize(
+         $recipes,
+         'json',
+         ['groups' => 'show_user']
+        );
+        $recipesSearch = json_decode($jsonRecipes, true);
+
+        return $this->json([
+            'recipes-search' => $recipesSearch,
+        ]);
     }
 }
