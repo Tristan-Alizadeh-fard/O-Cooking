@@ -5,7 +5,6 @@ namespace App\Controller\Api\V1;
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Form\RecipeType;
-use App\Form\SearchRecipesType;
 use App\Repository\CategoryRepository;
 use App\Repository\IngredientRepository;
 use App\Repository\MeasureRepository;
@@ -102,33 +101,16 @@ class RecipeController extends AbstractController
     {
       $json = $request->getContent();
 
-      $userInformationsArray = json_decode($json, true);
+      $userSearchData = json_decode($json, true);
 
-      $recipes = new Recipe();
-
-      $form = $this->createForm(SearchRecipesType::class, $recipes, ['csrf_protection' => true]);
-      $form->submit($userInformationsArray);
-
-      $name = $form->get('name')->getData();
-      $category = $form->get('category')->getData();
-
-
-      if($name !== null && $category == null){
-        $recipes = $recipeRepository->searchRecipesByName($name);
-
-      }elseif($category !== null && $name == null){
-        $recipes = $recipeRepository->searchRecipesByCategory($category);
-
-      }elseif($name !== null && $category !== null ){
-        $recipes = $recipeRepository->searchRecipesByNameAndCategory($name, $category);
-        
-      }else {
-        $recipes = $recipeRepository->searchRecipesAll();
-
+      if (is_null($userSearchData)) {
+        $userSearchData = [];
       }
-       
+
+       $result = $recipeRepository->findByPerso($userSearchData, 50);
+      
        $jsonRecipes = $serializer->serialize(
-         $recipes,
+         $result,
          'json',
          ['groups' => 'show_recipe']
         );

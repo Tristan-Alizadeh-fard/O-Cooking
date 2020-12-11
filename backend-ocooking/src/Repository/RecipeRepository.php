@@ -19,61 +19,47 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    // Recherche des recettes par noms
-    public function searchRecipesByName($name)
-    {
-            return $this->createQueryBuilder('r')
-            ->select('r')
-            ->leftjoin('r.category', 'c')
-            ->addSelect('c.name')
-            ->where('r.name like :name')
-            ->setParameter('name', '%'.$name.'%')
+
+    // // Recherche de toute les recettes limité a 50 resultas
+    // public function searchRecipesAll()
+    // {
+    //         return $this->createQueryBuilder('r')
+    //             ->select('r')
+    //             ->leftjoin('r.category', 'c')
+    //             ->addSelect('c.name')
+    //             ->setMaxResults(50)
+    //             ->getQuery()
+    //             ->getResult()
+    //         ; 
+    // }
+
+    public function findByPerso(array $criterias, $limit = null)
+     {
+        $qb = $this->createQueryBuilder('r')
+            ->orderBy('r.createdAt', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        if (array_key_exists('name', $criterias) && !is_null($criterias['name'])) {
+            $name = $criterias['name'];
+            $qb
+                ->andWhere('r.name like :name')
+                ->setParameter('name', '%' . $name . '%')
+            ;
+        }
+        
+        if (array_key_exists('category', $criterias) && !is_null($criterias['category'])) {
+            $category = $criterias['category'];
+            $qb
+                ->andWhere('r.category = :category')
+                ->setParameter('category', $category)
+            ;
+        }
+
+        return $qb
             ->getQuery()
             ->getResult()
-            ;
-    }
-
-    // Recherche des recettes par categorie
-    public function searchRecipesByCategory($category)
-    {
-        return $this->createQueryBuilder('r')
-                ->select('r')
-                ->leftjoin('r.category', 'c')
-                ->addSelect('c.name')
-                ->where('c.id = :id')
-                ->setParameter('id', $category)
-                ->getQuery()
-                ->getResult()
-            ; 
-    }
-
-    // Recherche des recettes par noms et categorie
-    public function searchRecipesByNameAndCategory($name, $category)
-    {
-        return $this->createQueryBuilder('r')
-                ->select('r')
-                ->leftjoin('r.category', 'c')
-                ->addSelect('c.name')
-                ->where('r.name like :name')
-                ->setParameter('name', '%'.$name.'%')
-                ->andwhere('c.id = :id')
-                ->setParameter('id', $category)
-                ->getQuery()
-                ->getResult()
-            ; 
-    }
-
-    // Recherche de toute les recettes limité a 50 resultas
-    public function searchRecipesAll()
-    {
-            return $this->createQueryBuilder('r')
-                ->select('r')
-                ->leftjoin('r.category', 'c')
-                ->addSelect('c.name')
-                ->setMaxResults(50)
-                ->getQuery()
-                ->getResult()
-            ; 
-    }
+        ;
+     }
    
 }
