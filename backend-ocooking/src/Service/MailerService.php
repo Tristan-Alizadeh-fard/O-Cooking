@@ -16,15 +16,9 @@ class MailerService
      */
     private $mailer;
 
-    /**
-     * @var Environment
-     */
-    private $twig;
-
-    public function __construct(MailerInterface $mailer, Environment $twig)
+    public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     /**
