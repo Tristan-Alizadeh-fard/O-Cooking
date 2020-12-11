@@ -18,7 +18,6 @@ import ConnectedSearchBar from 'src/containers/ConnectedSearchBar';
 
 const Page = ({ isLogged }) => (
   <div>
-  
     {isLogged && <><ConnectedNavbar /><ConnectedSearchBar /></>}
     <Route
       path="/inscription"

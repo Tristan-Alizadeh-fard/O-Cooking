@@ -24,8 +24,6 @@ export const SET_FAVORITE_ACTION = 'SET_FAVORITE_ACTION';
 export const UNSET_FAVORITE_ACTION = 'UNSET_FAVORITE_ACTION';
 export const ADD_SHOPLIST_ACTION = 'ADD_SHOPLIST_ACTION';
 export const SET_RECIPE = 'SET_RECIPE';
-export const SET_USER_FAVORITE = 'SET_USER_FAVORITE';
-export const UNSET_USER_FAVORITE = 'UNSET_USER_FAVORITE';
 export const GET_SHOPLIST_ACTION = 'GET_SHOPLIST_ACTION';
 
 
@@ -116,6 +114,7 @@ export const saveInfosUser = (data) => ({
   idUser: data.id,
   name: data.pseudo,
   roleUser: data.roles,
+  userFavorite: data.favorites,
 });
 
 export const saveUserRecipes = (data) => ({
@@ -146,16 +145,6 @@ export const addShopListAction = (id) => ({
 export const setRecipe = (data) => ({
   type: SET_RECIPE,
   recipe: data,
-});
-
-export const setUserFavorite = (data) => ({
-  type: SET_USER_FAVORITE,
-  userFavorite: data,
-});
-
-export const unsetUserFavorite = (data) => ({
-  type: UNSET_USER_FAVORITE,
-  userFavorite: data,
 });
 
 export const getShopListAction = () => ({
