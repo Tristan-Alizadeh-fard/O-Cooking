@@ -17,30 +17,30 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
   };
 
   return (
-    <>
+    <div className="all__page">
       <div className="home">
         <h2 className="home__title">Bienvenue Chez O'Coocking</h2>
         <h3 className="home__smalltitle">L'application des passionnés de cuisine</h3>
         <div className="home__more">
-          {!descriptionOn && <Button onClick={() => showDescription()}>Voir plus</Button>}
+          {!descriptionOn && <Button className="voir__plus" onClick={() => showDescription()}>Voir plus</Button>}
         </div>
         {descriptionOn && <p className="home__content">- Consulter toutes les recettes de la communauté</p>}
         {descriptionOn && <p className="home__content">- Générer une aide de course à partir d'une recette</p>}
         {descriptionOn && <p className="home__content">- Ajouter vos propres recettes</p>}
         <div className="home__less">
-          {descriptionOn && <Button onClick={() => showDescription()}>Voir moins</Button>}
+          {descriptionOn && <Button className="voir__moins" onClick={() => showDescription()}>Voir moins</Button>}
         </div>
       </div>
       <div className="form__login">
         {errorLogin && <div className="error__login">Vérifiez votre Email ou Password</div>}
         {isLogged && <Link to="/home" className="login__ok" onClick={() => setLoaderLogin()}>Login Success !</Link>}
-        <Form>
-          {!isLogged && <p>Formulaire de login</p>}
-          <Form.Field>
-            {!isLogged && <Form.Input fluid label="Votre Email" placeholder="Votre email" value={email} onChange={() => updateField(event.target.value, 'email')} />}
-            {!isLogged && <Form.Input fluid label="Votre Mot de passe" type="password" placeholder="Votre password" value={pass} onChange={() => updateField(event.target.value, 'pass')} />}
+        <Form className="form__log">
+          {!isLogged && <p className="title__form">Formulaire de login</p>}
+          <Form.Field className="interior__form__log">
+            {!isLogged && <Form.Input className="log__mail__pass" fluid label="Votre Email" placeholder="Votre email" value={email} onChange={() => updateField(event.target.value, 'email')} />}
+            {!isLogged && <Form.Input className="log__mail__pass" fluid label="Votre Mot de passe" type="password" placeholder="Votre password" value={pass} onChange={() => updateField(event.target.value, 'pass')} />}
           </Form.Field>
-          {!isLogged && <Button type="submit" onClick={submitLogin}>Login</Button>}
+          {!isLogged && <Button className="button__login" type="submit" onClick={submitLogin}>Login</Button>}
         </Form>
       </div>
       <div className="link__inscription">
@@ -49,7 +49,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
       <div className="link__forgottenpass">
         {!isLogged && <Link className="forgotten__password" to="/">Mot de passe oublié ?</Link>}
       </div>
-    </>
+    </div>
   );
 };
 

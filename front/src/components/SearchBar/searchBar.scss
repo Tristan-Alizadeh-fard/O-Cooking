@@ -1,6 +1,6 @@
 
 
-
+                                  /*MOBILE */
 
 /* SEARCH BAR COMPLETE */
 
@@ -58,8 +58,17 @@
 // boutton recherche
 .ui.button.button__search{
   background: blue;
+  margin: 0;
 }
 // effet quand l'utilisateur clic sur le bouton
 .ui.button.button__search:active{
   background:red;
+}
+
+
+                                        /*DESKTOP*/
+
+                                        
+   @media screen and (min-width: 980px){
+   
 }
