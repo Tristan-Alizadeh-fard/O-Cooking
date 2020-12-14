@@ -40,8 +40,9 @@ export const loadStateLocal = () => {
 
 const persistState = loadStateLocal();
 const store = configureStore({
-  reducer,
   persistState,
+  reducer,
+  
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(user),
   middleware: [user, recipe],
 });
