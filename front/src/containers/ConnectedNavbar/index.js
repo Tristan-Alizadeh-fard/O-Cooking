@@ -4,7 +4,7 @@ import { logOutUser, allRecipes, getUserRecipesAction, setisLoading, getShopList
 import { getFormSettings } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
-  admin: state.user.admin,
+  admin: state.user.roleUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

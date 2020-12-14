@@ -1,4 +1,5 @@
 import React from 'react';
+import './addRecipeForm.scss';
 import {
   Form,
   Input,
@@ -17,7 +18,6 @@ import Step from './Step';
 import Category from './Category';
 import Tag from './Tag';
 
-import './addRecipeForm.scss';
 
 const AddRecipeForm = ({
   updateRecipeField,
@@ -217,7 +217,7 @@ const AddRecipeForm = ({
           <Button.Group size="large">
             {categories.map((category) => (
             // eslint-disable-next-line max-len
-              <Category {...category} key={category.key} selectedCategory={selectedCategory} selectCategory={selectCategory} />
+              <Category {...category} key={category.name} selectedCategory={selectedCategory} selectCategory={selectCategory} />
             ))}
           </Button.Group>
         </Form.Field>

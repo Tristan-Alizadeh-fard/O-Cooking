@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './home.scss';
 
-const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader,  }) => {
+const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite }) => {
+
   console.log('Home', recipesUser);
   const setLoaderHomerecipes = (id) => {
     setLoader();
@@ -27,6 +28,10 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader,  }) => {
                   <div className="image">
                     <i className="image icon" />
                   </div>
+                  {recipeUser.signaled && <div className="favoris__icon">
+                <i className="bell icon" />
+                <p className="text__favoris">Recette signalé !</p>
+              </div>}
                   <div className="content">
                     <Link to={`/recette/${recipeUser.id}`} className="header" onClick={() => setLoaderHomerecipes(recipeUser.id)}>{recipeUser.name}</Link>
                     <div className="meta">
@@ -40,16 +45,23 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader,  }) => {
                     ))}
                   </div>
                   <div className="extra content">
-                    <Link to="/allrecipes" className="link__icon">
+                    <p className="link__icon">
                       <i className="user icon" />{`By ${name}`}
-                    </Link>
+                    </p>
                     <Link to="/aide-course" className="link__icon" onClick={() => console.log('aide de course')}>
                       <i className="shopping cart icon" />Ajouter à l'aide de course
                     </Link>
-                    <Link to="" className="link__icon" onClick={() => console.log('modification d\'une recette')}>
-                      <i className="edit icon" />Modifier la recette
-                    </Link>
+                    {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
+                      <i className="heart icon" />Ajouter aux favoris
+                    </Link>}
+                    {favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => unsetFavorite(recipeUser.id)}>
+                      <i className="heart outline icon" />Retirer de vos favoris
+                    </Link>}
                   </div>
+                  {favorite.find(fav => fav.name === recipeUser.name) && <div className="favoris__icon">
+                <i className="heart icon" />
+                <p className="text__favoris">Ajouté aux favoris</p>
+              </div>}
                 </div>
               </div>
         ))}
@@ -59,6 +71,9 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader,  }) => {
 };
 
 Home.protoTypes = {
+  favorite: PropTypes.array.isRequired,
+  setFavorite: PropTypes.func.isRequired,
+  unsetFavorite: PropTypes.func.isRequired,
   setLoader: PropTypes.func.isRequired,
   showRecipe: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,

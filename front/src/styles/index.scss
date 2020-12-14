@@ -1,9 +1,34 @@
 @use 'reset';
 @use 'vars';
 
-body {
-  font-family: sans-serif;
+// version mobile 
+
+.body {
+  //max-width: 1500px;
+
+  background-image :url("../pictures/FondBody.jpg");
+  height:100%;
+  min-height: 100%;
+  background-position:center;
+  background-size: cover;
+
 }
+
+// vertion ordinateur
+/*
+@media screen and (min-width: 980px) {
+ .body{
+  margin: 0 auto;
+  background-image :url("../pictures/FondBody.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  background-position: center;
+  //background-size: cover;
+ }
+
+}
+*/
 
 /* 
   // or you can import your own font

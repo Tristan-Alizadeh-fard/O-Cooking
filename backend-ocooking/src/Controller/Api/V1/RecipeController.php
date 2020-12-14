@@ -2,15 +2,16 @@
 
 namespace App\Controller\Api\V1;
 
-
+use App\Entity\Ingredient;
 use App\Entity\Recipe;
-use App\Form\SearchRecipesType;
+use App\Form\RecipeType;
 use App\Repository\CategoryRepository;
 use App\Repository\IngredientRepository;
 use App\Repository\MeasureRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
+use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,27 +94,6 @@ class RecipeController extends AbstractController
       ]);
     }
 
-    /**
-     * @Route("/{id}/edit/signaled", name="signaled", methods={"PATCH", "PUT"}, requirements={"id"="\d+"})
-     */
-    public function signaled(Recipe $recipe, SerializerInterface $serializer): Response
-    {
-        $recipe->setSignaled(true);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($recipe);
-        $em->flush();
-
-        $response = new JsonResponse();
-        $jsonContent = $serializer->serialize($recipe, 'json', [
-            'groups' => 'recipe_read',
-        ]);
- 
-        $response = JsonResponse::fromJsonString(($jsonContent));
-
-        return $response;
-    }
-
      /**
      * @Route("/search", name="search", methods={"POST"})
      */
@@ -121,33 +101,16 @@ class RecipeController extends AbstractController
     {
       $json = $request->getContent();
 
-      $userInformationsArray = json_decode($json, true);
+      $userSearchData = json_decode($json, true);
 
-      $recipes = new Recipe();
-
-      $form = $this->createForm(SearchRecipesType::class, $recipes, ['csrf_protection' => true]);
-      $form->submit($userInformationsArray);
-
-      $name = $form->get('name')->getData();
-      $category = $form->get('category')->getData();
-
-
-      if($name !== null && $category == null){
-        $recipes = $recipeRepository->searchRecipesByName($name);
-
-      }elseif($category !== null && $name == null){
-        $recipes = $recipeRepository->searchRecipesByCategory($category);
-
-      }elseif($name !== null && $category !== null ){
-        $recipes = $recipeRepository->searchRecipesByNameAndCategory($name, $category);
-        
-      }else {
-        $recipes = $recipeRepository->searchRecipesAll();
-
+      if (is_null($userSearchData)) {
+        $userSearchData = [];
       }
-       
+
+       $result = $recipeRepository->findByPerso($userSearchData, 50);
+      
        $jsonRecipes = $serializer->serialize(
-         $recipes,
+         $result,
          'json',
          ['groups' => 'show_recipe']
         );
@@ -161,19 +124,36 @@ class RecipeController extends AbstractController
     /**
     * @Route("/add", name="needed_information_add", methods={"GET"})
     */
-    public function neededInformationAdd(CategoryRepository $category, IngredientRepository $ingredient, MeasureRepository $measure, TagRepository $tag): Response
+    public function neededInformationAdd(SerializerInterface $serializer, CategoryRepository $category, IngredientRepository $ingredient, MeasureRepository $measure, TagRepository $tag): Response
     {
         $categories = $category->findAll();
         $ingredients = $ingredient->findAll();
         $measures = $measure->findAll();
         // $tags = $tag->findAll();
 
+        
+        $jsonContentCategories = $serializer->serialize($categories, 'json', [
+          'groups' => 'category_needed_information_add',
+        ]);
+        $categoryData = json_decode($jsonContentCategories, true);
+        dump($categoryData);
+
+        $jsonContentIngredients = $serializer->serialize($ingredients, 'json', [
+            'groups' => 'ingredient_needed_information_add',
+        ]);
+        $ingredientData = json_decode($jsonContentIngredients, true);
+
+        $jsonContentMeasures = $serializer->serialize($measures, 'json', [
+            'groups' => 'measure_needed_information_add',
+        ]);
+        $measureData = json_decode($jsonContentMeasures, true);
+  
         return $this->json([
-            'categories' => $categories,
-            'ingredients' => $ingredients,
-            'measures' => $measures,
-            // 'tags' => $tags,
-         ]);
+          'categories' => $categoryData,
+          'ingredients' => $ingredientData,
+          'measure' => $measureData
+        ]);
+ 
     }
 
     /**
@@ -291,5 +271,28 @@ class RecipeController extends AbstractController
                 'errors' => (string) $form->getErrors(true, false),
             ], 400);
         }
+    }
+
+    /**
+     * @Route("/{id}/edit/signaled", name="signaled", methods={"PATCH", "PUT"}, requirements={"id"="\d+"})
+     */
+    public function signaled(Recipe $recipe, SerializerInterface $serializer, MailerService $mailerService): Response
+    {
+        $recipe->setSignaled(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($recipe);
+        $em->flush();
+
+        $response = new JsonResponse();
+        $jsonContent = $serializer->serialize($recipe, 'json', [
+            'groups' => 'recipe_read',
+        ]);
+        $response = JsonResponse::fromJsonString(($jsonContent));
+
+        $from = $this->getUser()->getEmail();
+        $mailerService->sendAlertAboutSignalRecipe($recipe, $from);
+
+        return $response;
     }
 }

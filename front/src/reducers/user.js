@@ -132,6 +132,7 @@ const user = (state = initialState, action = {}) => {
         idUser: action.idUser,
         roleUser: action.roleUser,
         name: action.name,
+        userFavorite: action.userFavorite,
       };
     case SAVE_USER_RECIPE:
       return {
@@ -144,16 +145,6 @@ const user = (state = initialState, action = {}) => {
         ...state,
         recipe: action.recipe,
         isLoading: false,
-      };
-    case SET_USER_FAVORITE:
-      return {
-        ...state,
-        userFavorite: action.userFavorite,
-      };
-    case UNSET_USER_FAVORITE:
-      return {
-        ...state,
-        userFavorite: action.userFavorite,
       };
     case SET_SHOPLIST_ACTION:
       console.log(action.value);

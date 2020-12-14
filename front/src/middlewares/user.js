@@ -194,7 +194,8 @@ const user = (store) => (next) => (action) => {
         })
         .then((response) => {
           console.log(response.data, 'set favorite ok');
-          store.dispatch(setUserFavorite(response)); // TODO
+          // store.dispatch(setUserFavorite(response)); // TODO
+          store.dispatch(saveUserName());
         })
         .catch((error) => {
           console.log(error, 'set favorite error');
@@ -214,7 +215,7 @@ const user = (store) => (next) => (action) => {
         })
         .then((response) => {
           console.log(response.data, 'unset favorite ok');
-          store.dispatch(unsetUserFavorite(response));
+          store.dispatch(saveUserName());
         })
         .catch((error) => {
           console.log(error, 'unset favorite error');

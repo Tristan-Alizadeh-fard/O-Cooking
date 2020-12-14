@@ -1,0 +1,29 @@
+.about__container {
+  height: 100vh;
+  background-color: gray;
+}
+.pictures {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  padding: 50px 50px;
+}
+.php {
+  width: 200px;
+  height: 200px;
+   
+}
+.symphony {
+  width: 200px;
+  height: 200px;
+  
+}
+.react {
+  width: 200px;
+  height: 200px;
+ 
+}  
+.js {
+  width: 200px;
+  height: 200px;
+}  

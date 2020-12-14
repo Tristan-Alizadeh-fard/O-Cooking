@@ -32,8 +32,9 @@ const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getSh
             <ul className="sous" />
           </li>
           <li><Link to="/aide-course" onClick={() => setLoaderShopList()}>Liste de course</Link></li>
+          <li><Link to="/about">A propos</Link></li>
+          {admin[0] === 'ROLE_ADMIN' && <li><Link to="">Admin</Link></li>}
           <li><Link to="/" onClick={() => logOut()}>Déconnexion</Link></li>
-          {admin && <li><Link to="">Admin</Link></li>}
         </ul>
       </div>
     </nav>
@@ -46,7 +47,7 @@ Navbar.prototypes = {
   getUserRecipes: Prototypes.func.isrequired,
   getAllrecipes: Prototypes.func.isRequired,
   logOut: Prototypes.func.isrequired,
-  admin: Prototypes.bool.isrequired,
+  admin: Prototypes.object.isrequired,
 };
 
 export default Navbar;
