@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Checkbox } from 'semantic-ui-react'
+import PropTypes from 'prop-types';
+import ListAsRecipe from './ListAsRecipe';
 import './shoppingList.scss';
 
-const ShoppingList = () => {
+const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shoppingListCheck }) => {
   console.log('ShoppingList');
   return (
     <>
@@ -12,43 +12,24 @@ const ShoppingList = () => {
       </div>
       <div className="home__miniature">
         <div className="ui card">
-          <div className="liste_recettes">
-            <p className="recette">Recette 1
-              <button type="button" className="icon__addshopping">
-                <i className="trash alternate icon" />
-              </button>
-              <div className="content">
-                <Checkbox label="Article 1" />
-                <Checkbox label="Article 2" />
-                <Checkbox label="Article 3" />
-              </div>
-            </p>
-            <p className="recette">Recette 2
-              <button type="button" className="icon__addshopping">
-                <i className="trash alternate icon" />
-              </button>
-              <div className="content">
-                <Checkbox label="Article 1" />
-                <Checkbox label="Article 2" />
-                <Checkbox label="Article 3" />
-              </div>
-            </p>
-            <p className="recette">Recette 3
-              <button type="button" className="icon__addshopping">
-                <i className="trash alternate icon" />
-              </button>
-              <div className="content">
-                <Checkbox label="Article 1" />
-                <Checkbox label="Article 2" />
-                <Checkbox label="Article 3" />
-              </div>
-            </p>
-          </div>
+          {shoppingList !== undefined && <div className="liste_recettes">
+            {shoppingList.map((recipe) => (
+              // eslint-disable-next-line max-len
+              <ListAsRecipe {...recipe} key={recipe.name} removeShoppingRecipe={removeShoppingRecipe} removeFromList={removeFromList} shoppingListCheck={shoppingListCheck} />
+            ))}
+          </div>}
+          {shoppingList.length === 0 && <p>Votre aide de course est vide.</p>}
         </div>
       </div>
     </>
   );
 };
 
+ShoppingList.propTypes = {
+  shoppingList: PropTypes.array.isRequired,
+  shoppingListCheck: PropTypes.array.isRequired,
+  removeShoppingRecipe: PropTypes.func.isRequired,
+  removeFromList: PropTypes.func.isRequired,
+};
 
 export default ShoppingList;

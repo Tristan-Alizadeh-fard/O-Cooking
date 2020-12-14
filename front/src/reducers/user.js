@@ -10,13 +10,14 @@ import {
   SAVE_ALL_RECIPES,
   LOG_OUT_USER,
   SAVE_RECIPE,
-  SEARCH,
   SET_IS_LOADING,
   SAVE_INFOS_USER,
   SAVE_USER_RECIPE,
   SET_RECIPE,
   SET_USER_FAVORITE,
   UNSET_USER_FAVORITE,
+  SET_SHOPLIST_ACTION,
+  REMOVE_FROM_LIST,
 } from 'src/actions/user';
 
 const initialState = {
@@ -50,6 +51,8 @@ const initialState = {
   roleUser: [],
   recipesUser: [],
   userFavorite: {},
+  shoppingList: [],
+  shoppingListCheck: [],
 };
 
 const user = (state = initialState, action = {}) => {
@@ -143,6 +146,20 @@ const user = (state = initialState, action = {}) => {
         recipe: action.recipe,
         isLoading: false,
       };
+    case SET_SHOPLIST_ACTION:
+      console.log(action.value);
+      return {
+        ...state,
+        shoppingList: action.value,
+      };
+    case REMOVE_FROM_LIST: {
+      console.log('remove_from_list');
+      console.log(action);
+      return {
+        ...state,
+        shoppingListCheck: [...state.shoppingListCheck, action.index],
+      };
+    }
     default: return { ...state };
   }
 };
