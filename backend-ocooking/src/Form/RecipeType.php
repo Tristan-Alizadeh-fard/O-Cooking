@@ -60,11 +60,19 @@ class RecipeType extends AbstractType
                 'entry_type' => RecipeIngredientType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Valid(),
+                ]
             ])
             ->add('steps', CollectionType::class, [
                 'entry_type' => StepType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Valid(),
+                ]
             ])
         ;
     }

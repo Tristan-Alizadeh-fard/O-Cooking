@@ -14,21 +14,21 @@ class RecipeIngredientType extends AbstractType
     {
         $builder
             ->add('quantity', null, [
-                // 'constraints' => [
-                //     new Assert\NotBlank(),
-                // ]
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
             ])
             ->add('measure', MeasureType::class, [
-                // 'constraints' => [
-                    // new Assert\NotBlank(),
-                    // new Assert\Valid(),
-                // ]
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Valid(),
+                ]
             ])
             ->add('ingredient', IngredientType::class, [
-                // 'constraints' => [
-                    // new Assert\NotBlank(),
-                    // new Assert\Valid(),
-                // ]
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Valid(),
+                ]
             ])
         ;
     }
