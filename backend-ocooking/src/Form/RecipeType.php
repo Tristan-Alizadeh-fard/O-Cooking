@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Recipe;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -81,8 +80,7 @@ class RecipeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Recipe::class,
-            // 'csrf_protection' => false,
-            // 'validation_groups' => false,
+            'csrf_protection' => false,
         ]);
     }
 }

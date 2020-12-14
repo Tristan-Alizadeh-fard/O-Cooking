@@ -164,15 +164,11 @@ class RecipeController extends AbstractController
         $json = $request->getContent();
 
         $recipeInformationsArray = json_decode($json, true);
-        // dd($recipeInformationsArray);
 
         $recipe = new Recipe();
 
-        $form = $this->createForm(RecipeType::class, $recipe, ['csrf_protection' => false]);
+        $form = $this->createForm(RecipeType::class, $recipe);
         $form->submit($recipeInformationsArray);
-
-        // dd($form->submit($recipeInformationsArray));
-        // dd($form->isValid());
         
         if ($form->isValid()) {
             // Create unknown ingredient in Ingredient Entity
@@ -190,14 +186,17 @@ class RecipeController extends AbstractController
                 }
             }
             
-            // set $recipe for author and favorites
+            // set author and favorites in $recipe
             $user = $this->getUser();
             $recipe->setAuthor($user);
             $recipe->addFavorite($user);
 
-            // set $recipe for category
+            // set category in $recipe
             $categoryName = $form->getData()->getCategory()->getName();
             $category = $categoryRepository->findOneBy(['name' => $categoryName]);
+            if (is_null($category)) {
+                throw $this->createNotFoundException('La catégorie sélectionnée n\'existe pas');
+            }
             $recipe->setCategory($category);
 
             // // $recipe set tags
@@ -211,47 +210,34 @@ class RecipeController extends AbstractController
             //     $recipe->addTag($tagToAdd);
             // }
 
-            // $recipe set recipeIngredients
+            // set recipe in $recipeIngredients
             $recipeIngredients = $form->getData()->getRecipeIngredients();
-            // $ingredientCollection = [];
+
             foreach ($recipeIngredients as $recipeIngredient) {
                 // Measure
                 $measureName = $recipeIngredient->getMeasure()->getName();
                 $measure = $measureRepository->findOneBy(['name' => $measureName]);
+                if (is_null($measure)) {
+                    throw $this->createNotFoundException('La mesure sélectionnée n\'existe pas');
+                }
                 $recipeIngredient->setMeasure($measure);
 
                 // Ingredient
                 $ingredientName = $recipeIngredient->getIngredient()->getName();
                 $ingredient = $ingredientRepository->findOneBy(['name' => $ingredientName]);
                 $recipeIngredient->setIngredient($ingredient);
-                // if (is_null($ingredient)) {
-                //     $newIngredient = new Ingredient();
-                //     $newIngredient->setName($ingredientName);
-                //     $ingredientCollection[] = $newIngredient;
-                //     $recipeIngredient->setIngredient($ingredient);
-                // } else {
-                //     $recipeIngredient->setIngredient($ingredient);
-                // }
 
-                // set recipe to recipeIngredient
+                // set recipe in $recipeIngredient
                 $recipeIngredient->setRecipe($recipe);
-                // dump($recipeIngredient);
             }
-            // dd('FIN');
 
-            // set recipe to steps
+            // set recipe in $steps
             $steps = $form->getData()->getsteps();
             foreach ($steps as $step) {
                 $step->setRecipe($recipe);
             }
     
             // persist and flush in database
-            // $em = $this->getDoctrine()->getManager();
-
-            // foreach ($ingredientCollection as $ingredient) {
-            //     $em->persist($ingredient);
-            // }
-            
             foreach ($recipeIngredients as $recipeIngredient) {
                 $em->persist($recipeIngredient);
             }
