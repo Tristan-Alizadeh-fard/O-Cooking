@@ -6,7 +6,7 @@ import { setAllLoaders } from '../../actions/user';
 
 const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, addShopList, favorite }) => {
   console.log('Recipe component', recipe);
-  console.log('favorite', favorite );
+  console.log('favorite', favorite);
   return (
     <>
       {isLoading && <div className="ui segment">
@@ -27,27 +27,24 @@ const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, ad
         <button type="button" className="icon__addshopping">PDF
           <i className="file pdf icon" />
         </button>
-
-        <button type="button" className="icon__addshopping" onClick={() => setFavorite(recipe.id)}>Ajouter aux favoris
+        {!favorite.find(fav => fav.name === recipe.name) && <button type="button" className="icon__addshopping" onClick={() => setFavorite(recipe.id)}>Ajouter aux favoris
           <i className="heart icon" />
-        </button>
-        <button type="button" className="icon__addshopping" onClick={() => unsetFavorite(recipe.id)}>Retirer des favoris
+        </button>}
+        {favorite.find(fav => fav.name === recipe.name) && <button type="button" className="icon__addshopping" onClick={() => unsetFavorite(recipe.id)}>Retirer des favoris
           <i className="heart outline icon" />
-        </button>
-        {/* <button type="button" className="icon__addshopping">Modifier la recette
-          <i className="edit icon" />
-        </button> */}
+        </button>}
         <button type="button" className="icon__addshopping" onClick={() => setSignaled(recipe.id)}>Signaler la recette
           <i className="flag icon" />
         </button>
         <div className="recette__title">
           <h2>{recipe.name}</h2>
+          {favorite.find(fav => fav.name === recipe.name) && <h3 className="favorite">Cette recette est dans vos favoris</h3>}
           {recipe.tags.map((tag) => (
                     <div key={tag.id} className="tags__container">
                       <span className="tag">{tag.name}</span>
                     </div>
                   ))}
-          {recipe.signaled && <h3 className="signaled">Cette recette est potentiellement douteuse pour la communauté !</h3>}
+          {recipe.signaled && <h3 className="signaled">Signalement confirmé - Recette potentielement douteuse ! - En attente de validation par l'admin</h3>}
           <p className="author">{`By ${recipe.author.pseudo}`}</p>
           <h3>{`- ${recipe.category.name} -`}</h3>
           <h3>{`- Temps de préparation = ${recipe.preparationTime}`}</h3>
@@ -71,7 +68,7 @@ const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, ad
 };
 
 Recipe.prototype = {
-  favorite: PropTypes.object.isRequired,
+  favorite: PropTypes.array.isRequired,
   addShopList: PropTypes.func.isRequired,
   unsetFavorite: PropTypes.func.isRequired,
   setFavorite: PropTypes.func.isRequired,

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './navbar.scss';
 import Prototypes from 'prop-types';
 
-const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList }) => {
+const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList, getFormSettings }) => {
   const setLoaderHome = () => {
     setLoader();
     getUserRecipes();
@@ -28,12 +28,13 @@ const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getSh
           <li className="deroulan"><Link to="/allrecipes" onClick={() => setLoaderAllrecipes()}> Toutes les recettes &ensp;</Link>
             <ul className="sous" />
           </li>
-          <li className="deroulan"><Link to="/ajout-recette">Ajouter une recette &ensp;</Link>
+          <li className="deroulan"><Link to="/ajout-recette" onClick={() => getFormSettings()}>Ajouter une recette &ensp;</Link>
             <ul className="sous" />
           </li>
           <li><Link to="/aide-course" onClick={() => setLoaderShopList()}>Liste de course</Link></li>
+          <li><Link to="/about">A propos</Link></li>
+          {admin[0] === 'ROLE_ADMIN' && <li><Link to="">Admin</Link></li>}
           <li><Link to="/" onClick={() => logOut()}>Déconnexion</Link></li>
-          {admin && <li><Link to="">Admin</Link></li>}
         </ul>
       </div>
     </nav>
@@ -46,7 +47,7 @@ Navbar.prototypes = {
   getUserRecipes: Prototypes.func.isrequired,
   getAllrecipes: Prototypes.func.isRequired,
   logOut: Prototypes.func.isrequired,
-  admin: Prototypes.bool.isrequired,
+  admin: Prototypes.object.isrequired,
 };
 
 export default Navbar;

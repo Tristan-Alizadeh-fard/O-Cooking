@@ -17,12 +17,13 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @groups({"category_needed_information_add"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "show_user", "recipe_read"})
+     * @Groups({"show_recipe", "show_user", "recipe_read", "category_needed_information_add"})
      */
     private $name;
 
@@ -45,6 +46,11 @@ class Category
     {
         $this->createdAt = new \DateTime();
         $this->recipes = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
