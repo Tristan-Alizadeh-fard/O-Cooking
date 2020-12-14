@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@reduxjs/toolkit": "^1.5.0",
-    "lodash": "^4.17.20",
-    "react-redux": "^7.2.2",
-    "redux-persist": "^6.0.0",
-    "subscribe": "^0.0.1-security"
-  }
-}

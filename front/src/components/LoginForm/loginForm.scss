@@ -9,11 +9,17 @@
 // div du haut page de login
 .home {
   width: 70%;
-  background-color: cornflowerblue;
+  background-color: rgba(128, 128, 128, 0.315);
+  // background-color: cornflowerblue;
   margin: auto auto;
   margin-top: 40px;
-  border-radius: 1rem;
-  border: solid 2px black;
+  border-top: 0.5px solid rgba(58, 58, 58, 0.788);
+  border-right: 2.3px solid rgba(27, 27, 27, 0.705);
+  border-bottom: 2.3px solid rgba(27, 27, 27, 0.705);
+  border-left: 0.5px solid rgba(58, 58, 58, 0.788);
+  border-radius: 1em;
+  box-shadow: 8px 6px 4px 1px rgba(17, 17, 17, 0.301);
+
 }
 // h2 et h3 de .home
 .home__title { //h2
@@ -31,12 +37,15 @@
 }
 // Bouton voir plus semantic ui 
 .ui.button.voir__plus{
-  background: red;
+  color: white;
+  border-radius: 25px;
+  background: rgba(9, 5, 255, 0.61);
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
 }
 // balise p quand le bouton voir plus est activé 
 .home__content { // p
   text-align: center;
-  color: white;
+  color: black;
   padding-bottom: 15px;
 } 
 // div englobant le bouton voir moins 
@@ -47,41 +56,52 @@
 }
 //bouton sémantic voir moins
 .ui.button.voir__moins{
-  background: red;
+  color: white;
+  border-radius: 25px;
+  background: rgba(9, 5, 255, 0.61);
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
 }
 
 // div englobant input mail et pass (milieu de page)
 .form__login {
+  text-align: center;
   margin: auto auto;  
   margin-top: 60px;
   width: 50%;
   padding: 1em;
-  border: 2px solid black;
+  border-top: 0.5px solid rgba(58, 58, 58, 0.788);
+  border-right: 2.3px solid rgba(27, 27, 27, 0.705);
+  border-bottom: 2.3px solid rgba(27, 27, 27, 0.705);
+  border-left: 0.5px solid rgba(58, 58, 58, 0.788);
   border-radius: 1em;
-  background-color: grey;
+  background-color: rgba(128, 128, 128, 0.315);
   margin-bottom: 20px;
+  box-shadow: 8px 6px 4px 1px rgba(17, 17, 17, 0.301);
 }
 //formulaire login semantic ui avec le bouton
 .ui.form.form__log{
-  background: seagreen;
+  // background: seagreen;
 }
 // balise p du titre formulaire 
 .title__form {
-  background: skyblue;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  // background: skyblue;
 }
 // interieur du formulaire 
 .field.interior__form__log {
-  background-color: slateblue;
+  // background-color: slateblue;
   margin-top: 10px;
 }
 // élément titre (votre email + input email semantic)
 .field.log__mail__pass{
-  background: springgreen;
+  // background: springgreen;
 }
 
 // label "votre email" et "votre pass"  au decu des inputs
 .ui.form .field>label{
-  background: tomato;
+  border-bottom: 1px solid black;
+  // background: tomato;
 }
 //encadré des input de email et pass
 .ui.fluid.input{
@@ -98,7 +118,10 @@
 }
 // bouton Login du formulaire 
 .ui.button.button__login{
-  background: blueviolet;
+  color: white;
+  border-radius: 25px;
+  background: rgba(9, 5, 255, 0.61);
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
 }
 
 // selection de la div erreur mail ou pass
@@ -116,11 +139,12 @@
 // boutton inscrivez vous 
 .inscription {
   color: white;
-  font-size: 30px;
+  font-size: 15px;
   font-weight: bold;
-  background-color: black;
+  border-radius: 25px;
+  background: rgba(9, 5, 255, 0.61);
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
   padding: 0.5rem;
-  border-radius: 1rem;
 }
 // selection de la div lien pass oublié
 .link__forgottenpass {
@@ -130,10 +154,10 @@
 }
 //boutton du lien pass oublié 
 .forgotten__password {
-  color: red;
-  font-size: 30px;
+  color: black;
+  font-size: 13px;
   font-weight: bold;
-  background-color: black;
+  // background-color: rgba(0, 0, 0, 0.212);
   padding: 0.5rem;
   border-radius: 1rem;
 }
