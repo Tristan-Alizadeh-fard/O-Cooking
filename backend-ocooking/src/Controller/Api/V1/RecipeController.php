@@ -12,6 +12,7 @@ use App\Repository\RecipeRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
+use App\Service\PictureService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -164,7 +165,12 @@ class RecipeController extends AbstractController
         $json = $request->getContent();
 
         $recipeInformationsArray = json_decode($json, true);
-        // dd($recipeInformationsArray);
+        dump($recipeInformationsArray);
+        // picture in base64
+        $pictureBase64 = $recipeInformationsArray['picture'];
+        // picture from base64 to uploaded file
+        $recipeInformationsArray['picture'] = new PictureService($pictureBase64, 'test');
+        dump($recipeInformationsArray);
 
         $recipe = new Recipe();
 
@@ -172,7 +178,7 @@ class RecipeController extends AbstractController
         $form->submit($recipeInformationsArray);
 
         // dd($form->submit($recipeInformationsArray));
-        // dd($form->isValid());
+        dd($form->isValid());
         
         if ($form->isValid()) {
             // Create unknown ingredient in Ingredient Entity

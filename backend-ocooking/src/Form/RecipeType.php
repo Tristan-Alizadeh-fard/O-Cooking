@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,8 +22,18 @@ class RecipeType extends AbstractType
                     new Assert\NotBlank(),
                 ]
             ])
-            ->add('picture', null, [
+            ->add('picture', FileType::class, [
+                'mapped' => true,
                 'required' => false,
+                'constraints' => [
+                    new assert\File([
+                        'maxSize' => '2056k',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                        ],
+                    ]),
+                ]
             ])
             ->add('nbPeople', IntegerType::class, [
                 'constraints' => [
