@@ -22,6 +22,13 @@ class UserCrudController extends AbstractCrudController
             Field\IdField::new('id')->onlyOnIndex(),
             Field\TextField::new('email', 'Email'),
             Field\TextField::new('pseudo', 'Pseudo'),
+            Field\ArrayField::new('roles', 'Admin'),
+            // Field\ChoiceField::new('roles', 'Admin')
+            //     ->setChoices([
+            //         ' ' => 'ROLE_ADMIN'
+            //     ])
+            //     ->allowMultipleChoices()
+            //     ->renderExpanded(),
             Field\DateTimeField::new('createdAt', 'Date de création')->onlyOnIndex(),
         ];
     }
@@ -30,7 +37,7 @@ class UserCrudController extends AbstractCrudController
     {
         return $actions
             ->remove(Crud::PAGE_INDEX, Action::NEW)
-            ->remove(Crud::PAGE_INDEX, Action::EDIT)
+            // ->remove(Crud::PAGE_INDEX, Action::EDIT)
         ;
     }
 

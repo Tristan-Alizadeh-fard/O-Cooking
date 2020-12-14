@@ -6,6 +6,7 @@ use App\Entity\Recipe;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field as Field;
 
@@ -52,7 +53,6 @@ class RecipeCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Recettes')
             ->setEntityLabelInSingular('Recette')
             ->setDefaultSort(['signaled' => 'DESC'])
-            
         ;
     }
 }
