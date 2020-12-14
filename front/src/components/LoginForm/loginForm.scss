@@ -1,3 +1,56 @@
+
+
+// Div de toute la page formulaire
+.all__page{
+  background:none;
+}
+
+
+// div du haut page de login
+.home {
+  width: 70%;
+  background-color: cornflowerblue;
+  margin: auto auto;
+  margin-top: 40px;
+  border-radius: 1rem;
+  border: solid 2px black;
+}
+// h2 et h3 de .home
+.home__title { //h2
+  text-align: center;
+  color: black;
+}
+.home__smalltitle { //h3
+  text-align: center;
+  color: black;
+}
+// div contenant le bouton semantic ui 
+.home__more {
+  text-align: center;
+  color: black;
+}
+// Bouton voir plus semantic ui 
+.ui.button.voir__plus{
+  background: red;
+}
+// balise p quand le bouton voir plus est activé 
+.home__content { // p
+  text-align: center;
+  color: white;
+  padding-bottom: 15px;
+} 
+// div englobant le bouton voir moins 
+.home__less {
+  text-align: center;
+  color: black;
+  margin-bottom: 15px;
+}
+//bouton sémantic voir moins
+.ui.button.voir__moins{
+  background: red;
+}
+
+// div englobant input mail et pass (milieu de page)
 .form__login {
   margin: auto auto;  
   margin-top: 60px;
@@ -8,23 +61,59 @@
   background-color: grey;
   margin-bottom: 20px;
 }
+//formulaire login semantic ui avec le bouton
+.ui.form.form__log{
+  background: seagreen;
+}
+// balise p du titre formulaire 
+.title__form {
+  background: skyblue;
+}
+// interieur du formulaire 
+.field.interior__form__log {
+  background-color: slateblue;
+  margin-top: 10px;
+}
+// élément titre (votre email + input email semantic)
+.field.log__mail__pass{
+  background: springgreen;
+}
+
+// label "votre email" et "votre pass"  au decu des inputs
+.ui.form .field>label{
+  background: tomato;
+}
+//encadré des input de email et pass
+.ui.fluid.input{
+  background-color:black;
+  size: 10px;
+}
+// ciblage de l'encadré input de saisie de l'input email et pass 
+.ui.form .field.field input:-webkit-autofill {
+  background: yellowgreen;
+}
+// ciblage de l'encadré input de saisie de l'input email et pass quand l'utilisateur est sur l'input
+.ui.form .field.field input:-webkit-autofill:focus {
+  background: yellowgreen;
+}
+// bouton Login du formulaire 
+.ui.button.button__login{
+  background: blueviolet;
+}
+
+// selection de la div erreur mail ou pass
+.error__login {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
+
+// div du lien inscrivez-vous
 .link__inscription {
   margin-top: 40px;
   text-align: center;
 }
-.link__forgottenpass {
-  margin-top: 40px;
-  text-align: center;
-  
-}
-.forgotten__password {
-  color: red;
-  font-size: 30px;
-  font-weight: bold;
-  background-color: black;
-  padding: 0.5rem;
-  border-radius: 1rem;
-}
+// boutton inscrivez vous 
 .inscription {
   color: white;
   font-size: 30px;
@@ -33,47 +122,33 @@
   padding: 0.5rem;
   border-radius: 1rem;
 }
-.error__login {
-  color: red;
-  font-size: 20px;
+// selection de la div lien pass oublié
+.link__forgottenpass {
+  margin-top: 40px;
   text-align: center;
+  
 }
+//boutton du lien pass oublié 
+.forgotten__password {
+  color: red;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: black;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+// div du link login success 
 .login__ok {
   color: white;
   font-size: 20px;
   text-align: center;
   padding-top: 15px;
 }  
-.home__title {
-  text-align: center;
-  color: black;
-}
-.home__smalltitle {
-  text-align: center;
-  color: black;
-}
-.home__more {
-  text-align: center;
-  color: black;
-}
-.home__less {
-  text-align: center;
-  color: black;
-  margin-bottom: 15px;
-}
-.home__content {
-  text-align: center;
-  color: white;
-  padding-bottom: 15px;
-}
-.home {
-  width: 70%;
-  background-color: cornflowerblue;
-  margin: auto auto;
-  margin-top: 40px;
-  border-radius: 1rem;
-  border: solid 2px black;
-}
+
+
+
+/*
+Code css pas utilisé il me semble ?
 .link__logged {
   display: inline-block;
   font-size: large;
@@ -93,4 +168,5 @@
 @keyframes clignote {  
   50% { opacity: 0; }
 }
+*/
 

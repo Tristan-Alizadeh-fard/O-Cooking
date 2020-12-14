@@ -2,9 +2,11 @@
 import React from 'react';
 
 // == Import
-import './styles.scss';
-import Page from 'src/containers/ConnectedPage';
 import 'semantic-ui-css/semantic.min.css';
+import Page from 'src/containers/ConnectedPage';
+import './styles.scss';
+import 'semantic-ui-css/semantic.min.css';
+
 
 // == Composant
 const App = () => (

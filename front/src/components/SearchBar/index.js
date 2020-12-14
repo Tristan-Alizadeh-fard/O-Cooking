@@ -7,23 +7,23 @@ import './searchBar.scss';
 //   <ModifiedButton updateField={updateField} location={location} selectedLocation={selectedLocation} key={location} />
 // ))};
 
-const SearchBar = ({
-    searchOption,
-    searchInput,
-    updateField,
-    selectedLocation,
-    searchLocation,
-    search,
+const SearchBar = ({ 
+  searchOption,
+  searchInput,
+  updateField,
+  selectedLocation,
+  searchLocation,
+  search,
   }) => (
-  <Input type="text" placeholder="Search..." action>
-    <Input type="text" onChange={() => updateField(event.target.value, 'searchInput')} content={searchInput} />
+  <Input className='search__bar' type="text" placeholder="Search..." action>
+    <Input className="input__search__bar" type="text" onChange={() => updateField(event.target.value, 'searchInput')} content={searchInput} />
     <Select
       compact
       options={searchOption}
       defaultValue="all"
       onChange={() => updateField(event.target.textContent, 'selectedCategory')}
     />
-    <Button type="button" onClick={() => search()}>Search</Button>
+    <Button className="button__search"type="button" onClick={() => search()}>Search</Button>
   </Input>
   )
 
