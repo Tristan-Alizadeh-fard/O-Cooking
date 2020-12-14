@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './allrecipes.scss';
-import { setFavoriteAction } from '../../actions/user';
+import { setFavoriteAction } from 'src/actions/user';
 
 const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, unsetFavorite, favorite }) => {
   console.log('AllRecipes', recipes);
@@ -69,6 +69,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
         </div>
         </>
       }
+      {recipes.length < 1 && <div className="no-result"><p>Pas de résultat pour cette recherche</p></div>}
     </>
   );
 };
