@@ -23,7 +23,7 @@ class RecipeType extends AbstractType
                 ]
             ])
             ->add('picture', FileType::class, [
-                'mapped' => true,
+                // 'mapped' => true,
                 'required' => false,
                 'constraints' => [
                     new assert\File([

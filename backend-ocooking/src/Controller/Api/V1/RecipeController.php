@@ -13,6 +13,7 @@ use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 use App\Service\PictureService;
+use App\Service\Slugger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -160,17 +161,17 @@ class RecipeController extends AbstractController
     /**
     * @Route("/add", name="add", methods={"POST"})
     */
-    public function add(Request $request, CategoryRepository $categoryRepository, MeasureRepository $measureRepository, IngredientRepository $ingredientRepository, TagRepository $tagRepository)
+    public function add(Request $request, Slugger $slugger, CategoryRepository $categoryRepository, MeasureRepository $measureRepository, IngredientRepository $ingredientRepository, TagRepository $tagRepository)
     {
         $json = $request->getContent();
 
         $recipeInformationsArray = json_decode($json, true);
-        dump($recipeInformationsArray);
+        // dump($recipeInformationsArray);
         // picture in base64
         $pictureBase64 = $recipeInformationsArray['picture'];
         // picture from base64 to uploaded file
-        $recipeInformationsArray['picture'] = new PictureService($pictureBase64, 'test');
-        dump($recipeInformationsArray);
+        $recipeInformationsArray['picture'] = new PictureService($pictureBase64, 'Test');
+        // dump($recipeInformationsArray);
 
         $recipe = new Recipe();
 
@@ -178,7 +179,7 @@ class RecipeController extends AbstractController
         $form->submit($recipeInformationsArray);
 
         // dd($form->submit($recipeInformationsArray));
-        dd($form->isValid());
+        // dd($form->isValid());
         
         if ($form->isValid()) {
             // Create unknown ingredient in Ingredient Entity
