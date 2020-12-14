@@ -413,9 +413,9 @@ class Recipe
     public function setPictureFile(File $pictureFile = null)
     {
         $this->pictureFile = $pictureFile;
-        if ($pictureFile) {
-            $this->updatedAt = new \DateTime('now');
-        }
+        // if ($pictureFile) {
+        //     $this->updatedAt = new \DateTime('now');
+        // }
 
         return $this;
     }

@@ -21,6 +21,9 @@ class PictureController extends AbstractController
     */
     public function testPicture(Request $request): Response
     {
+        dump(tempnam(sys_get_temp_dir(), 'UploadedFile'));
+        dd(sys_get_temp_dir());
+        
         $json = $request->getContent();
         $jsonToArray = json_decode($json, true);
         // dump($jsonToArray);
