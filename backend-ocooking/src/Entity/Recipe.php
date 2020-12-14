@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
+ * @Vich\Uploadable
  */
 class Recipe
 {
@@ -32,6 +34,12 @@ class Recipe
      * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $picture;
+
+    /**
+     * @Vich\UploadableField(mapping="recipe_picture", fileNameProperty="picture")
+     * @var File|null
+     */
+    private $pictureFile;
 
     /**
      * @ORM\Column(type="smallint")
@@ -384,4 +392,31 @@ class Recipe
     }
 
     /* NECESSAIRE POUR L'AJOUT D'UNE RECETTE */
+
+    /**
+     * Get the value of pictureFile
+     *
+     * @return  File
+     */ 
+    public function getPictureFile()
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * Set the value of pictureFile
+     *
+     * @param  File  $pictureFile
+     *
+     * @return  self
+     */
+    public function setPictureFile(File $pictureFile = null)
+    {
+        $this->pictureFile = $pictureFile;
+        if ($pictureFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
 }
