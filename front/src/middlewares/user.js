@@ -13,6 +13,8 @@ import {
   ADD_SHOPLIST_ACTION,
   GET_SHOPLIST_ACTION,
   SEARCH,
+  REMOVE_SHOP_RECIPE,
+  REMOVE_FROM_LIST,
   saveUserLogin,
   saveUserInscription,
   errorInscription,
@@ -24,7 +26,10 @@ import {
   saveInfosUser,
   saveUserRecipes,
   setRecipe,
- 
+  setUserFavorite,
+  unsetUserFavorite,
+  setShopListAction,
+  getShopListAction,
 } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
@@ -189,7 +194,7 @@ const user = (store) => (next) => (action) => {
         })
         .then((response) => {
           console.log(response.data, 'set favorite ok');
-          // store.dispatch(saveInfosUser(response.data)); //TODO
+          // store.dispatch(setUserFavorite(response)); // TODO
           store.dispatch(saveUserName());
         })
         .catch((error) => {
@@ -239,24 +244,30 @@ const user = (store) => (next) => (action) => {
     }
     case GET_SHOPLIST_ACTION: {
       axios.get('http://localhost:8000/api/v1/shoppinglist/', {
-           headers: {
+        headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
           Authorization: `Bearer ${store.getState().user.token}`,
         },
       })
         .then((response) => {
-               console.log(response, 'get shoplist ok');
-          store.dispatch();
+          console.log(response, 'get shoplist ok');
+          console.log(response.data.recipes);
+          store.dispatch(setShopListAction(response.data.recipes));
         })
         .catch((error) => {
           console.log(error, 'get shoplist errore');
-           });
+        });
       next(action);
       break;
-      }
+    }
     case SEARCH: {
-      const { searchInput, selectedCategory, searchOption, selectedLocation } = store.getState().user;
+      const {
+        searchInput,
+        selectedCategory,
+        searchOption,
+        selectedLocation,
+      } = store.getState().user;
       let formatedCategory;
       searchOption.map((option) => {
         if (option.text === selectedCategory) {
@@ -285,6 +296,27 @@ const user = (store) => (next) => (action) => {
         .catch((error) => {
           console.log(error, 'La recherche n\'a pas abouti.');
           // store.dispatch(emailInUse());
+        });
+      next(action);
+      break;
+    }
+    case REMOVE_SHOP_RECIPE: {
+      console.log('remove_shop_recipe');
+      console.log(action.index);
+      axios.delete(`http://localhost:8000/api/v1/shoppinglist/delete/${action.index}`,
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response, 'shoplist delete ok');
+          store.dispatch(getShopListAction());
+        })
+        .catch((error) => {
+          console.log(error, 'shoplist delete error');
         });
       next(action);
       break;

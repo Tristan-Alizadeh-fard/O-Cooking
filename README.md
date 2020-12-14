@@ -48,3 +48,15 @@ User 2:
 
 
 # Installation du FrontEnd
+
+### Installation
+
+1. Ouvrir un terminal
+2. Se placer dans le dossier front de projet-o-cooking
+3. Executer la commande ``` $ yarn ``` afin d'installer les packages du projet
+
+### Lancer un serveur
+
+1. Ouvrir un terminal
+2. Se placer dans le dossier front de projet-o-cooking
+3. Executer la commande ``` $ yarn start ```

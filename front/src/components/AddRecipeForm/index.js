@@ -51,7 +51,20 @@ const AddRecipeForm = ({
   selectedCategory,
   submitRecipe,
 }) => {
-  const prevent = true;
+  const save = (
+    <div>
+      <Divider />
+      <p>Tag</p>
+      <Form.Field>
+        <div className="tags">
+          {tagList.map((tag) => (
+            // eslint-disable-next-line max-len
+            <Tag {...tag} key={tag.key} selectedTags={selectedTags} selectTags={selectTags} tagList={tagList} />
+          ))}
+        </div>
+      </Form.Field>
+    </div>
+  );
   return (
     <div className="form__addrecipe">
       <Form>
