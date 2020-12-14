@@ -20,8 +20,14 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             Field\IdField::new('id')->onlyOnIndex(),
-            Field\TextField::new('email', 'Email'),
-            Field\TextField::new('pseudo', 'Pseudo'),
+            Field\TextField::new('email', 'Email')
+                ->setFormTypeOptions([
+                    'disabled' => true,
+                ]),
+            Field\TextField::new('pseudo', 'Pseudo')
+                ->setFormTypeOptions([
+                    'disabled' => true,
+                ]),
             Field\ArrayField::new('roles', 'Admin'),
             // Field\ChoiceField::new('roles', 'Admin')
             //     ->setChoices([
