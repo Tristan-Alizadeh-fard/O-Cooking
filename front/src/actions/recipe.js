@@ -62,3 +62,12 @@ export const setMeasures = createAction('recipe/setMeasures', (value) => ({
     value,
   },
 }));
+
+export const emptyForm = createAction('recipe/empty');
+
+export const sendMessage = createAction('recipe/submit/sendMessage', (target, value) => ({
+  payload: {
+    target,
+    value,
+  },
+}));

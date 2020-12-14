@@ -14,8 +14,6 @@ import {
   SAVE_INFOS_USER,
   SAVE_USER_RECIPE,
   SET_RECIPE,
-  SET_USER_FAVORITE,
-  UNSET_USER_FAVORITE,
   SET_SHOPLIST_ACTION,
   REMOVE_FROM_LIST,
 } from 'src/actions/user';
@@ -38,7 +36,7 @@ const initialState = {
   admin: false,
   isLoading: true,
   searchOption: [
-    { key: 'all', text: 'Tout voir', value: 'all', id: null },
+    { key: 'all', text: 'Tout voir', value: 'all', id: '' },
     { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
     { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
     { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
@@ -51,8 +49,8 @@ const initialState = {
   roleUser: [],
   recipesUser: [],
   userFavorite: {},
+  listCheck: [],
   shoppingList: [],
-  shoppingListCheck: [],
 };
 
 const user = (state = initialState, action = {}) => {
@@ -73,6 +71,9 @@ const user = (state = initialState, action = {}) => {
         errorLogin: false,
         token: action.token,
         isLoading: false,
+        pass: '',
+        confirmPass: '',
+        listCheck: [],
       };
     case USER_INSCRIPTION_SUCCESS:
       return {
@@ -80,12 +81,16 @@ const user = (state = initialState, action = {}) => {
         inscriptionSuccess: true,
         errorInscription: false,
         emailInUse: false,
+        pass: '',
+        confirmPass: '',
       };
     case ERROR_INSCRIPTION:
       return {
         ...state,
         errorInscription: true,
         emailInUse: false,
+        pass: '',
+        confirmPass: '',
       };
     case EMAIL_IN_USE:
       return {
@@ -96,6 +101,8 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         errorLogin: true,
+        pass: '',
+        confirmPass: '',
       };
     case DESCRIPTION_ON:
       return {
@@ -114,6 +121,7 @@ const user = (state = initialState, action = {}) => {
         isLogged: false,
         token: '',
         pass: '',
+        confirmPass: '',
       };
     case SAVE_RECIPE:
       return {
@@ -147,17 +155,14 @@ const user = (state = initialState, action = {}) => {
         isLoading: false,
       };
     case SET_SHOPLIST_ACTION:
-      console.log(action.value);
       return {
         ...state,
         shoppingList: action.value,
       };
     case REMOVE_FROM_LIST: {
-      console.log('remove_from_list');
-      console.log(action);
       return {
         ...state,
-        shoppingListCheck: [...state.shoppingListCheck, action.index],
+        listCheck: [...state.listCheck, action.index],
       };
     }
     default: return { ...state };

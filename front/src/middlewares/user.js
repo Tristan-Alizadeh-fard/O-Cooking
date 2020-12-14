@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {
   LOG_IN,
   USER_INSCRIPTION,
@@ -14,7 +13,6 @@ import {
   GET_SHOPLIST_ACTION,
   SEARCH,
   REMOVE_SHOP_RECIPE,
-  REMOVE_FROM_LIST,
   saveUserLogin,
   saveUserInscription,
   errorInscription,
@@ -26,10 +24,9 @@ import {
   saveInfosUser,
   saveUserRecipes,
   setRecipe,
-  setUserFavorite,
-  unsetUserFavorite,
   setShopListAction,
   getShopListAction,
+  updateUserField,
 } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
@@ -50,6 +47,7 @@ const user = (store) => (next) => (action) => {
           console.log(response, 'success login');
           store.dispatch(saveUserLogin(response.data.token));
           store.dispatch(saveUserName());
+          store.dispatch(updateUserField('pass', ''));
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware LOGIN error');
@@ -296,8 +294,6 @@ const user = (store) => (next) => (action) => {
       break;
     }
     case REMOVE_SHOP_RECIPE: {
-      console.log('remove_shop_recipe');
-      console.log(action.index);
       axios.delete(`http://localhost:8000/api/v1/shoppinglist/delete/${action.index}`,
         {
           headers: {

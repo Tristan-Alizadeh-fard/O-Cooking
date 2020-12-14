@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import './loginForm.scss';
 
@@ -34,6 +34,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
       <div className="form__login">
         {errorLogin && <div className="error__login">Vérifiez votre Email ou Password</div>}
         {isLogged && <p className="login__ok">Login Success !</p>}
+        {isLogged && <Redirect to={{ pathname: '/home' }} />}
         <Form className="form__log">
           {!isLogged && <p className="title__form">Formulaire de login</p>}
           <Form.Field className="interior__form__log">

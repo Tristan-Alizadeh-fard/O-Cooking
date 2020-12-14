@@ -144,16 +144,6 @@ export const setRecipe = (data) => ({
   recipe: data,
 });
 
-export const setUserFavorite = (data) => ({
-  type: SET_USER_FAVORITE,
-  userFavorite: data,
-});
-
-export const unsetUserFavorite = (data) => ({
-  type: UNSET_USER_FAVORITE,
-  userFavorite: data,
-});
-
 export const addShopListAction = (id) => ({
   type: ADD_SHOPLIST_ACTION,
   id,

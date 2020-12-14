@@ -1,5 +1,6 @@
 import React from 'react';
 import './addRecipeForm.scss';
+import FileInputComponent from 'react-file-input-previews-base64';
 import {
   Form,
   Input,
@@ -17,7 +18,6 @@ import Ingredient from './Ingredient';
 import Step from './Step';
 import Category from './Category';
 import Tag from './Tag';
-
 
 const AddRecipeForm = ({
   updateRecipeField,
@@ -43,13 +43,14 @@ const AddRecipeForm = ({
   stepInputValue,
   steps,
   recipeImage,
-  alertSize,
   changeImage,
   tagList,
   selectedTags,
   categories,
   selectedCategory,
   submitRecipe,
+  success,
+  error,
 }) => {
   const save = (
     <div>
@@ -112,7 +113,7 @@ const AddRecipeForm = ({
             labelPosition="right"
             placeholder="Ex: 1"
             onChange={() => {
-              updateRecipeField('cookingTime', `${event.target.value}h`);
+              updateRecipeField('cookingTime1', `${event.target.value}h`);
               updateRecipeField('CTS1', event.target.value);
             }}
             value={CTS1}
@@ -206,20 +207,21 @@ const AddRecipeForm = ({
 
         <Divider />
         <p>Image</p>
-        <Form.Field>
-          <Image src={recipeImage} size="small" wrapped />
-          <Input type="file" accept="image/gif, image/jpeg, image/png, image/jpg" onChange={() => changeImage(URL.createObjectURL(event.target.files[0]))} />
-        </Form.Field>
-        {alertSize && <p className="alert">Votre image est trop lourde. La taille limite est de 5Mo.</p>}
+        <FileInputComponent
+          labelText="Select file"
+          labelStyle={{fontSize:14}}
+          multiple={false}
+          callbackFunction={(file_arr)=>{changeImage(file_arr.base64)}}
+          accept="image/*"
+          imagePreview
+        />
         <Divider />
         <p>Catégorie</p>
         <Form.Field>
-          <Button.Group size="large">
-            {categories.map((category) => (
-            // eslint-disable-next-line max-len
-              <Category {...category} key={category.name} selectedCategory={selectedCategory} selectCategory={selectCategory} />
-            ))}
-          </Button.Group>
+          {categories.map((category) => (
+          // eslint-disable-next-line max-len
+            <Category {...category} key={category.name} selectedCategory={selectedCategory} selectCategory={selectCategory} />
+          ))}
         </Form.Field>
 
         <Divider />
@@ -230,6 +232,8 @@ const AddRecipeForm = ({
             onClick={() => submitRecipe()}
           >Ajouter cette recette
           </Button>
+          {success && <div className="message__success"><p>Votre recette à bien été postée ! Merci</p></div> }
+          {error && <div className="message__error"><p>Il semblerait qu'il y ait une erreur.</p></div> }
         </Form.Field>
       </Form>
     </div>
@@ -250,9 +254,10 @@ AddRecipeForm.propTypes = {
   ingredientInputValue: PropTypes.string.isRequired,
   stepInputValue: PropTypes.string.isRequired,
   recipeImage: PropTypes.string.isRequired,
-  alertSize: PropTypes.bool.isRequired,
   quantityInputValue: PropTypes.string.isRequired,
   submitRecipe: PropTypes.func.isRequired,
+  success: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 export default AddRecipeForm;
