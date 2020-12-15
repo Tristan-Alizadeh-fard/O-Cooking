@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import testimage from 'src/pictures/sandwich.jpg';
 import './home.scss';
 
 const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite }) => {
@@ -20,13 +21,13 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
         <h2 className="allrecipes__title">{`Bienvenue dans votre espace " ${name} " !`}</h2>
       </div>
       {!isLoading && 
-      <div className="all">
+      
+        <div className="w3-row-padding w3-padding-16 w3-center">
        {recipesUser.map((recipeUser) => (
-              <div key={recipeUser.name} className="allrecipes__miniature">
-                <div className="ui card">
-                  <div className="image">
-                    <i className="image icon" />
-                  </div>
+         <div key={recipeUser.id} className="w3-quarter">
+              
+                
+                <img src={testimage} className="image__recette" />
                   {recipeUser.signaled && <div className="favoris__icon">
                 <i className="bell icon" />
                 <p className="text__favoris">Recette signalé !</p>
@@ -37,14 +38,16 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                       <span className="date">{`Posté le ${recipeUser.createdAt}`}</span>
                     </div>
                     <div className="description">{`${recipeUser.category.name} - Temps de préparation = ${recipeUser.preparationTime}`}</div>
+                    <div className="tags__container">
                     {recipeUser.tags.map((tag) => (
-                      <div key={tag.name} className="tags__container">
+                      <div key={tag.name} className="tag__container">
                         <span className="tag">{tag.name}</span>
                       </div>
                     ))}
+                    </div>
                   </div>
                   <div className="extra content">
-                    <p className="link__icon">
+                    <p className="link__author">
                       <i className="user icon" />{`By ${name}`}
                     </p>
                     <Link to="/aide-course" className="link__icon" onClick={() => console.log('aide de course')}>
@@ -61,9 +64,11 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                 <i className="heart icon" />
                 <p className="text__favoris">Ajouté aux favoris</p>
               </div>}
-                </div>
+                
               </div>
+              
         ))}
+       
       </div>}
     </>
   );

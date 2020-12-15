@@ -6,6 +6,7 @@ use App\Entity\Step;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class StepType extends AbstractType
 {
@@ -13,10 +14,14 @@ class StepType extends AbstractType
     {
         $builder
             ->add('nbStep', null, [
-
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
             ])
             ->add('description', null, [
-                
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
             ])
         ;
     }

@@ -13,11 +13,10 @@ class IngredientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('id')
         ->add('name', null, [
-                // 'constraints' => [
-                    // new Assert\NotBlank(),
-                // ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
             ;
     }
