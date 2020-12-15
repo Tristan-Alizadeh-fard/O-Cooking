@@ -51,6 +51,11 @@ class Step
         $this->createdAt = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->nbStep . '- ' . $this->description;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

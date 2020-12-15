@@ -20,10 +20,15 @@ class IngredientCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            Field\IdField::new('id')->onlyOnIndex(),
+            Field\IdField::new('id')
+                ->onlyOnIndex(),
             Field\TextField::new('name', 'Nom'),
-            Field\DateTimeField::new('createdAt', 'Date de création')->onlyOnIndex(),
-            Field\DateTimeField::new('updatedAt', 'Date de mise à jour')->onlyOnIndex(),
+            Field\DateTimeField::new('createdAt', 'Création')
+                ->onlyOnIndex()
+                ->setTextAlign('center'),
+            Field\DateTimeField::new('updatedAt', 'Mise à jour')
+                ->onlyOnIndex()
+                ->setTextAlign('center'),
         ];
     }
 

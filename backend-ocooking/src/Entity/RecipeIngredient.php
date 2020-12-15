@@ -57,6 +57,11 @@ class RecipeIngredient
     {
         $this->createdAt = new \DateTime();
     }
+
+    public function __toString()
+    {
+        return $this->quantity;
+    }
     
     public function getId(): ?int
     {
