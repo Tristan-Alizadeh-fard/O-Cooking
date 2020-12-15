@@ -17,7 +17,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
   };
 
   return (
-    <div className="all__page">
+    <div className="all__page home_login">
       <div className="home">
         <h2 className="home__title">Bienvenue Chez O'Coocking</h2>
         <h3 className="home__smalltitle">L'application des passionnés de cuisine</h3>
