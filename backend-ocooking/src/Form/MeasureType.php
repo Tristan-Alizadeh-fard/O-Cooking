@@ -14,12 +14,10 @@ class MeasureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // TODO Quid type de champs et vérifier que l'unité de mesure existe bien
-            ->add('id')
             ->add('name', null, [
-                // 'constraints' => [
-                    // new Assert\NotBlank(),
-                // ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
         ;
     }

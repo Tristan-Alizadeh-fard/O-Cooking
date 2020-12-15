@@ -28,7 +28,7 @@ class Recipe
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=500, nullable=true)
      * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $picture;
@@ -386,6 +386,4 @@ class Recipe
 
         return $this;
     }
-
-    /* NECESSAIRE POUR L'AJOUT D'UNE RECETTE */
 }
