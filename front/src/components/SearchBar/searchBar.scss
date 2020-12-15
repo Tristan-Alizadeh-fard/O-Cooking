@@ -20,12 +20,12 @@
 
 // interieur input search bar (zone texte)
 .ui.input input{
-  background-color:forestgreen;
+  //background-color:forestgreen;
   size: 10px;
 }
 // zone texte quand l'utilisateur a selectioné l'input pour faire une recherche (focus)
 .ui.input input:focus{
-  background-color:rgba(192, 192, 164, 0.753);
+  //background-color:rgba(192, 192, 164, 0.753);
 }
 
 
@@ -33,7 +33,7 @@
 
 //  menu deroulant fermé
 .ui.compact.selection.dropdown{
-  background: rgb(235, 235, 29);
+  //background: rgb(235, 235, 29);
   max-width: initial;
   border-top: 1000px;
 }
@@ -41,7 +41,7 @@
 // menu deroulant ouvert
 .ui.selection.active.dropdown .menu{
   max-height: 12rem; 
-  background: red;
+  //background: red;
   //min-width: 10;
   padding: 1px;
   
@@ -57,8 +57,9 @@
 
 // boutton recherche
 .ui.button.button__search{
-  background: blue;
+  //background: blue;
   margin: 0;
+  width: 50;
 }
 // effet quand l'utilisateur clic sur le bouton
 .ui.button.button__search:active{

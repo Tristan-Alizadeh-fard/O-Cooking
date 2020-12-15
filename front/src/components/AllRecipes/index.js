@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import testimage from 'src/pictures/sandwich.jpg';
+import ConnectedSearchBar from 'src/containers/ConnectedSearchBar';
 import './allrecipes.scss';
 import { setFavoriteAction } from 'src/actions/user';
 
@@ -12,6 +14,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
   };
   return (
     <>
+      {!isLoading && <ConnectedSearchBar />}
       {isLoading && <div className="ui segment">
         <div className="ui active dimmer">
         <div className="ui text loader">Loading</div>
@@ -22,13 +25,13 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
         <div className="allrecipes">
           <h2 className="allrecipes__title">Voici toutes les recettes de la communauté</h2>
         </div>
-        <div className="all">
+        <div className="w3-row-padding w3-padding-16 w3-center">
           {recipes.map((recipe) => (
-            <div key={recipe.id} className="allrecipes__miniature">
-              <div className="ui card">
-                <div className="image">
-                  <i className="image icon" />
-                </div>
+            
+              <div key={recipe.id} className="w3-quarter">
+                
+                  <img src={testimage} className="image__recette" />
+              
                 {recipe.signaled && <div className="favoris__icon">
                 <i className="bell icon" />
                 <p className="text__favoris">Recette signalé !</p>
@@ -39,14 +42,16 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
                     <span className="date">{`Posté le ${recipe.createdAt}`}</span>
                   </div>
                   <div className="description">{`${recipe.category.name} - Temps de préparation = ${recipe.preparationTime}`}</div>
+                  <div className="tags__container">
                   {recipe.tags.map((tag) => (
-                    <div key={tag.name} className="tags__container">
+                    <div key={tag.name} className="tag__container">
                       <span className="tag">{tag.name}</span>
                     </div>
                   ))}
+                  </div>
                 </div>
                 <div className="extra content">
-                  <p className="link__icon">
+                  <p className="link__author">
                     <i className="user icon" />{`By ${recipe.author.pseudo}`}
                   </p>
                   <Link to="/aide-course" className="link__icon" onClick={() => console.log('aide de course')}>
@@ -64,7 +69,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
                 <p className="text__favoris">Ajouté aux favoris</p>
               </div>}
               </div>
-            </div>
+            
           ))}
         </div>
         </>
