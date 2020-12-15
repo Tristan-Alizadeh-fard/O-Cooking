@@ -39,21 +39,22 @@ const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, ad
               </button>
             </div>
          </div>
-        <div className="content">
+        <div className="content recipe">
         
-          <h2 className="title">{`${recipe.name} Author: ${recipe.author.pseudo}`}</h2>
+          <h2 className="title">{recipe.name}</h2>
+          <h3 className="author">{`Author: ${recipe.author.pseudo}`}</h3>
           {favorite.find(fav => fav.name === recipe.name) && <h3 className="favorite">Cette recette est dans vos favoris</h3>}
+          <div className="tags__container">
           {recipe.tags.map((tag) => (
-          <div key={tag.id} className="tags__container">
-            <span className="tag">{tag.name}</span>
-          </div>))}
+             <span  key={tag.id} className="tag">{tag.name}</span>
+          ))}
+          </div>
           {recipe.signaled && <h3 className="signaled">Signalement confirmé - Recette potentielement douteuse ! - En attente de validation par l'admin</h3>}
           
           <h3>{`- ${recipe.category.name} -`}</h3>
           <h3>{`- Temps de préparation = ${recipe.preparationTime}`}</h3>
           <h3>{`- Temps de cuisson = ${recipe.cookingTime}`}</h3>
-        </div>
-        <div className="recette__ingredients">
+          <div className="recette__ingredients">
           <h3 className="recette__ingredient">Liste des ingrédients</h3>
           {recipe.recipeIngredients.map((ingredient) => (
             <p key={ingredient.id}>{ingredient.quantity}</p>
@@ -65,6 +66,8 @@ const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, ad
             <p key={step.id}>{step.description}</p>
           ))}
         </div>
+        </div>
+        
       </div>
     }
     </>
