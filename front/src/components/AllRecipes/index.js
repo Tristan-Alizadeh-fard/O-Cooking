@@ -32,7 +32,8 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
             
               <div key={recipe.id} className="w3-quarter">
                 
-                  <img src={testimage} className="image__recette" />
+                  {recipe.picture !== null && <img src={`http://localhost:8000${recipe.picture}`} className="image__recette" />}
+                  {recipe.picture === null &&  <img src={testimage} className="image__recette" />}
               
                 {recipe.signaled && <div className="favoris__icon">
                 <i className="bell icon" />
