@@ -22,12 +22,12 @@ class CategoryCrudController extends AbstractCrudController
             Field\IdField::new('id')
                 ->onlyOnIndex(),
             Field\TextField::new('name', 'Nom'),
-            Field\DateTimeField::new('createdAt', 'Création')
+            Field\DateTimeField::new('createdAt', 'Créée le')
                 ->onlyOnIndex()
                 ->setTextAlign('center'),
-            Field\DateTimeField::new('updatedAt', 'Mise à jour')
-                ->onlyOnIndex()
-                ->setTextAlign('center'),
+            // Field\DateTimeField::new('updatedAt', 'Mise à jour')
+            //     ->onlyOnIndex()
+            //     ->setTextAlign('center'),
         ];
     }
 

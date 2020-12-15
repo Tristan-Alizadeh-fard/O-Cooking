@@ -23,19 +23,18 @@ class IngredientCrudController extends AbstractCrudController
             Field\IdField::new('id')
                 ->onlyOnIndex(),
             Field\TextField::new('name', 'Nom'),
-            Field\DateTimeField::new('createdAt', 'Création')
+            Field\DateTimeField::new('createdAt', 'Créé le')
                 ->onlyOnIndex()
                 ->setTextAlign('center'),
-            Field\DateTimeField::new('updatedAt', 'Mise à jour')
-                ->onlyOnIndex()
-                ->setTextAlign('center'),
+            // Field\DateTimeField::new('updatedAt', 'Mise à jour')
+            //     ->onlyOnIndex()
+            //     ->setTextAlign('center'),
         ];
     }
 
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_INDEX, Action::NEW)
         ;
     }

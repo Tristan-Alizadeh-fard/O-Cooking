@@ -28,14 +28,16 @@ class UserCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'disabled' => true,
                 ]),
-            Field\ArrayField::new('roles', 'Admin'),
+            Field\ArrayField::new('roles', 'Rôles'),
             // Field\ChoiceField::new('roles', 'Admin')
             //     ->setChoices([
             //         ' ' => 'ROLE_ADMIN'
             //     ])
             //     ->allowMultipleChoices()
             //     ->renderExpanded(),
-            Field\DateTimeField::new('createdAt', 'Date de création')->onlyOnIndex(),
+            Field\DateTimeField::new('createdAt', 'Créé le')
+                ->onlyOnIndex()
+                ->setTextAlign('center'),
         ];
     }
 

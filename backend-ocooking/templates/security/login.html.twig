@@ -2,14 +2,14 @@
 
 {% block title %}O'Cooking - Admin{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css">
 {% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row justify-content-center" style="height: 100vh;">
-            <div class="col-8 align-self-center">
-                <form class="bg-light p-4" method="post">
+            <div class="col-lg-8 align-self-center">
+                <form class="bg-light px-5 py-4 border-top-0 border-2" method="post">
                     {% if error %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
