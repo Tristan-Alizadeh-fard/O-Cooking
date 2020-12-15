@@ -28,7 +28,7 @@ class Recipe
     private $name;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=500, nullable=true)
      * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $picture;
