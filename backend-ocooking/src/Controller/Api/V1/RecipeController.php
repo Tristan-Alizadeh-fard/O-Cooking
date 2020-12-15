@@ -12,6 +12,8 @@ use App\Repository\RecipeRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
+use App\Service\SluggerService;
+use App\Service\UploadFileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -159,12 +161,19 @@ class RecipeController extends AbstractController
     /**
     * @Route("/add", name="add", methods={"POST"})
     */
-    public function add(Request $request, CategoryRepository $categoryRepository, MeasureRepository $measureRepository, IngredientRepository $ingredientRepository, TagRepository $tagRepository)
+    public function add(Request $request, SluggerService $slugger, UploadFileService $uploadFile, CategoryRepository $categoryRepository, MeasureRepository $measureRepository, IngredientRepository $ingredientRepository, TagRepository $tagRepository)
     {
         $json = $request->getContent();
 
         $recipeInformationsArray = json_decode($json, true);
 
+        // Save picture on server
+        $pictureName = $slugger->slugifyRecipeNameForPicture($recipeInformationsArray['name'], $this->getUser());
+        $pictureFilePath = $uploadFile->uploadRecipePicture($recipeInformationsArray['picture'], $pictureName);
+        
+        // path to the picture
+        $recipeInformationsArray['picture'] = $pictureFilePath;
+        
         $recipe = new Recipe();
 
         $form = $this->createForm(RecipeType::class, $recipe);
