@@ -1,3 +1,12 @@
+.all__page.about{
+  background-image :url("../../pictures/font_acceuil.jpg");
+  // height: 100%;
+  // min-height: 100%;
+  background-position: 16%  -100%;
+  // margin: auto;
+  // background-size: contain;
+}
+
 .about_contenair {
   width: auto;
   height: auto;
@@ -51,6 +60,14 @@
 }
 
 @media screen and (min-width: 760px){
+  .all__page.about{
+    background-image :url("../../pictures/font_acceuil.jpg");
+    // height: 100%;
+    // min-height: 100%;
+    background-position: 20%  -50%;
+    // margin: auto;
+    background-size: cover;
+  }
   .cards{
     justify-content: space-around;
     display: flex;
@@ -95,6 +112,14 @@
 }
 
 @media screen and (min-width: 1020px){
+  .all__page.about{
+    background-image :url("../../pictures/font_acceuil.jpg");
+    // height: 100%;
+    // min-height: 100%;
+    background-position: 25%  -50%;
+    // margin: auto;
+    background-size: cover;
+  }
   .cards{
     justify-content: space-around;
     display: flex;
