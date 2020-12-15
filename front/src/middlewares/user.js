@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {
   LOG_IN,
   USER_INSCRIPTION,
@@ -31,7 +30,10 @@ import {
   setShopListAction,
   getShopListAction,
   setEmailSuccessAction,
+  updateUserField,
 } from 'src/actions/user';
+import { getFormSettings } from '../actions/recipe';
+import { getUserRecipesAction } from '../actions/user';
 
 const user = (store) => (next) => (action) => {
   switch (action.type) {
@@ -51,6 +53,9 @@ const user = (store) => (next) => (action) => {
           console.log(response, 'success login');
           store.dispatch(saveUserLogin(response.data.token));
           store.dispatch(saveUserName());
+          store.dispatch(updateUserField('pass', ''));
+          store.dispatch(getFormSettings());
+          store.dispatch(getUserRecipesAction());
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware LOGIN error');
@@ -102,6 +107,8 @@ const user = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data, 'get all recipes ok');
           store.dispatch(saveAllrecipes(response.data.recipes));
+          store.dispatch(updateUserField(null, 'searchInput'));
+          store.dispatch(updateUserField('Toutes les recettes', 'selectedCategory'));
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware getALLRECIPES');
@@ -268,15 +275,17 @@ const user = (store) => (next) => (action) => {
         searchInput,
         selectedCategory,
         searchOption,
-        selectedLocation,
       } = store.getState().user;
-      let formatedCategory;
-      searchOption.map((option) => {
+      store.dispatch(updateUserField(null, 'searchInput')); // prévient d'un reste de valeur non souhaitée donnée par le Rehydrate
+      store.dispatch(updateUserField(searchInput, 'searchInput')); // réassigne la valeur souhaitée de searchInput dans le champ de recherche
+      store.dispatch(updateUserField('Toutes les recettes', 'selectedCategory'));
+      store.dispatch(updateUserField(selectedCategory, 'selectedCategory'));
+      var formatedCategory;
+      searchOption.map((option) => { // récupère l'id de la catégorie souhaitée pour la DB
         if (option.text === selectedCategory) {
-          formatedCategory = option.id;
+          formatedCategory = option.key;
         }
       });
-      // console.log(formatedCategory);
       axios.post(`http://localhost:8000/api/v1/recipes/search`, {
         name: searchInput,
         category: formatedCategory,
@@ -291,15 +300,11 @@ const user = (store) => (next) => (action) => {
           store.dispatch(saveAllrecipes(response.data.recipesSearch));
         })
         .catch((error) => {
-          console.log(error, 'La recherche n\'a pas abouti.');
-          // store.dispatch(emailInUse());
         });
       next(action);
       break;
     }
     case REMOVE_SHOP_RECIPE: {
-      console.log('remove_shop_recipe');
-      console.log(action.index);
       axios.delete(`http://localhost:8000/api/v1/shoppinglist/delete/${action.index}`,
         {
           headers: {

@@ -32,6 +32,7 @@ export const SHARE_RECIPE_ACTION = 'SHARE_RECIPE_ACTION';
 export const SET_EMAIL_SUCCESS_ACTION = 'SET_EMAIL_SUCCESS_ACTION';
 export const UNSET_EMAIL_SUCCESS_ACTION = 'UNSET_EMAIL_SUCCESS_ACTION';
 export const SEND_SHOPPINGLIST_ACTION = 'SEND_SHOPPINGLIST_ACTION';
+export const SET_SEARCHBAR_SETTINGS = 'SET_SEARCHBAR_SETTINGS';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -148,16 +149,6 @@ export const setRecipe = (data) => ({
   recipe: data,
 });
 
-export const setUserFavorite = (data) => ({
-  type: SET_USER_FAVORITE,
-  userFavorite: data,
-});
-
-export const unsetUserFavorite = (data) => ({
-  type: UNSET_USER_FAVORITE,
-  userFavorite: data,
-});
-
 export const addShopListAction = (id) => ({
   type: ADD_SHOPLIST_ACTION,
   id,
@@ -197,4 +188,9 @@ export const unsetEmailSuccessAction = () => ({
 
 export const sendShoppingListAction = () => ({
   type: SEND_SHOPPINGLIST_ACTION,
+});
+                                             
+export const setSearchBarSettings = (value) => ({
+  type: SET_SEARCHBAR_SETTINGS,
+  value,
 });

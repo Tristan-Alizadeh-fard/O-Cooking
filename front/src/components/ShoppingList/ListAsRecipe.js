@@ -8,7 +8,7 @@ const ListAsRecipe = ({
   recipeIngredients,
   removeShoppingRecipe,
   removeFromList,
-  shoppingListCheck,
+  listCheck,
 }) => {
   console.log('ListAsRecipe');
   return (
@@ -22,24 +22,26 @@ const ListAsRecipe = ({
       </Button>
       <div className="content">
         {recipeIngredients.map((ingredient) => {
-          if (shoppingListCheck.find((ig) => ig === ingredient.id)) {
-            return (
-              <Checkbox
-                label={ingredient.quantity}
-                onClick={() => removeFromList(ingredient.id)}
-                key={ingredient.id}
-                defaultChecked
-              />
-            );
-          }
-          if (!shoppingListCheck.find((ig) => ig === ingredient.id)) {
-            return (
-              <Checkbox
-                label={ingredient.quantity}
-                onClick={() => removeFromList(ingredient.id)}
-                key={ingredient.id}
-              />
-            );
+          if (listCheck !== undefined) {
+            if (listCheck.find((ig) => ig === ingredient.id)) {
+              return (
+                <Checkbox
+                  label={ingredient.quantity}
+                  onClick={() => removeFromList(ingredient.id)}
+                  key={ingredient.id}
+                  defaultChecked
+                />
+              );
+            }
+            if (!listCheck.find((ig) => ig === ingredient.id)) {
+              return (
+                <Checkbox
+                  label={ingredient.quantity}
+                  onClick={() => removeFromList(ingredient.id)}
+                  key={ingredient.id}
+                />
+              );
+            }
           }
         })}
       </div>
@@ -48,7 +50,7 @@ const ListAsRecipe = ({
 };
 
 ListAsRecipe.propTypes = {
-  shoppingListCheck: PropTypes.array.isRequired,
+  listCheck: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
   recipeIngredients: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired,
