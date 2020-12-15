@@ -3,7 +3,7 @@ import axios from 'axios';
 // eslint-disable-next-line import/no-unresolved
 import { formatIG, formatTime, formatStep, formatSetMeasure } from 'src/utils';
 import { setFormSettings, setMeasures, emptyForm, sendMessage } from 'src/actions/recipe';
-import { saveUserName } from 'src/actions/user';
+import { saveUserName, setSearchBarSettings } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
   switch (action.type) {
@@ -59,7 +59,7 @@ const user = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response, 'success get settings');
           store.dispatch(setFormSettings(response.data.categories));
-
+          store.dispatch(setSearchBarSettings(formatSetMeasure(response.data.categories)));
           store.dispatch(setMeasures(formatSetMeasure(response.data.measure)));
         })
         .catch((error) => {

@@ -28,6 +28,7 @@ export const GET_SHOPLIST_ACTION = 'GET_SHOPLIST_ACTION';
 export const SET_SHOPLIST_ACTION = 'SET_SHOPLIST_ACTION';
 export const REMOVE_FROM_LIST = 'REMOVE_FROM_LIST';
 export const REMOVE_SHOP_RECIPE = 'REMOVE_SHOP_RECIPE';
+export const SET_SEARCHBAR_SETTINGS = 'SET_SEARCHBAR_SETTINGS';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -166,4 +167,9 @@ export const removeFromList = (index) => ({
 export const removeShoppingRecipe = (index) => ({
   type: REMOVE_SHOP_RECIPE,
   index,
+});
+
+export const setSearchBarSettings = (value) => ({
+  type: SET_SEARCHBAR_SETTINGS,
+  value,
 });

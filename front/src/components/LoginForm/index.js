@@ -34,7 +34,6 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
       <div className="form__login">
         {errorLogin && <div className="error__login">Vérifiez votre Email ou Password</div>}
         {isLogged && <p className="login__ok">Login Success !</p>}
-        {isLogged && <Redirect to={{ pathname: '/home' }} />}
         <Form className="form__log">
           {!isLogged && <p className="title__form">Formulaire de login</p>}
           <Form.Field className="interior__form__log">

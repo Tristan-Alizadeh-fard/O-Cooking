@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Prototypes from 'prop-types';
 import './page.scss';
 import ConnectedShoppingList from 'src/containers/ConnectedShoppingList';
@@ -20,6 +20,7 @@ import About from 'src/components/About';
 const Page = ({ isLogged }) => (
   <div>
     {isLogged && <><ConnectedNavbar /><ConnectedSearchBar /></>}
+    {!isLogged && <Redirect to="/" />}
     <Route
       path="/inscription"
     >

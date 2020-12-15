@@ -16,6 +16,7 @@ import {
   SET_RECIPE,
   SET_SHOPLIST_ACTION,
   REMOVE_FROM_LIST,
+  SET_SEARCHBAR_SETTINGS,
 } from 'src/actions/user';
 
 const initialState = {
@@ -32,17 +33,12 @@ const initialState = {
   token: '',
   emailInUse: false,
   recipes: [],
-  recipe: {},
+  recipe: [],
   admin: false,
   isLoading: true,
-  searchOption: [
-    { key: 'all', text: 'Tout voir', value: 'all', id: '' },
-    { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
-    { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
-    { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
-  ],
+  searchOption: [],
   searchLocation: ['Mes recettes', 'Toutes les recettes'],
-  selectedCagetory: '',
+  selectedCagetory: 'Toutes les recettes',
   selectedLocation: 'Toutes les recettes',
   searchInput: null,
   idUser: null,
@@ -116,12 +112,14 @@ const user = (state = initialState, action = {}) => {
         isLoading: false,
       };
     case LOG_OUT_USER:
+      localStorage.clear();
       return {
         ...state,
         isLogged: false,
         token: '',
         pass: '',
         confirmPass: '',
+        inputSearch: null,
       };
     case SAVE_RECIPE:
       return {
@@ -159,10 +157,16 @@ const user = (state = initialState, action = {}) => {
         ...state,
         shoppingList: action.value,
       };
-    case REMOVE_FROM_LIST: {
+    case REMOVE_FROM_LIST:
       return {
         ...state,
         listCheck: [...state.listCheck, action.index],
+      };
+    case SET_SEARCHBAR_SETTINGS: {
+      action.value.push({ key: undefined, text: 'Toutes les recettes', value: 'Toutes les recettes' });
+      return {
+        ...state,
+        searchOption: action.value,
       };
     }
     default: return { ...state };
