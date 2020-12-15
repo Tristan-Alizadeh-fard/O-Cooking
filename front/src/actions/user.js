@@ -28,6 +28,10 @@ export const GET_SHOPLIST_ACTION = 'GET_SHOPLIST_ACTION';
 export const SET_SHOPLIST_ACTION = 'SET_SHOPLIST_ACTION';
 export const REMOVE_FROM_LIST = 'REMOVE_FROM_LIST';
 export const REMOVE_SHOP_RECIPE = 'REMOVE_SHOP_RECIPE';
+export const SHARE_RECIPE_ACTION = 'SHARE_RECIPE_ACTION';
+export const SET_EMAIL_SUCCESS_ACTION = 'SET_EMAIL_SUCCESS_ACTION';
+export const UNSET_EMAIL_SUCCESS_ACTION = 'UNSET_EMAIL_SUCCESS_ACTION';
+export const SEND_SHOPPINGLIST_ACTION = 'SEND_SHOPPINGLIST_ACTION';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -176,4 +180,21 @@ export const removeFromList = (index) => ({
 export const removeShoppingRecipe = (index) => ({
   type: REMOVE_SHOP_RECIPE,
   index,
+});
+
+export const shareRecipeAction = (id) => ({
+  type: SHARE_RECIPE_ACTION,
+  id,
+});
+
+export const setEmailSuccessAction = () => ({
+  type: SET_EMAIL_SUCCESS_ACTION,
+});
+
+export const unsetEmailSuccessAction = () => ({
+  type: UNSET_EMAIL_SUCCESS_ACTION,
+});
+
+export const sendShoppingListAction = () => ({
+  type: SEND_SHOPPINGLIST_ACTION,
 });

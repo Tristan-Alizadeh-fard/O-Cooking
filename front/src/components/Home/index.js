@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import testimage from 'src/pictures/sandwich.jpg';
 import './home.scss';
 
-const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite }) => {
+const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite, addShopList, removeShoppingRecipe, shoppingList }) => {
 
   console.log('Home', recipesUser);
   const setLoaderHomerecipes = (id) => {
@@ -51,10 +51,17 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                     <p className="link__author">
                       <i className="user icon" />{`By ${name}`}
                     </p>
-                    <Link to="/aide-course" className="link__icon" onClick={() => console.log('aide de course')}>
-                      <i className="shopping cart icon" />Ajouter à l'aide de course
-                    </Link>
-                    {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
+                    {!shoppingList && <Link to="/home" className="link__icon" onClick={() => addShopList(recipeUser.id)}>
+                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                  </Link>}
+                  {shoppingList && !shoppingList.find(shop => shop.id === recipeUser.id) &&<Link to="/home" className="link__icon" onClick={() => addShopList(recipeUser.id)}>
+                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                  </Link>}
+                  {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <Link to="/home" className="link__icon" onClick={() => removeShoppingRecipe(recipeUser.id)}>
+                    <i className="shopping cart icon" />Retirer de l'aide de course
+                  </Link>}
+                  {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <h6 className="inShopingList">Recette présente dans votre aide de course</h6>}
+                  {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
                       <i className="heart icon" />Ajouter aux favoris
                     </Link>}
                     {favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => unsetFavorite(recipeUser.id)}>
@@ -62,8 +69,8 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                     </Link>}
                   </div>
                   {favorite.find(fav => fav.name === recipeUser.name) && <div className="favoris__icon">
-                <i className="heart icon" />
-                <p className="text__favoris">Ajouté aux favoris</p>
+                
+                <h5 className="text__favoris">Recette ajouté aux favoris</h5>
               </div>}
                 
               </div>
@@ -76,6 +83,9 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
 };
 
 Home.protoTypes = {
+  shoppingList: PropTypes.array.isRequired,
+  removeShoppingRecipe: PropTypes.func.isRequired,
+  addShopList: PropTypes.func.isRequired,
   favorite: PropTypes.array.isRequired,
   setFavorite: PropTypes.func.isRequired,
   unsetFavorite: PropTypes.func.isRequired,

@@ -6,10 +6,12 @@ import Prototypes from 'prop-types';
 const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList, getFormSettings }) => {
   const setLoaderHome = () => {
     setLoader();
+    getShopList();
     getUserRecipes();
   };
   const setLoaderAllrecipes = () => {
     setLoader();
+    getShopList();
     getAllrecipes();
   };
   const setLoaderShopList = () => {

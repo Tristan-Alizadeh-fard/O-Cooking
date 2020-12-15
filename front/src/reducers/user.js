@@ -18,6 +18,8 @@ import {
   UNSET_USER_FAVORITE,
   SET_SHOPLIST_ACTION,
   REMOVE_FROM_LIST,
+  SET_EMAIL_SUCCESS_ACTION,
+  UNSET_EMAIL_SUCCESS_ACTION,
 } from 'src/actions/user';
 
 const initialState = {
@@ -53,6 +55,7 @@ const initialState = {
   userFavorite: {},
   shoppingList: [],
   shoppingListCheck: [],
+  emailSuccess: false,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -158,6 +161,18 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         shoppingListCheck: [...state.shoppingListCheck, action.index],
+      };
+    }
+    case SET_EMAIL_SUCCESS_ACTION: {
+      return {
+        ...state,
+        emailSuccess: true,
+      };
+    }
+    case UNSET_EMAIL_SUCCESS_ACTION: {
+      return {
+        ...state,
+        emailSuccess: false,
       };
     }
     default: return { ...state };
