@@ -33,13 +33,13 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Backend Ocooking')
+            ->setTitle('Backoffice O\'cooking')
             ->renderContentMaximized();
     }
 
     public function configureMenuItems(): iterable
     {
-        // yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
         yield MenuItem::section('Utilisateurs');
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
