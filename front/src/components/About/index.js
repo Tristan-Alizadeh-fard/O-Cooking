@@ -8,7 +8,12 @@ import symphony from 'src/photos/SYMPHONY.png';
 
 const About = () => (
   <>
-    <div className="about__container">
+  {/* <div className="container">
+    <div className="dev">
+      <img src="https://ca.slack-edge.com/T016B3JM5J5-U01CCBFM2FQ-2eac481aefd0-512"
+    </div>
+  </div> */}
+    {/* <div className="about__container">
       <div className="ui five column grid">
         <div className="column">
           <div className="ui fluid card">
@@ -68,7 +73,7 @@ const About = () => (
       <img className="js" src={js}/>
     </div>
     </div>
-   
+    */}
   </>
 );
 
