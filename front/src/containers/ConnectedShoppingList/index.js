@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { removeFromList, removeShoppingRecipe } from 'src/actions/user';
+import { removeFromList, removeShoppingRecipe, getShopListAction } from 'src/actions/user';
 import ShoppingList from 'src/components/ShoppingList';
 
 const mapStateToProps = (state) => ({
   shoppingList: state.user.shoppingList,
-  shoppingListCheck: state.user.shoppingListCheck,
+  listCheck: state.user.listCheck,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   removeShoppingRecipe: (index) => {
     dispatch(removeShoppingRecipe(index));
+  },
+  getShopListAction: () => {
+    dispatch(getShopListAction());
   },
 });
 

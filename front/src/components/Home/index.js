@@ -5,7 +5,6 @@ import testimage from 'src/pictures/sandwich.jpg';
 import './home.scss';
 
 const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite }) => {
-
   console.log('Home', recipesUser);
   const setLoaderHomerecipes = (id) => {
     setLoader();

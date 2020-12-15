@@ -14,7 +14,24 @@ export const formatIG = (ig) => {
 };
 
 export const formatTime = (arg1, arg2) => {
-  const response = `${arg1}${arg2}`;
+  var formatedArg1;
+  if (arg1 === 'h' || arg1 === '0h' || arg1 === '00h') {
+    formatedArg1 = '';
+  }
+  else {
+    formatedArg1 = arg1;
+  }
+  var formatedArg2;
+  if (arg2.length === 3) {
+    formatedArg2 = `0${arg2}`;
+  }
+  if (arg2.length === 2) {
+    formatedArg2 = `00${arg2}`;
+  }
+  if (arg2.length === 4) {
+    formatedArg2 = arg2;
+  }
+  const response = `${formatedArg1}${formatedArg2}`;
   return response;
 };
 
