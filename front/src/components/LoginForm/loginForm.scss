@@ -9,24 +9,27 @@
 // div du haut page de login
 .home {
   width: 70%;
+  padding: 10px;
   background-color: rgba(128, 128, 128, 0.315);
   // background-color: cornflowerblue;
   margin: auto auto;
-  margin-top: 40px;
-  border-top: 0.5px solid rgba(58, 58, 58, 0.788);
-  border-right: 2.3px solid rgba(27, 27, 27, 0.705);
-  border-bottom: 2.3px solid rgba(27, 27, 27, 0.705);
-  border-left: 0.5px solid rgba(58, 58, 58, 0.788);
+  margin-top: 30px;
+  border-top: 0.5px solid rgba(255, 254, 254, 0.788);
+  border-right: 1px solid rgba(1.57, 27, 27, 0.705);
+  border-bottom: 1.5px solid rgba(1.57, 27, 27, 0.705);
+  border-left: 0.5px solid rgba(255, 255, 255, 0.788);
   border-radius: 1em;
   box-shadow: 8px 6px 4px 1px rgba(17, 17, 17, 0.301);
 
 }
 // h2 et h3 de .home
 .home__title { //h2
+  font-size: 1.4em;
   text-align: center;
   color: black;
 }
 .home__smalltitle { //h3
+  font-size: 1.2em;
   text-align: center;
   color: black;
 }
@@ -38,7 +41,9 @@
 // Bouton voir plus semantic ui 
 .ui.button.voir__plus{
   color: white;
+  font-size: 0.8em;
   border-radius: 25px;
+  border: 0.5px solid rgba(255, 255, 255, 0.788);
   background: rgba(9, 5, 255, 0.61);
   box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
 }
@@ -57,7 +62,9 @@
 //bouton sémantic voir moins
 .ui.button.voir__moins{
   color: white;
+  font-size: 0.8em;
   border-radius: 25px;
+  border: 0.5px solid rgba(255, 255, 255, 0.788);
   background: rgba(9, 5, 255, 0.61);
   box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
 }
@@ -66,13 +73,13 @@
 .form__login {
   text-align: center;
   margin: auto auto;  
-  margin-top: 60px;
+  margin-top: 45px;
   width: 50%;
   padding: 1em;
-  border-top: 0.5px solid rgba(58, 58, 58, 0.788);
-  border-right: 2.3px solid rgba(27, 27, 27, 0.705);
-  border-bottom: 2.3px solid rgba(27, 27, 27, 0.705);
-  border-left: 0.5px solid rgba(58, 58, 58, 0.788);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.788);
+  border-right: 1px solid rgba(1.57, 27, 27, 0.705);
+  border-bottom: 1.5px solid rgba(1.57, 27, 27, 0.705);
+  border-left: 0.5px solid rgba(255, 255, 255, 0.788);
   border-radius: 1em;
   background-color: rgba(128, 128, 128, 0.315);
   margin-bottom: 20px;
@@ -95,17 +102,19 @@
 }
 // élément titre (votre email + input email semantic)
 .field.log__mail__pass{
+  font-size: 0.8em;
   // background: springgreen;
 }
 
 // label "votre email" et "votre pass"  au decu des inputs
 .ui.form .field>label{
+  font-size: 1.2em;
   border-bottom: 1px solid black;
   // background: tomato;
 }
 //encadré des input de email et pass
 .ui.fluid.input{
-  background-color:black;
+  background-color:rgba(0, 0, 0, 0.993);
   size: 10px;
 }
 // ciblage de l'encadré input de saisie de l'input email et pass 
@@ -119,8 +128,10 @@
 // bouton Login du formulaire 
 .ui.button.button__login{
   color: white;
+  font-size: 0.8em;
   border-radius: 25px;
   background: rgba(9, 5, 255, 0.61);
+  border: 0.5px solid rgba(255, 255, 255, 0.788);
   box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
 }
 
@@ -133,7 +144,7 @@
 
 // div du lien inscrivez-vous
 .link__inscription {
-  margin-top: 40px;
+  margin-top: 50px;
   text-align: center;
 }
 // boutton inscrivez vous 
@@ -142,13 +153,14 @@
   font-size: 15px;
   font-weight: bold;
   border-radius: 25px;
+  border: 0.5px solid rgba(255, 255, 255, 0.788);
   background: rgba(9, 5, 255, 0.61);
   box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
   padding: 0.5rem;
 }
 // selection de la div lien pass oublié
 .link__forgottenpass {
-  margin-top: 40px;
+  margin-top: 15%;
   text-align: center;
   
 }
@@ -164,13 +176,236 @@
 // div du link login success 
 .login__ok {
   color: white;
-  font-size: 20px;
+  font-size: 1em;
   text-align: center;
   padding-top: 15px;
 }  
 
+@media screen and (min-width: 760px){
+  // div du haut page de login
+  .home {
+    width: 70%;
+    background-color: rgba(128, 128, 128, 0.315);
+    margin-top: 15%;
+    border-top: 1.5px solid rgba(255, 254, 254, 0.788);
+    border-right: 2px solid rgba(1.57, 27, 27, 0.705);
+    border-bottom: 2.5px solid rgba(27, 27, 27, 0.705);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.788);
+  }
+  // h2 de .home
+  .home__smalltitle { 
+    font-size: 1.3em;
+  }
+  // Bouton voir plus semantic ui 
+  .ui.button.voir__plus{
+    font-size: 1.2em;
+  }
+  // balise p quand le bouton voir plus est activé 
+  .home__content { // p
+    font-size: 1.1em;
+    text-align: center;
+    color: black;
+    padding-bottom: 15px;
+  } 
+  //bouton sémantic voir moins
+  .ui.button.voir__moins{
+    font-size: 1.2em;
+  }
+  // div englobant input mail et pass (milieu de page)
+  .form__login {
+    margin-top: 15%;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.788);
+    border-right: 1.5px solid rgba(27, 27, 27, 0.705);
+    border-bottom: 1.5px solid rgba(27, 27, 27, 0.705);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.788);
+  }
+  // balise p du titre formulaire 
+  .title__form {
+    font-size: 1.5em;
+  }
+  // élément titre (votre email + input email semantic)
+  .field.log__mail__pass{
+    // background: springgreen;
+    font-size: 1.2em;
+  }
+  // label "votre email" et "votre pass"  au decu des inputs
+  .ui.form .field>label{
+    font-size: 1.2em;
+    padding: 5px;
+  }
+  // bouton Login du formulaire 
+  .ui.button.button__login{
+    font-size: 1.2em;
+  }
+  // div du lien inscrivez-vous
+  .link__inscription {
+    margin-top: 15%;
+    text-align: center;
+  }
+  // boutton inscrivez vous 
+  .inscription {
+    font-size: 2em;
+    padding: 8px;
+  }
+  .login__ok {
+    font-size: 1.2em;
+  } 
+}
 
+@media screen and (min-width: 1020px){
+  // div du haut page de login
+  .home {
+    margin-top: 15%;
+    border-top: 1.5px solid rgba(255, 254, 254, 0.788);
+    border-right: 2px solid rgba(1.57, 27, 27, 0.705);
+    border-bottom: 2.5px solid rgba(27, 27, 27, 0.705);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.788);
+  }
+  // h2 de .home
+  .home__title { 
+    font-size: 2.5em;
 
+  }
+  // h3 de .home
+  .home__smalltitle { 
+    font-size: 2em;
+  }
+  // Bouton voir plus semantic ui 
+  .ui.button.voir__plus{
+    font-size: 1.5em;
+  }
+  // balise p quand le bouton voir plus est activé 
+  .home__content { // p
+    font-size: 1.5em;
+  } 
+  //bouton sémantic voir moins
+  .ui.button.voir__moins{
+    font-size: 1.5em;
+  }
+  // div englobant input mail et pass (milieu de page)
+  .form__login {
+    margin-top: 15%;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.788);
+    border-right: 1.5px solid rgba(27, 27, 27, 0.705);
+    border-bottom: 1.5px solid rgba(27, 27, 27, 0.705);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.788);
+  }
+  // balise p du titre formulaire 
+  .title__form {
+    font-size: 2.3em;
+  }
+  // élément titre (votre email + input email semantic)
+  .field.log__mail__pass{
+    // background: springgreen;
+    font-size: 1.6em;
+  }
+  // label "votre email" et "votre pass"  au decu des inputs
+  .ui.form .field>label{
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+  // bouton Login du formulaire 
+  .ui.button.button__login{
+    font-size: 1.5em;
+  }
+  // div du lien inscrivez-vous
+  .link__inscription {
+    margin-top: 15%;
+    text-align: center;
+  }
+  // boutton inscrivez vous 
+  .inscription {
+    font-size: 2.5em;
+    padding: 8px;
+  }
+
+  .login__ok {
+    font-size: 1.8em;
+  }
+}
+
+@media screen and (min-width: 1238px){
+  // Div de toute la page formulaire
+  .all__page{
+    position: relative;
+    background:none;
+  }
+  // div du haut page de login
+  .home {
+    width: 50%;
+    margin-top: 5%;
+    border-top: 1.5px solid rgba(255, 254, 254, 0.788);
+    border-right: 2px solid rgba(1.57, 27, 27, 0.705);
+    border-bottom: 2.5px solid rgba(27, 27, 27, 0.705);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.788);
+  }
+  // h2 de .home
+  .home__title { 
+    font-size: 2.2em;
+
+  }
+  // h3 de .home
+  .home__smalltitle { 
+    font-size: 1.8em;
+  }
+  // Bouton voir plus semantic ui 
+  .ui.button.voir__plus{
+    font-size: 1.2em;
+  }
+  // balise p quand le bouton voir plus est activé 
+  .home__content { // p
+    font-size: 1.2em;
+  } 
+  //bouton sémantic voir moins
+  .ui.button.voir__moins{
+    font-size: 1.2em;
+  }
+  // div englobant input mail et pass (milieu de page)
+  .form__login {
+    width: 25%;
+    margin-top: 5%;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.788);
+    border-right: 1.5px solid rgba(27, 27, 27, 0.705);
+    border-bottom: 1.5px solid rgba(27, 27, 27, 0.705);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.788);
+  }
+  // balise p du titre formulaire 
+  .title__form {
+    font-size: 2em;
+  }
+  // élément titre (votre email + input email semantic)
+  .field.log__mail__pass{
+    // background: springgreen;
+    font-size: 1.2em;
+  }
+  // label "votre email" et "votre pass"  au decu des inputs
+  .ui.form .field>label{
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+  // bouton Login du formulaire 
+  .ui.button.button__login{
+    font-size: 1.2em;
+  }
+  // div du lien inscrivez-vous
+  .link__inscription {
+    margin-top: 5%;
+    text-align: center;
+  }
+  // boutton inscrivez vous 
+  .inscription {
+    font-size: 2.5em;
+    padding: 10px;
+    position: fixed;
+    top: 2%;
+    right: 1%;
+  }
+  .login__ok {
+    font-size: 1.8em;
+  }
+}
 /*
 Code css pas utilisé il me semble ?
 .link__logged {
