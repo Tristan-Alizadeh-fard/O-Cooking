@@ -153,7 +153,10 @@ class RecipeController extends AbstractController
         $measureData = json_decode($jsonContentMeasures, true);
 
         // DOC Tag
-
+        $jsonContentTags = $serializer->serialize($tags, 'json', [
+            'groups' => 'tag_needed_information_add',
+        ]);
+        $tagData = json_decode($jsonContentTags, true);
         // DOC fin Tag
   
         return $this->json([
@@ -161,7 +164,7 @@ class RecipeController extends AbstractController
           'ingredients' => $ingredientData,
           'measure' => $measureData,
           // DOC Tag
-          'tag' => '',
+          'tag' => $tagData,
           // DOC fin Tag
         ]);
  

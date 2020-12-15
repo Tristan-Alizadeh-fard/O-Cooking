@@ -17,13 +17,13 @@ class Tag
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"recipe_read"})
+     * @Groups({"recipe_read", "tag_needed_information_add"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "show_user", "recipe_read"})
+     * @Groups({"show_recipe", "show_user", "recipe_read", "tag_needed_information_add"})
      */
     private $name;
 
