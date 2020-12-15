@@ -30,8 +30,10 @@ class RecipeCrudController extends AbstractCrudController
                 ->setTextAlign('center'),
             Field\TextField::new('cookingTime', 'Cuisson')
                 ->setTextAlign('center'),
-            Field\CollectionField::new('recipeIngredients', 'Ingrédients'),
-            Field\CollectionField::new('steps', 'Etapes'),
+            Field\CollectionField::new('recipeIngredients', 'Ingrédients')
+                ->onlyOnDetail(),
+            Field\CollectionField::new('steps', 'Etapes')
+                ->onlyOnDetail(),
             Field\AssociationField::new('author', 'Auteur'),
             Field\DateTimeField::new('createdAt', 'Créée le')
                 ->setTextAlign('center'),
