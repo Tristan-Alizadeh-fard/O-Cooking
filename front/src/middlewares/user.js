@@ -13,6 +13,9 @@ import {
   GET_SHOPLIST_ACTION,
   SEARCH,
   REMOVE_SHOP_RECIPE,
+  REMOVE_FROM_LIST,
+  SHARE_RECIPE_ACTION,
+  SEND_SHOPPINGLIST_ACTION,
   saveUserLogin,
   saveUserInscription,
   errorInscription,
@@ -26,6 +29,7 @@ import {
   setRecipe,
   setShopListAction,
   getShopListAction,
+  setEmailSuccessAction,
   updateUserField,
 } from 'src/actions/user';
 import { getFormSettings } from '../actions/recipe';
@@ -315,6 +319,44 @@ const user = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log(error, 'shoplist delete error');
+        });
+      next(action);
+      break;
+    }
+    case SHARE_RECIPE_ACTION: {
+      axios.get(`http://localhost:8000/api/v1/recipes/send/${action.id}`,
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response, 'share recipe ok');
+          store.dispatch(setEmailSuccessAction());
+        })
+        .catch((error) => {
+          console.log(error, 'share recipe error');
+        });
+      next(action);
+      break;
+    }
+    case SEND_SHOPPINGLIST_ACTION: {
+      axios.get(`http://localhost:8000/api/v1/shoppinglist/send/`,
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response, 'send shoplist ok');
+          store.dispatch(setEmailShoppingListSuccessAction());
+        })
+        .catch((error) => {
+          console.log(error, 'send shoplist error');
         });
       next(action);
       break;

@@ -16,6 +16,8 @@ import {
   SET_RECIPE,
   SET_SHOPLIST_ACTION,
   REMOVE_FROM_LIST,
+  SET_EMAIL_SUCCESS_ACTION,
+  UNSET_EMAIL_SUCCESS_ACTION,
   SET_SEARCHBAR_SETTINGS,
 } from 'src/actions/user';
 
@@ -47,6 +49,8 @@ const initialState = {
   userFavorite: {},
   listCheck: [],
   shoppingList: [],
+  shoppingListCheck: [],
+  emailSuccess: false,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -167,6 +171,18 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         searchOption: action.value,
+      };
+    }
+    case SET_EMAIL_SUCCESS_ACTION: {
+      return {
+        ...state,
+        emailSuccess: true,
+      };
+    }
+    case UNSET_EMAIL_SUCCESS_ACTION: {
+      return {
+        ...state,
+        emailSuccess: false,
       };
     }
     default: return { ...state };

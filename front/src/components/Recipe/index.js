@@ -5,9 +5,10 @@ import testimage from 'src/pictures/sandwich.jpg';
 import './recipe.scss';
 import { setAllLoaders } from '../../actions/user';
 
-const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, addShopList, favorite }) => {
+const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, addShopList, favorite, shoppingList, removeShoppingRecipe, shareRecipe, emailSuccess}) => {
   console.log('Recipe component', recipe);
   console.log('favorite', favorite);
+  console.log(shoppingList);
   return (
     <>
       {isLoading && <div className="ui segment">
@@ -22,18 +23,24 @@ const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, ad
               <img src={testimage} className="image" alt="Table Setting" />
             </div>
             <div className="button">
-              <button type="button" className="icon__addshopping" onClick={() => addShopList(recipe.id)}>Ajouter à l'aide course
+            {!shoppingList.find(shop => shop.id === recipe.id) && <button type="button" className="icon__addshopping" onClick={() => addShopList(recipe.id)}>Ajouter à l'aide course
                 <i className="shopping cart icon" />
-              </button>
-              <button type="button" className="icon__addshopping">Share
+              </button>}
+            {shoppingList.find(shop => shop.id === recipe.id) && <button type="button" className="icon__addshopping" onClick={() => removeShoppingRecipe(recipe.id)}>Retirer de l'aide course
+                <i className="shopping cart icon" />
+              </button>}
+              {shoppingList.find(shop => shop.id === recipe.id) && <h5 className="shopList">Cette recette est dans votre aide de course</h5>}
+              <button type="button" className="icon__addshopping" onClick={() => shareRecipe(recipe.id)}>Envoyer la recette sur votre email 
                 <i className="paper plane icon" />
               </button>
+              {emailSuccess && <h5 className="emailSuccess">Votre email à bien été envoyé</h5>}
               {!favorite.find(fav => fav.name === recipe.name) && <button type="button" className="icon__addshopping" onClick={() => setFavorite(recipe.id)}>Ajouter aux favoris
                 <i className="heart icon" />
               </button>}
               {favorite.find(fav => fav.name === recipe.name) && <button type="button" className="icon__addshopping" onClick={() => unsetFavorite(recipe.id)}>Retirer des favoris
                 <i className="heart outline icon" />
               </button>}
+              {favorite.find(fav => fav.name === recipe.name) && <h5 className="favorite">Cette recette est dans vos favoris</h5>}
               <button type="button" className="icon__addshopping" onClick={() => setSignaled(recipe.id)}>Signaler la recette
                 <i className="flag icon" />
               </button>
@@ -43,7 +50,7 @@ const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, ad
         
           <h2 className="title">{recipe.name}</h2>
           <h3 className="author">{`Author: ${recipe.author.pseudo}`}</h3>
-          {favorite.find(fav => fav.name === recipe.name) && <h3 className="favorite">Cette recette est dans vos favoris</h3>}
+         
           <div className="tags__container">
           {recipe.tags.map((tag) => (
              <span  key={tag.id} className="tag">{tag.name}</span>
@@ -75,6 +82,10 @@ const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, ad
 };
 
 Recipe.prototype = {
+  emailSuccess: PropTypes.bool.isRequired,
+  shareRecipe: PropTypes.func.isRequired,
+  removeShoppingRecipe: PropTypes.func.isRequired,
+  shoppingList: PropTypes.array.isRequired,
   favorite: PropTypes.array.isRequired,
   addShopList: PropTypes.func.isRequired,
   unsetFavorite: PropTypes.func.isRequired,

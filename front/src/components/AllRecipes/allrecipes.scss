@@ -342,7 +342,13 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   border-bottom: solid black 1px;
   
 }
-
+.ui.segment {
+  position: fixed;
+  top: 40%;
+  width: 50%;
+  height: 100px;
+  left: 20%;
+}
 
 
 @media screen and (min-width: 980px) {

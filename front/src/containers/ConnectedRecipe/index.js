@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import Recipe from 'src/components/Recipe';
-import { setSignaledAction, setFavoriteAction, unsetFavoriteAction, addShopListAction } from 'src/actions/user';
+import { setSignaledAction, setFavoriteAction, unsetFavoriteAction, addShopListAction, removeShoppingRecipe, shareRecipeAction } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   recipe: state.user.recipe,
   isLoading: state.user.isLoading,
   favorite: state.user.userFavorite,
+  shoppingList: state.user.shoppingList,
+  emailSuccess: state.user.emailSuccess,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -20,6 +22,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addShopList: (id) => {
     dispatch(addShopListAction(id));
+  },
+  removeShoppingRecipe: (index) => {
+    dispatch(removeShoppingRecipe(index));
+  },
+  shareRecipe: (id) => {
+    dispatch(shareRecipeAction(id));
   },
 });
 

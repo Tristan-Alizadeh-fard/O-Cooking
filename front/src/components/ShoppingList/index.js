@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import ListAsRecipe from './ListAsRecipe';
 import './shoppingList.scss';
 
-const ShoppingList = ({
-  shoppingList,
-  removeFromList,
-  removeShoppingRecipe,
-  listCheck,
-}) => {
+const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shoppingListCheck, sendShoppingList, listCheck }) => {
+
   console.log('ShoppingList');
 
   return (
@@ -27,11 +23,13 @@ const ShoppingList = ({
           {shoppingList.length === 0 && <p>Votre aide de course est vide.</p>}
         </div>
       </div>
+      <button type="button" onClick={() => sendShoppingList()}>Envoyer la liste sur ma boite mail</button>
     </>
   );
 };
 
 ShoppingList.propTypes = {
+  sendShoppingList: PropTypes.func.isRequired,
   shoppingList: PropTypes.array.isRequired,
   listCheck: PropTypes.array.isRequired,
   removeShoppingRecipe: PropTypes.func.isRequired,
