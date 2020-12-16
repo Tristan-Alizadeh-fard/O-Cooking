@@ -45,6 +45,7 @@ class Tag
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $color;
 
