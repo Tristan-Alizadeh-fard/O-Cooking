@@ -48,6 +48,18 @@ export const formatStep = (arr) => {
   return response;
 };
 
+export const formatTags = (arr) => {
+  const response = [];
+  arr.map((item) => (
+    response.push(
+      {
+        name: item,
+      },
+    )
+  ));
+  return response;
+};
+
 export const formatSetMeasure = (values) => {
   const result = [];
   values.map((value) => (
