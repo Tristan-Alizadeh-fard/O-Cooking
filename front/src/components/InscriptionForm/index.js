@@ -27,6 +27,7 @@ const InscriptionForm = ({ updateField, submitInscription, errorInscription, ins
       {inscriptionSuccess && <Link to="/" className="link__back">- Connection -</Link>}
       
     </div>
+    
   );
 };
 

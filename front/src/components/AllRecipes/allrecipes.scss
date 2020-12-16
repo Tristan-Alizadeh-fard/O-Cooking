@@ -343,7 +343,13 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   
 }
 
-
+// tittre "voici toutes les recettes de la communauté
+.allrecipes__title{
+  text-align: center;
+  padding-top : 20px;
+  font-weight : 100;
+  letter-spacing : 5px;
+}
 
 @media screen and (min-width: 980px) {
 
@@ -368,6 +374,12 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   }
   .content {
     border-left: none;
+  }
+  .allrecipes__title{
+    text-align: center;
+    padding-top : 20px;
+    font-weight : 100;
+    letter-spacing : 5px;
   }
 }
 

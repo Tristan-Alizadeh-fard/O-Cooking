@@ -23,7 +23,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
       {!isLoading && 
       <>
         <div className="allrecipes">
-          <h2 className="allrecipes__title">Voici toutes les recettes de la communauté</h2>
+          <h3 className="allrecipes__title">Voici toutes les recettes de la communauté</h3>
         </div>
         <div className="w3-row-padding w3-padding-16 w3-center">
           {recipes.map((recipe) => (
