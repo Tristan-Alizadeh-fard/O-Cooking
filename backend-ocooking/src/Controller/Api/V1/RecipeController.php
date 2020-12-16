@@ -319,20 +319,19 @@ class RecipeController extends AbstractController
     public function sendRecipe(int $id, MailerService $mailerService,SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
     {
       $recipe = $recipeRepository->find($id);
-      $response = new JsonResponse();
-      $jsonContent = $serializer->serialize($recipe, 'json', [
-          'groups' => 'recipe_read',
-      ]);
-      $response = JsonResponse::fromJsonString(($jsonContent));
+          $response = new JsonResponse();
+          $jsonContent = $serializer->serialize($recipe, 'json', [
+              'groups' => 'recipe_read',
+          ]);
+          $response = JsonResponse::fromJsonString(($jsonContent));
 
-      // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
-      if ($recipe === null) {
-          throw $this->createNotFoundException('La recette demandé n\'existe pas');
-      }
-      ;
-      $from = $this->getUser()->getEmail();
-      $mailerService->sendRecipe($recipe, $from);
-      return $response;
+          // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
+          if ($recipe === null) {
+              throw $this->createNotFoundException('La recette demandé n\'existe pas');
+          }
+          ;
+          $from = $this->getUser()->getEmail();
+          $mailerService->sendRecipe($recipe, $from);
+          return $response;
     }
-
 }

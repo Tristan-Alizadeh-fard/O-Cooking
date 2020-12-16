@@ -25,12 +25,12 @@
 {% endblock %}
 
 {% block body %}
-    <div id="container">
+    <div id="container">}
         <div class="title">
             <h2>{{recipe.name}}</h2>
         </div>
         <div class='head'>
-            <img src="https://assets.afcdn.com/recipe/20200828/113353_w350h250c1cx1920cy2880.jpg" alt="couscous">
+            {# <img src="{{path('' ~ recipe.picture)}}" alt="photo du plat {{recipe.name}}"> #}
             
             <h3>Informations de la recette :</h3>
             <ul>
@@ -56,8 +56,6 @@
                 {% endfor %}
             </ol>
         </div>
-    
-    
     </div>
     <p class='author'>Cette recette vous est proposé par  {{recipe.author.pseudo}}</p>
 {% endblock %}
