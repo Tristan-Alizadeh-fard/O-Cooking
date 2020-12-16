@@ -54,7 +54,7 @@ class RecipeController extends AbstractController
     {
       // recherche toutes les recettes
 
-      $recipes = $recipeRepository->findall();
+      $recipes = $recipeRepository->searchRecipesAll();
         
       $json = $serializer->serialize(
           $recipes,
