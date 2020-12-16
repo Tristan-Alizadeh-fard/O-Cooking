@@ -23,7 +23,8 @@ class RecipeCrudController extends AbstractCrudController
             Field\IdField::new('id'),
             Field\ImageField::new('picture', 'Photo'),
             Field\TextField::new('name', 'Nom'),
-            Field\AssociationField::new('category', 'Catégorie'),
+            Field\AssociationField::new('category', 'Catégorie')
+                ->onlyOnDetail(),
             Field\IntegerField::new('nbPeople', 'Personnes')
                 ->setTextAlign('center'),
             Field\TextField::new('preparationTime', 'Préparation')
