@@ -189,14 +189,8 @@
   padding-top: 15px;
 }  
 
+// reglage Ipad
 @media screen and (min-width: 760px){
-  // div du haut page de login
-  .home {
-    border-top: 0.5px solid #0070c9;
-    border-right: 1px solid #0070c9;
-    border-bottom: 1.5px solid #0070c9;
-    border-left: 0.5px solid #0070c9;
-  }
   // h2 de .home
   .home__smalltitle { 
     font-size: 1.3em;
@@ -219,10 +213,6 @@
   // div englobant input mail et pass (milieu de page)
   .form__login {
     padding: 1em;
-    border-top: 0.5px solid #0070c9;
-    border-right: 1px solid #0070c9;
-    border-bottom: 1.5px solid #0070c9;
-    border-left: 0.5px solid #0070c9;
   }
   // balise p du titre formulaire 
   .title__form {
@@ -263,14 +253,15 @@
   } 
 }
 
+// reglage Ipad pro
 @media screen and (min-width: 1020px){
   // div du haut page de login
   .home {
     margin-top: 30px;
-    border-top: 0.5px solid #0070c9;
-    border-right: 1px solid #0070c9;
-    border-bottom: 1.5px solid #0070c9;
-    border-left: 0.5px solid #0070c9;
+    border-top: 1px solid #0070c9;
+    border-right: 1.5px solid #0070c9;
+    border-bottom: 2px solid #0070c9;
+    border-left: 1px solid #0070c9;
   }
   // h2 de .home
   .home__title { 
@@ -340,6 +331,7 @@
   }
 }
 
+// reglage ecrant ordi
 @media screen and (min-width: 1238px){
   // Div de toute la page formulaire
   .all__page.home_login{
@@ -357,8 +349,8 @@
     width: 50%;
     margin-top: 30px;
     border-top: 0.5px solid #0070c9;
-    border-right: 1px solid #0070c9;
-    border-bottom: 1.5px solid #0070c9;
+    border-right: 1.5px solid #0070c9;
+    border-bottom: 2px solid #0070c9;
     border-left: 0.5px solid #0070c9;
   }
   
