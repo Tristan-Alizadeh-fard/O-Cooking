@@ -54,7 +54,7 @@ class RecipeController extends AbstractController
     {
       // recherche toutes les recettes
 
-      $recipes = $recipeRepository->findall();
+      $recipes = $recipeRepository->searchRecipesAll();
         
       $json = $serializer->serialize(
           $recipes,
@@ -131,7 +131,9 @@ class RecipeController extends AbstractController
         $categories = $category->findAll();
         $ingredients = $ingredient->findAll();
         $measures = $measure->findAll();
-        // $tags = $tag->findAll();
+        // DOC Tag
+        $tags = $tag->findAll();
+        // DOC fin Tag
 
         
         $jsonContentCategories = $serializer->serialize($categories, 'json', [
@@ -149,11 +151,21 @@ class RecipeController extends AbstractController
             'groups' => 'measure_needed_information_add',
         ]);
         $measureData = json_decode($jsonContentMeasures, true);
+
+        // DOC Tag
+        $jsonContentTags = $serializer->serialize($tags, 'json', [
+            'groups' => 'tag_needed_information_add',
+        ]);
+        $tagData = json_decode($jsonContentTags, true);
+        // DOC fin Tag
   
         return $this->json([
           'categories' => $categoryData,
           'ingredients' => $ingredientData,
-          'measure' => $measureData
+          'measure' => $measureData,
+          // DOC Tag
+          'tags' => $tagData,
+          // DOC fin Tag
         ]);
  
     }
@@ -167,12 +179,20 @@ class RecipeController extends AbstractController
 
         $recipeInformationsArray = json_decode($json, true);
 
-        // Save picture on server
-        $pictureName = $slugger->slugifyRecipeNameForPicture($recipeInformationsArray['name'], $this->getUser());
-        $pictureFilePath = $uploadFile->uploadRecipePicture($recipeInformationsArray['picture'], $pictureName);
-        
-        // path to the picture
-        $recipeInformationsArray['picture'] = $pictureFilePath;
+        if ($recipeInformationsArray['picture'] !== "") {
+            $test = preg_match('/data:image\/([a-z]+);base64,/', $recipeInformationsArray['picture']);
+
+            if ($test) {
+                // Save picture on server
+                $pictureName = $slugger->slugifyRecipeNameForPicture($recipeInformationsArray['name'], $this->getUser());
+                $pictureFilePath = $uploadFile->uploadRecipePicture($recipeInformationsArray['picture'], $pictureName);
+                
+                // path to the picture
+                $recipeInformationsArray['picture'] = $pictureFilePath;
+            } else {
+                throw $this->createNotFoundException('Vous ne nous avez pas envoyé une image');
+            }
+        }
         
         $recipe = new Recipe();
 
@@ -208,16 +228,18 @@ class RecipeController extends AbstractController
             }
             $recipe->setCategory($category);
 
-            // // $recipe set tags
-            // $tags = $form->getData()->getTags();
-            // $tagCollection = [];
-            // foreach ($tags as $tag) {
-            //     $tagName = $tag->getName();
-            //     $tagToAdd = $tagRepository->findOneBy(['name' => $tagName]);
-            //     $tagToAdd->addRecipe($recipe);
-            //     $tagCollection[] = $tagToAdd;
-            //     $recipe->addTag($tagToAdd);
-            // }
+            // DOC $recipe set tags
+            $tags = $form->getData()->getTags();
+            foreach ($tags as $tag) {
+                $tagName = $tag->getName();
+                $recipe->removeTag($tag);
+                $tagToAdd = $tagRepository->findOneBy(['name' => $tagName]);
+                if (is_null($tagToAdd)) {
+                    throw $this->createNotFoundException('Le(s) tag(s) sélectionné(s) n\'existe(nt) pas');
+                }
+                $recipe->addTag($tagToAdd);
+            }
+            // DOC fin $recipe set tags
 
             // set recipe in $recipeIngredients
             $recipeIngredients = $form->getData()->getRecipeIngredients();

@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // eslint-disable-next-line import/no-unresolved
-import { formatIG, formatTime, formatStep, formatSetMeasure } from 'src/utils';
-import { setFormSettings, setMeasures } from 'src/actions/recipe';
+import { formatIG, formatTime, formatStep, formatSetMeasure, formatTags } from 'src/utils';
+import { setFormSettings, setMeasures, emptyForm, sendMessage, setTags } from 'src/actions/recipe';
+import { saveUserName, setSearchBarSettings } from 'src/actions/user';
 
 const user = (store) => (next) => (action) => {
   switch (action.type) {
@@ -17,6 +18,7 @@ const user = (store) => (next) => (action) => {
         category: {
           name: recipe.selectedCategory,
         },
+        tags: formatTags(recipe.selectedTags),
         recipeIngredients: formatIG(recipe.ingredients),
         steps: formatStep(recipe.steps),
       }, {
@@ -29,15 +31,25 @@ const user = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response, 'success submit recipe');
           // créer une action de réponse avec message et effacement des champs
+          store.dispatch(emptyForm());
+          store.dispatch(saveUserName());
+          store.dispatch(sendMessage('success', true));
+          setTimeout(() => {
+            store.dispatch(sendMessage('success', false));
+          }, 10000);
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware submit error');
-          // créer une action de réponse avec message
+          store.dispatch(sendMessage('error', true));
+          setTimeout(() => {
+            store.dispatch(sendMessage('error', false));
+          }, 10000);
         });
       next(action);
       break;
     }
     case 'recipe/getFormSettings': {
+      store.dispatch(emptyForm());
       axios.get('http://localhost:8000/api/v1/recipes/add', {
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -48,7 +60,8 @@ const user = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response, 'success get settings');
           store.dispatch(setFormSettings(response.data.categories));
-
+          store.dispatch(setTags(response.data.tags));
+          store.dispatch(setSearchBarSettings(formatSetMeasure(response.data.categories)));
           store.dispatch(setMeasures(formatSetMeasure(response.data.measure)));
         })
         .catch((error) => {

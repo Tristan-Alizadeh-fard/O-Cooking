@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import testimage from 'src/pictures/sandwich.jpg';
 import ConnectedSearchBar from 'src/containers/ConnectedSearchBar';
 import './allrecipes.scss';
 import { setFavoriteAction } from 'src/actions/user';
 
-const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, unsetFavorite, favorite }) => {
+const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, unsetFavorite, favorite, unsetEmailSuccess, addShopList, removeShoppingRecipe, shoppingList }) => {
   console.log('AllRecipes', recipes);
+  console.log(shoppingList);
   const setLoaderAllrecipes = (id) => {
     setLoader();
+    unsetEmailSuccess();
     showRecipe(id);
   };
   return (
@@ -30,7 +31,8 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
             
               <div key={recipe.id} className="w3-quarter">
                 
-                  <img src={testimage} className="image__recette" />
+                  {recipe.picture !== null && <img src={`http://localhost:8000${recipe.picture}`} className="image__allrecipes" />}
+                  {recipe.picture === null &&  <div className="camera mini"><i className="camera icon"/></div>}
               
                 {recipe.signaled && <div className="favoris__icon">
                 <i className="bell icon" />
@@ -54,9 +56,16 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
                   <p className="link__author">
                     <i className="user icon" />{`By ${recipe.author.pseudo}`}
                   </p>
-                  <Link to="/aide-course" className="link__icon" onClick={() => console.log('aide de course')}>
+                  {!shoppingList && <Link to="/allrecipes" className="link__icon" onClick={() => addShopList(recipe.id)}>
                     <i className="shopping cart icon" />Ajouter à l'aide de course
-                  </Link>
+                  </Link>}
+                  {shoppingList && !shoppingList.find(shop => shop.id === recipe.id) &&<Link to="/allrecipes" className="link__icon" onClick={() => addShopList(recipe.id)}>
+                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                  </Link>}
+                  {shoppingList && shoppingList.find(shop => shop.id === recipe.id) && <Link to="/allrecipes" className="link__icon" onClick={() => removeShoppingRecipe(recipe.id)}>
+                    <i className="shopping cart icon" />Retirer de l'aide de course
+                  </Link>}
+                  {shoppingList && shoppingList.find(shop => shop.id === recipe.id) && <h6 className="inShopingList">Recette présente dans votre aide de course</h6>}
                   {!favorite.find(fav => fav.name === recipe.name) && <Link to="/allrecipes" className="link__icon" onClick={() => setFavorite(recipe.id)}>
                     <i className="heart icon" />Ajouter aux favoris
                   </Link>}
@@ -65,8 +74,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
                   </Link>}
                 </div>
                 {favorite.find(fav => fav.name === recipe.name) && <div className="favoris__icon">
-                <i className="heart icon" />
-                <p className="text__favoris">Ajouté aux favoris</p>
+                <h5 className="text__favoris">Recette ajouté aux favoris</h5>
               </div>}
               </div>
             
@@ -80,6 +88,10 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
 };
 
 AllRecipes.propTypes = {
+  shoppingList: PropTypes.array.isRequired,
+  removeShoppingRecipe: PropTypes.func.isRequired,
+  addShopList: PropTypes.func.isRequired,
+  unsetEmailSuccess: PropTypes.func.isRequired,
   favorite: PropTypes.array.isRequired,
   unsetFavorite: PropTypes.func.isRequired,
   setFavorite: PropTypes.func.isRequired,

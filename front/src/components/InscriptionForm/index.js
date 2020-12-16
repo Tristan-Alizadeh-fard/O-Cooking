@@ -12,20 +12,22 @@ const InscriptionForm = ({ updateField, submitInscription, errorInscription, ins
   };
 
   return (
-    <div className="form__inscription">
-      {errorInscription && <div className="error__message">Vous devez remplir tout les champs correctement !</div>}
-      {inscriptionSuccess && <h2>Inscription OK ! Veuillez vous connecter pour commencer</h2>}
-      {!inscriptionSuccess && <Form>
-        <Form.Input type="email" label="Votre Email" placeholder="exemple@gmail.com" onChange={() => updateField(event.target.value, 'email')} />
-        {emailInUse && <p className="emailinuse">Email déjà utilisé ou Email invalide, veuillez utiliser une autre adresse</p>}
-        <Form.Input type="email" label="Confirmer votre email" placeholder="exemple@gmail.com" onChange={() => updateField(event.target.value, 'confirmEmail')} />
-        <Form.Input label="Votre password" placeholder="Password" type="password" onChange={() => updateField(event.target.value, 'pass')} />
-        <Form.Input label="Confirmer votre password" placeholder="Confirmation de password" type="password" onChange={() => updateField(event.target.value, 'confirmPass')} />
-        <Form.Input label="Votre Pseudo" placeholder="Pseudo Minimum 4 caractères" onChange={() => updateField(event.target.value, 'name')} />
-        <Button type="submit" className="form__button" onClick={inputVeryfication}>Soumettre</Button>
-      </Form>}
-      {inscriptionSuccess && <Link to="/" className="link__back">- Connection -</Link>}
-      
+    <div className="all__page inscription_form">
+      <div className="form__inscription_home">
+        {errorInscription && <div className="error__message">Vous devez remplir tout les champs correctement !</div>}
+        {inscriptionSuccess && <h3>Inscription OK ! Veuillez vous connecter pour commencer</h3>}
+        {!inscriptionSuccess && <Form>
+          <Form.Input type="email" label="Votre Email" placeholder="exemple@gmail.com" className="email" onChange={() => updateField(event.target.value, 'email')} />
+          {emailInUse && <p className="emailinuse">Email déjà utilisé ou Email invalide, veuillez utiliser une autre adresse</p>}
+          <Form.Input type="email" label="Confirmer votre email" placeholder="exemple@gmail.com" className="email" onChange={() => updateField(event.target.value, 'confirmEmail')} />
+          <Form.Input label="Votre password" placeholder="Password" type="password" className="password" onChange={() => updateField(event.target.value, 'pass')} />
+          <Form.Input label="Confirmer votre password" placeholder="Confirmation de password" type="password" className="password" onChange={() => updateField(event.target.value, 'confirmPass')} />
+          <Form.Input label="Votre Pseudo" placeholder="Pseudo Minimum 4 caractères" className="pseudo" onChange={() => updateField(event.target.value, 'name')} />
+          <Button type="submit" className="form__button_valide" onClick={inputVeryfication}>Soumettre</Button>
+        <Link to="/" className="link__backinscription">Retour</Link>
+        </Form>}
+         {inscriptionSuccess && <Link to="/" className="link__back" onClick={() => updateField(false, 'inscriptionSuccess')}>- Connection -</Link>}
+      </div>
     </div>
     
   );

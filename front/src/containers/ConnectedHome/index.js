@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { showOneRecipe, setisLoading, addShopListAction, setFavoriteAction, unsetFavoriteAction } from 'src/actions/user';
+import { showOneRecipe, setisLoading, setFavoriteAction, unsetFavoriteAction, addShopListAction, removeShoppingRecipe } from 'src/actions/user';
 
 import Home from 'src/components/Home';
 
@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
   recipesUser: state.user.recipesUser,
   isLoading: state.user.isLoading,
   favorite: state.user.userFavorite,
+  shoppingList: state.user.shoppingList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -18,14 +19,17 @@ const mapDispatchToProps = (dispatch) => ({
   setLoader: () => {
     dispatch(setisLoading());
   },
-  addShopListAction: (id) => {
-    dispatch(addShopListAction(id));
-  },
   setFavorite: (id) => {
     dispatch(setFavoriteAction(id));
   },
   unsetFavorite: (id) => {
     dispatch(unsetFavoriteAction(id));
+  },
+  addShopList: (id) => {
+    dispatch(addShopListAction(id));
+  },
+  removeShoppingRecipe: (index) => {
+    dispatch(removeShoppingRecipe(index));
   },
 });
 

@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   searchInput: state.user.searchInput,
   selectedLocation: state.user.selectedLocation,
   searchLocation: state.user.searchLocation,
+  selectedCategory: state.user.selectedCategory,
 });
 
 const mapDispatchToProps = (dispatch) => ({

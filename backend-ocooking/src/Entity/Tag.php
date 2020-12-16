@@ -17,13 +17,13 @@ class Tag
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"recipe_read"})
+     * @Groups({"recipe_read", "tag_needed_information_add"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "show_user", "recipe_read"})
+     * @Groups({"show_recipe", "show_user", "recipe_read", "tag_needed_information_add"})
      */
     private $name;
 
@@ -43,12 +43,23 @@ class Tag
      */
     private $recipes;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"show_recipe", "show_user", "recipe_read"})
+     */
+    private $color;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->recipes = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -113,6 +124,18 @@ class Tag
         if ($this->recipes->removeElement($recipe)) {
             $recipe->removeTag($this);
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

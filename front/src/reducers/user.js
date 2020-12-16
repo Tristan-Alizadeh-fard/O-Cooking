@@ -14,10 +14,11 @@ import {
   SAVE_INFOS_USER,
   SAVE_USER_RECIPE,
   SET_RECIPE,
-  SET_USER_FAVORITE,
-  UNSET_USER_FAVORITE,
   SET_SHOPLIST_ACTION,
   REMOVE_FROM_LIST,
+  SET_EMAIL_SUCCESS_ACTION,
+  UNSET_EMAIL_SUCCESS_ACTION,
+  SET_SEARCHBAR_SETTINGS,
 } from 'src/actions/user';
 
 const initialState = {
@@ -34,25 +35,22 @@ const initialState = {
   token: '',
   emailInUse: false,
   recipes: [],
-  recipe: {},
+  recipe: [],
   admin: false,
   isLoading: true,
-  searchOption: [
-    { key: 'all', text: 'Tout voir', value: 'all', id: null },
-    { key: 'entrees', text: 'Entrée', value: 'entrees', id: 1 },
-    { key: 'plats', text: 'Plat', value: 'plats', id: 2 },
-    { key: 'deserts', text: 'Dessert', value: 'desserts', id: 3 },
-  ],
+  searchOption: [],
   searchLocation: ['Mes recettes', 'Toutes les recettes'],
-  selectedCagetory: '',
+  selectedCagetory: 'Toutes les recettes',
   selectedLocation: 'Toutes les recettes',
   searchInput: null,
   idUser: null,
   roleUser: [],
   recipesUser: [],
   userFavorite: {},
+  listCheck: [],
   shoppingList: [],
   shoppingListCheck: [],
+  emailSuccess: false,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -73,6 +71,9 @@ const user = (state = initialState, action = {}) => {
         errorLogin: false,
         token: action.token,
         isLoading: false,
+        pass: '',
+        confirmPass: '',
+        listCheck: [],
       };
     case USER_INSCRIPTION_SUCCESS:
       return {
@@ -80,12 +81,16 @@ const user = (state = initialState, action = {}) => {
         inscriptionSuccess: true,
         errorInscription: false,
         emailInUse: false,
+        pass: '',
+        confirmPass: '',
       };
     case ERROR_INSCRIPTION:
       return {
         ...state,
         errorInscription: true,
         emailInUse: false,
+        pass: '',
+        confirmPass: '',
       };
     case EMAIL_IN_USE:
       return {
@@ -96,6 +101,8 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         errorLogin: true,
+        pass: '',
+        confirmPass: '',
       };
     case DESCRIPTION_ON:
       return {
@@ -109,11 +116,14 @@ const user = (state = initialState, action = {}) => {
         isLoading: false,
       };
     case LOG_OUT_USER:
+      localStorage.clear();
       return {
         ...state,
         isLogged: false,
         token: '',
         pass: '',
+        confirmPass: '',
+        inputSearch: null,
       };
     case SAVE_RECIPE:
       return {
@@ -147,17 +157,32 @@ const user = (state = initialState, action = {}) => {
         isLoading: false,
       };
     case SET_SHOPLIST_ACTION:
-      console.log(action.value);
       return {
         ...state,
         shoppingList: action.value,
       };
-    case REMOVE_FROM_LIST: {
-      console.log('remove_from_list');
-      console.log(action);
+    case REMOVE_FROM_LIST:
       return {
         ...state,
-        shoppingListCheck: [...state.shoppingListCheck, action.index],
+        listCheck: [...state.listCheck, action.index],
+      };
+    case SET_SEARCHBAR_SETTINGS: {
+      action.value.push({ key: undefined, text: 'Toutes les recettes', value: 'Toutes les recettes' });
+      return {
+        ...state,
+        searchOption: action.value,
+      };
+    }
+    case SET_EMAIL_SUCCESS_ACTION: {
+      return {
+        ...state,
+        emailSuccess: true,
+      };
+    }
+    case UNSET_EMAIL_SUCCESS_ACTION: {
+      return {
+        ...state,
+        emailSuccess: false,
       };
     }
     default: return { ...state };

@@ -6,10 +6,12 @@ import Prototypes from 'prop-types';
 const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList, getFormSettings }) => {
   const setLoaderHome = () => {
     setLoader();
+    getShopList();
     getUserRecipes();
   };
   const setLoaderAllrecipes = () => {
     setLoader();
+    getShopList();
     getAllrecipes();
   };
   const setLoaderShopList = () => {
@@ -33,7 +35,7 @@ const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getSh
           </li>
           <li><Link to="/aide-course" onClick={() => setLoaderShopList()}>Liste de course</Link></li>
           <li><Link to="/about">A propos</Link></li>
-          {admin[0] === 'ROLE_ADMIN' && <li><Link to="">Admin</Link></li>}
+          {admin[0] === 'ROLE_ADMIN' && <li><a href="http://localhost:8000/admin" target="_blank">Admin</a></li>}
           <li><Link to="/" onClick={() => logOut()}>Déconnexion</Link></li>
         </ul>
       </div>

@@ -333,7 +333,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-pale-yellow,.w3-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.w3-border-pale-blue,.w3-hover-border-pale-blue:hover{border-color:#e7ffff!important}
 
 
-.image__recette {
+.image__allrecipes {
   width: 350px;
   margin-top: 20px;
 }
@@ -343,6 +343,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   
 }
 
+
 // tittre "voici toutes les recettes de la communauté
 .allrecipes__title{
   text-align: center;
@@ -350,6 +351,22 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   font-weight : 100;
   letter-spacing : 5px;
 }
+
+.ui.segment {
+  position: fixed;
+  top: 40%;
+  width: 50%;
+  height: 100px;
+  left: 20%;
+}
+.camera.mini {
+  // text-align: center;
+   font-size: 150px;
+  // top: 35%;
+  // left: 15%;
+  // position: fixed;
+ }
+ 
 
 @media screen and (min-width: 980px) {
 
@@ -368,7 +385,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     padding: 10px;
     flex: 30%;
   }
-  .image__recette {
+  .image__allrecipes {
     width: 90%;
     margin-top: 20px;
   }

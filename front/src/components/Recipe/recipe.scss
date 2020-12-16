@@ -327,13 +327,12 @@ i.icon {
 .title {
   text-align: center;
 }
-.button {
+.button.titi {
   display: flex;
   flex-direction: column;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 10px;
+ 
+ 
 }
 .icon__addshopping {
   padding: 5px;
@@ -354,8 +353,25 @@ i.icon {
 h1, h2 {
   letter-spacing: 5px;
 }
+.camera__icon {
+ // text-align: center;
+  font-size: 150px;
+ // top: 35%;
+ // left: 15%;
+ // position: fixed;
+}
+.image__recette {
+  width: 90%;
+}
+
 @media screen and (min-width: 980px) {
 
+  .camera__icon {
+    font-size: 150px;
+    top: 25%;
+    left: 15%;
+    position: fixed;
+  }
   .w3-row-padding {
     height: 1100px;
     width: 100%;
@@ -384,9 +400,11 @@ h1, h2 {
   h1, h2 {
     letter-spacing: 5px;
   }
-  .image__recette {
-    width: 90%;
-    margin-top: 20px;
+  img.image__recette {
+   position: fixed;
+   width: 22%;
+   top: 10%;
+   left: 10%;
   }
   .tag {
     display: i;
@@ -418,6 +436,12 @@ h1, h2 {
   .image__button {
     margin-right: 5%;
     
+  }
+  .button.titi {
+     
+  top: 65%;
+  left: 13%;
+  position: fixed;
   }
 }
 

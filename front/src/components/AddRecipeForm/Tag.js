@@ -7,19 +7,19 @@ import PropTypes from 'prop-types';
 const Tag = ({
   selectTags,
   selectedTags,
-  value,
+  name,
 }) => {
   let chosen = 'grey';
   // si value est dans selected tag alors chosen est blue
-  if (selectedTags.includes(value)) {
+  if (selectedTags.includes(name)) {
     chosen = 'blue';
   }
   return (
     <div className="tags__button">
       <Button
         type="button"
-        content={value}
-        onClick={() => selectTags(value)}
+        content={name}
+        onClick={() => selectTags(name)}
         color={chosen}
       />
     </div>
@@ -29,7 +29,7 @@ const Tag = ({
 Tag.propTypes = {
   selectTags: PropTypes.func.isRequired,
   selectedTags: PropTypes.array.isRequired,
-  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default Tag;

@@ -8,8 +8,13 @@ import {
   selectCategory,
   selectTags,
   changeImage,
+  emptyForm,
+  submitRecipe,
+  setFormSettings,
+  setMeasures,
+  setTags,
 } from 'src/actions/recipe';
-import { submitRecipe, setFormSettings, setMeasures } from '../actions/recipe';
+import { sendMessage } from '../actions/recipe';
 
 const initialState = {
   recipeName: '',
@@ -24,36 +29,18 @@ const initialState = {
   nbPerson: '',
   ingredientInputValue: '',
   quantityInputValue: '',
-  optionsMeasure: [
-    { key: 1, text: 'g', value: 'g' },
-    { key: 2, text: 'Kg', value: 'Kg' },
-    { key: 3, text: 'c.a.s', value: 'c.a.s' },
-    { key: 4, text: 'c.a.c', value: 'c.a.c' },
-    { key: 5, text: 'pièce.s', value: 'pièce.s' },
-    { key: 6, text: 'pincée.s', value: 'pincée.s' },
-    { key: 7, text: 'ml', value: 'ml' },
-    { key: 8, text: 'cl', value: 'cl' },
-    { key: 9, text: 'L', value: 'L' },
-  ],
   selectedMeasure: 'g',
   ingredients: [],
   stepInputValue: '',
   steps: [],
   recipeImage: '',
-  alertSize: false,
   categories: [],
   selectedCategory: '',
-  tagList: [
-    { key: 1, value: 'Sans gluten' },
-    { key: 2, value: 'Froid' },
-    { key: 3, value: 'Chaud' },
-    { key: 4, value: 'Vegan' },
-    { key: 5, value: 'Épicé' },
-    { key: 6, value: 'Végétarien' },
-    { key: 7, value: 'Viande' },
-  ],
+  tagList: [],
   selectedTags: [],
   settings: [],
+  success: false,
+  error: false,
 };
 
 const recipe = createReducer(initialState, (builder) => {
@@ -88,13 +75,36 @@ const recipe = createReducer(initialState, (builder) => {
         state.selectedTags.push(action.payload.value);
       }
     })
+    .addCase(setTags, (state, action) => {
+      state.tagList = action.payload.value;
+    })
     .addCase(setFormSettings, (state, action) => {
       state.categories = action.payload.value;
     })
     .addCase(setMeasures, (state, action) => {
       state.optionsMeasure = action.payload.value;
     })
-    .addCase(submitRecipe, (state, action) => {
+    .addCase(submitRecipe, () => {
+    })
+    .addCase(emptyForm, (state) => {
+      state.ingredients = [];
+      state.steps = [];
+      state.recipeName = '';
+      state.PTS1 = '';
+      state.PTS2 = '';
+      state.CTS1 = '';
+      state.CTS2 = '';
+      state.nbPerson = '';
+      state.ingredientInputValue = '';
+      state.quantityInputValue = '';
+      state.stepInputValue = '';
+      state.selectedCategory = '';
+      state.recipeImage = '';
+      state.success = false;
+      state.error = false;
+    })
+    .addCase(sendMessage, (state, action) => {
+      state[action.payload.target] = action.payload.value;
     });
 });
 
