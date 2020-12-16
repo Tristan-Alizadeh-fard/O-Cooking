@@ -20,18 +20,16 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
 
-    // // Recherche de toute les recettes limité a 50 resultas
-    // public function searchRecipesAll()
-    // {
-    //         return $this->createQueryBuilder('r')
-    //             ->select('r')
-    //             ->leftjoin('r.category', 'c')
-    //             ->addSelect('c.name')
-    //             ->setMaxResults(50)
-    //             ->getQuery()
-    //             ->getResult()
-    //         ; 
-    // }
+    // Recherche de toute les recettes limité a 50 resultas
+    public function searchRecipesAll()
+    {
+            return $this->createQueryBuilder('r')
+                ->setMaxResults(50)
+                ->orderBy('r.createdAt','DESC')
+                ->getQuery()
+                ->getResult()
+            ; 
+    }
 
     public function findByPerso(array $criterias, $limit = null)
      {
