@@ -6,69 +6,87 @@
 
 {% block page_content %}
     <div>
-        {{dump(signaledRecipes)}}
-        
         <p class="h4">Recettes signalées : {{NbSignaledRecipes}}</p>
         <table class="table">
             <thead>
                 <tr class="row">
-                <th scope="col" >ID</th>
-                <th scope="col" >Photo</th>
-                <th scope="col" class="col-2">Informations générales</th>
-                <th scope="col" class="col-2">Durée</th>
-                <th scope="col" class="col-2">Ingrédients</th>
-                <th scope="col" class="col-3">Préparation</th>
-                <th scope="col" style="text-align: center;">Action</th>
+                    <th scope="col" class="" >ID</th>
+                    <th scope="col" class="col-1" style="text-align: center;">Photo</th>
+                    <th scope="col" class="col-2">Informations générales</th>
+                    <th scope="col" class="col-1">Durée</th>
+                    <th scope="col" class="col-3">Ingrédients</th>
+                    <th scope="col" class="col-3">Préparation</th>
+                    <th scope="col" class="col-1"style="text-align: center;">Action</th>
                 </tr>
             </thead>
             {% for recipe in signaledRecipes %}
-                <tr>
-                    <th scope="row" style="vertical-align: middle;">{{ recipe.id }}</th>
-                    <td style="vertical-align: middle; text-align: center;">
+                <tr class="row">
+                    <th scope="row">{{ recipe.id }}</th>
+                    <td class="col-1" style="vertical-align: middle; text-align: center;">
                         {% if recipe.picture is null%}
                             <i class="fas fa-camera fa-4x"></i>
                         {% else %}
-                            <img src="{{ asset(recipe.picture) }}" alt="Photo de la recette">
+                            <img src="{{ asset(recipe.picture) }}" alt="Photo de la recette" style="max-width: 100%;">
                         {% endif %}
                     </td>
-                    <td style="vertical-align: middle;">
-                        <ul style="list-style: none; padding: 0;">
+                    <td class="col-2" >
+                        <p>{{ recipe.name }}</p>
+                        <p>Par {{ recipe.author.pseudo }}</p>
+                        <p>Le {{ recipe.createdAt }}</p>
+                        <p>Catégorie : {{ recipe.category.name }}</p>
+                        <p>Tag(s) :
+                            {% for tag in recipe.tags %}
+                                <span>{{ tag.name }} </span>
+                            {% endfor %}
+                        </p>
+                        {# <ul style="list-style: none; padding: 0;">
                             <li>{{ recipe.name }}</li>
                             <li>Par {{ recipe.author.pseudo }}</li>
-                            <li>Créée le {{ recipe.createdAt }}</li>
+                            <li>Le {{ recipe.createdAt }}</li>
                             <li>Catégorie : {{ recipe.category.name }}</li>
                             <li>Tag(s) :</li>
-                        </ul>
+                        </ul> #}
                     </td>
-                    <td style="vertical-align: middle;">
-                        <ul style="list-style: none; padding: 0;">
+                    <td class="col-1" >
+                        <p>Préparation : {{ recipe.preparationTime }}</p>
+                        <p>Cuisson : {{ recipe.cookingTime }}</p>
+                        {# <ul style="list-style: none; padding: 0;">
                             <li>Préparation : {{ recipe.preparationTime }}</li>
+                            <li>/</li>
                             <li>Cuisson : {{ recipe.cookingTime }}</li>
-                        </ul>
+                        </ul> #}
                     </td>
-                    <td style="vertical-align: middle;">
+                    <td class="col-3" >
                         <ul style="list-style: none; padding: 0;">
                             {% for ingredient in recipe.recipeIngredients %}
                                 <li>- {{ ingredient.quantity }}</li>
                             {% endfor %}
                         </ul>
                     </td>
-                    <td style="vertical-align: middle;">
-                        <ol>
+                    <td class="col-3">
+                        <ol style="padding: 0;">
                             {% for step in recipe.steps %}
                                 <li>{{ step.description }}</li>
                             {% endfor %}
                         </ol>
                     </td>
-                    <td style="vertical-align: middle;">
-                        <ul style="list-style: none; padding: 0;">
+                    <td class="col-1" >
+                        <div style="text-align: center;">
+                            <p>
+                                <a href=""><i class="fas fa-unlink fa-lg success"></i></a>
+                            </p>
+                            <p>
+                                <a href=""><i class="fas fa-trash fa-lg danger"></i></a>
+                            </p>
+                        </div>
+                        {# <ul style="list-style: none; padding: 0;">
                             <li style="text-align: center; margin-bottom: 35px;">
                                 <a href=""><i class="fas fa-unlink fa-lg success"></i></a>
                             </li>
                             <li style="text-align: center;">
                                 <a href=""><i class="fas fa-trash fa-lg danger"></i></a>
                             </li>
-                        </ul>
+                        </ul> #}
                     </td>
                 </tr>
             {% endfor %}
