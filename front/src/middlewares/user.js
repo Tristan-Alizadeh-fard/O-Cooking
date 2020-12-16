@@ -13,7 +13,6 @@ import {
   GET_SHOPLIST_ACTION,
   SEARCH,
   REMOVE_SHOP_RECIPE,
-  REMOVE_FROM_LIST,
   SHARE_RECIPE_ACTION,
   SEND_SHOPPINGLIST_ACTION,
   saveUserLogin,
@@ -33,7 +32,7 @@ import {
   updateUserField,
 } from 'src/actions/user';
 import { getFormSettings } from '../actions/recipe';
-import { getUserRecipesAction } from '../actions/user';
+import { getUserRecipesAction, userInscription } from '../actions/user';
 
 const user = (store) => (next) => (action) => {
   switch (action.type) {
@@ -84,6 +83,11 @@ const user = (store) => (next) => (action) => {
           .then((response) => {
             console.log(response, 'post success');
             store.dispatch(saveUserInscription());
+            store.dispatch(updateUserField('email', ''));
+            store.dispatch(updateUserField('pass', ''));
+            store.dispatch(updateUserField('confirmPass', ''));
+            store.dispatch(updateUserField('confirmEmail', ''));
+            store.dispatch(updateUserField('inscriptionSuccess', false));
           })
           .catch((error) => {
             console.log(error, 'Je suis dans le middleware LOGIN error');
