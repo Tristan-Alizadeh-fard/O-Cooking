@@ -179,12 +179,20 @@ class RecipeController extends AbstractController
 
         $recipeInformationsArray = json_decode($json, true);
 
-        // Save picture on server
-        $pictureName = $slugger->slugifyRecipeNameForPicture($recipeInformationsArray['name'], $this->getUser());
-        $pictureFilePath = $uploadFile->uploadRecipePicture($recipeInformationsArray['picture'], $pictureName);
-        
-        // path to the picture
-        $recipeInformationsArray['picture'] = $pictureFilePath;
+        if ($recipeInformationsArray['picture'] !== "") {
+            $test = preg_match('/data:image\/([a-z]+);base64,/', $recipeInformationsArray['picture']);
+
+            if ($test) {
+                // Save picture on server
+                $pictureName = $slugger->slugifyRecipeNameForPicture($recipeInformationsArray['name'], $this->getUser());
+                $pictureFilePath = $uploadFile->uploadRecipePicture($recipeInformationsArray['picture'], $pictureName);
+                
+                // path to the picture
+                $recipeInformationsArray['picture'] = $pictureFilePath;
+            } else {
+                throw $this->createNotFoundException('Vous ne nous avez pas envoyé une image');
+            }
+        }
         
         $recipe = new Recipe();
 
