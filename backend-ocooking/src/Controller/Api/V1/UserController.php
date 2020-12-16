@@ -6,6 +6,7 @@ use App\Entity\Recipe;
 use App\Entity\ShoppingList;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ class UserController extends AbstractController
     /**
       * @Route("/add", name="add", methods={"POST"})
      */
-    public function add(Request $request, SerializerInterface $serializer, UserPasswordEncoderInterface $userPasswordEncoder): Response
+    public function add(Request $request, SerializerInterface $serializer, UserPasswordEncoderInterface $userPasswordEncoder, MailerService $mailerService): Response
     {
         $json = $request->getContent();
 
@@ -55,6 +56,8 @@ class UserController extends AbstractController
             
             $em-> persist($shoppingList);
             $em->flush();
+
+            $mailerService->sendConfirmationInscriptiontoUser($user);
 
             return $this->json([], 201);
         } else {

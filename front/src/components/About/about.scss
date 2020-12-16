@@ -1,0 +1,196 @@
+.about_contenair {
+  width: auto;
+  height: auto;
+}
+.cards{
+  text-align: center;
+  margin-top: 2em;
+}
+.affiche_card img{
+  width: 150px;
+  padding: 5px;
+  margin: 5px;
+}
+.affiche_card p{
+  padding: 5px;
+  border-radius: 40px;
+  display: inline-block;
+  font-size: large;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.322);
+}
+.picture img{
+  border-radius: 100px;
+}
+
+.pictures {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  margin-top: 5%;
+  padding: 35px 35px;
+}
+.php {
+  width: 50px;
+  height: 50px;
+   
+}
+.symphony {
+  width: 50px;
+  height: 50px;
+  
+}
+.react {
+  width: 50px;
+  height: 50px;
+ 
+}  
+.js {
+  width: 50px;
+  height: 50px;
+}
+
+@media screen and (min-width: 760px){
+  .cards{
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+  }
+  .affiche_card {
+    margin-top: 10%;
+
+  }
+  .affiche_card img{
+    width: 200px;
+    padding: 5px;
+    margin: 5px;
+  }
+  .pictures {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    margin-top: 13%;
+    padding: 60px 60px;
+  }
+  .php {
+    width: 80px;
+    height: 80px;
+     
+  }
+  .symphony {
+    width: 80px;
+    height: 80px;
+    
+  }
+  .react {
+    width: 80px;
+    height: 80px;
+   
+  }  
+  .js {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media screen and (min-width: 1020px){
+  .cards{
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+  }
+  .affiche_card {
+    margin-top: 5%;
+
+  }
+  .affiche_card img{
+    width: 250px;
+    padding: 5px;
+    margin: 15px 30px;
+  }
+  .picture img{
+    border-radius: 120px;
+  }
+  .affiche_card p{
+    padding: 5px;
+    border-radius: 40px;
+    display: inline-block;
+    font-size: 2em;
+  }
+  .pictures {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    margin-top: 28%;
+    padding: 60px 60px;
+  }
+  .php {
+    width: 80px;
+    height: 80px;
+     
+  }
+  .symphony {
+    width: 80px;
+    height: 80px;
+    
+  }
+  .react {
+    width: 80px;
+    height: 80px;
+   
+  }  
+  .js {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media screen and (min-width: 1238px){
+  .cards{
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .affiche_card img{
+    width: 250px;
+    padding: 5px;
+    margin: 0 10px;
+  }
+  .picture img{
+    border-radius: 120px;
+  }
+  .affiche_card p{
+    padding: 5px;
+    border-radius: 40px;
+    display: inline-block;
+    font-size: 1.5em;
+  }
+  .pictures {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    margin-top: 12%;
+    padding: 60px 60px;
+  }
+  .php {
+    width: 80px;
+    height: 80px;
+     
+  }
+  .symphony {
+    width: 80px;
+    height: 80px;
+    
+  }
+  .react {
+    width: 80px;
+    height: 80px;
+   
+  }  
+  .js {
+    width: 80px;
+    height: 80px;
+  }
+}

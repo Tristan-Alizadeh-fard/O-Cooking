@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Recipe;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -51,20 +50,30 @@ class RecipeType extends AbstractType
                     new Assert\Valid(),
                 ]
             ])
-            // ->add('tags', CollectionType::class, [
-            //     'entry_type' => TagType::class,
-            //     'entry_options' => ['label' => false],
-            //     'allow_add' => true,
-            // ])
+            // DOC Tag
+            ->add('tags', CollectionType::class, [
+                'entry_type' => TagType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+            ])
+            // DOC fin Tag
             ->add('recipeIngredients', CollectionType::class, [
                 'entry_type' => RecipeIngredientType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Valid(),
+                ]
             ])
             ->add('steps', CollectionType::class, [
                 'entry_type' => StepType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Valid(),
+                ]
             ])
         ;
     }
@@ -73,8 +82,7 @@ class RecipeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Recipe::class,
-            // 'csrf_protection' => false,
-            // 'validation_groups' => false,
+            'csrf_protection' => false,
         ]);
     }
 }

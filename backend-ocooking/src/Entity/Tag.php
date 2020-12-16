@@ -17,13 +17,13 @@ class Tag
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"recipe_read"})
+     * @Groups({"recipe_read", "tag_needed_information_add"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "show_user", "recipe_read"})
+     * @Groups({"show_recipe", "show_user", "recipe_read", "tag_needed_information_add"})
      */
     private $name;
 
@@ -42,6 +42,11 @@ class Tag
      * @ORM\ManyToMany(targetEntity=Recipe::class, mappedBy="tags")
      */
     private $recipes;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $color;
 
     public function __construct()
     {
@@ -118,6 +123,18 @@ class Tag
         if ($this->recipes->removeElement($recipe)) {
             $recipe->removeTag($this);
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

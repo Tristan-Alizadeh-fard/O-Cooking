@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import testimage from 'src/pictures/sandwich.jpg';
 import './home.scss';
 
-const Home = ({ name, recipesUser, isLoading }) => {
+const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite, addShopList, removeShoppingRecipe, shoppingList }) => {
+
   console.log('Home', recipesUser);
+  const setLoaderHomerecipes = (id) => {
+    setLoader();
+    showRecipe(id);
+  };
   return (
     <>
     {isLoading && <div className="ui segment">
@@ -15,45 +21,76 @@ const Home = ({ name, recipesUser, isLoading }) => {
       <div className="allrecipes">
         <h2 className="allrecipes__title">{`Bienvenue dans votre espace " ${name} " !`}</h2>
       </div>
-      <div className="all">
-        {recipesUser.map((recipeUser) => (
-              <div key={recipeUser.name} className="allrecipes__miniature">
-                <div className="ui card">
-                  <div className="image">
-                    <i className="image icon" />
-                  </div>
+      {!isLoading && 
+      
+        <div className="w3-row-padding w3-padding-16 w3-center">
+       {recipesUser.map((recipeUser) => (
+         <div key={recipeUser.id} className="w3-quarter">
+              
+                
+              <img src={`http://localhost:8000${recipeUser.picture}`} className="image__home" />
+                  {recipeUser.signaled && <div className="favoris__icon">
+                <i className="bell icon" />
+                <p className="text__favoris">Recette signalé !</p>
+              </div>}
                   <div className="content">
-                    {/* <Link to={`/recette/${recipeUser.id}`} className="header" onClick={() => showRecipe(recipeUser.id)}>{recipeUser.name}</Link> //TODO idrecette => le link */}
+                    <Link to={`/recette/${recipeUser.id}`} className="header" onClick={() => setLoaderHomerecipes(recipeUser.id)}>{recipeUser.name}</Link>
                     <div className="meta">
                       <span className="date">{`Posté le ${recipeUser.createdAt}`}</span>
                     </div>
                     <div className="description">{`${recipeUser.category.name} - Temps de préparation = ${recipeUser.preparationTime}`}</div>
+                    <div className="tags__container">
                     {recipeUser.tags.map((tag) => (
-                      <div key={tag.name} className="tags__container">
+                      <div key={tag.name} className="tag__container">
                         <span className="tag">{tag.name}</span>
                       </div>
                     ))}
+                    </div>
                   </div>
                   <div className="extra content">
-                    <Link to="/allrecipes" className="link__icon">
+                    <p className="link__author">
                       <i className="user icon" />{`By ${name}`}
-                    </Link>
-                    <Link to="/aide-course" className="link__icon" onClick={() => console.log('aide de course')}>
-                      <i className="shopping cart icon" />Ajouter à l'aide de course
-                    </Link>
-                    <Link to="" className="link__icon" onClick={() => console.log('modification d\'une recette')}>
-                      <i className="edit icon" />Modifier la recette
-                    </Link>
+                    </p>
+                    {!shoppingList && <Link to="/home" className="link__icon" onClick={() => addShopList(recipeUser.id)}>
+                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                  </Link>}
+                  {shoppingList && !shoppingList.find(shop => shop.id === recipeUser.id) &&<Link to="/home" className="link__icon" onClick={() => addShopList(recipeUser.id)}>
+                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                  </Link>}
+                  {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <Link to="/home" className="link__icon" onClick={() => removeShoppingRecipe(recipeUser.id)}>
+                    <i className="shopping cart icon" />Retirer de l'aide de course
+                  </Link>}
+                  {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <h6 className="inShopingList">Recette présente dans votre aide de course</h6>}
+                  {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
+                      <i className="heart icon" />Ajouter aux favoris
+                    </Link>}
+                    {favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => unsetFavorite(recipeUser.id)}>
+                      <i className="heart outline icon" />Retirer de vos favoris
+                    </Link>}
                   </div>
-                </div>
+                  {favorite.find(fav => fav.name === recipeUser.name) && <div className="favoris__icon">
+                
+                <h5 className="text__favoris">Recette ajouté aux favoris</h5>
+              </div>}
+                
               </div>
+              
         ))}
-      </div>
+       
+      </div>}
     </>
   );
 };
 
 Home.protoTypes = {
+  shoppingList: PropTypes.array.isRequired,
+  removeShoppingRecipe: PropTypes.func.isRequired,
+  addShopList: PropTypes.func.isRequired,
+  favorite: PropTypes.array.isRequired,
+  setFavorite: PropTypes.func.isRequired,
+  unsetFavorite: PropTypes.func.isRequired,
+  setLoader: PropTypes.func.isRequired,
+  showRecipe: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   recipesUser: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,

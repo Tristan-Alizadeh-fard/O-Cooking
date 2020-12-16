@@ -17,18 +17,18 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist", "show_user"})
+     * @Groups({"show_recipe", "recipe_read", "show_shoppinglist", "show_user", "user_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist", "user_favorites"})
+     * @Groups({"show_recipe", "show_user", "recipe_read", "show_shoppinglist", "user_favorites", "user_read"})
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=500, nullable=true)
      * @Groups({"show_recipe", "show_user", "recipe_read"})
      */
     private $picture;
@@ -199,9 +199,13 @@ class Recipe
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?string
     {
-        return $this->createdAt;
+        // $date = date_format($this->createdAt, 'd/m/Y à H:i');
+        // $date = date_format($this->createdAt, 'j F Y à H\hi');
+        setlocale(LC_ALL, 'fr_FR.UTF-8');
+        $date = strftime('%d %B %G à %Hh%M', date_timestamp_get($this->createdAt));
+        return $date;
     }
 
     public function setCreatedAt(\DateTimeInterface $createdAt): self
@@ -382,6 +386,4 @@ class Recipe
 
         return $this;
     }
-
-    /* NECESSAIRE POUR L'AJOUT D'UNE RECETTE */
 }

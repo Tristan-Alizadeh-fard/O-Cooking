@@ -1,9 +1,36 @@
 @use 'reset';
 @use 'vars';
 
-body {
-  font-family: sans-serif;
+// version mobile 
+
+.body {
+  //max-width: 1500px;
+ // background-image :url("../pictures/FondBody.jpg");
+  height:100%;
+  min-height: 100%;
+  background-position:center;
+  background-size: cover;
+  background: #FFFFFF;
+  font-family: "Playfair Display";
 }
+.h1,h2,h3,h4,h5,h6 {
+  font-family: "Playfair Display";
+}
+// vertion ordinateur
+/*
+@media screen and (min-width: 980px) {
+ .body{
+  margin: 0 auto;
+  background-image :url("../pictures/FondBody.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  background-position: center;
+  //background-size: cover;
+ }
+
+}
+*/
 
 /* 
   // or you can import your own font

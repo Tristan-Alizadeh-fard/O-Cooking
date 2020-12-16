@@ -54,6 +54,7 @@ class Step
     public function __toString()
     {
         return $this->nbStep . '- ' . $this->description;
+        // return $this->description;
     }
     
     public function getId(): ?int

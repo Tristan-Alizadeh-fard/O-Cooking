@@ -48,3 +48,32 @@ export const changeImage = createAction('recipe/changeImage', (value) => ({
 }));
 
 export const submitRecipe = createAction('recipe/submit');
+
+export const getFormSettings = createAction('recipe/getFormSettings');
+
+export const setFormSettings = createAction('recipe/setFormSettings', (value) => ({
+  payload: {
+    value,
+  },
+}));
+
+export const setTags = createAction('recipe/setTags', (value) => ({
+  payload: {
+    value,
+  },
+}));
+
+export const setMeasures = createAction('recipe/setMeasures', (value) => ({
+  payload: {
+    value,
+  },
+}));
+
+export const emptyForm = createAction('recipe/empty');
+
+export const sendMessage = createAction('recipe/submit/sendMessage', (target, value) => ({
+  payload: {
+    target,
+    value,
+  },
+}));

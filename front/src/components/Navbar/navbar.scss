@@ -15,8 +15,9 @@ nav{
     z-index: 1;
 }
 .conteneur-nav{
-    position: absolute;
+    top: 0px;
     width: 100%;
+    margin-bottom: 10px;
 }
 nav input[type=checkbox]{
     display: none;
@@ -26,7 +27,7 @@ nav label{
     width: 100%;
     padding: 10px 0px;
     text-align: center;
-    background-color: gold;
+    background-color: grey;
 }
 nav ul{
     display: none;

@@ -71,7 +71,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Recipe::class, inversedBy="favorites")
-     * @groups({"user_favorites"})
+     * @groups({"user_favorites", "user_read"})
      */
     private $favorites;
 
@@ -86,8 +86,9 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->email;
+        // return $this->pseudo;
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;

@@ -19,48 +19,47 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    // /**
-    //  * @return Recipe[] Returns an array of Recipe objects
-    //  */
-    public function searchRecipes($name, $category)
-    {
-        // dd($name, $category);
-        return $this->createQueryBuilder('r')
-            ->select('r')
-            ->leftjoin('r.category', 'c')
-            ->addSelect('c.name')
-            ->where('r.name = :name')
-            ->setParameter('name', $name)
-            ->getQuery()
-            ->getResult()
-        ;
-        if(isset($name) !== null && isset($category) !== null){
 
-            return $this->createQueryBuilder('r')
-            ->select('r')
-            ->leftjoin('r.category', 'c')
-            ->addSelect('c.name')
-            ->where('r.name = :name')
-            ->setParameter('name', $name)
-            ->andwhere('r.category = :categoryId')
-            ->setParameter('categoryId', $category)
-            ->getQuery()
-            ->getResult()
+    // // Recherche de toute les recettes limité a 50 resultas
+    // public function searchRecipesAll()
+    // {
+    //         return $this->createQueryBuilder('r')
+    //             ->select('r')
+    //             ->leftjoin('r.category', 'c')
+    //             ->addSelect('c.name')
+    //             ->setMaxResults(50)
+    //             ->getQuery()
+    //             ->getResult()
+    //         ; 
+    // }
+
+    public function findByPerso(array $criterias, $limit = null)
+     {
+        $qb = $this->createQueryBuilder('r')
+            ->orderBy('r.createdAt', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        if (array_key_exists('name', $criterias) && !is_null($criterias['name'])) {
+            $name = $criterias['name'];
+            $qb
+                ->andWhere('r.name like :name')
+                ->setParameter('name', '%' . $name . '%')
+            ;
+        }
+        
+        if (array_key_exists('category', $criterias) && !is_null($criterias['category'])) {
+            $category = $criterias['category'];
+            $qb
+                ->andWhere('r.category = :category')
+                ->setParameter('category', $category)
             ;
         }
 
-        
-    }
-
-    /*
-    public function findOneBySomeField($value): ?Recipe
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+        return $qb
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
-    }
-    */
+     }
+   
 }
