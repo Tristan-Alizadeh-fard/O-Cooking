@@ -1,8 +1,9 @@
 .home__miniature {
-  text-align: center;
-  margin: 50px 50px 50px 50px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
+  margin: 1em;
 }
 .date {
   display: block;
@@ -19,9 +20,73 @@
   
 }
 
+button.icon__addshopping {
+  display: flex;
+  justify-content: center;
+  width: 55px;
+  border-radius: 50px;
+  margin: 1em;
+  margin: 0.5em auto;
+  font-size: 1.5em;
+  padding: 0.5em;
+  border: none;
+}
+
+.trash.alternate.icon.shoplist{
+  margin-left: 5px;
+}
+
+i.icon {
+  margin-bottom: 10px;
+}
+
+.ui.checkbox {
+  margin-top: 0.8em;
+}
+
+.ui.checbox:last-child{
+  margin-bottom: 0.5em;
+}
+
+.ui.checkbox input.hidden+label {
+  font-size: 1.3em;
+}
+
+.recette {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  margin: 0.5em;
+  margin-bottom: 3em;
+  border-radius: 19px;
+  background: linear-gradient(145deg, #e1e1e1, #ffffff);
+  box-shadow:  11px 11px 42px #cdcdcd, 
+              -11px -11px 42px #ffffff;
+}
+
+button.btn_send {
+  backface-visibility: 1;
+  margin: 0 auto;
+  padding: 0.5em 0.8em;
+  font-size: 1.3em;
+  border: 1px solid #5294e2;
+  border-radius: 9px;
+  background-color: #ffffff00;
+  transition: background-color, 0.5s ease-out;
+  transition: color, 0.5 ease-in;
+}
+
 @media screen and (min-width: 980px) {
  .content {
   border-left: 1px solid #000;
+ }
+ button.btn_send:hover {
+  background-color: #5294e2;
+  color: white;
+ }
+ .recette {
+   max-width: 50%;
+   margin: 0.3em auto 3em auto;
  }
 }
 

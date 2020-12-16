@@ -4,7 +4,6 @@ import ListAsRecipe from './ListAsRecipe';
 import './shoppingList.scss';
 
 const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shoppingListCheck, sendShoppingList, listCheck }) => {
-
   console.log('ShoppingList');
 
   return (
@@ -13,7 +12,6 @@ const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shop
         <h2 className="home__title">Liste de courses</h2>
       </div>
       <div className="home__miniature">
-        <div className="ui card">
           {shoppingList !== undefined && <div className="liste_recettes">
             {shoppingList.map((recipe) => (
               // eslint-disable-next-line max-len
@@ -21,9 +19,8 @@ const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shop
             ))}
           </div>}
           {shoppingList.length === 0 && <p>Votre aide de course est vide.</p>}
-        </div>
+        <button type="button" className="btn_send" onClick={() => sendShoppingList()}>Envoyer la liste sur ma boite mail</button>
       </div>
-      <button type="button" onClick={() => sendShoppingList()}>Envoyer la liste sur ma boite mail</button>
     </>
   );
 };
