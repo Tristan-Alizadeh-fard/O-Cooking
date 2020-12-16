@@ -18,7 +18,7 @@ const user = (store) => (next) => (action) => {
         category: {
           name: recipe.selectedCategory,
         },
-        tags: formatTags(recipe.selectedTags), //TODO
+        tags: formatTags(recipe.selectedTags),
         recipeIngredients: formatIG(recipe.ingredients),
         steps: formatStep(recipe.steps),
       }, {

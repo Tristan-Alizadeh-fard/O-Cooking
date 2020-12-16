@@ -83,11 +83,9 @@ const user = (store) => (next) => (action) => {
           .then((response) => {
             console.log(response, 'post success');
             store.dispatch(saveUserInscription());
-            store.dispatch(updateUserField('email', ''));
-            store.dispatch(updateUserField('pass', ''));
-            store.dispatch(updateUserField('confirmPass', ''));
-            store.dispatch(updateUserField('confirmEmail', ''));
-            store.dispatch(updateUserField('inscriptionSuccess', false));
+            store.dispatch(updateUserField('', 'pass'));
+            store.dispatch(updateUserField('', 'confirmPass'));
+            store.dispatch(updateUserField('', 'confirmEmail'));
           })
           .catch((error) => {
             console.log(error, 'Je suis dans le middleware LOGIN error');

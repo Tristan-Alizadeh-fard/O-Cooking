@@ -20,7 +20,6 @@ const Recipe = ({
   console.log('Recipe component', recipe);
   console.log('favorite', favorite);
   console.log(shoppingList);
-  const image = `http://localhost:8000${recipe.picture}`;
   return (
     <>
       {isLoading && (
