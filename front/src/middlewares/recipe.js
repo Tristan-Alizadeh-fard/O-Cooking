@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // eslint-disable-next-line import/no-unresolved
-import { formatIG, formatTime, formatStep, formatSetMeasure } from 'src/utils';
+import { formatIG, formatTime, formatStep, formatSetMeasure, formatTags } from 'src/utils';
 import { setFormSettings, setMeasures, emptyForm, sendMessage, setTags } from 'src/actions/recipe';
 import { saveUserName, setSearchBarSettings } from 'src/actions/user';
 
@@ -18,6 +18,7 @@ const user = (store) => (next) => (action) => {
         category: {
           name: recipe.selectedCategory,
         },
+        tags: formatTags(recipe.selectedTags), //TODO
         recipeIngredients: formatIG(recipe.ingredients),
         steps: formatStep(recipe.steps),
       }, {

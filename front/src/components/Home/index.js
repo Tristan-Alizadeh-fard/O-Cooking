@@ -27,8 +27,9 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
        {recipesUser.map((recipeUser) => (
          <div key={recipeUser.id} className="w3-quarter">
               
-                
-              <img src={`http://localhost:8000${recipeUser.picture}`} className="image__home" />
+              {recipeUser.picture !== null && <img src={`http://localhost:8000${recipeUser.picture}`} className="image__allrecipes" />}
+              {recipeUser.picture === null &&  <div className="camera mini"><i className="camera icon"/></div>}
+             
                   {recipeUser.signaled && <div className="favoris__icon">
                 <i className="bell icon" />
                 <p className="text__favoris">Recette signalé !</p>
