@@ -25,14 +25,14 @@ class RecipeRepository extends ServiceEntityRepository
     {
             return $this->createQueryBuilder('r')
                 ->setMaxResults(50)
-                ->orderBy('r.createdAt','DESC')
+                ->orderBy('r.createdAt', 'DESC')
                 ->getQuery()
                 ->getResult()
             ; 
     }
 
     public function findByPerso(array $criterias, $limit = null)
-     {
+    {
         $qb = $this->createQueryBuilder('r')
             ->orderBy('r.createdAt', 'DESC')
             ->setMaxResults($limit)
@@ -58,6 +58,15 @@ class RecipeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
-     }
-   
+    }
+
+    public function countSignaledRecipes()
+    {
+        return $this->createQueryBuilder('r')
+            ->Select('count(r.signaled)')
+            ->where('r.signaled = true')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

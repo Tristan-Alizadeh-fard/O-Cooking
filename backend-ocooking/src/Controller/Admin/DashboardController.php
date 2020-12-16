@@ -9,28 +9,39 @@ use App\Entity\Measure;
 use App\Entity\Recipe;
 use App\Entity\Tag;
 use App\Entity\User;
+use App\Repository\RecipeRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    private $recipeRepository;
+    
+    public function __construct(RecipeRepository $recipeRepository)
+    {
+        $this->recipeRepository = $recipeRepository;
+    }
+    
     /**
      * @Route("/admin", name="admin")
      */
     public function index(): Response
     {
-        return parent::index();
-        
-        // $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
+        $nbSignaledRecipes = $this->recipeRepository->countSignaledRecipes();
+        $signaledRecipes = $this->recipeRepository->findBy(['signaled' => true], ['createdAt' => 'DESC']);
 
-        // return $this->redirect($routeBuilder->setController(RecipeCrudController::class)->generateUrl());
+        return $this->render('bundles/EasyAdminBundle/welcome.html.twig', [
+            'NbSignaledRecipes' => $nbSignaledRecipes,
+            'signaledRecipes' => $signaledRecipes,
+        ]);
     }
-
+    
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -40,8 +51,8 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::section('Accueil');
-        yield MenuItem::linktoDashboard('Tableau de bord', 'fa fa-home');
+        yield MenuItem::section('Tableau de bord');
+        yield MenuItem::linktoDashboard('Recettes signalées', 'fa fa-traffic-light');
 
         yield MenuItem::section('Utilisateurs');
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);

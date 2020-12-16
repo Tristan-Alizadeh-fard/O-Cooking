@@ -6,58 +6,72 @@
 
 {% block page_content %}
     <div>
-        <p class="h4">Recettes signalées : 10</p>
-        <table class="table table-hover">
+        {{dump(signaledRecipes)}}
+        
+        <p class="h4">Recettes signalées : {{NbSignaledRecipes}}</p>
+        <table class="table">
             <thead>
-                <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Photo</th>
-                <th scope="col">Nom - Auteur</th>
-                <th scope="col">Durée</th>
-                <th scope="col">Ingrédients</th>
-                <th scope="col">Préparation</th>
-                <th scope="col-1" style="text-align: center;">Action</th>
+                <tr class="row">
+                <th scope="col" >ID</th>
+                <th scope="col" >Photo</th>
+                <th scope="col" class="col-2">Informations générales</th>
+                <th scope="col" class="col-2">Durée</th>
+                <th scope="col" class="col-2">Ingrédients</th>
+                <th scope="col" class="col-3">Préparation</th>
+                <th scope="col" style="text-align: center;">Action</th>
                 </tr>
             </thead>
-            <tr>
-                <th scope="row" style="vertical-align: middle;">1</th>
-                <td style="vertical-align: middle;">photo</td>
-                <td style="vertical-align: middle;">
-                    <ul style="list-style: none; padding: 0;">
-                        <li>Titre</li>
-                        <li>Auteur</li>
-                        <li>Créée le</li>
-                        <li>Catégorie :</li>
-                        <li>Tag(s) :</li>
-                    </ul>
-                </td>
-                <td style="vertical-align: middle;">
-                    <ul style="list-style: none; padding: 0;">
-                        <li>Préparation :</li>
-                        <li>Cuisson :</li>
-                    </ul>
-                </td>
-                <td style="vertical-align: middle;">
-                    <ul style="list-style: none; padding: 0;">
-                        <li>- </li>
-                    </ul>
-                </td>
-                <td style="vertical-align: middle;">
-                    <ol>
-                        <li></li>
-                    </ol>
-                </td>
-                <td style="vertical-align: middle;">
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="text-align: center; margin-bottom: 35%;">
-                            <a href=""><i class="fas fa-unlink fa-lg success"></i></a>
-                        </li>
-                        <li style="text-align: center;">
-                            <a href=""><i class="fas fa-trash fa-lg danger"></i></a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            {% for recipe in signaledRecipes %}
+                <tr>
+                    <th scope="row" style="vertical-align: middle;">{{ recipe.id }}</th>
+                    <td style="vertical-align: middle; text-align: center;">
+                        {% if recipe.picture is null%}
+                            <i class="fas fa-camera fa-4x"></i>
+                        {% else %}
+                            <img src="{{ asset(recipe.picture) }}" alt="Photo de la recette">
+                        {% endif %}
+                    </td>
+                    <td style="vertical-align: middle;">
+                        <ul style="list-style: none; padding: 0;">
+                            <li>{{ recipe.name }}</li>
+                            <li>Par {{ recipe.author.pseudo }}</li>
+                            <li>Créée le {{ recipe.createdAt }}</li>
+                            <li>Catégorie : {{ recipe.category.name }}</li>
+                            <li>Tag(s) :</li>
+                        </ul>
+                    </td>
+                    <td style="vertical-align: middle;">
+                        <ul style="list-style: none; padding: 0;">
+                            <li>Préparation : {{ recipe.preparationTime }}</li>
+                            <li>Cuisson : {{ recipe.cookingTime }}</li>
+                        </ul>
+                    </td>
+                    <td style="vertical-align: middle;">
+                        <ul style="list-style: none; padding: 0;">
+                            {% for ingredient in recipe.recipeIngredients %}
+                                <li>- {{ ingredient.quantity }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td style="vertical-align: middle;">
+                        <ol>
+                            {% for step in recipe.steps %}
+                                <li>{{ step.description }}</li>
+                            {% endfor %}
+                        </ol>
+                    </td>
+                    <td style="vertical-align: middle;">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="text-align: center; margin-bottom: 35px;">
+                                <a href=""><i class="fas fa-unlink fa-lg success"></i></a>
+                            </li>
+                            <li style="text-align: center;">
+                                <a href=""><i class="fas fa-trash fa-lg danger"></i></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
     
