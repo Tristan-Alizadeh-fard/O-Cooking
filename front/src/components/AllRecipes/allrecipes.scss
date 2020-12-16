@@ -342,6 +342,16 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   border-bottom: solid black 1px;
   
 }
+
+
+// tittre "voici toutes les recettes de la communauté
+.allrecipes__title{
+  text-align: center;
+  padding-top : 20px;
+  font-weight : 100;
+  letter-spacing : 5px;
+}
+
 .ui.segment {
   position: fixed;
   top: 40%;
@@ -382,8 +392,12 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   .content {
     border-left: none;
   }
-  
-   
+  .allrecipes__title{
+    text-align: center;
+    padding-top : 20px;
+    font-weight : 100;
+    letter-spacing : 5px;
+  }
 }
 
 

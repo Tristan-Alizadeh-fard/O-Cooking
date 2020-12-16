@@ -19,7 +19,7 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
         </div>
         </div>}
       <div className="allrecipes">
-        <h2 className="allrecipes__title">{`Bienvenue dans votre espace " ${name} " !`}</h2>
+        <h3 className="allrecipes__title">{`Bienvenue dans votre espace " ${name} " !`}</h3>
       </div>
       {!isLoading && 
       

@@ -29,6 +29,7 @@ const InscriptionForm = ({ updateField, submitInscription, errorInscription, ins
          {inscriptionSuccess && <Link to="/" className="link__back" onClick={() => updateField(false, 'inscriptionSuccess')}>- Connection -</Link>}
       </div>
     </div>
+    
   );
 };
 

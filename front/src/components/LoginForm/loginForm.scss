@@ -1,6 +1,7 @@
 
+
 // Div de toute la page formulaire
-.all__page.home_login{
+.all__page.home_login {
     background-image :url("../../pictures/font_acceuil.jpg");
     height: 100%;
     min-height: 100%;
@@ -25,24 +26,25 @@
   box-shadow: 8px 6px 4px 1px rgba(17, 17, 17, 0.301);
   font-family: "Playfair Display";
 }
+
 // h2 et h3 de .home
 .home__title { //h2
-  font-size: 1.4em;
-  text-align: center;
-  color: black;
+font-size: 1.4em;
+text-align: center;
+color: black;
 }
 .home__smalltitle { //h3
-  font-size: 1.2em;
-  text-align: center;
-  color: black;
+font-size: 1.2em;
+text-align: center;
+color: black;
 }
 // div contenant le bouton semantic ui 
 .home__more {
-  text-align: center;
-  color: black;
+text-align: center;
+color: black;
 }
 // Bouton voir plus semantic ui 
-.ui.button.voir__plus{
+.ui.button.voir__plus {
   color: white;
   font-size: 0.8em;
   border-radius: 25px;
@@ -54,18 +56,18 @@
 
 // balise p quand le bouton voir plus est activé 
 .home__content { // p
-  text-align: center;
-  color: black;
-  padding-bottom: 15px;
+text-align: center;
+color: black;
+padding-bottom: 15px;
 } 
 // div englobant le bouton voir moins 
 .home__less {
-  text-align: center;
-  color: black;
-  margin-bottom: 15px;
+text-align: center;
+color: black;
+margin-bottom: 15px;
 }
 //bouton sémantic voir moins
-.ui.button.voir__moins{
+.ui.button.voir__moins {
   color: white;
   font-size: 0.8em;
   border-radius: 25px;
@@ -93,46 +95,47 @@
 }
 //formulaire login semantic ui avec le bouton
 .ui.form.form__log{
-  // background: seagreen;
+// background: seagreen;
 }
 // balise p du titre formulaire 
 .title__form {
-  font-weight: bold;
-  border-bottom: 1px solid black;
-  // background: skyblue;
+font-weight: bold;
+border-bottom: 1px solid black;
+// background: skyblue;
 }
 // interieur du formulaire 
 .field.interior__form__log {
-  // background-color: slateblue;
-  margin-top: 10px;
+// background-color: slateblue;
+margin-top: 10px;
 }
 // élément titre (votre email + input email semantic)
 .field.log__mail__pass{
-  font-size: 0.8em;
-  // background: springgreen;
+font-size: 0.8em;
+// background: springgreen;
 }
 
 // label "votre email" et "votre pass"  au decu des inputs
 .ui.form .field>label{
-  font-size: 1.2em;
-  border-bottom: 1px solid black;
-  // background: tomato;
+font-size: 1.2em;
+border-bottom: 1px solid black;
+// background: tomato;
 }
 //encadré des input de email et pass
 .ui.fluid.input{
   // background-color:rgba(0, 0, 0, 0.993);
   // size: 10px;
 }
+
 // ciblage de l'encadré input de saisie de l'input email et pass 
 .ui.form .field.field input:-webkit-autofill {
-  background: yellowgreen;
+background: yellowgreen;
 }
 // ciblage de l'encadré input de saisie de l'input email et pass quand l'utilisateur est sur l'input
 .ui.form .field.field input:-webkit-autofill:focus {
-  background: yellowgreen;
+background: yellowgreen;
 }
 // bouton Login du formulaire 
-.ui.button.button__login{
+.ui.button.button__login {
   color: white;
   font-size: 0.8em;
   border-radius: 25px;
@@ -151,8 +154,8 @@
 
 // div du lien inscrivez-vous
 .link__inscription {
-  margin-top: 50px;
-  text-align: center;
+margin-top: 50px;
+text-align: center;
 }
 // boutton inscrivez vous 
 .inscription {
@@ -166,20 +169,21 @@
   box-shadow: 4px 6px 5px 2px rgba(19, 19, 19, 0.459);
   padding: 0.5rem;
 }
+
 // selection de la div lien pass oublié
 .link__forgottenpass {
-  margin-top: 15%;
-  text-align: center;
-  
+margin-top: 15%;
+text-align: center;
+
 }
 //boutton du lien pass oublié 
 .forgotten__password {
-  color: black;
-  font-size: 13px;
-  font-weight: bold;
-  // background-color: rgba(0, 0, 0, 0.212);
-  padding: 0.5rem;
-  border-radius: 1rem;
+color: black;
+font-size: 13px;
+font-weight: bold;
+// background-color: rgba(0, 0, 0, 0.212);
+padding: 0.5rem;
+border-radius: 1rem;
 }
 // div du link login success 
 .login__ok {
@@ -432,23 +436,22 @@
 /*
 Code css pas utilisé il me semble ?
 .link__logged {
-  display: inline-block;
-  font-size: large;
-  font: bold;
-  color: white;
-  background-color: none;
-  padding: 0.3rem;
-  border-radius: 0.5rem;
-  margin: auto auto;
+display: inline-block;
+font-size: large;
+font: bold;
+color: white;
+background-color: none;
+padding: 0.3rem;
+border-radius: 0.5rem;
+margin: auto auto;
 }
 .link__islogged {
-  color: black;
-  animation: clignote 2s linear infinite;
-  margin-right: 20px;
-  display: inline-block;
+color: black;
+animation: clignote 2s linear infinite;
+margin-right: 20px;
+display: inline-block;
 }
 @keyframes clignote {  
-  50% { opacity: 0; }
+50% { opacity: 0; }
 }
 */
-
