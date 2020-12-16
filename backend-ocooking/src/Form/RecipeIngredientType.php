@@ -15,7 +15,9 @@ class RecipeIngredientType extends AbstractType
         $builder
             ->add('quantity', null, [
                 'constraints' => [
-                    new Assert\NotBlank(),
+                    new Assert\NotBlank(),new Assert\Regex([
+                        'pattern' => '/^\d+/',
+                    ]),
                 ]
             ])
             ->add('measure', MeasureType::class, [
