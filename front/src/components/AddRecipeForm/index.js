@@ -215,12 +215,22 @@ const AddRecipeForm = ({
           accept="image/*"
           imagePreview
         />
+
         <Divider />
         <p>Catégorie</p>
         <Form.Field>
           {categories.map((category) => (
           // eslint-disable-next-line max-len
             <Category {...category} key={category.name} selectedCategory={selectedCategory} selectCategory={selectCategory} />
+          ))}
+        </Form.Field>
+
+        <Divider />
+        <p>Tags</p>
+        <Form.Field>
+          {tagList.map((tag) => (
+          // eslint-disable-next-line max-len
+            <Tag {...tag} key={tag.name} selectedTags={selectedTags} selectTags={selectTags} />
           ))}
         </Form.Field>
 

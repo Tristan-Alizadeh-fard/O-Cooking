@@ -5,22 +5,37 @@ import testimage from 'src/pictures/sandwich.jpg';
 import './recipe.scss';
 import { setAllLoaders } from '../../actions/user';
 
-const Recipe = ({ recipe, isLoading, setSignaled, setFavorite, unsetFavorite, addShopList, favorite, shoppingList, removeShoppingRecipe, shareRecipe, emailSuccess}) => {
+const Recipe = ({
+  recipe,
+  isLoading,
+  setSignaled,
+  setFavorite,
+  unsetFavorite,
+  addShopList,
+  favorite,
+  shoppingList,
+  removeShoppingRecipe,
+  shareRecipe,
+  emailSuccess,
+}) => {
   console.log('Recipe component', recipe);
   console.log('favorite', favorite);
   console.log(shoppingList);
+  const image = `http://localhost:8000${recipe.picture}`;
   return (
     <>
-      {isLoading && <div className="ui segment">
-        <div className="ui active dimmer">
-          <div className="ui text loader">Loading</div>
+      {isLoading && (
+        <div className="ui segment">
+          <div className="ui active dimmer">
+            <div className="ui text loader">Loading</div>
+          </div>
         </div>
-        </div>}
+      )}
       {!isLoading && 
         <div className="container">
           <div className="image__button">
             <div className="image">
-              <img src={testimage} className="image" alt="Table Setting" />
+              <img src={image} className="image" alt="Table Setting" />
             </div>
             <div className="button">
             {!shoppingList.find(shop => shop.id === recipe.id) && <button type="button" className="icon__addshopping" onClick={() => addShopList(recipe.id)}>Ajouter à l'aide course
@@ -96,11 +111,6 @@ Recipe.prototype = {
 };
 
 export default Recipe;
-
-
-
-
-
 
 {/* <div className="recette">
 <div className="image__container">
