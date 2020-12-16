@@ -331,7 +331,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-pale-yellow,.w3-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.w3-border-pale-blue,.w3-hover-border-pale-blue:hover{border-color:#e7ffff!important}
 
 
-.image__recette {
+.image__home {
   width: 350px;
   margin-top: 20px;
 }
@@ -360,10 +360,13 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     padding: 10px;
     flex: 30%;
   }
-  .image__recette {
-    width: 90%;
-    margin-top: 20px;
+  .image__home {
+    width: 350px;
+    margin-top: 5%;
+   
+
   }
+ 
 }
 
 
