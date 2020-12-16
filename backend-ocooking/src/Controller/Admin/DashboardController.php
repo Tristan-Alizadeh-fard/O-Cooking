@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Ingredient;
 use App\Entity\Measure;
 use App\Entity\Recipe;
+use App\Entity\Tag;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -42,7 +43,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
         yield MenuItem::section('Utilisateurs');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
 
         yield MenuItem::section('Recettes');
         yield MenuItem::linkToCrud('Recettes', 'fa fa-book-open', Recipe::class);
@@ -50,6 +51,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Données pour les recettes');
         yield MenuItem::linkToCrud('Catégories', 'fa fa-cocktail', Category::class);
         yield MenuItem::linkToCrud('Ingrédients', 'fa fa-apple-alt', Ingredient::class);
+        yield MenuItem::linkToCrud('Tags', 'fa fa-tags', Tag::class);
         yield MenuItem::linkToCrud('Unités de mesure', 'fa fa-weight', Measure::class);
     }
 
