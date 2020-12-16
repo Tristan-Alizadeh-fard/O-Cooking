@@ -15,14 +15,12 @@ const Tag = ({
     chosen = 'blue';
   }
   return (
-    <div className="tags__button">
-      <Button
-        type="button"
-        content={name}
-        onClick={() => selectTags(name)}
-        color={chosen}
-      />
-    </div>
+    <Button
+      type="button"
+      content={name}
+      onClick={() => selectTags(name)}
+      color={chosen}
+    />
   );
 };
 
