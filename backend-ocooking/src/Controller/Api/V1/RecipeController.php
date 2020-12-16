@@ -164,7 +164,7 @@ class RecipeController extends AbstractController
           'ingredients' => $ingredientData,
           'measure' => $measureData,
           // DOC Tag
-          'tag' => $tagData,
+          'tags' => $tagData,
           // DOC fin Tag
         ]);
  

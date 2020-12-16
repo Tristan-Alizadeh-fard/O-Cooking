@@ -43,6 +43,11 @@ class Tag
      */
     private $recipes;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $color;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -113,6 +118,18 @@ class Tag
         if ($this->recipes->removeElement($recipe)) {
             $recipe->removeTag($this);
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }
