@@ -12,6 +12,7 @@ import {
   submitRecipe,
   setFormSettings,
   setMeasures,
+  setTags,
 } from 'src/actions/recipe';
 import { sendMessage } from '../actions/recipe';
 
@@ -35,15 +36,7 @@ const initialState = {
   recipeImage: '',
   categories: [],
   selectedCategory: '',
-  tagList: [
-    { key: 1, value: 'Sans gluten' },
-    { key: 2, value: 'Froid' },
-    { key: 3, value: 'Chaud' },
-    { key: 4, value: 'Vegan' },
-    { key: 5, value: 'Épicé' },
-    { key: 6, value: 'Végétarien' },
-    { key: 7, value: 'Viande' },
-  ],
+  tagList: [],
   selectedTags: [],
   settings: [],
   success: false,
@@ -81,6 +74,9 @@ const recipe = createReducer(initialState, (builder) => {
       else {
         state.selectedTags.push(action.payload.value);
       }
+    })
+    .addCase(setTags, (state, action) => {
+      state.tagList = action.payload.value;
     })
     .addCase(setFormSettings, (state, action) => {
       state.categories = action.payload.value;
