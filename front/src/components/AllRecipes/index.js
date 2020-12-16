@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import testimage from 'src/pictures/sandwich.jpg';
 import ConnectedSearchBar from 'src/containers/ConnectedSearchBar';
 import './allrecipes.scss';
 import { setFavoriteAction } from 'src/actions/user';
@@ -32,7 +31,8 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
             
               <div key={recipe.id} className="w3-quarter">
                 
-                  <img src={testimage} className="image__recette" />
+                  {recipe.picture !== null && <img src={`http://localhost:8000${recipe.picture}`} className="image__allrecipes" />}
+                  {recipe.picture === null &&  <div className="camera mini"><i className="camera icon"/></div>}
               
                 {recipe.signaled && <div className="favoris__icon">
                 <i className="bell icon" />

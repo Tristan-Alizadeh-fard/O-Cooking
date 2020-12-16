@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
 import { Link } from 'react-router-dom';
-import testimage from 'src/pictures/sandwich.jpg';
 import './recipe.scss';
 import { setAllLoaders } from '../../actions/user';
 
@@ -35,9 +34,10 @@ const Recipe = ({
         <div className="container">
           <div className="image__button">
             <div className="image">
-              <img src={image} className="image" alt="Table Setting" />
+              {recipe.picture !== null && <img src={`http://localhost:8000${recipe.picture}`} className="image__recette" />}
+              {recipe.picture === null &&  <div className="camera__icon"><i className="camera icon"/></div>}
             </div>
-            <div className="button">
+            <div className="button titi">
             {!shoppingList.find(shop => shop.id === recipe.id) && <button type="button" className="icon__addshopping" onClick={() => addShopList(recipe.id)}>Ajouter à l'aide course
                 <i className="shopping cart icon" />
               </button>}
