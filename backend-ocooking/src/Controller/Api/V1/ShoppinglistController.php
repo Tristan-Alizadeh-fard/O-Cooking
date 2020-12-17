@@ -3,6 +3,7 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\Recipe;
+use App\Entity\ShoppingList;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,27 +20,24 @@ class ShoppinglistController extends AbstractController
     /**
      * @Route("/", name="read", methods={"GET"})
      */
-    public function userShoppingList(UserRepository $userRepository, SerializerInterface $serializer): Response
+    public function userShoppingList(SerializerInterface $serializer): Response
     {
-        $shoppinglist = $this->getUser()->getShoppingLists()[0];
-
-       
-      //  $users = $userRepository->find($id);
-       
-        $jsonUser = $serializer->serialize(
-            $shoppinglist,
-            'json',
-            ['groups' => 'show_shoppinglist']
+      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+     
+       $jsonshoppinglist = $serializer->serialize(
+         $shoppinglist,
+         'json',
+         ['groups' => 'show_shoppinglist']
         );
-        $user = json_decode($jsonUser, true);
+        $userShoppinglist = json_decode($jsonshoppinglist, true);
 
-        return $this->json($user);
+        return $this->json($userShoppinglist);
     }
 
     /**
      * @Route("/edit/{id}", name="edit",methods={"PATCH", "PUT"}, requirements={"id":"\d+"})
      */
-    public function addRecipeShoppinglist(Recipe $recipe): Response
+    public function addRecipeShoppinglist(Recipe $recipe, SerializerInterface $serializer): Response
     {
         $shoppinglist = $this->getUser()->getShoppingLists()[0];
 
@@ -49,15 +47,20 @@ class ShoppinglistController extends AbstractController
         
         $em->persist($recipe);
 
-        $em->flush();
-        
-        return $this->json([], 200);
+       $em->flush();
+       $jsonshoppinglist = $serializer->serialize(
+        $shoppinglist,
+        'json',
+        ['groups' => 'show_shoppinglist']
+       );
+       $userShoppinglist = json_decode($jsonshoppinglist, true);
+       return $this->json([$userShoppinglist], 200);
     }
 
     /**
      * @Route("/delete/{id}", name="delete",methods={"DELETE"}, requirements={"id":"\d+"})
      */
-    public function DeleteRecipeShoppinglist(Recipe $recipe): Response
+    public function deleteRecipeShoppinglist(Recipe $recipe, SerializerInterface $serializer): Response
     {
         $shoppinglist = $this->getUser()->getShoppingLists()[0];
 
@@ -67,9 +70,15 @@ class ShoppinglistController extends AbstractController
         
         $em->persist($recipe);
 
-        $em->flush();
-        
-        return $this->json([], 200);
+       $em->flush();
+       
+       $jsonshoppinglist = $serializer->serialize(
+        $shoppinglist,
+        'json',
+        ['groups' => 'show_shoppinglist']
+       );
+       $userShoppinglist = json_decode($jsonshoppinglist, true);
+       return $this->json([$userShoppinglist], 200);
     }
 
     /**

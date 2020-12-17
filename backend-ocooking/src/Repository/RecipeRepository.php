@@ -58,7 +58,8 @@ class RecipeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
-    }
+
+     }
 
     public function countSignaledRecipes()
     {

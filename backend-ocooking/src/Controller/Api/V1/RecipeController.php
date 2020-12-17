@@ -318,6 +318,7 @@ class RecipeController extends AbstractController
      */
     public function sendRecipe(int $id, MailerService $mailerService, SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
     {
+
         $recipe = $recipeRepository->find($id);
         $response = new JsonResponse();
         $jsonContent = $serializer->serialize($recipe, 'json', [
