@@ -43,7 +43,7 @@ const Recipe = ({
             {shoppingList.find(shop => shop.id === recipe.id) && <button type="button" className="icon__addshopping" onClick={() => removeShoppingRecipe(recipe.id)}>Retirer de l'aide course
                 <i className="shopping cart icon" />
               </button>}
-              {shoppingList.find(shop => shop.id === recipe.id) && <h5 className="shopList">Cette recette est dans votre aide de course</h5>}
+              {shoppingList.find(shop => shop.id === recipe.id) && <h5 className="shopList">Recette ajoutée dans l'aide de course</h5>}
               <button type="button" className="icon__addshopping" onClick={() => shareRecipe(recipe.id)}>Envoyer la recette sur votre email 
                 <i className="paper plane icon" />
               </button>
