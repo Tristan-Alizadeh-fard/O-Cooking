@@ -45,7 +45,7 @@ const About = () => (
             <div className="picture">
               <img src="https://ca.slack-edge.com/T016B3JM5J5-U016KTL660Z-12bee7b854b3-512" alt="" />
             </div>
-            <p>Tristant | React</p>
+            <p>Tristan | React</p>
           </div>
         </div>
       </div>

@@ -33,6 +33,7 @@ export const SET_EMAIL_SUCCESS_ACTION = 'SET_EMAIL_SUCCESS_ACTION';
 export const UNSET_EMAIL_SUCCESS_ACTION = 'UNSET_EMAIL_SUCCESS_ACTION';
 export const SEND_SHOPPINGLIST_ACTION = 'SEND_SHOPPINGLIST_ACTION';
 export const SET_SEARCHBAR_SETTINGS = 'SET_SEARCHBAR_SETTINGS';
+export const SET_ERROR_INSCRIPTION_ACTION = 'SET_ERROR_INSCRIPTION_ACTION';
 
 export const getUserState = () => ({
   type: TEST_ALL,
@@ -189,8 +190,12 @@ export const unsetEmailSuccessAction = () => ({
 export const sendShoppingListAction = () => ({
   type: SEND_SHOPPINGLIST_ACTION,
 });
-                                             
+
 export const setSearchBarSettings = (value) => ({
   type: SET_SEARCHBAR_SETTINGS,
   value,
+});
+
+export const setErrorInscriptionAction = () => ({
+  type: SET_ERROR_INSCRIPTION_ACTION,
 });
