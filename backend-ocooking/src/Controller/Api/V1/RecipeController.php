@@ -33,12 +33,12 @@ class RecipeController extends AbstractController
     {
       // recherche toutes les recettes d'un utilisateur
        
-       $users = $userRepository->find($id);
-       
-       $jsonUser = $serializer->serialize(
-         $users,
-         'json',
-         ['groups' => 'show_user']
+        $users = $userRepository->find($id);
+        
+        $jsonUser = $serializer->serialize(
+            $users,
+            'json',
+            ['groups' => 'show_user']
         );
         $user = json_decode($jsonUser, true);
 
@@ -54,46 +54,45 @@ class RecipeController extends AbstractController
     {
       // recherche toutes les recettes
 
-      $recipes = $recipeRepository->searchRecipesAll();
-        
-      $json = $serializer->serialize(
-          $recipes,
-          'json',
-          ['groups' => 'show_recipe']
+        $recipes = $recipeRepository->searchRecipesAll();
+            
+        $json = $serializer->serialize(
+            $recipes,
+            'json',
+            ['groups' => 'show_recipe']
         );
      
-      $recipes = json_decode($json, true);
+        $recipes = json_decode($json, true);
 
-      return $this->json([
-        'recipes' => $recipes,
-      ]);
-
+        return $this->json([
+            'recipes' => $recipes,
+        ]);
     }
 
      /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id":"\d+"})
      */
-    public function read(int $id,SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
+    public function read(int $id, SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
     {
       // affiche une recette
 
-      $recipe = $recipeRepository->find($id);
-        
-      $jsonRecipe = $serializer->serialize(
-          $recipe,
-          'json',
-          ['groups' => 'recipe_read']
+        $recipe = $recipeRepository->find($id);
+            
+        $jsonRecipe = $serializer->serialize(
+            $recipe,
+            'json',
+            ['groups' => 'recipe_read']
         );
         $recipe = json_decode($jsonRecipe, true);
 
-      // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
-      if ($recipe === null) {
-          throw $this->createNotFoundException('La recette demandé n\'existe pas');
-      }
+        // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
+        if ($recipe === null) {
+            throw $this->createNotFoundException('La recette demandé n\'existe pas');
+        }
 
-      return $this->json([
-        'recipes' => $recipe,
-      ]);
+        return $this->json([
+            'recipes' => $recipe,
+        ]);
     }
 
      /**
@@ -101,20 +100,20 @@ class RecipeController extends AbstractController
      */
     public function searchRecipes(Request $request, SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
     {
-      $json = $request->getContent();
+        $json = $request->getContent();
 
-      $userSearchData = json_decode($json, true);
+        $userSearchData = json_decode($json, true);
 
-      if (is_null($userSearchData)) {
-        $userSearchData = [];
-      }
+        if (is_null($userSearchData)) {
+            $userSearchData = [];
+        }
 
-       $result = $recipeRepository->findByPerso($userSearchData, 50);
-      
-       $jsonRecipes = $serializer->serialize(
-         $result,
-         'json',
-         ['groups' => 'show_recipe']
+        $result = $recipeRepository->findByPerso($userSearchData, 50);
+        
+        $jsonRecipes = $serializer->serialize(
+            $result,
+            'json',
+            ['groups' => 'show_recipe']
         );
         $recipesSearch = json_decode($jsonRecipes, true);
 
@@ -131,10 +130,7 @@ class RecipeController extends AbstractController
         $categories = $category->findAll();
         $ingredients = $ingredient->findAll();
         $measures = $measure->findAll();
-        // DOC Tag
         $tags = $tag->findAll();
-        // DOC fin Tag
-
         
         $jsonContentCategories = $serializer->serialize($categories, 'json', [
           'groups' => 'category_needed_information_add',
@@ -152,33 +148,29 @@ class RecipeController extends AbstractController
         ]);
         $measureData = json_decode($jsonContentMeasures, true);
 
-        // DOC Tag
         $jsonContentTags = $serializer->serialize($tags, 'json', [
             'groups' => 'tag_needed_information_add',
         ]);
         $tagData = json_decode($jsonContentTags, true);
-        // DOC fin Tag
   
         return $this->json([
           'categories' => $categoryData,
           'ingredients' => $ingredientData,
           'measure' => $measureData,
-          // DOC Tag
           'tags' => $tagData,
-          // DOC fin Tag
         ]);
- 
     }
 
     /**
     * @Route("/add", name="add", methods={"POST"})
     */
-    public function add(Request $request, SluggerService $slugger, UploadFileService $uploadFile, CategoryRepository $categoryRepository, MeasureRepository $measureRepository, IngredientRepository $ingredientRepository, TagRepository $tagRepository)
+    public function add(Request $request, SerializerInterface $serializer, SluggerService $slugger, UploadFileService $uploadFile, CategoryRepository $categoryRepository, MeasureRepository $measureRepository, IngredientRepository $ingredientRepository, TagRepository $tagRepository)
     {
         $json = $request->getContent();
 
         $recipeInformationsArray = json_decode($json, true);
 
+        // Treatment of the pictue received in base64 to upload the file on server et save the path in database
         if ($recipeInformationsArray['picture'] !== "") {
             $test = preg_match('/data:image\/([a-z]+);base64,/', $recipeInformationsArray['picture']);
 
@@ -194,6 +186,7 @@ class RecipeController extends AbstractController
             }
         }
         
+        // Submission of provided informations via the RecipeForm
         $recipe = new Recipe();
 
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -228,7 +221,7 @@ class RecipeController extends AbstractController
             }
             $recipe->setCategory($category);
 
-            // DOC $recipe set tags
+            // set tags in $recipe
             $tags = $form->getData()->getTags();
             foreach ($tags as $tag) {
                 $tagName = $tag->getName();
@@ -239,7 +232,6 @@ class RecipeController extends AbstractController
                 }
                 $recipe->addTag($tagToAdd);
             }
-            // DOC fin $recipe set tags
 
             // set recipe in $recipeIngredients
             $recipeIngredients = $form->getData()->getRecipeIngredients();
@@ -281,8 +273,16 @@ class RecipeController extends AbstractController
 
             $em->flush();
 
-            return $this->json([], 201);
+            // return recipe in json response
+            $jsonContent = $serializer->serialize($recipe, 'json', [
+                'groups' => 'recipe_read',
+            ]);
 
+            $response = new JsonResponse();
+            $response = JsonResponse::fromJsonString(($jsonContent));
+            $response->setStatusCode(201);
+
+            return $response;
         } else {
             return $this->json([
                 'errors' => (string) $form->getErrors(true, false),
@@ -316,22 +316,23 @@ class RecipeController extends AbstractController
     /**
      * @Route("/send/{id}", name="send_recipe", methods={"GET"}, requirements={"id"="\d+"})
      */
-    public function sendRecipe(int $id, MailerService $mailerService,SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
+    public function sendRecipe(int $id, MailerService $mailerService, SerializerInterface $serializer, RecipeRepository $recipeRepository): Response
     {
-      $recipe = $recipeRepository->find($id);
-          $response = new JsonResponse();
-          $jsonContent = $serializer->serialize($recipe, 'json', [
-              'groups' => 'recipe_read',
-          ]);
-          $response = JsonResponse::fromJsonString(($jsonContent));
 
-          // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
-          if ($recipe === null) {
-              throw $this->createNotFoundException('La recette demandé n\'existe pas');
-          }
-          ;
-          $from = $this->getUser()->getEmail();
-          $mailerService->sendRecipe($recipe, $from);
-          return $response;
+        $recipe = $recipeRepository->find($id);
+        $response = new JsonResponse();
+        $jsonContent = $serializer->serialize($recipe, 'json', [
+            'groups' => 'recipe_read',
+        ]);
+        $response = JsonResponse::fromJsonString(($jsonContent));
+
+        // Si la recipe n'existe pas en BDD, on lève une erreur pour obtenir unr 404
+        if ($recipe === null) {
+            throw $this->createNotFoundException('La recette demandé n\'existe pas');
+        }
+        ;
+        $from = $this->getUser()->getEmail();
+        $mailerService->sendRecipe($recipe, $from);
+        return $response;
     }
 }

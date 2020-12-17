@@ -45,6 +45,10 @@
     {% endblock %}
 
     <style>
+        .content-header {
+            position: relative;
+        }
+        
         .content-header:before {
             background: white;
         }
@@ -55,6 +59,10 @@
 
         .sidebar-menu li:not(.submenu-active).active .menu-icon, .sidebar-menu li:not(.submenu-active).active a {
             color: var(--primary);
+        }
+
+        li.px-2.mt-2.bg-primary.text-white {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -147,7 +155,7 @@
                 </header>
 
                 {# IMPORTANT Side bar #}
-                <aside class="bg-white main-sidebar">
+                <aside class="bg-white main-sidebar" >
                     {% block sidebar %}
                         <section class="sidebar">
                             {% block main_menu_wrapper %}

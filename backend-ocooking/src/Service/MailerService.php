@@ -35,7 +35,6 @@ class MailerService
      */
     public function send(string $subject, string $from, string $to, string $template, array $parameters, string $headers): void
     {
-        // Add attachFromPath('') pour ajouter des pdf
         $email = (new TemplatedEmail())
             ->from($from)
             ->to($to)
@@ -98,7 +97,7 @@ class MailerService
         ];
         $headers = 'false';
 
-        $this->send($subject,'ocooking.contact@gmail.com', $from, $template, $parameters, $headers);
+        $this->send($subject, 'ocooking.contact@gmail.com', $from, $template, $parameters, $headers);
     }
 
     public function sendShoppinList(ShoppingList $shoppingList, string $from)
@@ -112,6 +111,6 @@ class MailerService
         ];
         $headers = 'false';
 
-        $this->send($subject,'ocooking.contact@gmail.com', $from, $template, $parameters, $headers);
+        $this->send($subject, 'ocooking.contact@gmail.com', $from, $template, $parameters, $headers);
     }
 }
