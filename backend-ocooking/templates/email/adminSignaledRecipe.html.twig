@@ -31,7 +31,7 @@
                     <h2>{{recipe.name}}</h2>
                     <p><span class="bold">Auteur :</span> {{recipe.author}}</p>
                     {% if (recipe.picture is not null) %}
-                         {# <img src="{{asset(recipe.picture)}}" alt=""> #}
+                         <img src="{{email.image(asset(recipe.picture))}}" alt="">
                     {% endif %}
                     <p><span class="bold">Nombre de personnes :</span> {{recipe.nbPeople}}</p>
                     <p><span class="bold">Temps de préparation :</span> {{recipe.preparationTime}}</p>
