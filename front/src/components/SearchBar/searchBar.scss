@@ -12,7 +12,9 @@
   //padding: 100px;
   //margin-top: 40px;
   //position: -webkit-sticky;
-  position: fixed;
+  position: absolute;
+  top: 55px;
+  //position: fixed; //TODO
   display: flex;
   flex-flow: wrap;
   width: 100%;

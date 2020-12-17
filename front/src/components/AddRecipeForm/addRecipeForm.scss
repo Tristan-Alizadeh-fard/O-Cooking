@@ -109,6 +109,35 @@
   margin: 0.2em;
 }
 
+.message {
+  &__error {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1.5em;
+    border-radius: 7px;
+    p {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif !important;
+    }
+  }
+  &__success {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1.5em;
+    border-radius: 7px;
+    p {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif !important;
+    }
+  }
+}
+
 // gestion des bouttons categprie et tags
 .ui.grey.button{
   margin-top: 3%;
@@ -237,6 +266,5 @@
     margin-right: 2%;
     max-width:35%;
     padding: 1% 5%
-
   }
 }

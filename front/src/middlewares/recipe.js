@@ -34,16 +34,13 @@ const user = (store) => (next) => (action) => {
           store.dispatch(emptyForm());
           store.dispatch(saveUserName());
           store.dispatch(sendMessage('success', true));
-          setTimeout(() => {
-            store.dispatch(sendMessage('success', false));
-          }, 10000);
         })
         .catch((error) => {
           console.log(error, 'Je suis dans le middleware submit error');
           store.dispatch(sendMessage('error', true));
           setTimeout(() => {
             store.dispatch(sendMessage('error', false));
-          }, 10000);
+          }, 3000);
         });
       next(action);
       break;

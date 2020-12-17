@@ -12,19 +12,23 @@ const ListAsRecipe = ({
 }) => {
   console.log('ListAsRecipe');
   return (
-    <div className="recette"><h3>{name}</h3>
-      <Button
-        type="button"
-        className="icon__addshopping"
-        onClick={() => removeShoppingRecipe(id)}
-      >
-        <i className="trash alternate icon" />
-      </Button>
+    <div className="recette">
+      <h3>{name}</h3>
+      <div className="container-btn">
+        <button
+          type="button"
+          className="removeshopping"
+          onClick={() => removeShoppingRecipe(id)}
+        >
+          <i className="trash alternate icon shoplist" />
+        </button>
+      </div>
       <div className="content">
         {recipeIngredients.map((ingredient) => {
           if (listCheck !== undefined) {
             if (listCheck.find((ig) => ig === ingredient.id)) {
               return (
+                // eslint-disable-next-line react/button-has-type
                 <Checkbox
                   label={ingredient.quantity}
                   onClick={() => removeFromList(ingredient.id)}
@@ -35,6 +39,7 @@ const ListAsRecipe = ({
             }
             if (!listCheck.find((ig) => ig === ingredient.id)) {
               return (
+                // eslint-disable-next-line react/button-has-type
                 <Checkbox
                   label={ingredient.quantity}
                   onClick={() => removeFromList(ingredient.id)}

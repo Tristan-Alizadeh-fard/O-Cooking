@@ -19,13 +19,6 @@ const Step = ({
       <Button
         className="edit_ingredient_button"
         type="button"
-        onClick={() => console.log('Modification à venir')}
-      >
-        <Icon name="pencil" color="blue" />
-      </Button>
-      <Button
-        className="edit_ingredient_button"
-        type="button"
         onClick={() => removeFromRecipe('steps', index)}
       >
         <Icon name="delete" color="red" />
