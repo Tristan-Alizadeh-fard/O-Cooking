@@ -44,7 +44,7 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
               </div>}
                   <div className="content">
                     <Link to={`/recette/${recipeUser.id}`} className="header" onClick={() => setLoaderHomerecipes(recipeUser.id)}>{recipeUser.name}</Link>
-                    <Link to={`/recette/${recipeUser.id}`} className="header__plus" onClick={() => setLoaderAllrecipes(recipeUser.id)}>Voir plus</Link>
+                    <Link to={`/recette/${recipeUser.id}`} className="header__plus" onClick={() => setLoaderHomerecipes(recipeUser.id)}>Voir plus</Link>
                   {recipeUser.category.name === 'Entrée' && <div className="description"><img src={entree} />{` ${recipeUser.category.name}`}</div>}
                   {recipeUser.category.name === 'Plat' && <div className="description"><img src={plat} />{` ${recipeUser.category.name}`}</div>}
                   {recipeUser.category.name === 'Dessert' && <div className="description"><img src={dessert} />{` ${recipeUser.category.name}`}</div>}
