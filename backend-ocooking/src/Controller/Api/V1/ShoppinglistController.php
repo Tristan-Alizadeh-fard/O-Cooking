@@ -21,15 +21,15 @@ class ShoppinglistController extends AbstractController
      */
     public function userShoppingList(UserRepository $userRepository, SerializerInterface $serializer): Response
     {
-      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+        $shoppinglist = $this->getUser()->getShoppingLists()[0];
 
        
       //  $users = $userRepository->find($id);
        
-       $jsonUser = $serializer->serialize(
-         $shoppinglist,
-         'json',
-         ['groups' => 'show_shoppinglist']
+        $jsonUser = $serializer->serialize(
+            $shoppinglist,
+            'json',
+            ['groups' => 'show_shoppinglist']
         );
         $user = json_decode($jsonUser, true);
 
@@ -41,18 +41,17 @@ class ShoppinglistController extends AbstractController
      */
     public function addRecipeShoppinglist(Recipe $recipe): Response
     {
-      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+        $shoppinglist = $this->getUser()->getShoppingLists()[0];
 
-      $shoppinglist->addRecipe($recipe);
+        $shoppinglist->addRecipe($recipe);
 
-       $em = $this->getDoctrine()->getManager();
-       
-       //le persist sert a modifier (sens supprimer une recette) la relation
-       $em->persist($recipe);
+        $em = $this->getDoctrine()->getManager();
+        
+        $em->persist($recipe);
 
-       $em->flush();
-       
-       return $this->json([], 200);
+        $em->flush();
+        
+        return $this->json([], 200);
     }
 
     /**
@@ -60,39 +59,37 @@ class ShoppinglistController extends AbstractController
      */
     public function DeleteRecipeShoppinglist(Recipe $recipe): Response
     {
-      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+        $shoppinglist = $this->getUser()->getShoppingLists()[0];
 
-      $shoppinglist->removeRecipe($recipe);
+        $shoppinglist->removeRecipe($recipe);
 
-       $em = $this->getDoctrine()->getManager();
-       
-       //le persist sert a modifier (sens supprimer une recette) la relation
-       $em->persist($recipe);
+        $em = $this->getDoctrine()->getManager();
+        
+        $em->persist($recipe);
 
-       $em->flush();
-       
-       return $this->json([], 200);
+        $em->flush();
+        
+        return $this->json([], 200);
     }
 
     /**
      * @Route("/send", name="send_shoppingList", methods={"GET"})
      */
-    public function sendShoppingList(MailerService $mailerService,SerializerInterface $serializer): Response
+    public function sendShoppingList(MailerService $mailerService, SerializerInterface $serializer): Response
     {
 
-      $shoppinglist = $this->getUser()->getShoppingLists()[0];
-      
-      $response = new JsonResponse();
-      $jsonShoppinglist = $serializer->serialize(
-        $shoppinglist,
-        'json',
-        ['groups' => 'show_shoppinglist']
-       );
-      $response = JsonResponse::fromJsonString(($jsonShoppinglist));
+        $shoppinglist = $this->getUser()->getShoppingLists()[0];
+        
+        $response = new JsonResponse();
+        $jsonShoppinglist = $serializer->serialize(
+            $shoppinglist,
+            'json',
+            ['groups' => 'show_shoppinglist']
+        );
+        $response = JsonResponse::fromJsonString(($jsonShoppinglist));
 
-      $from = $this->getUser()->getEmail();
-      $mailerService->sendShoppinList($shoppinglist, $from);
-      return $response;
-
+        $from = $this->getUser()->getEmail();
+        $mailerService->sendShoppinList($shoppinglist, $from);
+        return $response;
     }
 }

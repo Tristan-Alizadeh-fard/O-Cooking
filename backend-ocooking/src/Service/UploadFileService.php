@@ -8,13 +8,10 @@ class UploadFileService
     
     public function uploadFile($base64_pixels, $filePath)
     {
-        // create an image file
         $fp = fopen('.' . $filePath, 'w+');
         
-        // write the data in image file
         fwrite($fp, base64_decode($base64_pixels));
 
-        // close an open file pointer
         fclose($fp);
     }
     
