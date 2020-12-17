@@ -28,7 +28,7 @@ class RecipeRepository extends ServiceEntityRepository
                 ->orderBy('r.createdAt', 'DESC')
                 ->getQuery()
                 ->getResult()
-            ; 
+            ;
     }
 
     public function findByPerso(array $criterias, $limit = null)

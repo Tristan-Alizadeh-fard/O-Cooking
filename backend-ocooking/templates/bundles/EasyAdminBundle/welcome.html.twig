@@ -12,7 +12,7 @@
                 <tr class="row">
                     <th scope="col" class="" >ID</th>
                     <th scope="col" class="col-1" style="text-align: center;">Photo</th>
-                    <th scope="col" class="col-2">Informations générales</th>
+                    <th scope="col" class="col-2">Informations</th>
                     <th scope="col" class="col-1">Durée</th>
                     <th scope="col" class="col-3">Ingrédients</th>
                     <th scope="col" class="col-3">Préparation</th>
@@ -61,10 +61,10 @@
                     <td class="col-1" >
                         <div style="text-align: center;">
                             <p>
-                                <a href="{{ path('admin_unsignaled_recipe', {'id': recipe.id}) }}" class="btn btn-success"><i class="fas fa-unlink fa-lg success"></i></a>
+                                <a href="{{ path('admin_unsignaled_recipe', {'id': recipe.id}) }}" class="btn btn-success"><i class="fas fa-thumbs-up fa-lg "></i></a>
                             </p>
                             <p style="margin-top: 40px;">
-                                <a id="delete-link" type="button" class="btn btn-danger" data-toggle="modal" href="#deleteModal" data-id="{{ recipe.id }}"><i class="fas fa-trash fa-lg danger"></i></a>
+                                <a id="delete-link" type="button" class="btn btn-danger" data-toggle="modal" href="#deleteModal" data-id="{{ recipe.id }}"><i class="fas fa-trash fa-lg"></i></a>
                             </p>
                         </div>
                     </td>
