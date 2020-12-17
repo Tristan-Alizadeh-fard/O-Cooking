@@ -6,7 +6,7 @@ App\Entity\User:
     pseudo : 'Stephelle'
   user_2:
     email: 'renan@ocooking.fr'
-    roles: '[ROLE_USER]'
+    roles: '[]'
     password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$YurxvnGGwLRI+ScOIvr2rw\$hJLS24urK70WoNiPUzPraMgBR1U1y5j6uz2TDo6pXlg'
     pseudo: 'Renan'
 
@@ -18,29 +18,29 @@ App\Entity\Category:
   category_3:
     name: 'Dessert'
   category_4:
-    name: 'Soupe'
-  category_5:
-    name: 'Smoothie'
-  category_6:
     name: 'Sandwich'
-  category_7:
+  category_5:
     name: 'Sauce'
+  category_6:
+    name: 'Smoothie'
+  category_7:
+    name: 'Soupe'
 
 App\Entity\Tag:
   tag_1:
-    name: 'Végétarien'
-  tag_2:
-    name: 'Végan'
-  tag_3:
-    name: 'Sans gluten'
-  tag_4:
-    name: 'Sans lactose'
-  tag_5:
-    name: 'Epicé'
-  tag_6:
-    name: 'Froid'
-  tag_7:
     name: 'Chaud'
+  tag_2:
+    name: 'Epicé'
+  tag_3:
+    name: 'Froid'
+  tag_4:
+    name: 'Sans gluten'
+  tag_5:
+    name: 'Sans lactose'
+  tag_6:
+    name: 'Végan'
+  tag_7:
+    name: 'Végétarien'
 
 App\Entity\Measure:
   measure_1:
@@ -62,36 +62,3 @@ App\Entity\Measure:
   measure_9:
     name: 'c. à soupe'
 
-App\Entity\Ingredient:
-  ingredient_{1..150}:
-    name (unique): '<word())>'
-
-App\Entity\ShoppingList:
-  shoppingList_1:
-    user: '@user_1'
-  shoppingList_2:
-    user: '@user_2'
-
-App\Entity\Recipe:
-  recipe_{1..60}:
-    name: '<sentence()>'
-    nbPeople: '<numberBetween(1, 6)>'
-    preparationTime: '<numberBetween(1, 60)>mn'
-    cookingTime: '<numberBetween(1, 60)>mn'
-    tags: '<numberBetween(0, 3)>x @tag_*'
-    category: '@category_*'
-    shoppingLists: '<numberBetween(0, 2)>x @shoppingList_*'
-    author: '@user_*'
-
-App\Entity\RecipeIngredient:
-  recipeIngredient_{1..400}:
-    quantity: '<numberBetween(1, 50)>measure de ingredient'
-    recipe: '@recipe_*'
-    measure: '@measure_*'
-    ingredient: '@ingredient_*'
-    
-App\Entity\Step:
-  step_{1..250}:
-    nbStep: '<numberBetween(1, 5)>'
-    description: '<paragraph()>'
-    recipe: '@recipe_*'
