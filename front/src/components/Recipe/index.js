@@ -53,6 +53,7 @@ const Recipe = ({
                 <i className="shopping cart icon" />
               </button>}
               <button type="button" className="icon__addshopping" onClick={() => shareRecipe(recipe.id)}>Envoyer par email 
+              {shoppingList.find(shop => shop.id === recipe.id) && <h5 className="shopList">Recette ajoutée dans l'aide de course</h5>} 
                 <i className="paper plane icon" />
               </button>
               {!favorite.find(fav => fav.name === recipe.name) && <button type="button" className="icon__addshopping" onClick={() => setFavorite(recipe.id)}>Ajouter aux favoris

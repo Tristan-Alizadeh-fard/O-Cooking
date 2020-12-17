@@ -3,7 +3,7 @@
 // Div de toute la page formulaire
 .all__page.home_login {
     background-image :url("../../pictures/font_acceuil.jpg");
-    height: 100%;
+    height: 100vh;
     min-height: 100%;
     background-position: 50%;
     margin: auto;
@@ -341,9 +341,8 @@ border-radius: 1rem;
 @media screen and (min-width: 1238px){
   // Div de toute la page formulaire
   .all__page.home_login{
-    background:none;
     background-image :url("../../pictures/font_acceuil.jpg");
-    height: 100%;
+    height: 100vh;
     min-height: 100%;
     background-position: center;
     margin: auto;

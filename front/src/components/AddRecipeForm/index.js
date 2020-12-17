@@ -67,11 +67,13 @@ const AddRecipeForm = ({
     </div>
   );
   return (
-    <div className="form__addrecipe">
+    <div className="all_page form_addrecipe">
+      <div className="form__addrecipe">
       <Form>
         <p>Description</p>
         <Form.Field>
           <Form.Input
+            className="title"
             fluid label="Donnez un nom à votre recette !"
             placeholder="Ecrivez le nom de votre recette"
             onChange={() => updateRecipeField('recipeName', event.target.value)}
@@ -82,6 +84,7 @@ const AddRecipeForm = ({
         <Form.Field>
           <p>Entrez votre temps de préparation</p>
           <Input
+            className="time"
             label={{ basic: true, content: 'h' }}
             type="number"
             labelPosition="right"
@@ -93,6 +96,7 @@ const AddRecipeForm = ({
             value={PTS1}
           />
           <Input
+            className="time"
             label={{ basic: true, content: 'mn' }}
             type="number"
             labelPosition="right"
@@ -108,6 +112,7 @@ const AddRecipeForm = ({
         <Form.Field>
           <p>Puis votre temps de cuisson si besoin</p>
           <Input
+            className="time"
             label={{ basic: true, content: 'h' }}
             type="number"
             labelPosition="right"
@@ -119,6 +124,7 @@ const AddRecipeForm = ({
             value={CTS1}
           />
           <Input
+            className="time"
             label={{ basic: true, content: 'mn' }}
             type="number"
             labelPosition="right"
@@ -134,6 +140,7 @@ const AddRecipeForm = ({
         <Form.Field>
           <p>Le nombre de personnes</p>
           <Input
+            className="personne"
             placeholder="Ex: 4"
             type="number"
             onChange={() => updateRecipeField('nbPerson', event.target.value)}
@@ -162,6 +169,7 @@ const AddRecipeForm = ({
                 onChange={() => updateRecipeField('selectedMeasure', event.target.textContent)}
               />
             )}
+            className="ingredient"
             type="number"
             labelPosition="right"
             placeholder="Ex: 2"
@@ -176,6 +184,7 @@ const AddRecipeForm = ({
               measure: selectedMeasure,
               quantity: quantityInputValue,
             })}
+            className="add_ingredient_button"
           >
             <Icon name="plus" />
           </Button>
@@ -200,6 +209,7 @@ const AddRecipeForm = ({
             onClick={() => addToRecipe('steps', {
               description: stepInputValue,
             })}
+            className="add_ingredient_button"
           >
             <Icon name="plus" />
           </Button>
@@ -208,7 +218,7 @@ const AddRecipeForm = ({
         <Divider />
         <p>Image</p>
         <FileInputComponent
-          labelText="Select file"
+          labelText="Ajout d'une image "
           labelStyle={{fontSize:14}}
           multiple={false}
           callbackFunction={(file_arr)=>{changeImage(file_arr.base64)}}
@@ -239,6 +249,7 @@ const AddRecipeForm = ({
           <Button
             type="button"
             name="add_button"
+            className="recipe_button"
             onClick={() => submitRecipe()}
           >Ajouter cette recette
           </Button>
@@ -246,6 +257,7 @@ const AddRecipeForm = ({
           {error && <div className="message__error"><p>Il semblerait qu'il y ait une erreur.</p></div> }
         </Form.Field>
       </Form>
+    </div>
     </div>
   );
 };

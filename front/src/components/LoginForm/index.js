@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import './loginForm.scss';
 
-const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes }) => {
+const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes, setErrorInscription }) => {
   const submitLogin = (event) => {
     event.preventDefault();
     setLoader();
@@ -47,13 +47,14 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
         </Form>
       </div>
       <div className="link__inscription">
-        {!isLogged && <Link className="inscription" to="/inscription">Inscrivez-vous !</Link>}
+        {!isLogged && <Link className="inscription" to="/inscription" onClick={() => setErrorInscription()}>Inscrivez-vous !</Link>}
       </div>
     </div>
   );
 };
 
 LoginForm.prototypes = {
+  setErrorInscription: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   pass: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
