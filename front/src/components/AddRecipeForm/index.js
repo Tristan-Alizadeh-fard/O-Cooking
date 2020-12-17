@@ -67,7 +67,8 @@ const AddRecipeForm = ({
     </div>
   );
   return (
-    <div className="form__addrecipe">
+    <div className="all_page form_addrecipe">
+      <div className="form__addrecipe">
       <Form>
         <p>Description</p>
         <Form.Field>
@@ -256,6 +257,7 @@ const AddRecipeForm = ({
           {error && <div className="message__error"><p>Il semblerait qu'il y ait une erreur.</p></div> }
         </Form.Field>
       </Form>
+    </div>
     </div>
   );
 };

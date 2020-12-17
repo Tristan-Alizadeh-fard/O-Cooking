@@ -1,3 +1,8 @@
+.all_page.form_addrecipe{
+  background-image :url("../../pictures/font_acceuil.jpg");
+  background-position: 16%  -100%;
+  background-size: cover;
+}
 // gère l affichage du formulaire
 .form__addrecipe {
   text-align: center;
@@ -122,9 +127,9 @@
   padding: 2%;
   color: white;
   border-radius: 125px;
-  background-color: #06b31d;
-  background: linear-gradient(#33f04c,#06b31d);
-  border: 1px solid #2ac23e;
+  background-color: #066b13;
+  background: linear-gradient(#26c93c,#066b13);
+  border: 1px solid #14b92a;
   box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
 }
 
@@ -173,6 +178,15 @@
 }
 // reglage ecrant ordi
 @media screen and (min-width: 1238px){
+  .all_page.form_addrecipe{
+    background-image :url("../../pictures/font_acceuil.jpg");
+    background-position: 16%  50%;
+    margin: auto;
+    padding: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
   // gère l affichage du formulaire
   .form__addrecipe {
     margin-top: 3%;
@@ -204,9 +218,9 @@
   padding: 2%;
   color: white;
   border-radius: 125px;
-  background-color: #06b31d;
-  background: linear-gradient(#33f04c,#06b31d);
-  border: 1px solid #2ac23e;
+  background-color: #066b13;
+  background: linear-gradient(#26c93c,#066b13);
+  border: 1px solid #14b92a;
   box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
   }
   // gère le boutton d ajout final de la rectte "ajouter cette recette"

@@ -43,12 +43,12 @@ const About = () => (
           </div>
         </div>
       </div>
-      <div className="pictures">
+      {/* <div className="pictures">
         <img className="php" src={php} alt="" />
         <img className="symphony" src={symphony} alt="" />
         <img className="react" src={react} alt="" />
         <img className="js" src={js} alt="" />
-      </div>
+      </div> */}
     </div>
   </>
 );

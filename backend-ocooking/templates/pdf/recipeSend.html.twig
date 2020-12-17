@@ -30,7 +30,9 @@
             <h2>{{recipe.name}}</h2>
         </div>
         <div class='head'>
-            {# <img src="{{path('' ~ recipe.picture)}}" alt="photo du plat {{recipe.name}}"> #}
+            {# {% if recipe.picture != null %} #}
+                {# <img src="{{asset( recipe.picture)}}" alt="photo du plat {{recipe.name}}" widht="250px"> #}
+            {# {% endif %} #}
             
             <h3>Informations de la recette :</h3>
             <ul>
