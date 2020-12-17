@@ -76,7 +76,7 @@
                                 <a href="{{ path('admin_unsignaled_recipe', {'id': recipe.id}) }}" class="btn btn-success"><i class="fas fa-unlink fa-lg success"></i></a>
                             </p>
                             <p style="margin-top: 40px;">
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ recipe.id }}"><i class="fas fa-trash fa-lg danger"></i></button>
+                                <a id="delete-link" type="button" class="btn btn-danger" data-toggle="modal" href="#deleteModal" data-id="{{ recipe.id }}"><i class="fas fa-trash fa-lg danger"></i></a>
                             </p>
                         </div>
                         {# <ul style="list-style: none; padding: 0;">
@@ -106,7 +106,7 @@
                 <p>Êtes-vous sûre de vouloir supprimer cette recette ?</p>
             </div>
             <div class="modal-footer">
-                <a href="" type="button" class="btn btn-danger">Supprimer</a>
+                <a id="modal-delete-link" href="" type="button" class="btn btn-danger">Supprimer</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
             </div>
             </div>
@@ -114,23 +114,12 @@
     </div>
 
     <script>
-        var deleteModal = document.getElementById('deleteModal')
-       deleteModal.addEventListener('show.modal', function (event) {
-           // Button that triggered the modal
-           var button = event.relatedTarget
-           // Extract info from data-bs-* attributes
-           var recipient = button.getAttribute('data-id')
-           // If necessary, you could initiate an AJAX request here
-           // and then do the updating in a callback.
-           //
-           // Update the modal's content.
-           var modalTitle = deleteModal.querySelector('.modal-title')
-           modalTitle.textContent = 'Recette #' + id
-          
-           var modalHref = deleteModal.querySelector('.modal-footer a')
-           modalHref.setAttribute(href, '/admin/recipes/' + id + '/delete')
-       })
-
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget)
+            const id = button.data('id')
+            document.querySelector('.modal-title').textContent = 'Recette #' + id
+            document.getElementById('modal-delete-link').setAttribute('href', '/admin/recipes/' + id + '/delete')
+        })
     </script>
     
 {% endblock %}
