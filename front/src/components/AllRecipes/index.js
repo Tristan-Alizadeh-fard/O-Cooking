@@ -4,6 +4,17 @@ import { Link } from 'react-router-dom';
 import ConnectedSearchBar from 'src/containers/ConnectedSearchBar';
 import './allrecipes.scss';
 import { setFavoriteAction } from 'src/actions/user';
+import time from 'src/pictures/horloge.png';
+import entree from 'src/pictures/entree.png';
+import sandwich from 'src/pictures/sandwich.png';
+import sauce from 'src/pictures/sauce.png';
+import plat from 'src/pictures/plat.png';
+import smoothie from 'src/pictures/smoothie.png';
+import soupe from 'src/pictures/soupe.png';
+import dessert from 'src/pictures/dessert.png';
+
+
+
 
 const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, unsetFavorite, favorite, unsetEmailSuccess, addShopList, removeShoppingRecipe, shoppingList }) => {
   console.log('AllRecipes', recipes);
@@ -33,17 +44,27 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
                 
                   {recipe.picture !== null && <img src={`http://localhost:8000${recipe.picture}`} className="image__allrecipes" />}
                   {recipe.picture === null &&  <div className="camera mini"><i className="camera icon"/></div>}
-              
+                  {!favorite.find(fav => fav.name === recipe.name) && <Link to="/allrecipes" className="link__icon" onClick={() => setFavorite(recipe.id)}>
+                    <i className="heart outline icon" />Ajouter aux favoris
+                  </Link>}
+                  {favorite.find(fav => fav.name === recipe.name) && <Link to="/allrecipes" className="link__icon" onClick={() => unsetFavorite(recipe.id)}>
+                    <i className="heart icon" />Retirer de vos favoris
+                  </Link>}
                 {recipe.signaled && <div className="favoris__icon">
                 <i className="bell icon" />
                 <p className="text__favoris">Recette signalé !</p>
               </div>}
                 <div className="content">
                   <Link to={`/recette/${recipe.id}`} className="header" onClick={() => setLoaderAllrecipes(recipe.id)}>{recipe.name}</Link>
-                  <div className="meta">
-                    <span className="date">{`Posté le ${recipe.createdAt}`}</span>
-                  </div>
-                  <div className="description">{`${recipe.category.name} - Temps de préparation = ${recipe.preparationTime}`}</div>
+                  <Link to={`/recette/${recipe.id}`} className="header__plus" onClick={() => setLoaderAllrecipes(recipe.id)}>Voir plus</Link>
+                  {recipe.category.name === 'Entrée' && <div className="description"><img src={entree} />{` ${recipe.category.name}`}</div>}
+                  {recipe.category.name === 'Plat' && <div className="description"><img src={plat} />{` ${recipe.category.name}`}</div>}
+                  {recipe.category.name === 'Dessert' && <div className="description"><img src={dessert} />{` ${recipe.category.name}`}</div>}
+                  {recipe.category.name === 'Sauce' && <div className="description"><img src={sauce} />{` ${recipe.category.name}`}</div>}
+                  {recipe.category.name === 'Smoothie' && <div className="description"><img src={smoothie} />{` ${recipe.category.name}`}</div>}
+                  {recipe.category.name === 'Soupe' && <div className="description"><img src={soupe} />{` ${recipe.category.name}`}</div>}
+                  {recipe.category.name === 'Sandwich' && <div className="description"><img src={sandwich} />{` ${recipe.category.name}`}</div>}
+                  <div className="description"><img src={time} />{` ${recipe.preparationTime}`}</div>
                   <div className="tags__container">
                   {recipe.tags.map((tag) => (
                     <div key={tag.name} className="tag__container">
@@ -53,29 +74,27 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
                   </div>
                 </div>
                 <div className="extra content">
-                  <p className="link__author">
-                    <i className="user icon" />{`By ${recipe.author.pseudo}`}
-                  </p>
                   {!shoppingList && <Link to="/allrecipes" className="link__icon" onClick={() => addShopList(recipe.id)}>
-                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                    <i className="cart arrow down" />Ajouter à l'aide de course
                   </Link>}
                   {shoppingList && !shoppingList.find(shop => shop.id === recipe.id) &&<Link to="/allrecipes" className="link__icon" onClick={() => addShopList(recipe.id)}>
-                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                    <i className="cart arrow down icon" />Ajouter à l'aide de course
                   </Link>}
                   {shoppingList && shoppingList.find(shop => shop.id === recipe.id) && <Link to="/allrecipes" className="link__icon" onClick={() => removeShoppingRecipe(recipe.id)}>
                     <i className="shopping cart icon" />Retirer de l'aide de course
                   </Link>}
-                  {shoppingList && shoppingList.find(shop => shop.id === recipe.id) && <h6 className="inShopingList">Recette présente dans votre aide de course</h6>}
-                  {!favorite.find(fav => fav.name === recipe.name) && <Link to="/allrecipes" className="link__icon" onClick={() => setFavorite(recipe.id)}>
-                    <i className="heart icon" />Ajouter aux favoris
-                  </Link>}
-                  {favorite.find(fav => fav.name === recipe.name) && <Link to="/allrecipes" className="link__icon" onClick={() => unsetFavorite(recipe.id)}>
-                    <i className="heart outline icon" />Retirer de vos favoris
-                  </Link>}
+                  {/* {shoppingList && shoppingList.find(shop => shop.id === recipe.id) && <h6 className="inShopingList">Ajouté dans l'aide de course</h6>} */}
+                  
                 </div>
-                {favorite.find(fav => fav.name === recipe.name) && <div className="favoris__icon">
-                <h5 className="text__favoris">Recette ajouté aux favoris</h5>
-              </div>}
+                {/* {favorite.find(fav => fav.name === recipe.name) && <div className="favoris__icon">
+                <h6 className="text__favoris">Recette ajouté aux favoris</h6>
+              </div>} */}
+              <p className="link__author">
+                    <i className="user icon" />{recipe.author.pseudo}
+                  </p>
+              <div className="meta">
+                    <span className="date">{`Posté le ${recipe.createdAt}`}</span>
+                  </div>
               </div>
             
           ))}

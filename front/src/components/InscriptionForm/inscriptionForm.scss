@@ -18,10 +18,10 @@
     padding: 1em;
     border-radius: 1em;
     background: rgba(250, 250, 250, 0.76);
-    border-top: 0.5px solid #FFDD39;
-    border-right: 1px solid #FFDD39;
-    border-bottom: 1.5px solid #FFDD39;
-    border-left: 0.5px solid #FFDD39;
+    // border-top: 0.5px solid #FFDD39;
+    // border-right: 1px solid #FFDD39;
+    // border-bottom: 1.5px solid #FFDD39;
+    // border-left: 0.5px solid #FFDD39;
     box-shadow: 8px 6px 4px 1px rgba(17, 17, 17, 0.301);
     font-family: "Playfair Display";
 }
@@ -29,11 +29,12 @@
 // Boutton Soumettre
 .ui.button.form__button_valide {
   border-radius: 25px;
-  background-color: #FFDD39;
-  background: linear-gradient(rgba(248, 219, 52, 0.774),rgb(219, 184, 10));
-  border: 1px solid rgb(255, 238, 0);
+  background: linear-gradient(#42a1ec,#0070c9);
+  //border: 1px solid rgb(255, 238, 0);
   box-shadow: 4px 6px 5px 2px rgba(19, 19, 19, 0.459);
   padding: 0.5rem;
+  color: white;
+ 
 }
 
 // Message d'error

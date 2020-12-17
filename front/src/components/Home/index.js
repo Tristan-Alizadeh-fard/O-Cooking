@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import testimage from 'src/pictures/sandwich.jpg';
+//import testimage from 'src/pictures/sandwich.jpg';
 import './home.scss';
+import time from 'src/pictures/horloge.png';
+import entree from 'src/pictures/entree.png';
+import sandwich from 'src/pictures/sandwich.png';
+import sauce from 'src/pictures/sauce.png';
+import plat from 'src/pictures/plat.png';
+import smoothie from 'src/pictures/smoothie.png';
+import soupe from 'src/pictures/soupe.png';
+import dessert from 'src/pictures/dessert.png';
 
 const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite, addShopList, removeShoppingRecipe, shoppingList }) => {
 
@@ -36,10 +44,15 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
               </div>}
                   <div className="content">
                     <Link to={`/recette/${recipeUser.id}`} className="header" onClick={() => setLoaderHomerecipes(recipeUser.id)}>{recipeUser.name}</Link>
-                    <div className="meta">
-                      <span className="date">{`Posté le ${recipeUser.createdAt}`}</span>
-                    </div>
-                    <div className="description">{`${recipeUser.category.name} - Temps de préparation = ${recipeUser.preparationTime}`}</div>
+                    <Link to={`/recette/${recipeUser.id}`} className="header__plus" onClick={() => setLoaderAllrecipes(recipeUser.id)}>Voir plus</Link>
+                  {recipeUser.category.name === 'Entrée' && <div className="description"><img src={entree} />{` ${recipeUser.category.name}`}</div>}
+                  {recipeUser.category.name === 'Plat' && <div className="description"><img src={plat} />{` ${recipeUser.category.name}`}</div>}
+                  {recipeUser.category.name === 'Dessert' && <div className="description"><img src={dessert} />{` ${recipeUser.category.name}`}</div>}
+                  {recipeUser.category.name === 'Sauce' && <div className="description"><img src={sauce} />{` ${recipeUser.category.name}`}</div>}
+                  {recipeUser.category.name === 'Smoothie' && <div className="description"><img src={smoothie} />{` ${recipeUser.category.name}`}</div>}
+                  {recipeUser.category.name === 'Soupe' && <div className="description"><img src={soupe} />{` ${recipeUser.category.name}`}</div>}
+                  {recipeUser.category.name === 'Sandwich' && <div className="description"><img src={sandwich} />{` ${recipeUser.category.name}`}</div>}
+                  <div className="description"><img src={time} />{` ${recipeUser.preparationTime}`}</div>
                     <div className="tags__container">
                     {recipeUser.tags.map((tag) => (
                       <div key={tag.name} className="tag__container">
@@ -49,9 +62,7 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                     </div>
                   </div>
                   <div className="extra content">
-                    <p className="link__author">
-                      <i className="user icon" />{`By ${name}`}
-                    </p>
+                   
                     {!shoppingList && <Link to="/home" className="link__icon" onClick={() => addShopList(recipeUser.id)}>
                     <i className="shopping cart icon" />Ajouter à l'aide de course
                   </Link>}
@@ -61,7 +72,7 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                   {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <Link to="/home" className="link__icon" onClick={() => removeShoppingRecipe(recipeUser.id)}>
                     <i className="shopping cart icon" />Retirer de l'aide de course
                   </Link>}
-                  {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <h6 className="inShopingList">Recette présente dans votre aide de course</h6>}
+                  {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <h6 className="inShopingList">Ajouté dans l'aide de course</h6>}
                   {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
                       <i className="heart icon" />Ajouter aux favoris
                     </Link>}
@@ -73,7 +84,12 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                 
                 <h5 className="text__favoris">Recette ajouté aux favoris</h5>
               </div>}
-                
+              <p className="link__author">
+                <i className="user icon" />{name}
+              </p>
+              <div className="meta">
+                <span className="date">{`Posté le ${recipeUser.createdAt}`}</span>
+              </div>  
               </div>
               
         ))}

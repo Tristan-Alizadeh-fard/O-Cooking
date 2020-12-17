@@ -6,15 +6,19 @@
 
 // composant search bar
 .ui.action.input.search__bar{
-  border: 100px;
+  //border: 100px;
 
   //z-index: 1;
   //padding: 100px;
   //margin-top: 40px;
   //position: -webkit-sticky;
-  position: sticky;
-  top: 40px;
+  position: fixed;
   display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  top: 40px;
+  //margin-left: 10%;
+  //margin-right: 10%;
 }
 
 
@@ -80,5 +84,17 @@
 
                                         
    @media screen and (min-width: 980px){
-   
+    .ui.action.input.search__bar{
+      //border-top: solid blue 1px;
+    
+      //z-index: 1;
+      //padding: 100px;
+      //margin-top: 40px;
+      //position: -webkit-sticky;
+      position: fixed;
+      left: 10%;
+      top: 44px;
+      width: 80%;
+     
+    }
 }

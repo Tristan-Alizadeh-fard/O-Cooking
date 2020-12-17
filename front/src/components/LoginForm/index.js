@@ -19,7 +19,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
   return (
     <div className="all__page home_login">
       <div className="home">
-        <h2 className="home__title">Bienvenue Chez O'Coocking</h2>
+        <h2 className="home__title">Bienvenue Chez O'Cooking</h2>
         <h3 className="home__smalltitle">L'application des passionnés de cuisine</h3>
         <div className="home__more">
           {!descriptionOn && <Button className="voir__plus" onClick={() => showDescription()}>Voir plus</Button>}
