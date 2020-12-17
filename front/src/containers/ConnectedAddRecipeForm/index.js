@@ -10,6 +10,7 @@ import {
   changeImage,
   submitRecipe,
 } from 'src/actions/recipe';
+import { emptyForm } from '../../actions/recipe';
 
 const mapStateToProps = (state) => ({
   recipeName: state.recipe.recipeName,
@@ -36,6 +37,7 @@ const mapStateToProps = (state) => ({
   selectedCategory: state.recipe.selectedCategory,
   quantityInputValue: state.recipe.quantityInputValue,
   optionsMeasure: state.recipe.optionsMeasure,
+  open: state.recipe.open,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -62,6 +64,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   submitRecipe: () => {
     dispatch(submitRecipe());
+  },
+  emptyForm: () => {
+    dispatch(emptyForm());
   },
 });
 

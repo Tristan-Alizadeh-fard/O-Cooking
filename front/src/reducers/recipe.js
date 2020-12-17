@@ -41,6 +41,7 @@ const initialState = {
   settings: [],
   success: false,
   error: false,
+  open: true,
 };
 
 const recipe = createReducer(initialState, (builder) => {
@@ -89,12 +90,14 @@ const recipe = createReducer(initialState, (builder) => {
     .addCase(emptyForm, (state) => {
       state.ingredients = [];
       state.steps = [];
+      state.selectedTags = [];
       state.recipeName = '';
       state.PTS1 = '';
       state.PTS2 = '';
       state.CTS1 = '';
       state.CTS2 = '';
       state.nbPerson = '';
+      state.selectedMeasure = 'g';
       state.ingredientInputValue = '';
       state.quantityInputValue = '';
       state.stepInputValue = '';

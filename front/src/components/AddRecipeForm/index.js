@@ -1,6 +1,8 @@
 import React from 'react';
 import './addRecipeForm.scss';
+import { useHistory } from 'react-router-dom';
 import FileInputComponent from 'react-file-input-previews-base64';
+
 import {
   Form,
   Input,
@@ -8,10 +10,10 @@ import {
   Button,
   Icon,
   TextArea,
-  Image,
   Dropdown,
-  Message,
+  Modal,
 } from 'semantic-ui-react';
+
 import PropTypes from 'prop-types';
 
 import Ingredient from './Ingredient';
@@ -51,28 +53,23 @@ const AddRecipeForm = ({
   submitRecipe,
   success,
   error,
+  emptyForm,
+  open,
 }) => {
-  const save = (
-    <div>
-      <Divider />
-      <p>Tag</p>
-      <Form.Field>
-        <div className="tags">
-          {tagList.map((tag) => (
-            // eslint-disable-next-line max-len
-            <Tag {...tag} key={tag.key} selectedTags={selectedTags} selectTags={selectTags} tagList={tagList} />
-          ))}
-        </div>
-      </Form.Field>
-    </div>
-  );
+  const save = false;
+  const history = useHistory();
+
+  function handleClick() {
+    emptyForm();
+    history.push('/home');
+  }
   return (
     <div className="form__addrecipe">
       <Form>
-        <p>Description</p>
+        <h2>Description</h2>
         <Form.Field>
+          <p>Donnez un nom à votre recette !<span className="required-field"> *</span></p>
           <Form.Input
-            fluid label="Donnez un nom à votre recette !"
             placeholder="Ecrivez le nom de votre recette"
             onChange={() => updateRecipeField('recipeName', event.target.value)}
             value={recipeName}
@@ -132,7 +129,7 @@ const AddRecipeForm = ({
         </Form.Field>
 
         <Form.Field>
-          <p>Le nombre de personnes</p>
+          <p>Le nombre de personnes<span className="required-field"> *</span></p>
           <Input
             placeholder="Ex: 4"
             type="number"
@@ -142,14 +139,14 @@ const AddRecipeForm = ({
 
         <Divider />
 
-        <p>Ingrédients</p>
+        <h2>Ingrédients<span className="required-field"> *</span></h2>
         <Form.Field>
           {ingredients.map((ingredient, index) => (
             // eslint-disable-next-line max-len
             <Ingredient {...ingredient} index={index} key={ingredient.name} updateRecipe={updateRecipe} removeFromRecipe={removeFromRecipe} />
           ))}
+          <p>Ajoutez un ingrédient</p>
           <Form.Input
-            fluid label="Ajoutez un ingrédient"
             placeholder="ex: Courgette"
             onChange={() => updateRecipeField('ingredientInputValue', event.target.value)}
             value={ingredientInputValue}
@@ -183,12 +180,13 @@ const AddRecipeForm = ({
 
         <Divider />
 
-        <p>Etapes</p>
+        <h2>Etapes<span className="required-field"> *</span></h2>
         <Form.Field>
           {steps.map((step, index) => (
             // eslint-disable-next-line max-len
             <Step {...step} index={index} key={step.description} updateRecipe={updateRecipe} removeFromRecipe={removeFromRecipe} />
           ))}
+          <p>Ajoutez une étape</p>
           <TextArea
             placeholder="ex: Courgette"
             onChange={() => updateRecipeField('stepInputValue', event.target.value)}
@@ -206,9 +204,9 @@ const AddRecipeForm = ({
         </Form.Field>
 
         <Divider />
-        <p>Image</p>
+        <h2>Images</h2>
         <FileInputComponent
-          labelText="Select file"
+          labelText="Choisissez une image"
           labelStyle={{fontSize:14}}
           multiple={false}
           callbackFunction={(file_arr)=>{changeImage(file_arr.base64)}}
@@ -217,7 +215,7 @@ const AddRecipeForm = ({
         />
 
         <Divider />
-        <p>Catégorie</p>
+        <h2>Catégorie<span className="required-field"> *</span></h2>
         <Form.Field>
           {categories.map((category) => (
           // eslint-disable-next-line max-len
@@ -226,11 +224,11 @@ const AddRecipeForm = ({
         </Form.Field>
 
         <Divider />
-        <p>Tags</p>
+        <h2>Tags</h2>
         <Form.Field>
-          {tagList.map((tag) => (
-          // eslint-disable-next-line max-len
-            <Tag {...tag} key={tag.name} selectedTags={selectedTags} selectTags={selectTags} />
+          {tagList.map((tag, index) => (
+            // eslint-disable-next-line max-len
+            <Tag {...tag} key={index.toString()} selectedTags={selectedTags} selectTags={selectTags} />
           ))}
         </Form.Field>
 
@@ -242,8 +240,8 @@ const AddRecipeForm = ({
             onClick={() => submitRecipe()}
           >Ajouter cette recette
           </Button>
-          {success && <div className="message__success"><p>Votre recette à bien été postée ! Merci</p></div> }
-          {error && <div className="message__error"><p>Il semblerait qu'il y ait une erreur.</p></div> }
+          {success && <Modal basic open={open} size="small"><div className="message__success"><p>Votre recette à bien été postée ! Merci</p></div><Button onClick={handleClick}>Ok</Button></Modal> }
+          {error && <Modal basic open={open} size="small"><div className="message__error"><p>Il semblerait qu'il y ait une erreur.</p></div></Modal>}
         </Form.Field>
       </Form>
     </div>
@@ -268,6 +266,7 @@ AddRecipeForm.propTypes = {
   submitRecipe: PropTypes.func.isRequired,
   success: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
+  open: PropTypes.bool.isRequired,
 };
 
 export default AddRecipeForm;

@@ -161,11 +161,21 @@ const user = (state = initialState, action = {}) => {
         ...state,
         shoppingList: action.value,
       };
-    case REMOVE_FROM_LIST:
-      return {
-        ...state,
-        listCheck: [...state.listCheck, action.index],
-      };
+    case REMOVE_FROM_LIST: {
+      if (state.listCheck.includes(action.index)) {
+        return {
+          ...state,
+          listCheck: [...state.listCheck].filter((elt) => elt !== action.index),
+        };
+      }
+      if (!state.listCheck.includes(action.index)) {
+        return {
+          ...state,
+          listCheck: [...state.listCheck, action.index],
+        };
+      }
+      break;
+    }
     case SET_SEARCHBAR_SETTINGS: {
       action.value.push({ key: undefined, text: 'Toutes les recettes', value: 'Toutes les recettes' });
       return {

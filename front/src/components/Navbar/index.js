@@ -33,7 +33,7 @@ const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getSh
           <li className="deroulan"><Link to="/ajout-recette" onClick={() => getFormSettings()}>Ajouter une recette &ensp;</Link>
             <ul className="sous" />
           </li>
-          <li><Link to="/aide-course" onClick={() => setLoaderShopList()}>Liste de course</Link></li>
+          <li><Link to="/aide-course" onClick={() => setLoaderShopList()}>Aide de course</Link></li>
           <li><Link to="/about">A propos</Link></li>
           {admin[0] === 'ROLE_ADMIN' && <li><a href="http://localhost:8000/admin" target="_blank">Admin</a></li>}
           <li><Link to="/" onClick={() => logOut()}>Déconnexion</Link></li>

@@ -12,14 +12,17 @@ const ListAsRecipe = ({
 }) => {
   console.log('ListAsRecipe');
   return (
-    <div className="recette"><h3>{name}</h3>
-      <button
-        type="button"
-        className="icon__addshopping"
-        onClick={() => removeShoppingRecipe(id)}
-      >
-        <i className="trash alternate icon shoplist" />
-      </button>
+    <div className="recette">
+      <h3>{name}</h3>
+      <div className="container-btn">
+        <button
+          type="button"
+          className="removeshopping"
+          onClick={() => removeShoppingRecipe(id)}
+        >
+          <i className="trash alternate icon shoplist" />
+        </button>
+      </div>
       <div className="content">
         {recipeIngredients.map((ingredient) => {
           if (listCheck !== undefined) {

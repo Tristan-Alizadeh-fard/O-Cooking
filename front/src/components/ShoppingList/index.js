@@ -8,18 +8,16 @@ const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shop
 
   return (
     <>
-      <div className="home">
-        <h2 className="home__title">Liste de courses</h2>
-      </div>
       <div className="home__miniature">
-          {shoppingList !== undefined && <div className="liste_recettes">
-            {shoppingList.map((recipe) => (
-              // eslint-disable-next-line max-len
-              <ListAsRecipe {...recipe} key={recipe.name} removeShoppingRecipe={removeShoppingRecipe} removeFromList={removeFromList} listCheck={listCheck} />
-            ))}
-          </div>}
-          {shoppingList.length === 0 && <p>Votre aide de course est vide.</p>}
-        <button type="button" className="btn_send" onClick={() => sendShoppingList()}>Envoyer la liste sur ma boite mail</button>
+        <h1 className="home__title">Aide de courses</h1>
+        {shoppingList !== undefined && <div className="liste_recettes">
+          {shoppingList.map((recipe) => (
+            // eslint-disable-next-line max-len
+            <ListAsRecipe {...recipe} key={recipe.name} removeShoppingRecipe={removeShoppingRecipe} removeFromList={removeFromList} listCheck={listCheck} />
+          ))}
+        </div>}
+        {shoppingList.length === 0 && <p>Votre aide de course est vide.</p>}
+        {shoppingList.length > 0 && <button type="button" className="btn_send" onClick={() => sendShoppingList()}>Envoyer la liste sur ma boite mail</button>}
       </div>
     </>
   );
