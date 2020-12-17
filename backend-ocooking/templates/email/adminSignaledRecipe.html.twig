@@ -6,17 +6,27 @@
     <style>
         article {
             max-width: 500px;
-            margin: 0 30px;
-            padding-left: 10px;
+            margin: 0 40px;
+            padding: 0 20px;
             border: solid 1px black;
         }
 
-        .bold {
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        p.nbPers::before {
+            content: "<img src=\"{{email.image(asset('/layout/nbPers.ico'))}}\"> "
+        }
+
+        span.bold {
             font-weight: bold;
             font-style: italic;
         }
 
-        .italic {
+        span.italic {
            font-style: italic; 
         }
     </style>
@@ -30,14 +40,14 @@
             <div>
                 <article>
                     <section>
-                        <h2>{{recipe.name}}</h2>
-                        <p><span class="bold">Auteur :</span> {{recipe.author}}</p>
+                        <h1>{{recipe.name}}</h1>
+                        <p><img src="{{email.image(asset(''))}}"> {{recipe.author}}</p>
                         {% if (recipe.picture is not null) %}
                             <img src="{{email.image(asset(recipe.picture))}}" alt="">
                         {% endif %}
-                        <p><span class="bold">Nombre de personnes :</span> {{recipe.nbPeople}}</p>
-                        <p><span class="bold">Temps de préparation :</span> {{recipe.preparationTime}}</p>
-                        <p><span class="bold">Temps de cuisson :</span> {{recipe.cookingTime}}</p>
+                        <p><img src="{{email.image(asset(''))}}"> {{recipe.nbPeople}}</p>
+                        <p><img src="{{email.image(asset(''))}}"> {{recipe.preparationTime}}</p>
+                        <p><img src="{{email.image(asset(''))}}"> {{recipe.cookingTime}}</p>
                     </section>
                     <section>
                         <h2>Ingrédients</h2>
