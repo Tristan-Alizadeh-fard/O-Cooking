@@ -36,8 +36,8 @@ class RecipeCrudController extends AbstractCrudController
             Field\CollectionField::new('steps', 'Etapes')
                 ->onlyOnDetail(),
             Field\AssociationField::new('author', 'Auteur'),
-            Field\DateTimeField::new('createdAt', 'Créée le')
-                ->setTextAlign('center'),
+            // Field\DateTimeField::new('createdAt', 'Créée le')
+            //     ->setTextAlign('center'),
             Field\BooleanField::new('signaled', 'Signalée'),
         ];
     }

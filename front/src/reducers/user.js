@@ -19,6 +19,7 @@ import {
   SET_EMAIL_SUCCESS_ACTION,
   UNSET_EMAIL_SUCCESS_ACTION,
   SET_SEARCHBAR_SETTINGS,
+  SET_ERROR_INSCRIPTION_ACTION,
 } from 'src/actions/user';
 
 const initialState = {
@@ -193,6 +194,12 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         emailSuccess: false,
+      };
+    }
+    case SET_ERROR_INSCRIPTION_ACTION: {
+      return {
+        ...state,
+        errorInscription: false,
       };
     }
     default: return { ...state };

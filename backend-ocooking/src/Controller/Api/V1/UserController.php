@@ -28,7 +28,6 @@ class UserController extends AbstractController
         $json = $request->getContent();
 
         $userInformationsArray = json_decode($json, true);
-        // dd($userInformationsArray);
 
         $user = new User();
 
@@ -48,6 +47,7 @@ class UserController extends AbstractController
                 $errors = $error->getMessage();
                 return $this->json([
                     'error' => 'Cette adresse email existe déjà',
+                    'errors' => $errors,
                 ], 500);
             }
                 
@@ -59,7 +59,15 @@ class UserController extends AbstractController
 
             $mailerService->sendConfirmationInscriptiontoUser($user);
 
-            return $this->json([], 201);
+            $jsonContent = $serializer->serialize($user, 'json', [
+                'groups' => 'show_user',
+            ]);
+
+            $response = new JsonResponse();
+            $response = JsonResponse::fromJsonString(($jsonContent));
+            $response->setStatusCode(201);
+
+            return $response;
         } else {
             return $this->json([
                 'errors' => (string) $form->getErrors(true, false),

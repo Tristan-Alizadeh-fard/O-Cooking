@@ -201,8 +201,6 @@ class Recipe
 
     public function getCreatedAt(): ?string
     {
-        // $date = date_format($this->createdAt, 'd/m/Y à H:i');
-        // $date = date_format($this->createdAt, 'j F Y à H\hi');
         setlocale(LC_ALL, 'fr_FR.UTF-8');
         $date = strftime('%d %B %G à %Hh%M', date_timestamp_get($this->createdAt));
         return $date;

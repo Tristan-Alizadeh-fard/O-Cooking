@@ -17,8 +17,9 @@ const Ingredient = ({
 }) => (
   <div className="ingredient">
     <p>{quantity} {measure} de {name}</p>
-    <div className="ingredient__icons">
+    <div className="ingredient__icons">      
       <Button
+        className="edit_ingredient_button"
         type="button"
         onClick={() => removeFromRecipe('ingredients', index)}
       >

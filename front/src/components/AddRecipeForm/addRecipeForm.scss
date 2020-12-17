@@ -1,20 +1,104 @@
+.all_page.form_addrecipe{
+  background-image :url("../../pictures/font_acceuil.jpg");
+  background-position: 16%  -100%;
+  background-size: cover;
+}
+// gère l affichage du formulaire
 .form__addrecipe {
+  text-align: center;
   margin: auto auto;  
-  margin-top: 60px;
-  width: 95%;
+  margin-top:10%;
+  width: 90%;
   padding: 1em;
-  border: 1px solid #CCC;
+  border-top: 0.5px solid #0070c9;
+  border-right: 1px solid #0070c9;
+  border-bottom: 1.5px solid #0070c9;
+  border-left: 0.5px solid #0070c9;
   border-radius: 1em;
-  background-color: #b9b9b9e0;
+  background-color: rgba(250, 250, 250, 0.801);
+  margin-bottom: 20px;
+  box-shadow: 8px 6px 4px 1px rgba(17, 17, 17, 0.301);
 }
 
+// gère le boutton d ajout final de la rectte "ajouter cette recette"
+.ui.button.recipe_button{
+  color: white;
+  font-size: 0.8em;
+  border-radius: 25px;
+  background-color: #0070c9;
+  background: linear-gradient(#42a1ec,#0070c9);
+  border: 1px solid #07c;
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
+}
+
+
+// gestion des input
+.field.title{
+  padding: 1% 5%
+}
+
+.ui.right.labeled.input.time{
+  margin-right: 12%;
+  max-width:35%;
+  padding: 1% 5%
+
+}
+
+.ui.input.personne{
+  padding: 1% 25%
+}
+
+.ui.fluid.input{
+  padding: 1% 5%
+}
+
+.ui.right.labeled.input.ingredient{
+  max-width:35%;
+  padding: 1% 2%;
+  margin-right: 25%;
+}
+
+// gère les bouttons pour ajouter les ingredient et les step
+.ui.button.add_ingredient_button{
+  display: block;
+  margin-top: 3%;
+  margin-left: 45%;
+  padding: 1% 1% 1% 4%;
+  color: white;
+  border-radius: 125px;
+  background-color: #0070c9;
+  background: linear-gradient(#42a1ec,#0070c9);
+  border: 1px solid #07c;
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
+}
+
+// gère l affichage des boutton d edition et surprimer ingredient et step
+.ui.button.edit_ingredient_button{
+  margin: 2%;
+  padding: 1% 1% 1% 4%;
+  color: white;
+  border-radius: 125px;
+  background-color: #cee4f7;
+  background: linear-gradient(#67b2eb,#cee4f7);
+  border: 1px solid rgb(77, 151, 204);
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
+}
+
+//permet d espacer les bouttons pour editer et supprimer du text aera
+.step__icons{
+  margin-bottom: 5%;
+}
+
+// affichage des ingredients
 .ingredient {
   p {
-    color: white;
-    font-size: 1.6rem;
+    color: black;
+    font-size: 1rem;
+    margin: 2%;
   }
 }
 
+// gestion du positionnement des tags
 .tags {
   display: flex;
   flex-direction: row;
@@ -24,7 +108,6 @@
 .tags__button {
   margin: 0.2em;
 }
-
 
 .message {
   &__error {
@@ -52,5 +135,136 @@
       text-align: center;
       font-family: 'Montserrat', sans-serif !important;
     }
+  }
+}
+
+// gestion des bouttons categprie et tags
+.ui.grey.button{
+  margin-top: 3%;
+  padding: 2%;
+  color: white;
+  border-radius: 125px;
+  background-color: #0070c9;
+  background: linear-gradient(#42a1ec,#0070c9);
+  border: 1px solid #07c;
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
+}
+
+// gestion des bouttons une foie selectioner
+.ui.blue.button {
+  margin-top: 3%;
+  padding: 2%;
+  color: white;
+  border-radius: 125px;
+  background-color: #066b13;
+  background: linear-gradient(#26c93c,#066b13);
+  border: 1px solid #14b92a;
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
+}
+
+// reglage Ipad
+@media screen and (min-width: 760px){
+  // gère les bouttons pour ajouter les ingredient et les step
+  .ui.button.add_ingredient_button{
+  padding: 1% 1% 1% 3%;
+}
+  // gère l affichage du formulaire
+  .form__addrecipe {
+  width: 70%;
+  }
+}
+// reglage Ipad pro
+@media screen and (min-width: 1020px){
+  // gère l affichage du formulaire
+  .form__addrecipe {
+  width: 90%;
+  border-top: 1px solid #0070c9;
+  border-right: 1.5px solid #0070c9;
+  border-bottom: 2px solid #0070c9;
+  border-left: 1.5px solid #0070c9;
+  }
+  // gère l affichage du formulaire
+  .form__addrecipe {
+    width: 70%;
+  }
+
+  // affichage des ingredients
+  .ingredient {
+    p {
+      color: black;
+      font-size: 1.5rem;
+      margin: 2%;
+    }
+  }
+
+  .step{
+    font-size: 1.5rem;
+  }
+
+  .paragraphe{
+    font-size: 20px;
+  }
+}
+// reglage ecrant ordi
+@media screen and (min-width: 1238px){
+  .all_page.form_addrecipe{
+    background-image :url("../../pictures/font_acceuil.jpg");
+    background-position: 16%  50%;
+    margin: auto;
+    padding: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  // gère l affichage du formulaire
+  .form__addrecipe {
+    margin-top: 3%;
+    width: 50%;
+    border-top: 1px solid #0070c9;
+    border-right: 1.5px solid #0070c9;
+    border-bottom: 2px solid #0070c9;
+    border-left: 1.5px solid #0070c9;
+  }
+  // gère les bouttons pour ajouter les ingredient et les step
+  .ui.button.add_ingredient_button{
+    padding: 1% 1% 1% 2%;
+  }
+  // gestion des bouttons categories
+  .ui.grey.button{
+  margin: 1%;
+  padding: 2%;
+  color: white;
+  border-radius: 125px;
+  background-color: #0070c9;
+  background: linear-gradient(#42a1ec,#0070c9);
+  border: 1px solid #07c;
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
+  }
+
+  // gestion des bouttons categories une foie selectioner
+  .ui.blue.button {
+  margin: 1%;
+  padding: 2%;
+  color: white;
+  border-radius: 125px;
+  background-color: #066b13;
+  background: linear-gradient(#26c93c,#066b13);
+  border: 1px solid #14b92a;
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
+  }
+  // gère le boutton d ajout final de la rectte "ajouter cette recette"
+  .ui.button.recipe_button{
+  color: white;
+  font-size: 1.3em;
+  border-radius: 25px;
+  background-color: #0070c9;
+  background: linear-gradient(#42a1ec,#0070c9);
+  border: 1px solid #07c;
+  box-shadow: 2px 4px 1px 0px rgba(19, 19, 19, 0.301);
+  }
+  .ui.right.labeled.input.time{
+    margin-right: 2%;
+    max-width:35%;
+    padding: 1% 5%
   }
 }

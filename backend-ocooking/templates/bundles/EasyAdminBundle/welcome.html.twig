@@ -5,55 +5,101 @@
 
 
 {% block page_content %}
-    <style>
-        p { max-width: 600px; }
-    </style>
+    <div>
+        <p class="h4"><span style="font-weight:bold">Recettes signalées :</span> {{NbSignaledRecipes}}</p>
+        <table class="table">
+            <thead>
+                <tr class="row">
+                    <th scope="col" class="" >ID</th>
+                    <th scope="col" class="col-1" style="text-align: center;">Photo</th>
+                    <th scope="col" class="col-2">Informations</th>
+                    <th scope="col" class="col-1">Durée</th>
+                    <th scope="col" class="col-3">Ingrédients</th>
+                    <th scope="col" class="col-3">Préparation</th>
+                    <th scope="col" class="col-1"style="text-align: center;">Action</th>
+                </tr>
+            </thead>
+            {% for recipe in signaledRecipes %}
+                <tr class="row">
+                    <th scope="row">{{ recipe.id }}</th>
+                    <td class="col-1" style="vertical-align: middle; text-align: center;">
+                        {% if recipe.picture is null%}
+                            <i class="fas fa-camera fa-4x"></i>
+                        {% else %}
+                            <img src="{{ asset(recipe.picture) }}" alt="Photo de la recette" style="max-width: 100%;">
+                        {% endif %}
+                    </td>
+                    <td class="col-2" >
+                        <p>{{ recipe.name }}</p>
+                        <p>Par {{ recipe.author.pseudo }}</p>
+                        <p>Le {{ recipe.createdAt }}</p>
+                        <p>Catégorie : {{ recipe.category.name }}</p>
+                        <p>Tag(s) :
+                            {% for tag in recipe.tags %}
+                                <span>{{ tag.name }} / </span>
+                            {% endfor %}
+                        </p>
+                    </td>
+                    <td class="col-1" >
+                        <p>Préparation : {{ recipe.preparationTime }}</p>
+                        <p>Cuisson : {{ recipe.cookingTime }}</p>
+                    </td>
+                    <td class="col-3" >
+                        <ul style="list-style: none; padding: 0;">
+                            {% for ingredient in recipe.recipeIngredients %}
+                                <li>- {{ ingredient.quantity }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td class="col-3">
+                        <ol style="padding: 0;">
+                            {% for step in recipe.steps %}
+                                <li>{{ step.description }}</li>
+                            {% endfor %}
+                        </ol>
+                    </td>
+                    <td class="col-1" >
+                        <div style="text-align: center;">
+                            <p>
+                                <a href="{{ path('admin_unsignaled_recipe', {'id': recipe.id}) }}" class="btn btn-success"><i class="fas fa-thumbs-up fa-lg "></i></a>
+                            </p>
+                            <p style="margin-top: 40px;">
+                                <a id="delete-link" type="button" class="btn btn-danger" data-toggle="modal" href="#deleteModal" data-id="{{ recipe.id }}"><i class="fas fa-trash fa-lg"></i></a>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
-    <p>
-        <strong>You have successfully installed EasyAdmin 3 in your application!</strong>
-    </p>
+    <div class="modal" id="deleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûre de vouloir supprimer cette recette ?</p>
+            </div>
+            <div class="modal-footer">
+                <a id="modal-delete-link" href="" type="button" class="btn btn-danger">Supprimer</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            </div>
+            </div>
+        </div>
+    </div>
 
-    <p>
-        You are seeing this example page because you haven't configured the start page
-        of your Dashboard. To do that, open the following file in your editor:
-    </p>
-
-    <pre>{{ dashboard_controller_filepath }}</pre>
-
-    <p>
-        Then, add the following method to it to customize the Dashboard start page:
-    </p>
-
-    <pre>
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-// ...
-
-class {{ dashboard_controller_class }} extends AbstractDashboardController
-{
-    /**
-     * @Route("/admin")
-     */
-    public function index(): Response
-    {
-        // redirect to some CRUD controller
-        $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
-
-        return $this->redirect($routeBuilder->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // you can also redirect to different pages depending on the current user
-        if ('jane' === $this->getUser()->getUsername()) {
-            return $this->redirect('...');
-        }
-
-        // you can also render some template to display a proper Dashboard
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        return $this->render('some/path/my-dashboard.html.twig');
-    }
-
-    // ...
-}
-    </pre>
+    <script>
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget)
+            const id = button.data('id')
+            document.querySelector('.modal-title').textContent = 'Recette #' + id
+            document.getElementById('modal-delete-link').setAttribute('href', '/admin/recipes/' + id + '/delete')
+        })
+    </script>
+    
 {% endblock %}

@@ -17,6 +17,7 @@ const Step = ({
     <p>Etape {index + 1} : {description}</p>
     <div className="step__icons">
       <Button
+        className="edit_ingredient_button"
         type="button"
         onClick={() => removeFromRecipe('steps', index)}
       >

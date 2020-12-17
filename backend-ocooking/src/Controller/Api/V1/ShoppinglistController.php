@@ -3,6 +3,7 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\Recipe;
+use App\Entity\ShoppingList;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,80 +20,85 @@ class ShoppinglistController extends AbstractController
     /**
      * @Route("/", name="read", methods={"GET"})
      */
-    public function userShoppingList(UserRepository $userRepository, SerializerInterface $serializer): Response
+    public function userShoppingList(SerializerInterface $serializer): Response
     {
       $shoppinglist = $this->getUser()->getShoppingLists()[0];
-
-       
-      //  $users = $userRepository->find($id);
-       
-       $jsonUser = $serializer->serialize(
+     
+       $jsonshoppinglist = $serializer->serialize(
          $shoppinglist,
          'json',
          ['groups' => 'show_shoppinglist']
         );
-        $user = json_decode($jsonUser, true);
+        $userShoppinglist = json_decode($jsonshoppinglist, true);
 
-        return $this->json($user);
+        return $this->json($userShoppinglist);
     }
 
     /**
      * @Route("/edit/{id}", name="edit",methods={"PATCH", "PUT"}, requirements={"id":"\d+"})
      */
-    public function addRecipeShoppinglist(Recipe $recipe): Response
+    public function addRecipeShoppinglist(Recipe $recipe, SerializerInterface $serializer): Response
     {
-      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+        $shoppinglist = $this->getUser()->getShoppingLists()[0];
 
-      $shoppinglist->addRecipe($recipe);
+        $shoppinglist->addRecipe($recipe);
 
-       $em = $this->getDoctrine()->getManager();
-       
-       //le persist sert a modifier (sens supprimer une recette) la relation
-       $em->persist($recipe);
+        $em = $this->getDoctrine()->getManager();
+        
+        $em->persist($recipe);
 
        $em->flush();
-       
-       return $this->json([], 200);
+       $jsonshoppinglist = $serializer->serialize(
+        $shoppinglist,
+        'json',
+        ['groups' => 'show_shoppinglist']
+       );
+       $userShoppinglist = json_decode($jsonshoppinglist, true);
+       return $this->json([$userShoppinglist], 200);
     }
 
     /**
      * @Route("/delete/{id}", name="delete",methods={"DELETE"}, requirements={"id":"\d+"})
      */
-    public function DeleteRecipeShoppinglist(Recipe $recipe): Response
+    public function deleteRecipeShoppinglist(Recipe $recipe, SerializerInterface $serializer): Response
     {
-      $shoppinglist = $this->getUser()->getShoppingLists()[0];
+        $shoppinglist = $this->getUser()->getShoppingLists()[0];
 
-      $shoppinglist->removeRecipe($recipe);
+        $shoppinglist->removeRecipe($recipe);
 
-       $em = $this->getDoctrine()->getManager();
-       
-       //le persist sert a modifier (sens supprimer une recette) la relation
-       $em->persist($recipe);
+        $em = $this->getDoctrine()->getManager();
+        
+        $em->persist($recipe);
 
        $em->flush();
        
-       return $this->json([], 200);
+       $jsonshoppinglist = $serializer->serialize(
+        $shoppinglist,
+        'json',
+        ['groups' => 'show_shoppinglist']
+       );
+       $userShoppinglist = json_decode($jsonshoppinglist, true);
+       return $this->json([$userShoppinglist], 200);
     }
 
     /**
      * @Route("/send", name="send_shoppingList", methods={"GET"})
      */
-    public function sendShoppingList(MailerService $mailerService,SerializerInterface $serializer): Response
+    public function sendShoppingList(MailerService $mailerService, SerializerInterface $serializer): Response
     {
 
-      $shoppinglist = $this->getUser()->getShoppingLists()[0];
-      
-      $response = new JsonResponse();
-      $jsonShoppinglist = $serializer->serialize(
-        $shoppinglist,
-        'json',
-        ['groups' => 'show_shoppinglist']
-       );
-      $response = JsonResponse::fromJsonString(($jsonShoppinglist));
+        $shoppinglist = $this->getUser()->getShoppingLists()[0];
+        
+        $response = new JsonResponse();
+        $jsonShoppinglist = $serializer->serialize(
+            $shoppinglist,
+            'json',
+            ['groups' => 'show_shoppinglist']
+        );
+        $response = JsonResponse::fromJsonString(($jsonShoppinglist));
 
-      $from = $this->getUser()->getEmail();
-      $mailerService->sendShoppinList($shoppinglist, $from);
-      return $response;
-
+        $from = $this->getUser()->getEmail();
+        $mailerService->sendShoppinList($shoppinglist, $from);
+        return $response;
     }
 }

@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import './loginForm.scss';
 
-const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes }) => {
+const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes, setErrorInscription }) => {
   const submitLogin = (event) => {
     event.preventDefault();
     setLoader();
@@ -19,7 +19,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
   return (
     <div className="all__page home_login">
       <div className="home">
-        <h2 className="home__title">Bienvenue Chez O'Coocking</h2>
+        <h2 className="home__title">Bienvenue Chez O'Cooking</h2>
         <h3 className="home__smalltitle">L'application des passionnés de cuisine</h3>
         <div className="home__more">
           {!descriptionOn && <Button className="voir__plus" onClick={() => showDescription()}>Voir plus</Button>}
@@ -47,13 +47,14 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
         </Form>
       </div>
       <div className="link__inscription">
-        {!isLogged && <Link className="inscription" to="/inscription">Inscrivez-vous !</Link>}
+        {!isLogged && <Link className="inscription" to="/inscription" onClick={() => setErrorInscription()}>Inscrivez-vous !</Link>}
       </div>
     </div>
   );
 };
 
 LoginForm.prototypes = {
+  setErrorInscription: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   pass: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
