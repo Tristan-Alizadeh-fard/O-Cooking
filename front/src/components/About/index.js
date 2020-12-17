@@ -8,6 +8,9 @@ import symphony from 'src/photos/SYMPHONY.png';
 
 const About = () => (
   <>
+    <div className="team_title">
+      <h2>L'équipe O'Cooking</h2>
+    </div>
     <div className="all__page about">
       <div className="about_contenair">
         <div className="cards">
@@ -15,7 +18,10 @@ const About = () => (
             <div className="picture">
               <img src="https://ca.slack-edge.com/T016B3JM5J5-U01CCBFM2FQ-2eac481aefd0-512" alt="" />
             </div>
-            <p>Kévin | React</p>
+            <div>
+              <p>Kévin | React</p>
+              <p></p>
+            </div>
           </div>
           <div className="affiche_card">
             <div className="picture">

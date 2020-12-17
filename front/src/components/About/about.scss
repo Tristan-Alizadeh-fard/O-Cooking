@@ -1,15 +1,25 @@
 .all__page.about{
-  background-image :url("../../pictures/font_acceuil.jpg");
-  background-position: 16%  -100%;
+  // background-image :url("../../pictures/font_acceuil.jpg");
+  // background-position: 16%  -100%;
 }
-
+.team_title{
+  margin-top: 2%;
+  text-align: center;
+}
 .about_contenair {
   width: auto;
   height: auto;
 }
 .cards{
+  // background-color: yellow;
   text-align: center;
+  align-items: center;
   margin-top: 2em;
+  height: 50vh;
+}
+.affiche_card {
+  // background-color: yellowgreen;
+  border: solid 1px black;
 }
 .affiche_card img{
   width: 150px;
@@ -25,7 +35,7 @@
   background: rgba(250, 250, 250, 0.76);
 }
 .picture img{
-  border-radius: 100px;
+  // border-radius: 100px;
 }
 
 .pictures {
@@ -57,12 +67,12 @@
 
 @media screen and (min-width: 760px){
   .all__page.about{
-    background-image :url("../../pictures/font_acceuil.jpg");
-    // height: 100%;
-    // min-height: 100%;
-    background-position: 20%  -50%;
-    // margin: auto;
-    background-size: cover;
+    // background-image :url("../../pictures/font_acceuil.jpg");
+    // // height: 100%;
+    // // min-height: 100%;
+    // background-position: 20%  -50%;
+    // // margin: auto;
+    // background-size: cover;
   }
   .cards{
     justify-content: space-around;
@@ -109,12 +119,12 @@
 
 @media screen and (min-width: 1020px){
   .all__page.about{
-    background-image :url("../../pictures/font_acceuil.jpg");
-    // height: 100%;
-    // min-height: 100%;
-    background-position: 25%  -50%;
-    // margin: auto;
-    background-size: cover;
+    // background-image :url("../../pictures/font_acceuil.jpg");
+    // // height: 100%;
+    // // min-height: 100%;
+    // background-position: 25%  -50%;
+    // // margin: auto;
+    // background-size: cover;
   }
   .cards{
     justify-content: space-around;
@@ -132,7 +142,7 @@
     margin: 15px 30px;
   }
   .picture img{
-    border-radius: 120px;
+    // border-radius: 120px;
   }
   .affiche_card p{
     padding: 5px;
@@ -170,11 +180,11 @@
 
 @media screen and (min-width: 1238px){
   .all__page.about{
-    background-image :url("../../pictures/font_acceuil.jpg");
+    // background-image :url("../../pictures/font_acceuil.jpg");
     height: 100vh;
     // min-height: 100%;
-    background-position: 16%  -90%;
-    // margin: auto;
+    background-position: 16% -200%;
+    // margin-top: 50%;
     // background-size: contain;
   }
   .cards{
@@ -189,7 +199,7 @@
     margin: 0 10px;
   }
   .picture img{
-    border-radius: 120px;
+    // border-radius: 120px;
   }
   .affiche_card p{
     background: rgba(250, 250, 250, 0.76);
