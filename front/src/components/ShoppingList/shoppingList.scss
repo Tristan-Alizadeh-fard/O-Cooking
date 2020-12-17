@@ -3,7 +3,8 @@
   flex-direction: column;
   text-align: center;
   margin-top: 43px;
-  height: -webkit-fill-available;
+  padding-bottom: 3em;
+  min-height: -webkit-fill-available;;
   background-image: url("src/photos/shoppingListBG.jpg");
   background-size: cover;
   background-position: right;
