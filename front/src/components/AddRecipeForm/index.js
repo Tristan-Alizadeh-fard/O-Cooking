@@ -217,7 +217,7 @@ const AddRecipeForm = ({
         <Divider />
         <h2>Images</h2>
         <FileInputComponent
-          labelText="Choisissez une image"
+          labelText="Choisissez une image  "
           labelStyle={{fontSize:14}}
           multiple={false}
           callbackFunction={(file_arr)=>{changeImage(file_arr.base64)}}
