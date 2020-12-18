@@ -326,6 +326,7 @@ border-radius: 1rem;
   // Div de toute la page formulaire
   .all__page.home_login{
     background-image :url("../../pictures/font_acceuil.jpg");
+    background-attachment: fixed;
     height: 100vh;
     min-height: 100%;
     background-position: center;

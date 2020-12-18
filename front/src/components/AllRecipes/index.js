@@ -52,7 +52,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
                   </Link>}
                 {recipe.signaled && <div className="favoris__icon">
                 <i className="bell icon" />
-                <p className="text__favoris">Recette signalé !</p>
+                <p className="text__favoris">Recette signalée !</p>
               </div>}
                 <div className="content">
                   <Link to={`/recette/${recipe.id}`} className="header" onClick={() => setLoaderAllrecipes(recipe.id)}>{recipe.name}</Link>
