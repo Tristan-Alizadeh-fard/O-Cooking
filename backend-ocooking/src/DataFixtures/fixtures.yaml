@@ -1,0 +1,64 @@
+App\Entity\User:
+  user_1:
+    email: 'stephanie@ocooking.fr'
+    roles: '[ROLE_ADMIN]'
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$2/65rQwOPez+Iz99jKE/0g\$ppFVtlIUa732Npua1eDRoi+ogZxdP7Am6WrRkWjyoh4'
+    pseudo : 'Stephelle'
+  user_2:
+    email: 'renan@ocooking.fr'
+    roles: '[ROLE_ADMIN]'
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$YurxvnGGwLRI+ScOIvr2rw\$hJLS24urK70WoNiPUzPraMgBR1U1y5j6uz2TDo6pXlg'
+    pseudo: 'Renan'
+
+App\Entity\Category:
+  category_1:
+    name: 'Entrée'
+  category_2:
+    name: 'Plat'
+  category_3:
+    name: 'Dessert'
+  category_4:
+    name: 'Sandwich'
+  category_5:
+    name: 'Sauce'
+  category_6:
+    name: 'Smoothie'
+  category_7:
+    name: 'Soupe'
+
+App\Entity\Tag:
+  tag_1:
+    name: 'Chaud'
+  tag_2:
+    name: 'Epicé'
+  tag_3:
+    name: 'Froid'
+  tag_4:
+    name: 'Sans gluten'
+  tag_5:
+    name: 'Sans lactose'
+  tag_6:
+    name: 'Végan'
+  tag_7:
+    name: 'Végétarien'
+
+App\Entity\Measure:
+  measure_1:
+    name: 'g'
+  measure_2:
+    name: 'kg'
+  measure_3:
+    name: 'unité(s)'
+  measure_4:
+    name: 'ml'
+  measure_5:
+    name: 'cl'
+  measure_6:
+    name: 'dl'
+  measure_7:
+    name: 'l'
+  measure_8:
+    name: 'c. à café'
+  measure_9:
+    name: 'c. à soupe'
+

@@ -1,0 +1,60 @@
+@use 'reset';
+@use 'vars';
+
+// version mobile 
+
+.body {
+  background: #FAFAFA;
+  font-family: "Montserrat"!important;
+}
+
+a.header {
+  font-size: 1.4em;
+  font-family: 'Kalam', cursive !important;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.ui.button {
+  font-family: 'Montserrat'!important;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+  font-family: 'Kalam',cursive!important;
+}
+
+a.header__plus {
+  color: white !important;
+}
+
+.form__addrecipe {
+  border: none !important;
+}
+
+// vertion ordinateur
+/*
+@media screen and (min-width: 980px) {
+ .body{
+  margin: 0 auto;
+  background-image :url("../pictures/FondBody.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  background-position: center;
+  //background-size: cover;
+ }
+
+}
+*/
+
+/* 
+  // or you can import your own font
+  @font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto-Regular.ttf');
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+*/

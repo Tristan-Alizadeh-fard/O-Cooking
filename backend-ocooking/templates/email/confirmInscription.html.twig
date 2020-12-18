@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation d'inscription sur O'Cooking{% endblock %}
+
+{% block stylesheets %}
+    <style>
+       
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div id="container">
+        <p>Bonjour {{user.pseudo}}, bienvenue sur O'Cooking !</p>
+        <p>Votre inscription a bien été prise en compte. Vous pouvez dès à présent vous connecter pour bénéficier de toutes les fonctionnalités disponibles (consultation de recettes, création de recettes, création de listes de courses, ...)</p>
+        <ul>
+            <li>Mail (identifiant nécessaire à la connexion) : {{ user.email }}</li>
+            <li>Pseudo : {{ user.pseudo }}</li>
+        </ul>
+        <p>Toute l'équipe vous souhaite une bonne navigation sur notre site.</p>
+        <p>A bientôt</p>
+        <p>Bonne journée</p>
+    </div>
+{% endblock %}

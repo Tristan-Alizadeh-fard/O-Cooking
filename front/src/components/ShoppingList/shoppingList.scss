@@ -1,0 +1,145 @@
+.home__miniature {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 43px;
+  padding-bottom: 3em;
+  min-height: -webkit-fill-available;;
+  background-image: url("src/photos/shoppingListBG.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  h1 {
+    margin: 2em 0;
+  }
+}
+
+.date {
+  display: block;
+}
+.link__icon {
+  display: block;
+}
+.home {
+  width: 70%;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+button.removeshopping {
+  color:#c18d5d;
+  background-color: #ffffff00;
+  display: flex;
+  justify-content: center;
+  width: 55px;
+  font-size: 2em;
+  border: none;
+}
+
+.required-field {
+  color: red;
+}
+
+.trash.alternate.icon.shoplist{
+  margin-left: 4px;
+}
+
+i.icon {
+  margin-bottom: 10px;
+}
+
+.ui.checkbox {
+  margin-top: 1em;
+
+  &:last-child {
+    margin-bottom: 0.5em;
+  }
+}
+
+.ui.checkbox input.hidden+label {
+  font-size: 1.3em;
+}
+
+.recette {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  margin: 0.5em;
+  margin-bottom: 3em;
+  border-radius: 19px;
+  background: linear-gradient(145deg,#e1e1e173,#fff);
+    box-shadow: 3px 4px 13px #cdcdcd73, -3px -4px 8px 2px #fff;
+  h3{
+    font-size: 2em;
+    font-weight: 500 !important;
+    font-family: 'Kalam', cursive !important;
+    border-bottom: 1px solid black;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  label {
+    font-family: 'Montserrat', cursive !important;
+  }
+  
+  .container-btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+button.btn_send {
+  backface-visibility: 1;
+  margin: 0 auto;
+  padding: 0.5em 0.8em;
+  font-size: 1.3em;
+  font-family: 'Montserrat', sans-serif !important;
+  color: #c18d5d;
+  border: 1px solid #c18d5d;
+  border-radius: 5px;
+  background-color: #ffffff00;
+  transition: background-color, 0.5s ease-out;
+  transition: color, 0.5 ease-in;
+}
+
+.ui.checkbox label:before {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  margin-left: -3px;
+  margin-top: -4px;
+  
+}
+
+.ui.checkbox input:checked~label:after {
+  opacity: 1;
+  color: #829f16!important;
+  font-size: 1em;
+}
+
+@media screen and (min-width: 980px) {
+ .content {
+  border-left: 1px solid #000;
+ }
+ button.btn_send:hover {
+   &:hover {
+    background-color: #c18d5d;
+    color: white;
+   }
+ }
+ .recette {
+   max-width: 50%;
+   margin: 0.3em auto 3em auto;
+   transition: max-width 0.3s ease-out;
+   &:hover {
+     max-width: 51%;
+   }
+
+ }
+
+}
+
+

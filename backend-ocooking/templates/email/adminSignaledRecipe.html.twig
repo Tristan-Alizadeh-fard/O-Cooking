@@ -1,0 +1,199 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recette {{recipe.id}} ({{recipe.name}}) signalée{% endblock %}
+
+{% block stylesheets %}
+    <style>      
+        * {
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        span.italic {
+           font-style: italic; 
+        }
+        
+        article {
+            max-width: 450px;
+            margin: 0 40px;
+            padding: 0 20px;
+            border: solid 1px black;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            margin: 5px 0 20px 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        ul,
+        ol {
+            margin-top: 5px;
+        }
+
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-picture {
+            max-width: 120px;
+            align-self: center;
+        }
+
+        .info-picture--picture {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .infos-general {
+            padding: 0 10px;
+            align-self: center;
+        }
+
+        .info-generale--info {
+            margin-top: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-generale--info.tags {
+            margin-top: 8px;
+        }
+
+        .icon {
+            width: 15px;
+        }
+
+        .icon img {
+            display: block;
+            width: 100%;
+            margin: auto auto;
+        }
+
+        .text {
+            padding: 0 10px;
+        }
+
+        .time {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .second {
+            padding-left: 20px;
+        }
+
+        .tag {
+            margin-right: 5px;
+            padding: 0 10px;
+            background: #26a0e6;
+            color: white;
+            font-weight: bold;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div id="container">
+        <p>Bonjour Admin,</p>
+
+        <p>La recette {{recipe.name}} (id {{recipe.id}}) a été signalée par <span class="italic">{{signaledBy}}</span> comme étant une recette potentiellement douteuse:
+            <div>
+                <article>
+                    <section>
+                        <h1>{{recipe.name}}</h1>
+                        <h3>- {{recipe.category.name}} -</h3>
+                        <div class="info">
+                            <div class="info-picture">
+                                {% if (recipe.picture is not null) %}
+                                    <img class="info-picture--picture" src="{{email.image(asset(recipe.picture))}}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="infos-general">
+                                <div class="info-generale--info">
+                                    <div class="icon">
+                                        <img src="{{email.image(asset('/img/author.png'))}}">
+                                    </div>
+                                    <div class="text">
+                                        {{recipe.author}}
+                                    </div>
+                                </div>
+                                <div class="info-generale--info">
+                                    <div class="icon">
+                                        <img src="{{email.image(asset('/img/nbPerson.png'))}}">
+                                    </div>
+                                    <div class="text">
+                                        {{recipe.nbPeople}}
+                                    </div>
+                                </div>
+                                <div class="time">
+                                    <div class="info-generale--info">
+                                        <div class="icon">
+                                            <img src="{{email.image(asset('/img/prepTime.png'))}}">
+                                        </div>
+                                        <div class="text">
+                                            {{recipe.cookingTime}}
+                                        </div>
+                                    </div>
+                                    <div class="info-generale--info second">
+                                        <div class="icon">
+                                            <img src="{{email.image(asset('/img/cookTime.png'))}}">
+                                        </div>
+                                        <div class="text">
+                                            {{recipe.preparationTime}}
+                                        </div>
+                                    </div>   
+                                </div>
+                                <div class="info-generale--info tags">
+                                    {% for tag in recipe.tags %}
+                                        <div class="tag">
+                                            {{ tag.name }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Ingrédients</h2>
+                        <ul>
+                            {% for ingredient in recipe.recipeIngredients %}
+                                <li>{{ ingredient.quantity }}</li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Etapes</h2>
+                        <ol>
+                            {% for step in recipe.steps|sort((a, b) => a.nbStep|lower <=> b.nbStep|lower) %}
+                                <li>{{ step.description }}</li>
+                            {% endfor %}
+                        </ol>
+                    </section>
+                </article>
+            </div>
+        </p>
+
+        <p>Merci de vous rendre dans l'interface administration pour déterminer si ce signalement est erroné ou si cette recette doit être supprimée</p>
+        <p>Bonne journée</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title 'Bienvenue sur le backoffice d\'O\'Cooking' %}
+
+
+{% block page_content %}
+    <div>
+        <p class="h4"><span style="font-weight:bold">Recettes signalées :</span> {{NbSignaledRecipes}}</p>
+        <table class="table">
+            <thead>
+                <tr class="row">
+                    <th scope="col" class="col-1" style="text-align: center;">ID</th>
+                    <th scope="col" class="col-1" style="text-align: center;">Photo</th>
+                    <th scope="col" class="col-2">Informations</th>
+                    <th scope="col" class="col-1">Durée</th>
+                    <th scope="col" class="col-3">Ingrédients</th>
+                    <th scope="col" class="col-3">Préparation</th>
+                    <th scope="col" class="col-1"style="text-align: center;">Action</th>
+                </tr>
+            </thead>
+            {% for recipe in signaledRecipes %}
+                <tr class="row">
+                    <th scope="row" class="col-1" style="text-align: center;">{{ recipe.id }}</th>
+                    <td class="col-1" style="text-align: center;">
+                        {% if recipe.picture is null%}
+                                <i class="fas fa-camera fa-4x"></i>
+                        {% else %}
+                            <img src="{{ asset(recipe.picture) }}" alt="Photo de la recette" style="max-width: 100%;">
+                        {% endif %}
+                    </td>
+                    <td class="col-2" >
+                        <p>{{ recipe.name }}</p>
+                        <p>Par {{ recipe.author.pseudo }}</p>
+                        <p>Le {{ recipe.createdAt }}</p>
+                        <p>Nb pers : {{ recipe.nbPeople }}</p>
+                        <p>Catégorie : {{ recipe.category.name }}</p>
+                        <p>Tag(s) :
+                            {% for tag in recipe.tags %}
+                                <span>{{ tag.name }} / </span>
+                            {% endfor %}
+                        </p>
+                    </td>
+                    <td class="col-1" >
+                        <p>Préparation : {{ recipe.preparationTime }}</p>
+                        <p>Cuisson : {{ recipe.cookingTime }}</p>
+                    </td>
+                    <td class="col-3" >
+                        <ul style="list-style: none; padding: 0;">
+                            {% for ingredient in recipe.recipeIngredients %}
+                                <li>- {{ ingredient.quantity }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td class="col-3">
+                        <ol style="padding: 0;">
+                            {% for step in recipe.steps %}
+                                <li>{{ step.description }}</li>
+                            {% endfor %}
+                        </ol>
+                    </td>
+                    <td class="col-1" >
+                        <div style="text-align: center;">
+                            <p>
+                                <a href="{{ path('admin_unsignaled_recipe', {'id': recipe.id}) }}" class="btn btn-success"><i class="fas fa-thumbs-up fa-lg "></i></a>
+                            </p>
+                            <p style="margin-top: 40px;">
+                                <a id="delete-link" type="button" class="btn btn-danger" data-toggle="modal" href="#deleteModal" data-id="{{ recipe.id }}"><i class="fas fa-trash fa-lg"></i></a>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="modal" id="deleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûre de vouloir supprimer cette recette ?</p>
+            </div>
+            <div class="modal-footer">
+                <a id="modal-delete-link" href="" type="button" class="btn btn-danger">Supprimer</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget)
+            const id = button.data('id')
+            document.querySelector('.modal-title').textContent = 'Recette #' + id
+            document.getElementById('modal-delete-link').setAttribute('href', '/admin/recipes/' + id + '/delete')
+        })
+    </script>
+    
+{% endblock %}

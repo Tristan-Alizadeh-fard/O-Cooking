@@ -1,0 +1,99 @@
+
+
+                                  /*MOBILE */
+
+/* SEARCH BAR COMPLETE */
+
+// composant search bar
+.ui.action.input.search__bar{
+  //border: 100px;
+
+  //z-index: 1;
+  //padding: 100px;
+  //margin-top: 40px;
+  //position: -webkit-sticky;
+  position: absolute;
+  top: 55px;
+  //position: fixed; //TODO
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  top: 40px;
+  //margin-left: 10%;
+  //margin-right: 10%;
+}
+
+
+/* ZONE DE SAISIE INPUT */
+
+// interieur input search bar (zone texte)
+.ui.input input{
+  //background-color:forestgreen;
+  size: 10px;
+}
+// zone texte quand l'utilisateur a selectioné l'input pour faire une recherche (focus)
+.ui.input input:focus{
+  //background-color:rgba(192, 192, 164, 0.753);
+}
+
+.ui.input.input__search__bar{
+  flex: auto;
+}
+
+.ui.compact.selection.dropdown{
+  min-width: auto;
+}
+
+/* MENU DEROULANT */
+
+//  menu deroulant fermé
+.ui.compact.selection.dropdown{
+  //background: rgb(235, 235, 29);
+  max-width: initial;
+  border-top: 1000px;
+}
+
+// menu deroulant ouvert
+.ui.selection.active.dropdown .menu{
+  max-height: 12rem; 
+  //background: red;
+  //min-width: 10;
+  padding: 1px;
+  
+}
+
+// zone texte interieur menu déroulant choix entrée plats dessert
+.ui.dropdown >.text{
+  min-width: 60px;
+  text-align: center;
+}
+
+/* BOUTON RECHERCHE */
+
+// boutton recherche
+.ui.button.button__search{
+  //background: blue;
+  margin: 0;
+  width: 50;
+}
+// effet quand l'utilisateur clic sur le bouton
+
+
+                                        /*DESKTOP*/
+
+                                        
+   @media screen and (min-width: 980px){
+    .ui.action.input.search__bar{
+      //border-top: solid blue 1px;
+    
+      //z-index: 1;
+      //padding: 100px;
+      //margin-top: 40px;
+      //position: -webkit-sticky;
+      position: fixed;
+      left: 10%;
+      top: 44px;
+      width: 80%;
+     
+    }
+}
