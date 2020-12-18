@@ -34,7 +34,7 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
        <div className="w3-row-padding w3-padding-16 w3-center">
        {recipesUser.map((recipeUser) => (
          <div key={recipeUser.id} className="w3-quarter">
-              {recipeUser.picture !== null && <div className="img-container"><img src={`http://localhost:8000${recipeUser.picture}`} className="image__allrecipes" /></div>}
+              {recipeUser.picture !== null && <div className="img-container"><img src={`/api${recipeUser.picture}`} className="image__allrecipes" /></div>}
               {recipeUser.picture === null &&  <div className="img-container"><div className="camera mini"><i className="camera icon"/></div></div>}
               {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
                     <i className="heart outline icon" />Ajouter aux favoris
