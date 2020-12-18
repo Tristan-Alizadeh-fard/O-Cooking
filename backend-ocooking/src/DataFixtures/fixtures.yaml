@@ -6,7 +6,7 @@ App\Entity\User:
     pseudo : 'Stephelle'
   user_2:
     email: 'renan@ocooking.fr'
-    roles: '[]'
+    roles: '[ROLE_ADMIN]'
     password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$YurxvnGGwLRI+ScOIvr2rw\$hJLS24urK70WoNiPUzPraMgBR1U1y5j6uz2TDo6pXlg'
     pseudo: 'Renan'
 

@@ -41,9 +41,6 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
             {!isLogged && <Form.Input className="log__mail__pass" fluid label="Votre Mot de passe" type="password" placeholder="Votre password" value={pass} onChange={() => updateField(event.target.value, 'pass')} />}
           </Form.Field>
           {!isLogged && <Button className="button__login" type="submit" onClick={submitLogin}>A table !</Button>}
-          {/* <div className="link__forgottenpass">
-            {!isLogged && <Link className="forgotten__password" to="/">Mot de passe oublié ?</Link>}
-          </div> */}
         </Form>
       </div>
       <div className="link__inscription">

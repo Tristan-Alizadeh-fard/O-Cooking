@@ -10,7 +10,7 @@ const ListAsRecipe = ({
   removeFromList,
   listCheck,
 }) => {
-  console.log('ListAsRecipe');
+  const lar = true;
   return (
     <div className="recette">
       <h3>{name}</h3>

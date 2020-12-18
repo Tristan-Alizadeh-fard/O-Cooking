@@ -13,12 +13,7 @@ import smoothie from 'src/pictures/smoothie.png';
 import soupe from 'src/pictures/soupe.png';
 import dessert from 'src/pictures/dessert.png';
 
-
-
-
 const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, unsetFavorite, favorite, unsetEmailSuccess, addShopList, removeShoppingRecipe, shoppingList }) => {
-  console.log('AllRecipes', recipes);
-  console.log(shoppingList);
   const setLoaderAllrecipes = (id) => {
     setLoader();
     unsetEmailSuccess();
@@ -83,20 +78,14 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
                   {shoppingList && shoppingList.find(shop => shop.id === recipe.id) && <Link to="/allrecipes" className="link__icon" onClick={() => removeShoppingRecipe(recipe.id)}>
                     <i className="shopping cart icon" />Retirer de l'aide de course
                   </Link>}
-                  {/* {shoppingList && shoppingList.find(shop => shop.id === recipe.id) && <h6 className="inShopingList">Ajouté dans l'aide de course</h6>} */}
-                  
-                </div>
-                {/* {favorite.find(fav => fav.name === recipe.name) && <div className="favoris__icon">
-                <h6 className="text__favoris">Recette ajouté aux favoris</h6>
-              </div>} */}
-              <p className="link__author">
+                 </div>
+                  <p className="link__author">
                     <i className="user icon" />{recipe.author.pseudo}
                   </p>
               <div className="meta">
                     <span className="date">{`Posté le ${recipe.createdAt}`}</span>
                   </div>
               </div>
-            
           ))}
         </div>
         </>

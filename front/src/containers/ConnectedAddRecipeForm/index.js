@@ -9,9 +9,9 @@ import {
   selectTags,
   changeImage,
   submitRecipe,
+  emptyForm,
 } from 'src/actions/recipe';
 import { setisLoading, getUserRecipesAction } from 'src/actions/user';
-import { emptyForm } from '../../actions/recipe';
 
 const mapStateToProps = (state) => ({
   recipeName: state.recipe.recipeName,

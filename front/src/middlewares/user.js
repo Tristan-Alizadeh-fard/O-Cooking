@@ -39,7 +39,7 @@ const user = (store) => (next) => (action) => {
     case LOG_IN: {
       const { email, pass } = store.getState().user;
       // http://ec2-100-25-30-18.compute-1.amazonaws.com/api/login_check
-      axios.post('http://localhost:8000/api/login_check', {
+      axios.post('/api/api/login_check', {
         username: email,
         password: pass,
       }, {
@@ -49,15 +49,13 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response, 'success login');
           store.dispatch(saveUserLogin(response.data.token));
           store.dispatch(saveUserName());
           store.dispatch(updateUserField('pass', ''));
           store.dispatch(getFormSettings());
           store.dispatch(getUserRecipesAction());
         })
-        .catch((error) => {
-          console.log(error, 'Je suis dans le middleware LOGIN error');
+        .catch(() => {
           store.dispatch(errorLogin());
         });
       next(action);
@@ -67,28 +65,24 @@ const user = (store) => (next) => (action) => {
       const { email, confirmEmail, pass, confirmPass, name } = store.getState().user;
       if (email === confirmEmail && pass === confirmPass && email !== '' && pass !== '' && name !== '') {
         // http://ec2-100-25-30-18.compute-1.amazonaws.com/api/v1/users/add
-        axios.post('http://localhost:8000/api/v1/users/add', {
+        axios.post('/api/api/v1/users/add', {
           email,
           password: pass,
           pseudo: name,
         },
         {
           headers: {
-            // Accept: 'application/json',
             'Access-Control-Allow-Origin': '*',
-            // 'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
             'Content-Type': 'application/json',
           },
         })
-          .then((response) => {
-            console.log(response, 'post success');
+          .then(() => {
             store.dispatch(saveUserInscription());
             store.dispatch(updateUserField('', 'pass'));
             store.dispatch(updateUserField('', 'confirmPass'));
             store.dispatch(updateUserField('', 'confirmEmail'));
           })
-          .catch((error) => {
-            console.log(error, 'Je suis dans le middleware LOGIN error');
+          .catch(() => {
             store.dispatch(emailInUse());
           });
       }
@@ -99,7 +93,7 @@ const user = (store) => (next) => (action) => {
       break;
     }
     case ALL_RECIPES: {
-      axios.get('http://localhost:8000/api/v1/recipes', {
+      axios.get('/api/api/v1/recipes', {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -107,19 +101,17 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response.data, 'get all recipes ok');
           store.dispatch(saveAllrecipes(response.data.recipes));
           store.dispatch(updateUserField(null, 'searchInput'));
           store.dispatch(updateUserField('Toutes les recettes', 'selectedCategory'));
         })
-        .catch((error) => {
-          console.log(error, 'Je suis dans le middleware getALLRECIPES');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case SHOW_ONE_RECIPE: {
-      axios.get(`http://localhost:8000/api/v1/recipes/${action.id}`, {
+      axios.get(`/api/api/v1/recipes/${action.id}`, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -127,17 +119,15 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response.data, 'get one recipe ok');
           store.dispatch(saveRecipe(response.data.recipes));
         })
-        .catch((error) => {
-          console.log(error, 'Je suis dans le middleware get one recipe error');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case SAVE_USER_NAME: {
-      axios.get('http://localhost:8000/api/v1/users/read', {
+      axios.get('/api/api/v1/users/read', {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -145,17 +135,15 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response, 'save user name ok');
           store.dispatch(saveInfosUser(response.data));
         })
-        .catch((error) => {
-          console.log(error, 'Je suis dans le middleware saveUserName');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case GET_USER_RECIPES_ACTION: {
-      axios.get(`http://localhost:8000/api/v1/recipes/browse/user/${store.getState().user.idUser}`, {
+      axios.get(`/api/api/v1/recipes/browse/user/${store.getState().user.idUser}`, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -163,17 +151,15 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response, 'getrecipesUser ok');
           store.dispatch(saveUserRecipes(response.data.user));
         })
-        .catch((error) => {
-          console.log(error, 'Je suis dans le middleware getrecipeUser error');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case SET_SIGNALED_ACTION: {
-      axios.put(`http://localhost:8000/api/v1/recipes/${action.id}/edit/signaled`,
+      axios.put(`/api/api/v1/recipes/${action.id}/edit/signaled`,
         {},
         {
           headers: {
@@ -183,17 +169,15 @@ const user = (store) => (next) => (action) => {
           },
         })
         .then((response) => {
-          console.log(response, 'mid set signaled ok');
           store.dispatch(setRecipe(response.data));
         })
-        .catch((error) => {
-          console.log(error, 'mid set signaled');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case SET_FAVORITE_ACTION: {
-      axios.put(`http://localhost:8000/api/v1/users/favorites/add/${action.id}`,
+      axios.put(`/api/api/v1/users/favorites/add/${action.id}`,
         {},
         {
           headers: {
@@ -202,19 +186,16 @@ const user = (store) => (next) => (action) => {
             Authorization: `Bearer ${store.getState().user.token}`,
           },
         })
-        .then((response) => {
-          console.log(response.data, 'set favorite ok');
-          // store.dispatch(setUserFavorite(response)); // TODO
+        .then(() => {
           store.dispatch(saveUserName());
         })
-        .catch((error) => {
-          console.log(error, 'set favorite error');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case UNSET_FAVORITE_ACTION: {
-      axios.put(`http://localhost:8000/api/v1/users/favorites/remove/${action.id}`,
+      axios.put(`/api/api/v1/users/favorites/remove/${action.id}`,
         {},
         {
           headers: {
@@ -223,18 +204,16 @@ const user = (store) => (next) => (action) => {
             Authorization: `Bearer ${store.getState().user.token}`,
           },
         })
-        .then((response) => {
-          console.log(response.data, 'unset favorite ok');
+        .then(() => {
           store.dispatch(saveUserName());
         })
-        .catch((error) => {
-          console.log(error, 'unset favorite error');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case ADD_SHOPLIST_ACTION: {
-      axios.put(`http://localhost:8000/api/v1/shoppinglist/edit/${action.id}`,
+      axios.put(`/api/api/v1/shoppinglist/edit/${action.id}`,
         {},
         {
           headers: {
@@ -244,17 +223,15 @@ const user = (store) => (next) => (action) => {
           },
         })
         .then((response) => {
-          console.log(response, 'add shoplist ok');
           store.dispatch(getShopListAction());
         })
-        .catch((error) => {
-          console.log(error, 'add shoplist error');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case GET_SHOPLIST_ACTION: {
-      axios.get('http://localhost:8000/api/v1/shoppinglist/', {
+      axios.get('/api/api/v1/shoppinglist/', {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -262,12 +239,9 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response, 'get shoplist ok');
-          console.log(response.data.recipes);
           store.dispatch(setShopListAction(response.data.recipes));
         })
-        .catch((error) => {
-          console.log(error, 'get shoplist errore');
+        .catch(() => {
         });
       next(action);
       break;
@@ -288,7 +262,7 @@ const user = (store) => (next) => (action) => {
           formatedCategory = option.key;
         }
       });
-      axios.post(`http://localhost:8000/api/v1/recipes/search`, {
+      axios.post('/api/api/v1/recipes/search', {
         name: searchInput,
         category: formatedCategory,
       }, {
@@ -301,13 +275,13 @@ const user = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(saveAllrecipes(response.data.recipesSearch));
         })
-        .catch((error) => {
+        .catch(() => {
         });
       next(action);
       break;
     }
     case REMOVE_SHOP_RECIPE: {
-      axios.delete(`http://localhost:8000/api/v1/shoppinglist/delete/${action.index}`,
+      axios.delete(`/api/api/v1/shoppinglist/delete/${action.index}`,
         {
           headers: {
             'Access-Control-Allow-Origin': '*',
@@ -316,17 +290,15 @@ const user = (store) => (next) => (action) => {
           },
         })
         .then((response) => {
-          console.log(response, 'shoplist delete ok');
           store.dispatch(getShopListAction());
         })
-        .catch((error) => {
-          console.log(error, 'shoplist delete error');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case SHARE_RECIPE_ACTION: {
-      axios.get(`http://localhost:8000/api/v1/recipes/send/${action.id}`,
+      axios.get(`/api/api/v1/recipes/send/${action.id}`,
         {
           headers: {
             'Access-Control-Allow-Origin': '*',
@@ -334,18 +306,16 @@ const user = (store) => (next) => (action) => {
             Authorization: `Bearer ${store.getState().user.token}`,
           },
         })
-        .then((response) => {
-          console.log(response, 'share recipe ok');
+        .then(() => {
           store.dispatch(setEmailSuccessAction());
         })
-        .catch((error) => {
-          console.log(error, 'share recipe error');
+        .catch(() => {
         });
       next(action);
       break;
     }
     case SEND_SHOPPINGLIST_ACTION: {
-      axios.get(`http://localhost:8000/api/v1/shoppinglist/send/`,
+      axios.get('/api/api/v1/shoppinglist/send/',
         {
           headers: {
             'Access-Control-Allow-Origin': '*',
@@ -353,12 +323,10 @@ const user = (store) => (next) => (action) => {
             Authorization: `Bearer ${store.getState().user.token}`,
           },
         })
-        .then((response) => {
-          console.log(response, 'send shoplist ok');
+        .then(() => {
           store.dispatch(setEmailShoppingListSuccessAction());
         })
-        .catch((error) => {
-          console.log(error, 'send shoplist error');
+        .catch(() => {
         });
       next(action);
       break;

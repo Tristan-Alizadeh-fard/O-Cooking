@@ -24,6 +24,7 @@ SearchBar.propTypes = {
   searchOption: PropTypes.array.isRequired,
   updateField: PropTypes.func.isRequired,
   search: PropTypes.func.isRequired,
+  searchInput: PropTypes.string.isRequired,
 };
 
 export default SearchBar;

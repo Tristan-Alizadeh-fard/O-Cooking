@@ -13,8 +13,6 @@ import soupe from 'src/pictures/soupe.png';
 import dessert from 'src/pictures/dessert.png';
 
 const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite, addShopList, removeShoppingRecipe, shoppingList, unsetEmailSuccess }) => {
-
-  console.log('Home', recipesUser);
   const setLoaderHomerecipes = (id) => {
     setLoader();
     unsetEmailSuccess();
@@ -33,12 +31,9 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
       {!isLoading && recipesUser.length === 0 && <p className="user__norecipes">Vous n'avez pas encore ajouté de recette à votre espace.</p>}
       {!isLoading && recipesUser.length === 0 && <p className="user__norecipes">Cliquer sur Ajouter une recette, on attend plus que vous !</p>}
       {!isLoading && 
-      
-        <div className="w3-row-padding w3-padding-16 w3-center">
+       <div className="w3-row-padding w3-padding-16 w3-center">
        {recipesUser.map((recipeUser) => (
          <div key={recipeUser.id} className="w3-quarter">
-              
-
               {recipeUser.picture !== null && <div className="img-container"><img src={`http://localhost:8000${recipeUser.picture}`} className="image__allrecipes" /></div>}
               {recipeUser.picture === null &&  <div className="img-container"><div className="camera mini"><i className="camera icon"/></div></div>}
               {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
@@ -71,7 +66,6 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                     </div>
                   </div>
                   <div className="extra content">
-                   
                     {!shoppingList && <Link to="/home" className="link__icon" onClick={() => addShopList(recipeUser.id)}>
                     <i className="cart arrow down icon" />Ajouter à l'aide de course
                   </Link>}
@@ -81,20 +75,15 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                   {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <Link to="/home" className="link__icon" onClick={() => removeShoppingRecipe(recipeUser.id)}>
                     <i className="shopping cart icon" />Retirer de l'aide de course
                   </Link>}
-                 
-                 
                   </div>
-                 
-              <p className="link__author">
+                  <p className="link__author">
                 <i className="user icon" />{name}
               </p>
               <div className="meta">
                 <span className="date">{`Posté le ${recipeUser.createdAt}`}</span>
               </div>  
               </div>
-              
-        ))}
-       
+       ))}
       </div>}
     </>
   );

@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   search: () => {
     dispatch(searchBar());
-  }
+  },
 });
 
 const ConnectedSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);

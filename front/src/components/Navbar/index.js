@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './navbar.scss';
-import Prototypes, { checkPropTypes } from 'prop-types';
+import Prototypes from 'prop-types';
 
 const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList, getFormSettings, recipesUser }) => {
   const setLoaderHome = () => {
@@ -35,7 +35,7 @@ const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getSh
           </li>
           <li><Link to="/aide-course" onClick={() => setLoaderShopList()}>Aide de course</Link></li>
           <li><Link to="/about">A propos</Link></li>
-          {admin[0] === 'ROLE_ADMIN' && <li><a href="http://localhost:8000/admin" target="_blank">Admin</a></li>}
+          {admin[0] === 'ROLE_ADMIN' && <li><a href="/api/admin" target="_blank">Backoffice</a></li>}
           <li><Link to="/" onClick={() => logOut()}>Déconnexion</Link></li>
         </ul>
       </div>

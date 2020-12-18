@@ -29,14 +29,12 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response, 'success submit recipe');
           // créer une action de réponse avec message et effacement des champs
           store.dispatch(emptyForm());
           store.dispatch(saveUserName());
           store.dispatch(sendMessage('success', true));
         })
         .catch((error) => {
-          console.log(error, 'Je suis dans le middleware submit error');
           store.dispatch(sendMessage('error', true));
           setTimeout(() => {
             store.dispatch(sendMessage('error', false));
@@ -55,14 +53,12 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response, 'success get settings');
           store.dispatch(setFormSettings(response.data.categories));
           store.dispatch(setTags(response.data.tags));
           store.dispatch(setSearchBarSettings(formatSetMeasure(response.data.categories)));
           store.dispatch(setMeasures(formatSetMeasure(response.data.measure)));
         })
         .catch((error) => {
-          console.log(error, 'Je suis dans le middleware recipe; get settings error');
         });
       next(action);
       break;
