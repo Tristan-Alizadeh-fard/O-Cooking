@@ -9,7 +9,7 @@ const user = (store) => (next) => (action) => {
   switch (action.type) {
     case 'recipe/submit': {
       const { recipe } = store.getState();
-      axios.post('http://localhost:8000/api/v1/recipes/add', {
+      axios.post('/api/api/v1/recipes/add', {
         name: recipe.recipeName,
         picture: recipe.recipeImage,
         nbPeople: recipe.nbPerson * 1,
@@ -45,7 +45,7 @@ const user = (store) => (next) => (action) => {
     }
     case 'recipe/getFormSettings': {
       store.dispatch(emptyForm());
-      axios.get('http://localhost:8000/api/v1/recipes/add', {
+      axios.get('/api/api/v1/recipes/add', {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',

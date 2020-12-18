@@ -37,7 +37,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
             
               <div key={recipe.id} className="w3-quarter">
                 
-                  {recipe.picture !== null && <div className="img-container"><img src={`http://localhost:8000${recipe.picture}`} className="image__allrecipes" /></div>}
+                  {recipe.picture !== null && <div className="img-container"><img src={`/api{recipe.picture}`} className="image__allrecipes" /></div>}
                   {recipe.picture === null &&  <div className="img-container"><div className="camera mini"><i className="camera icon"/></div></div>}
                   {!favorite.find(fav => fav.name === recipe.name) && <Link to="/allrecipes" className="link__icon" onClick={() => setFavorite(recipe.id)}>
                     <i className="heart outline icon" />Ajouter aux favoris

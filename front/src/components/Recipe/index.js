@@ -39,7 +39,7 @@ const Recipe = ({
         <div className="container">
           <div className="image__button">
             <div className="image">
-              {recipe.picture !== null && <img src={`http://localhost:8000${recipe.picture}`} className="image__recette" />}
+              {recipe.picture !== null && <img src={`/api${recipe.picture}`} className="image__recette" />}
               {recipe.picture === null &&  <div className="camera__icon"><i className="camera icon"/></div>}
             </div>
             {!shoppingList && <button type="button" className="icon__addshopping" onClick={() => addShopList(recipe.id)}>Ajouter à l'aide course
