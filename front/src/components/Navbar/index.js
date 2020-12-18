@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './navbar.scss';
-import Prototypes from 'prop-types';
+import Prototypes, { checkPropTypes } from 'prop-types';
 
-const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList, getFormSettings }) => {
+const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getShopList, getFormSettings, recipesUser }) => {
   const setLoaderHome = () => {
     setLoader();
     getShopList();
@@ -44,6 +44,7 @@ const Navbar = ({ logOut, admin, getAllrecipes, getUserRecipes, setLoader, getSh
 };
 
 Navbar.prototypes = {
+  recipesUser: Prototypes.array.isRequired,
   getShopList: Prototypes.func.isRequired,
   setLoader: Prototypes.func.isRequired,
   getUserRecipes: Prototypes.func.isrequired,

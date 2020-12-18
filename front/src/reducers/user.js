@@ -46,7 +46,7 @@ const initialState = {
   searchInput: null,
   idUser: null,
   roleUser: [],
-  recipesUser: [],
+  recipesUser: null,
   userFavorite: {},
   listCheck: [],
   shoppingList: [],

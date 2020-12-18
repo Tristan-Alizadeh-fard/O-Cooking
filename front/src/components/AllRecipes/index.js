@@ -29,7 +29,7 @@ const AllRecipes = ({ recipes, showRecipe, isLoading, setLoader, setFavorite, un
       {!isLoading && <ConnectedSearchBar />}
       {isLoading && <div className="ui segment">
         <div className="ui active dimmer">
-        <div className="ui text loader">Loading</div>
+        <div className="ui text loader">Chargement...</div>
         </div>
         </div>}
       {!isLoading && 

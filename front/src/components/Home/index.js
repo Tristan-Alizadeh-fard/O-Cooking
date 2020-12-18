@@ -12,39 +12,48 @@ import smoothie from 'src/pictures/smoothie.png';
 import soupe from 'src/pictures/soupe.png';
 import dessert from 'src/pictures/dessert.png';
 
-const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite, addShopList, removeShoppingRecipe, shoppingList }) => {
+const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite, unsetFavorite, favorite, addShopList, removeShoppingRecipe, shoppingList, unsetEmailSuccess }) => {
 
   console.log('Home', recipesUser);
   const setLoaderHomerecipes = (id) => {
     setLoader();
+    unsetEmailSuccess();
     showRecipe(id);
   };
   return (
     <>
     {isLoading && <div className="ui segment">
         <div className="ui active dimmer">
-        <div className="ui text loader">Loading</div>
+        <div className="ui text loader">Chargement...</div>
         </div>
         </div>}
       <div className="allrecipes">
         <h3 className="allrecipes__title">{`Bienvenue dans votre espace " ${name} " !`}</h3>
       </div>
+      {!isLoading && recipesUser.length === 0 && <p className="user__norecipes">Vous n'avez pas encore ajouté de recette à votre espace.</p>}
+      {!isLoading && recipesUser.length === 0 && <p className="user__norecipes">Cliquer sur Ajouter une recette, on attend plus que vous !</p>}
       {!isLoading && 
       
         <div className="w3-row-padding w3-padding-16 w3-center">
        {recipesUser.map((recipeUser) => (
          <div key={recipeUser.id} className="w3-quarter">
               
+
               {recipeUser.picture !== null && <div className="img-container"><img src={`http://localhost:8000${recipeUser.picture}`} className="image__allrecipes" /></div>}
               {recipeUser.picture === null &&  <div className="img-container"><div className="camera mini"><i className="camera icon"/></div></div>}
-             
+              {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
+                    <i className="heart outline icon" />Ajouter aux favoris
+                  </Link>}
+                  {favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => unsetFavorite(recipeUser.id)}>
+                    <i className="heart icon" />Retirer de vos favoris
+                  </Link>}
                   {recipeUser.signaled && <div className="favoris__icon">
                 <i className="bell icon" />
                 <p className="text__favoris">Recette signalé !</p>
               </div>}
                   <div className="content">
                     <Link to={`/recette/${recipeUser.id}`} className="header" onClick={() => setLoaderHomerecipes(recipeUser.id)}>{recipeUser.name}</Link>
-                    <Link to={`/recette/${recipeUser.id}`} className="header__plus" onClick={() => setLoaderAllrecipes(recipeUser.id)}>Voir plus</Link>
+                    <Link to={`/recette/${recipeUser.id}`} className="header__plus" onClick={() => setLoaderHomerecipes(recipeUser.id)}>Voir plus</Link>
                   {recipeUser.category.name === 'Entrée' && <div className="description"><img src={entree} />{` ${recipeUser.category.name}`}</div>}
                   {recipeUser.category.name === 'Plat' && <div className="description"><img src={plat} />{` ${recipeUser.category.name}`}</div>}
                   {recipeUser.category.name === 'Dessert' && <div className="description"><img src={dessert} />{` ${recipeUser.category.name}`}</div>}
@@ -64,26 +73,18 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
                   <div className="extra content">
                    
                     {!shoppingList && <Link to="/home" className="link__icon" onClick={() => addShopList(recipeUser.id)}>
-                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                    <i className="cart arrow down icon" />Ajouter à l'aide de course
                   </Link>}
                   {shoppingList && !shoppingList.find(shop => shop.id === recipeUser.id) &&<Link to="/home" className="link__icon" onClick={() => addShopList(recipeUser.id)}>
-                    <i className="shopping cart icon" />Ajouter à l'aide de course
+                    <i className="cart arrow down icon" />Ajouter à l'aide de course
                   </Link>}
                   {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <Link to="/home" className="link__icon" onClick={() => removeShoppingRecipe(recipeUser.id)}>
                     <i className="shopping cart icon" />Retirer de l'aide de course
                   </Link>}
-                  {shoppingList && shoppingList.find(shop => shop.id === recipeUser.id) && <h6 className="inShopingList">Ajouté dans l'aide de course</h6>}
-                  {!favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => setFavorite(recipeUser.id)}>
-                      <i className="heart icon" />Ajouter aux favoris
-                    </Link>}
-                    {favorite.find(fav => fav.name === recipeUser.name) && <Link to="/home" className="link__icon" onClick={() => unsetFavorite(recipeUser.id)}>
-                      <i className="heart outline icon" />Retirer de vos favoris
-                    </Link>}
+                 
+                 
                   </div>
-                  {favorite.find(fav => fav.name === recipeUser.name) && <div className="favoris__icon">
-                
-                <h5 className="text__favoris">Recette ajouté aux favoris</h5>
-              </div>}
+                 
               <p className="link__author">
                 <i className="user icon" />{name}
               </p>
@@ -100,6 +101,7 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
 };
 
 Home.protoTypes = {
+  unsetEmailSuccess: PropTypes.func.isRequired,
   shoppingList: PropTypes.array.isRequired,
   removeShoppingRecipe: PropTypes.func.isRequired,
   addShopList: PropTypes.func.isRequired,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { showOneRecipe, setisLoading, setFavoriteAction, unsetFavoriteAction, addShopListAction, removeShoppingRecipe } from 'src/actions/user';
+import { showOneRecipe, setisLoading, setFavoriteAction, unsetFavoriteAction, addShopListAction, removeShoppingRecipe, unsetEmailSuccessAction } from 'src/actions/user';
 
 import Home from 'src/components/Home';
 
@@ -30,6 +30,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   removeShoppingRecipe: (index) => {
     dispatch(removeShoppingRecipe(index));
+  },
+  unsetEmailSuccess: () => {
+    dispatch(unsetEmailSuccessAction());
   },
 });
 
