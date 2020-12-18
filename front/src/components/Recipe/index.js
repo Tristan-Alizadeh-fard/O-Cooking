@@ -34,7 +34,7 @@ const Recipe = ({
       {isLoading && (
         <div className="ui segment">
           <div className="ui active dimmer">
-            <div className="ui text loader">Loading</div>
+            <div className="ui text loader">Chargement...</div>
           </div>
         </div>
       )}
@@ -46,28 +46,31 @@ const Recipe = ({
               {recipe.picture === null &&  <div className="camera__icon"><i className="camera icon"/></div>}
             </div>
             {/* <div className="button titi"> */}
+            {!shoppingList && <button type="button" className="icon__addshopping" onClick={() => addShopList(recipe.id)}>Ajouter à l'aide course
+                <i className="cart arrow down icon" />
+              </button>}
             {!shoppingList.find(shop => shop.id === recipe.id) && <button type="button" className="icon__addshopping" onClick={() => addShopList(recipe.id)}>Ajouter à l'aide course
-                <i className="shopping cart icon" />
+                <i className="cart arrow down icon" />
               </button>}
             {shoppingList.find(shop => shop.id === recipe.id) && <button type="button" className="icon__addshopping" onClick={() => removeShoppingRecipe(recipe.id)}>Retirer de l'aide course
                 <i className="shopping cart icon" />
               </button>}
-              <button type="button" className="icon__addshopping" onClick={() => shareRecipe(recipe.id)}>Envoyer par email 
-              {shoppingList.find(shop => shop.id === recipe.id) && <h5 className="shopList">Recette ajoutée dans l'aide de course</h5>} 
-                <i className="paper plane icon" />
-              </button>
+              {!emailSuccess && <button type="button" className="icon__addshopping" onClick={() => shareRecipe(recipe.id)}>Envoyer par email<i className="paper plane icon" />
+              </button>}
+              {emailSuccess && <button type="button" className="icon__addshopping">Email envoyé !<i className="thumbs up icon" />
+              </button>}
               {!favorite.find(fav => fav.name === recipe.name) && <button type="button" className="icon__addshopping" onClick={() => setFavorite(recipe.id)}>Ajouter aux favoris
-                <i className="heart icon" />
+                <i className="heart outline icon" />
               </button>}
               {favorite.find(fav => fav.name === recipe.name) && <button type="button" className="icon__addshopping" onClick={() => unsetFavorite(recipe.id)}>Retirer des favoris
-                <i className="heart outline icon" />
+                <i className="heart icon" />
               </button>}
               {recipe.signaled === false && <button type="button" className="icon__addshopping" onClick={() => setSignaled(recipe.id)}>Signaler la recette
                 <i className="flag icon" />
               </button>}
-              {shoppingList.find(shop => shop.id === recipe.id) && <h5 className="shopList">Ajouté dans l'aide de course</h5>}
+              {/* {shoppingList.find(shop => shop.id === recipe.id) && <h5 className="shopList">Ajouté dans l'aide de course</h5>}
               {favorite.find(fav => fav.name === recipe.name) && <h5 className="favorite">Ajouté dans vos favoris</h5>}
-              {emailSuccess && <h5 className="emailSuccess">Email envoyé !</h5>}
+              {emailSuccess && <h5 className="emailSuccess">Email envoyé !</h5>} */}
               <h5 className="author"><i className="user icon" />{recipe.author.pseudo}</h5>
               <span className="date">{`Posté le ${recipe.createdAt}`}</span>
             {/* </div> */}

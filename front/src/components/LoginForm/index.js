@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import './loginForm.scss';
 
-const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes, setErrorInscription }) => {
+const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescription, descriptionOn, getAllrecipes, email, pass, setLoader, getUserRecipes, setErrorInscription, recipesUser }) => {
   const submitLogin = (event) => {
     event.preventDefault();
     setLoader();
@@ -54,6 +54,7 @@ const LoginForm = ({ updateField, logIn, logOut, errorLogin, isLogged, showDescr
 };
 
 LoginForm.prototypes = {
+  recipesUser: PropTypes.array.isRequired,
   setErrorInscription: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   pass: PropTypes.string.isRequired,

@@ -5,6 +5,7 @@ import { getFormSettings } from 'src/actions/recipe';
 
 const mapStateToProps = (state) => ({
   admin: state.user.roleUser,
+  recipesUser: state.user.recipesUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
