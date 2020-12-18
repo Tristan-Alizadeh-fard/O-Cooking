@@ -33,6 +33,7 @@
                         <p>{{ recipe.name }}</p>
                         <p>Par {{ recipe.author.pseudo }}</p>
                         <p>Le {{ recipe.createdAt }}</p>
+                        <p>Nb pers : {{ recipe.nbPeople }}</p>
                         <p>Catégorie : {{ recipe.category.name }}</p>
                         <p>Tag(s) :
                             {% for tag in recipe.tags %}
