@@ -23,7 +23,7 @@ const InscriptionForm = ({ updateField, submitInscription, errorInscription, ins
           <Form.Input label="Votre password" placeholder="Password" type="password" className="password" onChange={() => updateField(event.target.value, 'pass')} />
           <Form.Input label="Confirmer votre password" placeholder="Confirmation de password" type="password" className="password" onChange={() => updateField(event.target.value, 'confirmPass')} />
           <Form.Input label="Votre Pseudo" placeholder="Pseudo Minimum 4 caractères" className="pseudo" onChange={() => updateField(event.target.value, 'name')} />
-          <Button type="submit" className="form__button_valide" onClick={inputVeryfication}>Soumettre</Button>
+          <Button type="submit" className="form__button_valide" onClick={inputVeryfication}>Envoyer</Button>
         <Link to="/" className="link__backinscription">Retour</Link>
         </Form>}
          {inscriptionSuccess && <Link to="/" className="link__back" onClick={() => updateField(false, 'inscriptionSuccess')}>- Connection -</Link>}
