@@ -24,12 +24,14 @@ const Home = ({ name, recipesUser, isLoading, showRecipe, setLoader, setFavorite
     <>
     {isLoading && <div className="ui segment">
         <div className="ui active dimmer">
-        <div className="ui text loader">Loading</div>
+        <div className="ui text loader">Chargement...</div>
         </div>
         </div>}
       <div className="allrecipes">
         <h3 className="allrecipes__title">{`Bienvenue dans votre espace " ${name} " !`}</h3>
       </div>
+      {!isLoading && recipesUser.length === 0 && <p className="user__norecipes">Vous n'avez pas encore ajouté de recette à votre espace.</p>}
+      {!isLoading && recipesUser.length === 0 && <p className="user__norecipes">Cliquer sur Ajouter une recette, on attend plus que vous !</p>}
       {!isLoading && 
       
         <div className="w3-row-padding w3-padding-16 w3-center">
