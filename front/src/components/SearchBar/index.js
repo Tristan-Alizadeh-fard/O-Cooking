@@ -16,7 +16,7 @@ const SearchBar = ({
       defaultValue="Toutes les recettes"
       onChange={() => updateField(event.target.textContent, 'selectedCategory')}
     />
-    <Button className="button__search" type="button" onClick={() => search()}>Search</Button>
+    <Button className="button__search" type="button" onClick={() => search()}>Chercher</Button>
   </Input>
 );
 
