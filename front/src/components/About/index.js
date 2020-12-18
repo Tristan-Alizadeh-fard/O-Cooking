@@ -19,9 +19,9 @@ const About = () => (
               <img src="https://ca.slack-edge.com/T016B3JM5J5-U01CCBFM2FQ-2eac481aefd0-512" alt="" />
             </div>
             <div className="description">
-              <p>Kévin</p>
-              <p>React</p>
-              <p>Lead Dev Front</p>
+              <h3>Kévin</h3>
+              <h4>React</h4>
+              <h5>Lead Dev Front</h5>
             </div>
           </div>
           <div className="affiche_card">
@@ -29,9 +29,9 @@ const About = () => (
               <img src="https://ca.slack-edge.com/T016B3JM5J5-U01677PF1AP-80842f306660-192" alt="" />
             </div>
             <div className="description">
-              <p>Renan</p>
-              <p>Symfony</p>
-              <p>Srum Master</p>
+              <h3>Renan</h3>
+              <h4>Symfony</h4>
+              <h5>Srum Master</h5>
             </div>
           </div>
           <div className="affiche_card">
@@ -39,9 +39,9 @@ const About = () => (
               <img src="https://ca.slack-edge.com/T016B3JM5J5-U016ETQLUUU-26460626ad4f-512" alt="" />
             </div>
             <div className="description">
-              <p>Slim</p>
-              <p>React</p>
-              <p>Git Master</p>
+              <h3>Slim</h3>
+              <h4>React</h4>
+              <h5>Git Master</h5>
             </div>
           </div>
           <div className="affiche_card">
@@ -49,9 +49,9 @@ const About = () => (
               <img src="https://ca.slack-edge.com/T016B3JM5J5-U01678JKA82-5524d0573566-512" alt="" />
             </div>
             <div className="description">
-              <p>Stéphanie</p>
-              <p>Symfony</p>
-              <p>Product Owner - Lead Dev Back</p>
+              <h3>Stéphanie</h3>
+              <h4>Symfony</h4>
+              <h5>Product Owner - Lead Dev Back</h5>
             </div>
           </div>
           <div className="affiche_card">
@@ -59,9 +59,9 @@ const About = () => (
               <img src="https://ca.slack-edge.com/T016B3JM5J5-U016KTL660Z-12bee7b854b3-512" alt="" />
             </div>
             <div className="description">
-              <p>Tristan</p>
-              <p>React</p>
-              <p>Dév</p>
+              <h3>Tristan</h3>
+              <h4>React</h4>
+              <h5>Dév</h5>
             </div>
           </div>
         </div>
