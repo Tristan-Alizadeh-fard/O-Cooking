@@ -48,7 +48,7 @@ App\Entity\Measure:
   measure_2:
     name: 'kg'
   measure_3:
-    name: 'pièce'
+    name: 'unité(s)'
   measure_4:
     name: 'ml'
   measure_5:
