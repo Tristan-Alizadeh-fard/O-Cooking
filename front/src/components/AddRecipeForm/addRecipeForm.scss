@@ -10,14 +10,15 @@
   margin-top:10%;
   width: 90%;
   padding: 1em;
-  border-top: 0.5px solid #0070c9;
-  border-right: 1px solid #0070c9;
-  border-bottom: 1.5px solid #0070c9;
-  border-left: 0.5px solid #0070c9;
+  border: none;
   border-radius: 1em;
   background-color: rgba(250, 250, 250, 0.801);
   margin-bottom: 20px;
-  box-shadow: 8px 6px 4px 1px rgba(17, 17, 17, 0.301);
+  box-shadow: 3px 3px 11px 1px rgba(17, 17, 17, 0.18);
+}
+
+.ui.button.space {
+  margin-left: 15px;
 }
 
 // gère le boutton d ajout final de la rectte "ajouter cette recette"
@@ -178,10 +179,7 @@
   // gère l affichage du formulaire
   .form__addrecipe {
   width: 90%;
-  border-top: 1px solid #0070c9;
-  border-right: 1.5px solid #0070c9;
-  border-bottom: 2px solid #0070c9;
-  border-left: 1.5px solid #0070c9;
+  border: none;
   }
   // gère l affichage du formulaire
   .form__addrecipe {

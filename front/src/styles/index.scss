@@ -5,19 +5,31 @@
 
 .body {
   background: #FAFAFA;
-  font-family: "Playfair Display"!important;
-}
-
-.h1,h2,h3,h4,h5,h6 {
-  font-family: "Playfair Display"!important;
+  font-family: "Montserrat"!important;
 }
 
 a.header {
-  font-size: 2.3em;
+  font-size: 2em;
   font-family: 'Kalam', cursive !important;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
+.ui.button {
+  font-family: 'Montserrat'!important;
+}
 
+h1,h2,h3,h4,h5,h6,p {
+  font-family: 'Kalam',cursive!important;
+}
+
+a.header__plus {
+  color: white !important;
+}
+
+.form__addrecipe {
+  border: none !important;
+}
 
 // vertion ordinateur
 /*

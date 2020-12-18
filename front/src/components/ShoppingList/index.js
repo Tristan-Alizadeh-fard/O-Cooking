@@ -3,8 +3,19 @@ import PropTypes from 'prop-types';
 import ListAsRecipe from './ListAsRecipe';
 import './shoppingList.scss';
 
-const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shoppingListCheck, sendShoppingList, listCheck }) => {
-  console.log('ShoppingList');
+const ShoppingList = ({
+  shoppingList,
+  removeFromList,
+  removeShoppingRecipe,
+  shoppingListCheck,
+  sendShoppingList,
+  listCheck,
+}) => {
+  const msgSent = (e) => {
+    e.target.textContent = 'Envoyé !';
+    e.target.setAttribute('style', 'background-color: green;');
+    sendShoppingList();
+  };
 
   return (
     <>
@@ -17,7 +28,7 @@ const ShoppingList = ({ shoppingList, removeFromList, removeShoppingRecipe, shop
           ))}
         </div>}
         {shoppingList.length === 0 && <p>Votre aide de course est vide.</p>}
-        {shoppingList.length > 0 && <button type="button" className="btn_send" onClick={() => sendShoppingList()}>Envoyer la liste sur ma boite mail</button>}
+        {shoppingList.length > 0 && <button type="button" className="btn_send" onClick={(e) => msgSent(e)}>Envoyer la liste sur ma boite mail</button>}
       </div>
     </>
   );

@@ -55,14 +55,20 @@ const AddRecipeForm = ({
   error,
   emptyForm,
   open,
+  isLoading,
+  setisLoading,
+  getUserRecipesAction,
 }) => {
   const save = false;
   const history = useHistory();
 
-  function handleClick() {
+  const handleClick = () => {
     emptyForm();
+    setisLoading();
+    getUserRecipesAction();
     history.push('/home');
-  }
+  };
+
   return (
     <div className="all_page form_addrecipe">
       <div className="form__addrecipe">
@@ -72,7 +78,6 @@ const AddRecipeForm = ({
           <p>Donnez un nom à votre recette !<span className="required-field"> *</span></p>
           <Form.Input
             className="title"
-            fluid label="Donnez un nom à votre recette !" //TODO
             placeholder="Ecrivez le nom de votre recette"
             onChange={() => updateRecipeField('recipeName', event.target.value)}
             value={recipeName}
@@ -155,7 +160,7 @@ const AddRecipeForm = ({
           ))}
           <p>Ajoutez un ingrédient</p>
           <Form.Input
-            placeholder="ex: Courgette"
+            placeholder="ex: Courgette..."
             onChange={() => updateRecipeField('ingredientInputValue', event.target.value)}
             value={ingredientInputValue}
           />
@@ -198,7 +203,7 @@ const AddRecipeForm = ({
           ))}
           <p>Ajoutez une étape</p>
           <TextArea
-            placeholder="ex: Courgette"
+            placeholder="ex: Coupez la courgette en tranches fines..."
             onChange={() => updateRecipeField('stepInputValue', event.target.value)}
             value={stepInputValue}
             rows="3"
@@ -223,6 +228,7 @@ const AddRecipeForm = ({
           callbackFunction={(file_arr)=>{changeImage(file_arr.base64)}}
           accept="image/*"
           imagePreview
+          buttonComponent={<button type="button" className="ui button space">Choisir</button>}
         />
 
         <Divider />
@@ -280,6 +286,9 @@ AddRecipeForm.propTypes = {
   success: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  setisLoading: PropTypes.func.isRequired,
+  getUserRecipesAction: PropTypes.func.isRequired,
 };
 
 export default AddRecipeForm;

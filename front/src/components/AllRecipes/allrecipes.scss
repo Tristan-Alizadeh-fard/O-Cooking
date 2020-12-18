@@ -113,7 +113,7 @@
 .tags__container {
   margin-top: 10px;
   display: flex;
-  height: 80px;
+  // height: 80px;
   flex-flow: wrap;
   justify-content: center;
   //margin-bottom: 20px;
@@ -426,11 +426,22 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 }
 .camera.mini {
   // text-align: center;
-   font-size: 200px;
+   font-size: 150px;
   // top: 35%;
   // left: 15%;
   // position: fixed;
  }
+
+ .img-container {
+   height: 200px;
+   overflow: hidden;
+ }
+
+ .w3-quarter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
  
 
 @media screen and (min-width: 980px) {
@@ -452,7 +463,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   }
   .image__allrecipes {
     width: 90%;
-    height: 40%;
+    //height: 40%;
     margin-top: 20px;
     object-fit: cover;
   }

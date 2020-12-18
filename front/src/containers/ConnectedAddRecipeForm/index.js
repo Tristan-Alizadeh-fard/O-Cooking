@@ -10,6 +10,7 @@ import {
   changeImage,
   submitRecipe,
 } from 'src/actions/recipe';
+import { setisLoading, getUserRecipesAction } from 'src/actions/user';
 import { emptyForm } from '../../actions/recipe';
 
 const mapStateToProps = (state) => ({
@@ -38,6 +39,7 @@ const mapStateToProps = (state) => ({
   quantityInputValue: state.recipe.quantityInputValue,
   optionsMeasure: state.recipe.optionsMeasure,
   open: state.recipe.open,
+  isLoading: state.user.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -67,6 +69,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   emptyForm: () => {
     dispatch(emptyForm());
+  },
+  setisLoading: () => {
+    dispatch(setisLoading());
+  },
+  getUserRecipesAction: () => {
+    dispatch(getUserRecipesAction());
   },
 });
 
