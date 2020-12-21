@@ -19,67 +19,57 @@ import About from 'src/components/About';
 const Page = ({ isLogged }) => (
   <div>
     {isLogged && <ConnectedNavbar />}
-
-    <Route exact path="/">
-      <ConnectedLoginForm />
-    </Route>
-
-    <Route exact path="http://ec2-100-25-30-18.compute-1.amazonaws.com/inscription">
-      <Redirect to="/inscription" />
-    </Route>
-
-    <Route exact path="/inscription">
+    <Route
+      path="localhost:8080/inscription"
+    >
       <ConnectedInscriptionForm />
     </Route>
 
-    <Route exact path="http://ec2-100-25-30-18.compute-1.amazonaws.com/home">
-      <Redirect to="/home" />
+    <Route
+      path="/"
+      exact
+    >
+      <ConnectedLoginForm />
     </Route>
 
-    <Route exact path="/home">
+    <Route
+      path="/home"
+      exact
+    >
       <ConnectedHome />
     </Route>
 
-    <Route exact path="http://ec2-100-25-30-18.compute-1.amazonaws.com/allrecipes">
-      <Redirect to="/allrecipes" />
-    </Route>
-
-    <Route exact path="/allrecipes">
+    <Route
+      path="/allrecipes"
+      exact
+    >
       <ConnectedAllRecipes />
     </Route>
 
-    <Route exact path="http://ec2-100-25-30-18.compute-1.amazonaws.com/ajout-recette">
-      <Redirect to="/ajout-recette" />
-    </Route>
-
-    <Route exact path="/ajout-recette">
+    <Route
+      path="localhost:8080/ajout-recette"
+    >
       <ConnectedAddRecipeForm />
     </Route>
 
-    <Route exact path="http://ec2-100-25-30-18.compute-1.amazonaws.com/aide-course">
-      <Redirect to="/aide-course" />
-    </Route>
-
-    <Route exact path="/aide-course">
+    <Route
+      path="localhost:8080/aide-course"
+    >
       <ConnectedShoppingList />
     </Route>
 
-    <Route exact path="http://ec2-100-25-30-18.compute-1.amazonaws.com/recette/:id">
-      <Redirect to="/recette/:id" />
-    </Route>
-
-    <Route exact path="/recette/:id">
+    <Route
+      path="localhost:8080/recette/:id"
+      exact
+    >
       <ConnectedRecipe />
     </Route>
-
-    <Route exact path="http://ec2-100-25-30-18.compute-1.amazonaws.com/about">
-      <Redirect to="/about" />
-    </Route>
-
-    <Route exact path="/about">
+    <Route
+      path="localhost:8080/about"
+      exact
+    >
       <About />
     </Route>
-
   </div>
 );
 
