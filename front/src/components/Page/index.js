@@ -19,7 +19,6 @@ import About from 'src/components/About';
 const Page = ({ isLogged }) => (
   <div>
     {isLogged && <ConnectedNavbar />}
-    {!isLogged && <Redirect to="/" />}
     <Route
       path="/inscription"
     >
