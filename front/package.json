@@ -38,7 +38,7 @@
     "file-loader": "^6.1.1",
     "html-webpack-plugin": "^4.5.0",
     "ignore-styles": "^5.0.1",
-    "jsdom": "^16.4.0",
+    "jsdom": "^16.5.0",
     "mini-css-extract-plugin": "^1.1.0",
     "mocha": "^8.2.1",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
