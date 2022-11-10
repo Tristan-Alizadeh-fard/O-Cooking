@@ -40,7 +40,7 @@
     "ignore-styles": "^5.0.1",
     "jsdom": "^16.4.0",
     "mini-css-extract-plugin": "^1.1.0",
-    "mocha": "^8.2.1",
+    "mocha": "^10.1.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-loader": "^4.0.4",
     "postcss-preset-env": "^6.7.0",
